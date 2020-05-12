@@ -66,7 +66,7 @@ class TsPathsResolvePlugin implements ResolvePlugin {
 	configFilePath: string
 	absoluteBaseUrl: string
 	mappings: Mapping[]
-	constructor({ configFile }: PluginOptions | undefined = {}) {
+	constructor({ configFile }: PluginOptions = {}) {
 		const cwd = process.cwd()
 		this.configFilePath = configFile ?? path.resolve(cwd, "tsconfig.json")
 		this.absoluteBaseUrl = cwd
