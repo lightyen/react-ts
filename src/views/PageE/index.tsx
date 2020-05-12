@@ -14,6 +14,8 @@ const Loadable: React.FC<{ timeout: number }> = ({ timeout = 500, children }) =>
 	return visible ? <>{children}</> : null
 }
 
+const MyChart = React.lazy(() => import("./MyChart"))
+
 const PageE: React.FC = () => {
 	const ref = React.useRef<HTMLDivElement>()
 	const [width, setWidth] = React.useState(0)
@@ -38,8 +40,6 @@ const PageE: React.FC = () => {
 			window.removeEventListener("resize", resize)
 		}
 	}, [width])
-
-	const MyChart = React.lazy(() => import("./MyChart"))
 
 	return (
 		<div className="h-full relative p-3">
