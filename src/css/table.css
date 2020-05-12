@@ -1,0 +1,130 @@
+table {
+	width: calc(100% - 1px);
+	@apply border-collapse table-auto leading-normal;
+}
+
+thead {
+	@apply font-bold text-left text-gray-800;
+}
+
+tr > td,
+tr > th {
+	@apply trans text-gray-900 bg-white whitespace-no-wrap box-border;
+}
+
+td {
+	@apply px-3 py-2;
+}
+
+th {
+	@apply px-3 py-3;
+}
+
+tbody.striped tr:nth-child(odd) > td {
+	@apply bg-gray-300;
+}
+
+tbody.hover tr:hover > td {
+	@apply bg-blue-300;
+}
+
+.column-sticky {
+	right: -0px;
+	@apply sticky;
+}
+
+.column-sticky::after {
+	content: "";
+	transform: translate(-100%);
+	transition: box-shadow 0.2s;
+	@apply absolute top-0 left-0 w-8 bottom-0 pointer-events-none;
+}
+.column-sticky.ping::after {
+	box-shadow: inset -10px 0 8px -8px rgba(0, 0, 0, 0.2);
+}
+
+.add-filter {
+	transition-property: background-color, box-shadow;
+	transition-duration: 200ms;
+	transition-timing-function: ease;
+	@apply rounded bg-green-500 px-4 py-2 text-white font-bold leading-none whitespace-no-wrap;
+}
+.add-filter:hover,
+.add-filter:focus {
+	box-shadow: 0 0 0 3px rgba(72, 187, 120, 0.5);
+	@apply outline-none;
+}
+
+.pattern-filter,
+.select-filter {
+	transition-property: background-color, box-shadow;
+	transition-duration: 200ms;
+	transition-timing-function: ease;
+	@apply rounded bg-blue-500 text-white leading-none px-4 py-2;
+}
+
+.pattern-filter:hover,
+.select-filter:hover,
+.pattern-filter:focus,
+.select-filter:focus {
+	box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+	@apply outline-none;
+}
+
+.filter-close-btn {
+	@apply pr-2 trans;
+}
+.filter-close-btn:hover {
+	color: #ee2200;
+}
+
+.sort-icon-container {
+	width: 1rem;
+	height: 24px;
+	@apply relative;
+}
+
+.sort-icon-1 {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.sort-icon-2 {
+	position: absolute;
+}
+
+/** Pagination */
+
+.page-item {
+	min-width: 33px;
+	@apply flex overflow-hidden;
+}
+
+.page-item:first-child {
+	@apply rounded-l;
+}
+
+.page-item:last-child {
+	@apply rounded-r;
+}
+
+.page-link {
+	@apply w-full select-none rounded-none cursor-pointer py-1 px-3 text-blue-500;
+}
+
+.page-link:hover {
+	@apply bg-blue-300 text-gray-100;
+}
+
+.page-link:focus {
+	@apply outline-none;
+}
+
+.page-link.active {
+	@apply bg-blue-500 text-gray-100;
+}
+
+.page-link.disabled {
+	@apply text-gray-500 bg-gray-100 cursor-not-allowed;
+}

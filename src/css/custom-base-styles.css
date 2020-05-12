@@ -1,0 +1,18 @@
+body {
+	@apply leading-normal;
+	font-family: Roboto, 微軟正黑體, Microsoft JhengHei, Helvetica Neue,
+		Helvetica, Arial, PingFang TC, 黑體-繁, Heiti TC, 蘋果儷中黑,
+		Apple LiGothic Medium, sans-serif;
+}
+
+::selection {
+	background: rgb(115, 80, 196);
+	@apply text-gray-100;
+}
+
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+	outline: none;
+}
