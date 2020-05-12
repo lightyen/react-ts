@@ -1,4 +1,5 @@
 export * from "./messages"
+import { setDateLocale } from "~/date"
 
 // NOTE: https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers
 export const languageNames = {
@@ -8,34 +9,33 @@ export const languageNames = {
 
 export const defaultLocale = "en-US"
 
-export type Locales = keyof typeof languageNames
+export type Locale = keyof typeof languageNames
 
-export function getLanguage(): Locales {
-	const result = localStorage.getItem("language")
-	if (result) {
-		return result as Locales
-	}
-	localStorage.setItem("language", defaultLocale)
-	return defaultLocale
+export function setLocale(locale: Locale) {
+	localStorage.setItem("locale", locale)
+	setDateLocale(locale)
 }
 
-export function setLanguage(name: Locales) {
-	localStorage.setItem("language", name)
+export function getLocale(): Locale {
+	const result = localStorage.getItem("locale")
+	if (result) {
+		return result as Locale
+	}
+	setLocale(defaultLocale)
+	return defaultLocale
 }
 
 import enUS from "./en-US"
 import zhTW from "./zh-TW"
 
-export function getLocaleMessages(name: Locales = defaultLocale) {
-	const [primary, region] = name.toLocaleLowerCase().split(/-/)
+export function getLocaleMessages() {
+	const locale = getLocale()
+	const [primary] = locale.toLocaleLowerCase().split(/-/)
 	switch (primary) {
 		case "en":
 			return enUS
 		case "zh":
-			switch (region) {
-				default:
-					return zhTW
-			}
+			return zhTW
 		default:
 			return enUS
 	}

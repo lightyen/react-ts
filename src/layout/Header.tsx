@@ -87,8 +87,8 @@ const LanguageSelect: React.FC = () => {
 							transition: { easings: "easeOut", duration: 0.1 },
 						}}
 					>
-						{entries(languageNames).map(([key, value]) => (
-							<li key={key} className="language-item" onClick={() => setLocale({ name: key })}>
+						{entries(languageNames).map(([locale, value]) => (
+							<li key={locale} className="language-item" onClick={() => setLocale({ locale })}>
 								{value}
 							</li>
 						))}
