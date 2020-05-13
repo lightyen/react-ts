@@ -1,8 +1,9 @@
 {
 	"extends": "./tsconfig.base",
 	"compilerOptions": {
+		"allowJs": false, // js 的問題交給 babel
 		"strictNullChecks": false, // 對開發不友善，我決定關閉它
-		"noImplicitAny": false, // 為了相容於類型定義還不是那麼完善的 js library, 或者 jsx
+		"experimentalDecorators": false, // 我不喜歡
 		"jsx": "preserve",
 		"module": "esnext",
 		"moduleResolution": "node",

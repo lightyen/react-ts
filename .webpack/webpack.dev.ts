@@ -2,6 +2,7 @@ import { HotModuleReplacementPlugin } from "webpack"
 import webpackMerge from "webpack-merge"
 import createBaseConfig from "./webpack.common"
 import type { Configuration } from "webpack"
+import "webpack-dev-server"
 
 const defaultPort = 3000
 process.env.NODE_ENV = "development"
