@@ -1,7 +1,7 @@
 import React from "react"
 import chroma from "chroma-js"
 import { useVirtualScroll, useStay, VirtualItem, VirtualScrollProps } from "./useVirtualScroll"
-import { useScrollBar } from "~/components/ScrollBar"
+import { useScrollBarSource } from "~/components/ScrollBar"
 
 function outerHeight(target: HTMLElement) {
 	const marginTop = parseInt(document.defaultView.getComputedStyle(target).getPropertyValue("margin-top"))
@@ -77,7 +77,7 @@ function useMyContext() {
 
 const VirtualList: React.FC = () => {
 	const { data, offsetTop, changeOffsetTop } = useMyContext()
-	const scrollbar = useScrollBar()
+	const scrollbar = useScrollBarSource()
 	const container = React.useRef<HTMLDivElement>()
 	React.useEffect(() => {
 		const e = container.current

@@ -23,8 +23,8 @@ export const Sidebar: React.FC<Props> = ({ top, width }) => {
 			style={{
 				height: `calc(100vh - ${top}px)`,
 				top,
-				width: width,
-				transform: collapsed ? `translateX(${-width}px)` : "translateX(0px)",
+				width,
+				marginLeft: collapsed ? `${-width}px` : "0px",
 			}}
 		>
 			<ul>

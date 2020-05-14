@@ -11,11 +11,13 @@ interface CustomScrollBarProps {
 }
 
 // https://css-tricks.com/custom-scrollbars-in-webkit/
-const CustomScrollBar = styled.div.attrs(props => ({ width: 10, padding: 3, color: "black", ...props }))<
-	CustomScrollBarProps
->`
+const CustomScrollBar = styled.div.attrs(({ className, style, ...props }) => ({
+	width: 10,
+	padding: 3,
+	color: "black",
+	...props,
+}))<CustomScrollBarProps>`
 	color: transparent;
-	transition: all ease 0.2s;
 	overflow-x: hidden;
 	overflow-y: auto;
 	overflow-anchor: none;
@@ -46,7 +48,7 @@ const CustomScrollBar = styled.div.attrs(props => ({ width: 10, padding: 3, colo
 `
 const ScrollBarContext = React.createContext<HTMLDivElement>(null)
 
-export function useScrollBar() {
+export function useScrollBarSource() {
 	return React.useContext(ScrollBarContext)
 }
 
