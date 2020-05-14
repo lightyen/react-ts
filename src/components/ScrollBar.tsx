@@ -12,8 +12,8 @@ interface CustomScrollBarProps {
 
 // https://css-tricks.com/custom-scrollbars-in-webkit/
 const CustomScrollBar = styled.div.attrs(({ className, style, ...props }) => ({
-	width: 10,
-	padding: 3,
+	width: 6,
+	padding: 4,
 	color: "black",
 	...props,
 }))<CustomScrollBarProps>`
@@ -22,28 +22,39 @@ const CustomScrollBar = styled.div.attrs(({ className, style, ...props }) => ({
 	overflow-y: auto;
 	overflow-anchor: none;
 
-	&::-webkit-scrollbar {
+	::-webkit-scrollbar {
 		width: ${({ width, padding }) => width + padding * 2}px;
 		height: ${({ width, padding }) => width + padding * 2}px;
+		background: #333333;
+	}
+	::-webkit-scrollbar-corner {
+		background: #333333;
 	}
 
-	&::-webkit-scrollbar-track {
+	::-webkit-scrollbar-track {
 		display: none;
 	}
 
-	&:hover {
+	:hover {
 		color: ${({ color }) => color}80;
 	}
 
-	&:focus {
+	:focus {
 		outline: none;
 	}
 
-	&::-webkit-scrollbar-thumb {
-		border-radius: ${({ width, padding }) => width / 2 + padding}px;
+	::-webkit-scrollbar-thumb {
+		transition: all 3s ease;
+		width: 2px;
+		min-height: 30px;
 		border: ${({ padding }) => padding}px solid transparent;
+		border-radius: ${({ width, padding }) => width / 2 + padding}px;
 		box-shadow: inset 0 0 0 100px;
-		min-height: 60px;
+	}
+
+	::-webkit-scrollbar-thumb:hover {
+		border: ${({ padding }) => padding - 2}px solid transparent;
+		box-shadow: inset 0 0 0 100px;
 	}
 `
 const ScrollBarContext = React.createContext<HTMLDivElement>(null)
@@ -63,9 +74,7 @@ export function useScrollTop({ scrollbar }: { scrollbar: HTMLElement }) {
 			animationFrame.current = requestAnimationFrame(() => setScrollTop(scrollbar.scrollTop))
 		}
 		scrollbar.addEventListener("scroll", scroll, { passive: true })
-		return () => {
-			scrollbar.removeEventListener("scroll", scroll)
-		}
+		return () => scrollbar.removeEventListener("scroll", scroll)
 	}, [scrollbar])
 	return scrollTop
 }
@@ -77,12 +86,13 @@ interface ScrollBarProps {
 }
 
 export const ScrollBar: React.FC<ScrollBarProps> = ({ children, ...props }) => {
-	const color = useSelector(state => state.theme.textColor)
-	const backgroundColor = useSelector(state => state.theme.backgroundColor)
 	const ref = React.useRef<HTMLDivElement>()
 	const [handle, setHandle] = React.useState<HTMLDivElement>(ref.current)
-	const [thumbColor, setColor] = React.useState(backgroundColor)
 	const isMount = React.useRef(false)
+
+	const backgroundColor = useSelector(state => state.theme.backgroundColor)
+	const textColor = useSelector(state => state.theme.textColor)
+	const [thumbColor, setThumbColor] = React.useState(backgroundColor)
 	React.useEffect(() => {
 		isMount.current = true
 		setHandle(ref.current)
@@ -96,10 +106,10 @@ export const ScrollBar: React.FC<ScrollBarProps> = ({ children, ...props }) => {
 		function cb() {
 			window.requestAnimationFrame(() => {
 				window.clearTimeout(tick.current)
-				setColor(color)
+				setThumbColor(backgroundColor)
 				tick.current = window.setTimeout(() => {
 					if (isMount.current) {
-						setColor(backgroundColor)
+						setThumbColor(textColor)
 					}
 				}, 3000)
 			})
@@ -113,7 +123,7 @@ export const ScrollBar: React.FC<ScrollBarProps> = ({ children, ...props }) => {
 			target.removeEventListener("mousemove", cb)
 			target.removeEventListener("wheel", cb)
 		}
-	}, [color, backgroundColor])
+	}, [textColor, backgroundColor])
 
 	return (
 		<CustomScrollBar
@@ -121,12 +131,12 @@ export const ScrollBar: React.FC<ScrollBarProps> = ({ children, ...props }) => {
 			ref={ref}
 			onMouseDown={() => {
 				window.clearTimeout(tick.current)
-				setColor(color)
+				setThumbColor(backgroundColor)
 			}}
 			onMouseUp={() => {
 				tick.current = window.setTimeout(() => {
 					if (isMount.current) {
-						setColor(backgroundColor)
+						setThumbColor(textColor)
 					}
 				}, 3000)
 			}}
@@ -135,7 +145,7 @@ export const ScrollBar: React.FC<ScrollBarProps> = ({ children, ...props }) => {
 		>
 			{handle && (
 				<ScrollBarContext.Provider value={handle}>
-					<div className="flex-grow flex flex-col" style={{ color }}>
+					<div className="flex-grow flex flex-col" style={{ color: textColor }}>
 						{children}
 					</div>
 				</ScrollBarContext.Provider>

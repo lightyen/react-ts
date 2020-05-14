@@ -144,10 +144,14 @@ const Information: React.FC<VirtualScrollProps> = ({ scrollTop, start, end, accH
 	}, [])
 
 	return (
-		<div ref={ref} className="sticky text-xl z-10 w-4/5 mx-auto" style={{ top: "1rem", marginBottom }}>
+		<div
+			ref={ref}
+			className="sticky text-xl text-gray-600 z-10 w-4/5 mx-auto"
+			style={{ top: "1rem", marginBottom }}
+		>
 			<div className="p-3 bg-gray-300" style={{ background: "#e2e8f0a0" }}>
 				<button
-					className="btn btn-blue mb-3"
+					className="btn btn-blue mb-3 opacity-75"
 					onClick={e =>
 						scrollTo({
 							scrollbar,
@@ -186,7 +190,11 @@ const Information: React.FC<VirtualScrollProps> = ({ scrollTop, start, end, accH
 						}
 					}}
 				/>
-				<button className="btn btn-blue" style={{ top: 120 }} onClick={e => changeData(createData())}>
+				<button
+					className="btn btn-blue opacity-75"
+					style={{ top: 120 }}
+					onClick={e => changeData(createData())}
+				>
 					Create
 				</button>
 				<div>Items: {accHeights.length}</div>

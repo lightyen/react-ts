@@ -20,19 +20,21 @@
 }
 
 .app-main {
-	transition: margin-left ease 0.2s;
-	@apply bg-green-200 flex-grow flex flex-col overflow-x-hidden overflow-y-auto;
+	transition-property: color background;
+	transition-duration: 0.2s;
+	transition-timing-function: ease;
+	@apply bg-gray-100 flex-grow flex flex-col overflow-x-hidden overflow-y-auto;
 }
 .app-container {
 	@apply flex-grow h-full;
 }
 
 .app-header {
-	@apply flex items-center bg-blue-300 text-gray-700;
+	@apply flex items-center bg-teal-300 text-gray-700;
 }
 
 .app-footer {
-	@apply p-3 bg-teal-300 flex justify-end;
+	@apply p-3 bg-gray-100 flex justify-end;
 }
 
 .language-menu {
