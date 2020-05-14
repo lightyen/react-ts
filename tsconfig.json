@@ -2,6 +2,7 @@
 	"extends": "./tsconfig.base",
 	"compilerOptions": {
 		"allowJs": false,
+		"checkJs": false,
 		"strictNullChecks": false, // 對開發不友善，我決定關閉它
 		"experimentalDecorators": false, // 我不喜歡
 		"jsx": "preserve",

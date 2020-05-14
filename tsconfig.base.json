@@ -11,7 +11,7 @@
 		"removeComments": true,
 		"resolveJsonModule": true,
 		"skipLibCheck": true,
-		"noImplicitAny": false, // 顯示宣告 any 其實沒什麼用，我們應該盡量不使用 any
+		"noImplicitAny": false, // 顯式宣告 any 其實沒什麼用，我們應該盡量不使用 any
 		"sourceMap": true
 	}
 }
