@@ -34,7 +34,7 @@
 }
 
 .app-footer {
-	@apply p-3 bg-gray-100 flex justify-end;
+	@apply px-6 py-3 bg-gray-100 flex justify-end;
 }
 
 .language-menu {

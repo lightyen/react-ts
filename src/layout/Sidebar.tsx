@@ -64,6 +64,12 @@ export const Sidebar: React.FC<Props> = ({ top, width }) => {
 					</div>
 					<div>Web Components</div>
 				</NavLink>
+				<NavLink to="/page-g" className="nav-item" activeClassName="active">
+					<div className="w-8 mr-2 relative" style={{ left: "0.8rem" }}>
+						<FontAwesomeIcon icon={faBox} />
+					</div>
+					<div>CodeMirror</div>
+				</NavLink>
 			</ul>
 		</nav>
 	)
