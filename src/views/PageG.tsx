@@ -7,6 +7,7 @@ import "codemirror/mode/javascript/javascript.js"
 import "codemirror/mode/jsx/jsx.js"
 import "codemirror/addon/comment/comment.js"
 import "codemirror/addon/edit/closetag.js"
+import "codemirror/addon/edit/closebrackets.js"
 
 defineMIME("text/typescript", { name: "text/javascript", typescript: true })
 
@@ -92,6 +93,7 @@ const Card: React.FC = () => {
 					indentWithTabs: true,
 					indentUnit: 4,
 					autoCloseTags: true,
+					autoCloseBrackets: true,
 					autofocus: true,
 				}}
 				defaultValue={cache.current}
