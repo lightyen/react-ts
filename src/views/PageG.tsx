@@ -6,6 +6,7 @@ import type { Editor, EditorConfiguration, EditorFromTextArea, Doc, EditorChange
 import "codemirror/mode/javascript/javascript.js"
 import "codemirror/mode/jsx/jsx.js"
 import "codemirror/addon/comment/comment.js"
+import "codemirror/addon/edit/closetag.js"
 
 defineMIME("text/typescript", { name: "text/javascript", typescript: true })
 
@@ -63,22 +64,18 @@ const PageG: React.FC = () => {
 	const ref = useRef<Editor>()
 
 	const cache = React.useRef(
-		`
-import React from "react"
+		`import React from "react"
 const Card: React.FC = () => {
 	return (
 		<div>Card</div>
 	)
 }
 
-
-
-
 `,
 	)
 
 	return (
-		<div className="m-3 p-3">
+		<div className="m-3 p-3 bg-white">
 			<CodeMirror
 				id="hehehe"
 				ref={ref}
@@ -86,9 +83,16 @@ const Card: React.FC = () => {
 					lineNumbers: true,
 					mode: "jsx",
 					theme: "dracula",
-					extraKeys: { "Ctrl-/": "toggleComment" },
+					extraKeys: {
+						"Ctrl-/": "toggleComment",
+						"Ctrl-S": function (instance) {
+							// no code
+						},
+					},
 					indentWithTabs: true,
 					indentUnit: 4,
+					autoCloseTags: true,
+					autofocus: true,
 				}}
 				defaultValue={cache.current}
 				onChange={e => (cache.current = e)}

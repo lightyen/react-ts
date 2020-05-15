@@ -18,7 +18,7 @@
 
 .CodeMirror pre.CodeMirror-line,
 .CodeMirror pre.CodeMirror-line-like {
-	@apply px-3;
+	@apply px-2;
 }
 
 .cm-tab {
