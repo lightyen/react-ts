@@ -24,9 +24,15 @@
 .cm-tab {
 	position: relative;
 }
+.cm-tab::before {
+	content: "";
+	height: 100%;
+	position: absolute;
+	border-right: 1px solid #424242;
+}
 .cm-tab::after {
 	position: absolute;
-	left: 0;
+	left: 2px;
 	content: "→";
 	color: #424242;
 }
