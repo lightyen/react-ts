@@ -44,6 +44,7 @@ export default function (options?: { src?: string; dist?: string }): Configurati
 		}),
 		new ForkTsCheckerWebpackPlugin({
 			checkSyntacticErrors: true,
+			tsconfig: path.resolve(src, "tsconfig.json"),
 		}),
 	]
 
@@ -96,7 +97,12 @@ export default function (options?: { src?: string; dist?: string }): Configurati
 						},
 						{ loader: "thread-loader" },
 						{ loader: "babel-loader" },
-						{ loader: "ts-loader", options: { happyPackMode: true } },
+						{
+							loader: "ts-loader",
+							options: {
+								happyPackMode: true,
+							},
+						},
 					],
 				},
 				{
@@ -206,7 +212,7 @@ export default function (options?: { src?: string; dist?: string }): Configurati
 			alias: {
 				assets,
 			},
-			plugins: [new TsPathsResolvePlugin()],
+			plugins: [new TsPathsResolvePlugin({ configFile: path.resolve(src, "tsconfig.json") })],
 		},
 		resolveLoader: {
 			alias: {

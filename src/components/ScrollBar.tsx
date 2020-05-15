@@ -96,7 +96,9 @@ export const ScrollBar: React.FC<ScrollBarProps> = ({ children, ...props }) => {
 	React.useEffect(() => {
 		isMount.current = true
 		setHandle(ref.current)
-		return () => (isMount.current = false)
+		return () => {
+			isMount.current = false
+		}
 	}, [])
 
 	const tick = React.useRef<number>(0)
