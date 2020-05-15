@@ -1,10 +1,13 @@
 import React, { forwardRef, useRef, useEffect, useImperativeHandle } from "react"
 
-import { fromTextArea, on, off, EditorChange } from "codemirror"
-import type { Editor, EditorConfiguration, EditorFromTextArea, Doc } from "codemirror"
+import { fromTextArea, on, off, defineMIME } from "codemirror"
+import type { Editor, EditorConfiguration, EditorFromTextArea, Doc, EditorChange } from "codemirror"
 
 import "codemirror/mode/javascript/javascript.js"
+import "codemirror/mode/jsx/jsx.js"
 import "codemirror/addon/comment/comment.js"
+
+defineMIME("text/typescript", { name: "text/javascript", typescript: true })
 
 interface MyProps {
 	options?: EditorConfiguration
@@ -22,6 +25,7 @@ const CodeMirror = forwardRef<Editor, Props>(({ options, className, style, onCha
 	}))
 	useEffect(() => {
 		editorRef.current = fromTextArea(textareaRef.current, options)
+		editorRef.current.setSize("auto", 600)
 		return () => {
 			editorRef.current.toTextArea()
 		}
@@ -60,25 +64,17 @@ const PageG: React.FC = () => {
 
 	const cache = React.useRef(
 		`
-class Greeter {
-	greeting: string;
-	constructor (message: string) {
-		this.greeting = message;
-	}
-	greet() {
-		return "Hello, " + this.greeting;
-	}
+import React from "react"
+const Card: React.FC = () => {
+	return (
+		<div>Card</div>
+	)
 }
 
-var greeter = new Greeter("world");
 
-var button = document.createElement('button')
-button.innerText = "Say Hello"
-button.onclick = function() {
-	alert(greeter.greet())
-}
-document.body.appendChild(button)
-	`,
+
+
+`,
 	)
 
 	return (
@@ -86,13 +82,13 @@ document.body.appendChild(button)
 			<CodeMirror
 				id="hehehe"
 				ref={ref}
-				style={{ height: 600 }}
 				options={{
 					lineNumbers: true,
-					mode: "text/typescript",
+					mode: "jsx",
 					theme: "dracula",
 					extraKeys: { "Ctrl-/": "toggleComment" },
-					tabSize: 4,
+					indentWithTabs: true,
+					indentUnit: 4,
 				}}
 				defaultValue={cache.current}
 				onChange={e => (cache.current = e)}
