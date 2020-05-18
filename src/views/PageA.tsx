@@ -1,4 +1,5 @@
 import React from "react"
+import classnames from "classnames"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBars } from "@fortawesome/free-solid-svg-icons/faBars"
 import { FormattedMessage } from "react-intl"
@@ -7,6 +8,39 @@ import { Modal } from "~/components/Modal"
 import { startOfDay, endOfDay, subDays } from "date-fns"
 import { CustomDateRangePicker, DateRange } from "~/components/DateRangePicker/DateRangePicker"
 import { PromptModal } from "~/components/PromptModal"
+
+function useRipple<T extends HTMLElement>() {
+	const ref = React.useRef<T>()
+	React.useEffect(() => {
+		const el = ref.current
+		function ripple(el: HTMLElement, e: MouseEvent | Touch) {
+			const r = el.getBoundingClientRect()
+			const d = Math.sqrt(Math.pow(r.width, 2) + Math.pow(r.height, 2)) * 2
+			el.style.cssText = `--scale: 0; --opacity: 1;`
+			el.offsetTop
+			el.style.cssText = `--t: 1;
+			--opacity: 0; --d: ${d};
+			--x:${e.pageX - window.screenLeft - r.left};
+			--y:${e.pageY - window.screenTop - r.top};`
+		}
+		el.setAttribute("data-anime", "ripple")
+		const mousedown = (e: MouseEvent) => ripple(el, e)
+		el.addEventListener("click", mousedown)
+		return () => {
+			el.removeEventListener("click", mousedown)
+			el.removeAttribute("data-anime")
+		}
+	}, [])
+	return ref
+}
+
+const Button: React.FC<{ className?: string }> = ({ className, children }) => {
+	return (
+		<button ref={useRipple()} className={classnames("btn", className)}>
+			{children}
+		</button>
+	)
+}
 
 const PageA: React.FC = () => {
 	const [dateRange, setDateRange] = React.useState<DateRange>(() => {
@@ -24,14 +58,14 @@ const PageA: React.FC = () => {
 				<FormattedMessage id="button" />
 			</h3>
 			<div className="-pb-2 mb-6">
-				<button className="btn inline-block mr-2 mb-2">Button</button>
-				<button className="btn btn-blue inline-block mr-2 mb-2">Button</button>
-				<button className="btn btn-green inline-block mr-2 mb-2">Button</button>
-				<button className="btn btn-red inline-block mr-2 mb-2">Button</button>
-				<button className="btn btn-orange inline-block mr-2 mb-2">
+				<Button className="inline-block mr-2 mb-2">Button</Button>
+				<Button className="btn-blue inline-block mr-2 mb-2">Button</Button>
+				<Button className="btn-green inline-block mr-2 mb-2">Button</Button>
+				<Button className="btn-red inline-block mr-2 mb-2">Button</Button>
+				<Button className="btn-orange inline-block mr-2 mb-2">
 					<FontAwesomeIcon className="mr-2" icon={faBars} />
 					Button
-				</button>
+				</Button>
 			</div>
 			<h3 className="text-xl mt-6 mb-3 font-bold">
 				<FormattedMessage id="date_range_picker" />

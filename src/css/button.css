@@ -53,3 +53,27 @@
 	box-shadow: 0 0 0 3px rgba(245, 101, 101, 0.5);
 	@apply outline-none;
 }
+
+.btn[data-anime*="ripple"] {
+	@apply relative overflow-hidden;
+}
+
+.btn[data-anime~="ripple"]::before {
+	content: "";
+	position: absolute;
+	display: block;
+	background: var(--ripple-background, white);
+	border-radius: 50%;
+	pointer-events: none;
+
+	top: calc(var(--y) * 1px);
+	left: calc(var(--x) * 1px);
+	width: calc(var(--d) * 1px);
+	height: calc(var(--d) * 1px);
+
+	opacity: calc(var(--opacity, 1) * var(--ripple-opacity, 0.3));
+	transition: calc(var(--t, 0) * var(--ripple-duration, 350ms))
+		var(--ripple-easing, ease-in);
+	transform: translate(-50%, -50%) scale(var(--scale, 1));
+	transform-origin: center;
+}
