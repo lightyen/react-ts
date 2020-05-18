@@ -5,13 +5,15 @@ import { motion, AnimatePresence } from "framer-motion"
 
 interface Props extends ModalContentProps {
 	open?: boolean
+	afterClose?: () => void
 }
 
-export const Modal: React.FC<Props> = ({ children, open = false, exitAnime = true, ...rest }) => {
+export const Modal: React.FC<Props> = ({ children, open = false, exitAnime = true, afterClose, ...rest }) => {
 	const root = document.getElementById("root")
 	const modalRoot = document.getElementById("modal-root")
 	const element = React.useRef(document.createElement("div"))
 	const [visible, setVisible] = React.useState(open)
+
 	function onExitComplete() {
 		setVisible(false)
 		modalRoot.style.bottom = ""
@@ -25,6 +27,16 @@ export const Modal: React.FC<Props> = ({ children, open = false, exitAnime = tru
 			modalRoot.style.bottom = ""
 		}
 	}, [open, modalRoot, exitAnime])
+
+	const isOpen = React.useRef(false)
+	React.useEffect(() => {
+		if (isOpen.current && !visible && afterClose) {
+			afterClose()
+		}
+		return () => {
+			isOpen.current = visible
+		}
+	}, [afterClose, visible])
 
 	React.useEffect(() => {
 		const e = element.current
