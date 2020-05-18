@@ -17,10 +17,10 @@ const PageA: React.FC = () => {
 	const [open, setOpen] = React.useState(false)
 	const [open2, setOpen2] = React.useState(false)
 	return (
-		<div className="m-3 p-6 bg-white">
+		<div className="m-3 p-3 bg-white">
 			<PromptModal when={false} />
-			<h2 className="text-3xl mb-2 font-black">Components</h2>
-			<h3 className="text-xl mt-4 mb-2 font-bold">
+			<h2 className="text-3xl mt-8 mb-5 font-black">Components</h2>
+			<h3 className="text-xl mt-6 mb-3 font-bold">
 				<FormattedMessage id="button" />
 			</h3>
 			<div className="-pb-2 mb-6">
@@ -33,7 +33,7 @@ const PageA: React.FC = () => {
 					Button
 				</button>
 			</div>
-			<h3 className="text-xl mt-4 mb-2 font-bold">
+			<h3 className="text-xl mt-6 mb-3 font-bold">
 				<FormattedMessage id="date_range_picker" />
 			</h3>
 			<div className="mb-6">
@@ -43,7 +43,7 @@ const PageA: React.FC = () => {
 					onChange={e => setDateRange(e)}
 				/>
 			</div>
-			<h3 className="text-xl mt-4 mb-2 font-bold">
+			<h3 className="text-xl mt-6 mb-3 font-bold">
 				<FormattedMessage id="card" />
 			</h3>
 			<div className="max-w-sm mb-6 rounded overflow-hidden shadow-lg">
@@ -56,7 +56,7 @@ const PageA: React.FC = () => {
 					</p>
 				</div>
 			</div>
-			<h3 className="text-xl mt-4 mb-2 font-bold">
+			<h3 className="text-xl mt-6 mb-3 font-bold">
 				<FormattedMessage id="input" />
 				{value ? `: ${value}` : ""}
 			</h3>
@@ -68,7 +68,7 @@ const PageA: React.FC = () => {
 					onChange={v => setValue(v)}
 				/>
 			</div>
-			<h3 className="text-xl mt-4 mb-2 font-bold">
+			<h3 className="text-xl mt-6 mb-3 font-bold">
 				<FormattedMessage id="modal" />
 			</h3>
 			<div className="mb-6">

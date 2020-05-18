@@ -214,8 +214,8 @@ const PageC: React.FC = () => {
 	const value = React.useMemo(() => ({ ...state, dispatch }), [state, dispatch])
 	return (
 		<MyContext.Provider value={value}>
-			<div className="m-3 pt-1 px-6 pb-6 relative bg-white">
-				<h2 className="text-3xl mt-4 mb-2 font-black">Virtual List</h2>
+			<div className="m-3 pt-3 px-3 pb-6 relative bg-white">
+				<h2 className="text-3xl mt-8 mb-5 font-black">Virtual List</h2>
 				<VirtualList />
 			</div>
 		</MyContext.Provider>

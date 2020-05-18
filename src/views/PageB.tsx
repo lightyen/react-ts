@@ -156,8 +156,8 @@ const PageB: React.FC = () => {
 	]
 
 	return (
-		<div className="m-3 p-6 bg-white">
-			<h2 className="text-3xl mb-2 font-black">Table</h2>
+		<div className="m-3 p-3 bg-white">
+			<h2 className="text-3xl mt-8 mb-5 font-black">Table</h2>
 
 			<Table
 				id="#mytable"
