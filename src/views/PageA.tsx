@@ -18,7 +18,7 @@ const PageA: React.FC = () => {
 	const [open2, setOpen2] = React.useState(false)
 	return (
 		<div className="m-3 p-6 bg-white">
-			<PromptModal />
+			<PromptModal when={false} />
 			<h2 className="text-3xl mb-2 font-black">Components</h2>
 			<h3 className="text-xl mt-4 mb-2 font-bold">
 				<FormattedMessage id="button" />

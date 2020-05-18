@@ -3,7 +3,12 @@ import React from "react"
 import { Prompt, useLocation, useHistory } from "react-router-dom"
 import { Modal } from "./Modal"
 
-export const PromptModal: React.FC<{ when?: boolean }> = ({ when = true }) => {
+interface Props {
+	/** 是否要攔截路由跳轉？ */
+	when?: boolean
+}
+
+export const PromptModal: React.FC<Props> = ({ when = true }) => {
 	const [modalVisible, setModalVisible] = React.useState(false)
 	const location = useLocation()
 	const history = useHistory()
