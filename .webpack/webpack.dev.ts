@@ -4,7 +4,6 @@ import createBaseConfig from "./webpack.common"
 import type { Configuration } from "webpack"
 import "webpack-dev-server"
 
-const defaultPort = 3000
 process.env.NODE_ENV = "development"
 process.env.PUBLIC_URL = ""
 
@@ -28,28 +27,21 @@ const config: Configuration = {
 		},
 	},
 	plugins: [new HotModuleReplacementPlugin()],
-	output: {
-		publicPath: `http://localhost:${defaultPort}/`,
-	},
+	// output: {
+	// 	publicPath: `http://localhost:${defaultPort}/`,
+	// },
 	devServer: {
 		hot: true,
 		compress: true,
 		open: true,
 		host: "localhost",
-		port: defaultPort,
-		public: `localhost:${defaultPort}`,
-		publicPath: "/",
-		clientLogLevel: "warning",
+		// port: defaultPort,
+		// public: `localhost:${defaultPort}`,
+		// publicPath: "/",
+		clientLogLevel: "none",
 		contentBase: false,
-		stats: {
-			all: false,
-			colors: true,
-			builtAt: true,
-			errors: true,
-			cached: true,
-			cachedAssets: true,
-			warnings: true,
-		},
+		quiet: true,
+		noInfo: true,
 		historyApiFallback: true,
 	},
 }

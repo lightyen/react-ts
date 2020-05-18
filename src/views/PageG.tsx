@@ -1,15 +1,20 @@
 import React, { forwardRef, useRef, useEffect, useImperativeHandle } from "react"
 
-import { fromTextArea, on, off, defineMIME } from "codemirror"
+import { fromTextArea, on, off } from "codemirror"
 import type { Editor, EditorConfiguration, EditorFromTextArea, Doc, EditorChange } from "codemirror"
 
-import "codemirror/mode/javascript/javascript.js"
-import "codemirror/mode/jsx/jsx.js"
-import "codemirror/addon/comment/comment.js"
-import "codemirror/addon/edit/closetag.js"
-import "codemirror/addon/edit/closebrackets.js"
+import "codemirror/addon/comment/comment"
+import "codemirror/addon/edit/closetag"
+import "codemirror/addon/edit/closebrackets"
+import "codemirror/addon/edit/continuelist"
 
-defineMIME("text/typescript", { name: "text/javascript", typescript: true })
+// highlights
+import "codemirror/mode/markdown/markdown"
+import "codemirror/mode/javascript/javascript"
+import "codemirror/mode/jsx/jsx"
+import "codemirror/mode/go/go"
+import "codemirror/mode/sass/sass"
+import "codemirror/mode/css/css"
 
 interface MyProps {
 	options?: EditorConfiguration
@@ -65,13 +70,18 @@ const PageG: React.FC = () => {
 	const ref = useRef<Editor>()
 
 	const cache = React.useRef(
-		`import React from "react"
-const Card: React.FC = () => {
-	return (
-		<div>Card</div>
-	)
-}
+		`# Test
 
+code
+
+\`\`\`tsx
+import React from "react"
+const Card: React.FC = () => {
+    return (
+        <div>Card</div>
+    )
+}
+\`\`\`
 `,
 	)
 
@@ -82,11 +92,15 @@ const Card: React.FC = () => {
 				ref={ref}
 				options={{
 					lineNumbers: true,
-					mode: "jsx",
+					mode: "markdown",
 					theme: "dracula",
 					extraKeys: {
+						Enter: "newlineAndIndentContinueMarkdownList",
+						Tab: function (cm) {
+							cm.replaceSelection(Array(cm.getOption("tabSize")).join(" "))
+						},
 						"Ctrl-/": "toggleComment",
-						"Ctrl-S": function (instance) {
+						"Ctrl-S": function (cm) {
 							// no code
 						},
 					},
@@ -99,9 +113,6 @@ const Card: React.FC = () => {
 				defaultValue={cache.current}
 				onChange={e => (cache.current = e)}
 			/>
-			<button className="btn btn-blue" onClick={() => ref.current.focus()}>
-				Click
-			</button>
 		</div>
 	)
 }
