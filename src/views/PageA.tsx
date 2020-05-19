@@ -8,35 +8,12 @@ import { Modal } from "~/components/Modal"
 import { startOfDay, endOfDay, subDays } from "date-fns"
 import { CustomDateRangePicker, DateRange } from "~/components/DateRangePicker/DateRangePicker"
 import { PromptModal } from "~/components/PromptModal"
-
-function useRipple<T extends HTMLElement>() {
-	const ref = React.useRef<T>()
-	React.useEffect(() => {
-		const el = ref.current
-		function ripple(el: HTMLElement, e: MouseEvent | Touch) {
-			const r = el.getBoundingClientRect()
-			const d = Math.sqrt(Math.pow(r.width, 2) + Math.pow(r.height, 2)) * 2
-			el.style.cssText = `--scale: 0; --opacity: 1;`
-			el.offsetTop
-			el.style.cssText = `--t: 1;
-			--opacity: 0; --d: ${d};
-			--x:${e.pageX - window.screenLeft - r.left};
-			--y:${e.pageY - window.screenTop - r.top};`
-		}
-		el.setAttribute("data-anime", "ripple")
-		const mousedown = (e: MouseEvent) => ripple(el, e)
-		el.addEventListener("click", mousedown)
-		return () => {
-			el.removeEventListener("click", mousedown)
-			el.removeAttribute("data-anime")
-		}
-	}, [])
-	return ref
-}
+import { useRipple } from "~/components/Button/hooks"
 
 const Button: React.FC<{ className?: string }> = ({ className, children }) => {
+	const ref = useRipple<HTMLButtonElement>()
 	return (
-		<button ref={useRipple()} className={classnames("btn", className)}>
+		<button ref={ref} className={classnames("btn relative overflow-hidden", className)}>
 			{children}
 		</button>
 	)
