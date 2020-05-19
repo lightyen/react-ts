@@ -1,4 +1,4 @@
-import { Messages } from "./index"
+import { Messages } from "../model"
 
 const messages: Messages = {
 	language: "Language",

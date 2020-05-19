@@ -1,4 +1,4 @@
-import { Locale, Messages, getLocale, getLocaleMessages, languageNames } from "./languages"
+import { Locale, Messages, getLocale, getLocaleMessages, languageNames } from "./model/language"
 import { createReducer } from "@reduxjs/toolkit"
 import { setLocale } from "./action"
 

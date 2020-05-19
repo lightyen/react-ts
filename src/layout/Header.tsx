@@ -6,7 +6,7 @@ import { faLanguage } from "@fortawesome/free-solid-svg-icons/faLanguage"
 import { Link } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
 import { FormattedMessage } from "react-intl"
-import { languageNames } from "~/store/i18n/languages"
+import { languageNames } from "~/store/i18n/model/language"
 import { entries } from "~/type-safed"
 
 interface Props {

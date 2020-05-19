@@ -9,6 +9,7 @@
 		"bradlc.vscode-tailwindcss",
 		"jpoissonnier.vscode-styled-components",
 		"visualstudioexptteam.vscodeintellicode",
+		"antfu.i18n-ally",
 		"pkief.material-icon-theme"
 	]
 }
