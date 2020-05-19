@@ -1,6 +1,7 @@
 import React from "react"
+import classnames from "classnames"
 import { useSelector } from "~/store"
-import { NavLink } from "react-router-dom"
+import { NavLink, Prompt, useLocation, NavLinkProps } from "react-router-dom"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faThLarge } from "@fortawesome/free-solid-svg-icons/faThLarge"
@@ -10,6 +11,12 @@ import { faDiceD6 } from "@fortawesome/free-solid-svg-icons/faDiceD6"
 import { faDiceD20 } from "@fortawesome/free-solid-svg-icons/faDiceD20"
 import { faBox } from "@fortawesome/free-solid-svg-icons/faBox"
 import { faCode } from "@fortawesome/free-solid-svg-icons/faCode"
+import { useRipple } from "~/components/Button/hooks"
+
+const RippleNavLink: React.FC<NavLinkProps> = ({ className, ...props }) => {
+	const ref = useRipple<HTMLAnchorElement>()
+	return <NavLink ref={ref} className={classnames("relative overflow-hidden", className)} {...props} />
+}
 
 interface Props {
 	top: number
@@ -18,6 +25,7 @@ interface Props {
 
 export const Sidebar: React.FC<Props> = ({ top, width }) => {
 	const collapsed = useSelector(state => state.app.collapsed)
+	const location = useLocation()
 	return (
 		<nav
 			className="nav-sidebar"
@@ -29,48 +37,48 @@ export const Sidebar: React.FC<Props> = ({ top, width }) => {
 			}}
 		>
 			<ul>
-				<NavLink to="/page-a" className="nav-item" activeClassName="active">
+				<RippleNavLink to="/page-a" className="nav-item" activeClassName="active">
 					<div className="w-8 mr-2 flex justify-end">
 						<FontAwesomeIcon icon={faThLarge} />
 					</div>
 					<div>Components</div>
-				</NavLink>
-				<NavLink to="/page-b" className="nav-item" activeClassName="active">
+				</RippleNavLink>
+				<RippleNavLink to="/page-b" className="nav-item" activeClassName="active">
 					<div className="w-8 mr-2 flex justify-end">
 						<FontAwesomeIcon icon={faThList} />
 					</div>
 					<div>Table</div>
-				</NavLink>
-				<NavLink to="/page-c" className="nav-item" activeClassName="active">
+				</RippleNavLink>
+				<RippleNavLink to="/page-c" className="nav-item" activeClassName="active">
 					<div className="w-8 mr-2 flex justify-end">
 						<FontAwesomeIcon icon={faInfinity} />
 					</div>
 					<div>Virtual List</div>
-				</NavLink>
-				<NavLink to="/page-d" className="nav-item" activeClassName="active">
+				</RippleNavLink>
+				<RippleNavLink to="/page-d" className="nav-item" activeClassName="active">
 					<div className="w-8 mr-2 relative" style={{ left: "0.875rem" }}>
 						<FontAwesomeIcon icon={faDiceD6} />
 					</div>
 					<div>Transition</div>
-				</NavLink>
-				<NavLink to="/page-e" className="nav-item" activeClassName="active">
+				</RippleNavLink>
+				<RippleNavLink to="/page-e" className="nav-item" activeClassName="active">
 					<div className="w-8 mr-2 relative" style={{ left: "0.8rem" }}>
 						<FontAwesomeIcon icon={faDiceD20} />
 					</div>
 					<div>Chart</div>
-				</NavLink>
-				<NavLink to="/page-f" className="nav-item" activeClassName="active">
+				</RippleNavLink>
+				<RippleNavLink to="/page-f" className="nav-item" activeClassName="active">
 					<div className="w-8 mr-2 relative" style={{ left: "0.8rem" }}>
 						<FontAwesomeIcon icon={faBox} />
 					</div>
 					<div>Web Components</div>
-				</NavLink>
-				<NavLink to="/page-g" className="nav-item" activeClassName="active">
+				</RippleNavLink>
+				<RippleNavLink to="/page-g" className="nav-item" activeClassName="active">
 					<div className="w-8 mr-2 relative" style={{ left: "0.8rem" }}>
 						<FontAwesomeIcon icon={faCode} />
 					</div>
 					<div>CodeMirror</div>
-				</NavLink>
+				</RippleNavLink>
 			</ul>
 		</nav>
 	)
