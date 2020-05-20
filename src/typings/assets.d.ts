@@ -2,6 +2,8 @@ declare module "*.css"
 declare module "*.less"
 declare module "*.scss"
 declare module "*.json"
+declare module "*.yaml"
+declare module "*.yml"
 declare module "*.png" {
 	const path: string
 	export = path
