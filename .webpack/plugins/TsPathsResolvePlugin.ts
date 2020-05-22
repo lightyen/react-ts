@@ -110,7 +110,7 @@ class TsPathsResolvePlugin implements ResolvePlugin {
 				continue
 			}
 			resolver.hooks.describedResolve.tapAsync(
-				"ts-paths-resolvess-plugin",
+				"ts-paths-resolve-plugin",
 				this.makeResolvePlugin(resolver, mapping),
 			)
 		}
