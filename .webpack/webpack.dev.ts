@@ -2,7 +2,8 @@ import { HotModuleReplacementPlugin } from "webpack"
 import webpackMerge from "webpack-merge"
 import createBaseConfig from "./webpack.common"
 import type { Configuration } from "webpack"
-import "webpack-dev-server"
+import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin"
+import path from "path"
 
 process.env.NODE_ENV = "development"
 process.env.PUBLIC_URL = ""
@@ -26,7 +27,13 @@ const config: Configuration = {
 			"react-dom": "@hot-loader/react-dom",
 		},
 	},
-	plugins: [new HotModuleReplacementPlugin()],
+	plugins: [
+		new HotModuleReplacementPlugin(),
+		new ForkTsCheckerWebpackPlugin({
+			checkSyntacticErrors: true,
+			tsconfig: path.resolve(process.cwd(), "src", "tsconfig.json"),
+		}),
+	],
 	// output: {
 	// 	publicPath: `http://localhost:${defaultPort}/`,
 	// },
