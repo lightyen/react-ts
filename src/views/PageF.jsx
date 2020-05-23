@@ -52,7 +52,7 @@ window.customElements.define(
 		adoptedCallback() {
 			//
 		}
-		handleClick(e) {
+		handleClick() {
 			console.log("on click")
 		}
 	},
