@@ -2,6 +2,7 @@ import packageJSON from "../package.json"
 
 import path from "path"
 import { EnvironmentPlugin, ExtendedAPIPlugin } from "webpack"
+import type { Configuration, Plugin, Loader } from "webpack"
 
 // Plugins
 import HtmlWebpackPlugin from "html-webpack-plugin"
@@ -9,17 +10,20 @@ import MiniCssExtractPlugin from "mini-css-extract-plugin"
 import WebpackBarPlugin from "webpackbar"
 import TsPathsResolvePlugin from "ts-paths-resolve-plugin"
 
-import type { Configuration, Plugin, Loader } from "webpack"
-
 // NOTE: 關閉 webpack 要求 donate 訊息
 process.env.DISABLE_OPENCOLLECTIVE = "true"
 
 export default function (): Configuration {
+	const outputCSS = "css"
+	const outputJS = "js"
+	const publicPath = "/"
+
 	const workingDirectory = process.cwd()
 	const src = path.resolve(workingDirectory, "src")
 	const dist = path.resolve(workingDirectory, "build")
-	const assets = path.resolve(workingDirectory, "public", "assets")
 	const isDevelopment = process.env.NODE_ENV === "development"
+
+	const join_network = (...args: string[]) => path.join(...args).replace(path.sep, "/")
 
 	const plugins: Plugin[] = [
 		new WebpackBarPlugin({ color: "blue", name: "React" }),
@@ -27,11 +31,11 @@ export default function (): Configuration {
 			NODE_ENV: "development",
 			PUBLIC_URL: "",
 			APP_NAME: packageJSON.name,
-			TAILWIND_CONFIG: JSON.stringify(require("../tailwind.config")),
+			TAILWIND_CONFIG: JSON.stringify(require(path.resolve(workingDirectory, "tailwind.config"))),
 		}),
 		new MiniCssExtractPlugin({
-			filename: "css/[name].[contenthash:8].css",
-			chunkFilename: "css/[name].[contenthash:8].chunk.css",
+			filename: join_network(outputCSS, "[name].[contenthash:8].css"),
+			chunkFilename: join_network(outputCSS, "[name].[contenthash:8].chunk.css"),
 		}),
 		new HtmlWebpackPlugin({
 			inject: false,
@@ -50,23 +54,32 @@ export default function (): Configuration {
 	const styleLoader: Loader = {
 		loader: isDevelopment ? "style-loader" : MiniCssExtractPlugin.loader,
 		options: {
-			...(!isDevelopment && {
-				publicPath: "../",
-			}),
+			...(!isDevelopment && { publicPath: path.relative(path.join(publicPath, outputCSS), publicPath) }),
 		},
 	}
 
 	return {
+		target: "web",
+		plugins,
+		// NOTE: https://webpack.js.org/configuration/resolve/
+		resolve: {
+			extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
+			plugins: [new TsPathsResolvePlugin({ configFile: path.resolve(src, "tsconfig.json") })],
+		},
+		resolveLoader: {
+			alias: {
+				"custom-loader": path.resolve(__dirname, "loaders", "custom-loader.ts"),
+			},
+		},
 		entry: {
-			index: path.join(src, "index.tsx"),
+			index: path.resolve(src, "index.tsx"),
 		},
 		output: {
 			path: dist,
-			filename: "js/[name].[hash:8].js",
-			chunkFilename: "js/[name].[hash:8].chunk.js",
-			publicPath: "/",
+			filename: join_network(outputJS, "[name].[hash:8].js"),
+			chunkFilename: join_network(outputJS, "[name].[hash:8].chunk.js"),
+			publicPath,
 		},
-		target: "web",
 		module: {
 			rules: [
 				{
@@ -111,7 +124,7 @@ export default function (): Configuration {
 						{
 							loader: "url-loader",
 							options: {
-								name: "assets/images/[name].[ext]",
+								name: join_network("assets", "images", "[name].[ext]"),
 								limit: 8192,
 							},
 						},
@@ -128,7 +141,7 @@ export default function (): Configuration {
 							loader: "file-loader",
 							options: {
 								name: "[name].[ext]?[hash:8]",
-								outputPath: "assets/fonts",
+								outputPath: join_network("assets", "fonts"),
 							},
 						},
 					],
@@ -205,19 +218,5 @@ export default function (): Configuration {
 				},
 			],
 		},
-		// NOTE: https://webpack.js.org/configuration/resolve/
-		resolve: {
-			extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
-			alias: {
-				assets,
-			},
-			plugins: [new TsPathsResolvePlugin({ configFile: path.resolve(src, "tsconfig.json") })],
-		},
-		resolveLoader: {
-			alias: {
-				"custom-loader": path.resolve(__dirname, "./loaders/custom-loader.ts"),
-			},
-		},
-		plugins,
 	}
 }

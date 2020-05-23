@@ -13,7 +13,8 @@
     "types": ["react", "webpack-env"],
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./*"]
+      "~/*": ["./*"],
+      "assets/*": ["../public/assets/*"]
     }
   }
 }
