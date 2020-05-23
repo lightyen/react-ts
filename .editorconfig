@@ -17,7 +17,7 @@ max_line_length = 120
 [*.{scss,less,css}]
 max_line_length = 80
 
-[*.json]
+[*.{json,yaml,yml,babelrc}]
 max_line_length = 80
 indent_style = space
 indent_size = 2
