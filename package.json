@@ -19,7 +19,8 @@
     "start": "cross-env TS_NODE_PROJECT=\".webpack/tsconfig.json\" webpack-dev-server --config .webpack/webpack.dev.ts",
     "build": "cross-env TS_NODE_PROJECT=\".webpack/tsconfig.json\" webpack --config .webpack/webpack.prod.ts",
     "doit": "yarn upgrade-interactive --latest",
-    "test": "jest"
+    "test": "yarn run build",
+    "jest": "jest"
   },
   "devDependencies": {
     "@babel/core": "7.9.6",

@@ -1,3 +1,4 @@
+root: true
 parser: "@typescript-eslint/parser"
 plugins:
   - "@typescript-eslint"
@@ -7,10 +8,10 @@ extends:
   - "plugin:@typescript-eslint/recommended"
   - prettier
   - prettier/@typescript-eslint
+  - "plugin:react/recommended"
+  - "plugin:react-hooks/recommended"
 parserOptions:
   project: ./tsconfig.json
-ignorePatterns:
-  - tailwind.config.js
 rules:
   spaced-comment: error
   no-var: error
@@ -24,7 +25,7 @@ rules:
   "@typescript-eslint/array-type":
     - error
     - default: array-simple
-  "@typescript-eslint/no-var-requires": "off"
+  "@typescript-eslint/no-var-requires": warn
   "@typescript-eslint/member-delimiter-style":
     - error
     - multiline:
@@ -33,6 +34,12 @@ rules:
         delimiter: semi
         requireLast: false
   "@typescript-eslint/explicit-module-boundary-types": "off"
+  react/display-name: "off"
+  react/prop-types: "off"
+  react-hooks/rules-of-hooks: error
+  react-hooks/exhaustive-deps: error
+settings:
+  react:
+    version: detect
 env:
   browser: true
-  node: true
