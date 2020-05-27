@@ -2,7 +2,7 @@ import { createAction } from "@reduxjs/toolkit"
 import { FilterType } from "./model"
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const setFilters = createAction("SET_FILTERS", (payload: { id: string; filters: FilterType<any>[] }) => ({
+export const setFilters = createAction("SET_FILTERS", (payload: { id: string; filters: Array<FilterType<any>> }) => ({
 	payload,
 }))
 export const setInput = createAction("SET_INPUT_VALUE", (payload: { id: string; fid: string; value: unknown }) => ({

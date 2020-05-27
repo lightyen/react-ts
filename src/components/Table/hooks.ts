@@ -8,13 +8,13 @@ export type WithCheckbox<RecordType> = RecordType & { __checkbox__: boolean }
 
 export interface BaseColumnProps<T> {
 	sorter?: Sorter<T>
-	filters?: FilterType<T>[]
+	filters?: Array<FilterType<T>>
 }
 
 interface TableOptions<T> {
 	id: string
 	data: T[]
-	columns: BaseColumnProps<T>[]
+	columns: Array<BaseColumnProps<T>>
 
 	pageSize: number
 	maxPageItem: number
@@ -105,10 +105,10 @@ function usePagination({ total, pageSize, maxPageItem, infiniteLoop }: Paginatio
 }
 
 interface SortProps<T> {
-	columns: BaseColumnProps<T>[]
+	columns: Array<BaseColumnProps<T>>
 }
 
-function sorting<T>(data: T[], columns: BaseColumnProps<T>[], sortKeys: SortType[]) {
+function sorting<T>(data: T[], columns: Array<BaseColumnProps<T>>, sortKeys: SortType[]) {
 	const i = sortKeys.findIndex(p => p && p !== "none")
 	if (i < 0) {
 		return data.slice()
@@ -122,7 +122,7 @@ function sorting<T>(data: T[], columns: BaseColumnProps<T>[], sortKeys: SortType
 }
 
 function useSort<T>({ columns }: SortProps<T>) {
-	const [sortTypes, setSortTypes] = React.useState<SortType[]>(columns.map(c => (!!c.sorter ? "none" : undefined)))
+	const [sortTypes, setSortTypes] = React.useState<SortType[]>(columns.map(c => (c.sorter ? "none" : undefined)))
 	function nextSortType(col: number) {
 		function newTypes(t: SortType) {
 			const keys = sortTypes.slice()
@@ -151,7 +151,7 @@ function exhaustiveCheck(value: never) {
 	throw new Error(`Exhaustive check is not passed: ${value}`)
 }
 
-function filtering<T>(data: readonly T[], columns: BaseColumnProps<T>[], filterKeys: { [id: string]: unknown }) {
+function filtering<T>(data: readonly T[], columns: Array<BaseColumnProps<T>>, filterKeys: { [id: string]: unknown }) {
 	return data.filter(record => {
 		return columns.every((col, i) => {
 			// for every filter
@@ -252,8 +252,8 @@ export function useTable<T = unknown>({ id, data, columns, pageSize, maxPageItem
 	const page = rows.slice(pageIndex * pageSize, (pageIndex + 1) * pageSize)
 
 	// checkbox
-	const enableCheckbox = data.length > 0 && data.every(d => d.hasOwnProperty("__checkbox__"))
-	const allChecked = enableCheckbox && (rows as WithCheckbox<T>[]).every(d => d.__checkbox__)
+	const enableCheckbox = data.length > 0 && data.every(d => Object.prototype.hasOwnProperty.call(d, "__checkbox__"))
+	const allChecked = enableCheckbox && (rows as Array<WithCheckbox<T>>).every(d => d.__checkbox__)
 	const [c, setC] = React.useState(false)
 
 	return {
@@ -268,17 +268,17 @@ export function useTable<T = unknown>({ id, data, columns, pageSize, maxPageItem
 		enableCheckbox,
 		allChecked,
 		setAllChecked: (checked: boolean) => {
-			const list = rows as WithCheckbox<T>[]
+			const list = rows as Array<WithCheckbox<T>>
 			list.forEach(d => {
 				d.__checkbox__ = checked
 			})
 			setC(!c)
-			return data.slice() as WithCheckbox<T>[]
+			return data.slice() as Array<WithCheckbox<T>>
 		},
 		setChecked: (record: WithCheckbox<T>, checked: boolean) => {
 			record.__checkbox__ = checked
 			setC(!c)
-			const list = data as WithCheckbox<T>[]
+			const list = data as Array<WithCheckbox<T>>
 			return list.slice()
 		},
 	}

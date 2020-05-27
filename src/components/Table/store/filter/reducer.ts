@@ -4,7 +4,7 @@ import { setFilters, setFocus, setInput } from "./action"
 
 interface StoreType {
 	id: string
-	filters: FilterType<unknown>[]
+	filters: Array<FilterType<unknown>>
 	inputs: {
 		[fid: string]: unknown
 	}

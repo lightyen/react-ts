@@ -12,7 +12,7 @@ export interface OptionType<T> {
 
 interface Props<T = string> {
 	tabIndex: number
-	options: OptionType<T>[]
+	options: Array<OptionType<T>>
 	onChange?(value: T): void
 }
 

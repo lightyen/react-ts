@@ -42,16 +42,16 @@ interface TableProps<T> extends PaginationOptions {
 	/** 資料來源 */
 	data: T[]
 	/** 欄位描述 */
-	columns: Column<T>[]
+	columns: Array<Column<T>>
 	rowKey?: (record: T, index: number) => React.Key
 	onRowClick?: (e: React.MouseEvent, record: T) => void
 	/** Set each item with "**\_\_checkbox\_\_**" field will enable this feature. */
-	onChecked?(result: WithCheckbox<T>[]): void
+	onChecked?(result: Array<WithCheckbox<T>>): void
 }
 
 interface FilterComponentsProps<T> {
 	id: string
-	columns: Column<T>[]
+	columns: Array<Column<T>>
 	setFilterInput: (fid: string, inputValue: unknown) => void
 }
 

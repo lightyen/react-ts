@@ -71,7 +71,7 @@ const PageB: React.FC = () => {
 				return 2
 		}
 	}
-	const columns: Column<Item>[] = [
+	const columns: Array<Column<Item>> = [
 		{
 			title: intl.formatMessage({ id: "title" }),
 			className: "md:w-1/2 hidden sm:table-cell",
