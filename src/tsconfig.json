@@ -3,8 +3,8 @@
   "compilerOptions": {
     "allowJs": false,
     "checkJs": false,
-    "strictNullChecks": false, // 對開發不友善，尤其是使用 ref 的時候，所以我決定關閉它
-    "experimentalDecorators": false, // 我不喜歡這個
+    "strictNullChecks": false, // Not worth when I use react ref, so close it.
+    "experimentalDecorators": false, // I don't like this.
     "jsx": "preserve",
     "module": "esnext",
     "moduleResolution": "node",

@@ -47,12 +47,12 @@ const config: Configuration = {
 			{
 				test: /\.tsx?$/,
 				exclude: /node_modules|\.test.tsx?$/,
-				use: ["babel-loader", "ts-loader"],
+				use: ["babel-loader", { loader: "ts-loader", options: { context: path.join(process.cwd(), "src") } }],
 			},
 			{
 				test: /\.jsx?$/,
 				exclude: /node_modules/,
-				use: "babel-loader",
+				use: ["babel-loader"],
 			},
 		],
 	},
