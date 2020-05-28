@@ -22,6 +22,44 @@ const config: Configuration = {
 			return filename.endsWith(".css") || filename.endsWith(".js")
 		},
 	},
+	module: {
+		rules: [
+			{
+				test: /\.tsx?$/,
+				exclude: /node_modules|\.test.tsx?$/,
+				use: [
+					{
+						loader: "cache-loader",
+						options: {
+							cacheDirectory: path.resolve(".cache"),
+						},
+					},
+					{ loader: "thread-loader" },
+					{ loader: "babel-loader" },
+					{
+						loader: "ts-loader",
+						options: {
+							happyPackMode: true,
+						},
+					},
+				],
+			},
+			{
+				test: /\.jsx?$/,
+				exclude: /node_modules/,
+				use: [
+					{
+						loader: "cache-loader",
+						options: {
+							cacheDirectory: path.resolve(".cache"),
+						},
+					},
+					{ loader: "thread-loader" },
+					{ loader: "babel-loader" },
+				],
+			},
+		],
+	},
 	resolve: {
 		alias: {
 			"react-dom": "@hot-loader/react-dom",

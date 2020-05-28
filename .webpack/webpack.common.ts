@@ -2,7 +2,7 @@ import packageJSON from "../package.json"
 
 import path from "path"
 import { EnvironmentPlugin, ExtendedAPIPlugin } from "webpack"
-import type { Configuration, Plugin, Loader, RuleSetUse } from "webpack"
+import type { Configuration, Plugin, Loader } from "webpack"
 
 // Plugins
 import HtmlWebpackPlugin from "html-webpack-plugin"
@@ -51,25 +51,6 @@ export default function (): Configuration {
 		plugins.push(new ExtendedAPIPlugin())
 	}
 
-	const tsxRuleSetUse: RuleSetUse = isDevelopment
-		? [
-				{
-					loader: "cache-loader",
-					options: {
-						cacheDirectory: path.resolve(".cache"),
-					},
-				},
-				{ loader: "thread-loader" },
-				{ loader: "babel-loader" },
-				{
-					loader: "ts-loader",
-					options: {
-						happyPackMode: true,
-					},
-				},
-		  ]
-		: ["babel-loader", "ts-loader"]
-
 	const styleLoader: Loader = {
 		loader: isDevelopment ? "style-loader" : MiniCssExtractPlugin.loader,
 		options: {
@@ -111,16 +92,6 @@ export default function (): Configuration {
 							},
 						},
 					],
-				},
-				{
-					test: /\.tsx?$/,
-					exclude: /node_modules|\.test.tsx?$/,
-					use: tsxRuleSetUse,
-				},
-				{
-					test: /\.jsx?$/,
-					exclude: /node_modules/,
-					use: [{ loader: "babel-loader" }],
 				},
 				{
 					test: /\.(png|jpe?g|gif|svg|ico)$/i,
