@@ -1,6 +1,6 @@
 import React from "react"
 import { hot } from "react-hot-loader/root"
-import { BrowserRouter, RouteProps, RedirectProps, Redirect, Route, Switch, useLocation } from "react-router-dom"
+import { BrowserRouter, RouteProps, RedirectProps, Redirect, Route, Switch } from "react-router-dom"
 import { Sidebar } from "./Sidebar"
 import { Header } from "./Header"
 import { AppContainer } from "./AppContainer"

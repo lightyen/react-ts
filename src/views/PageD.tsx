@@ -1,5 +1,5 @@
-import React, { useEffect } from "react"
-import { motion, useMotionValue, transform, useAnimation, useTransform, AnimatePresence } from "framer-motion"
+import React from "react"
+import { motion, AnimatePresence } from "framer-motion"
 
 // const PageD: React.FC = () => {
 // 	const x = useMotionValue(500)

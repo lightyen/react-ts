@@ -1,7 +1,7 @@
 import React from "react"
 import classnames from "classnames"
 import { useSelector } from "~/store"
-import { NavLink, Prompt, useLocation, NavLinkProps } from "react-router-dom"
+import { NavLink, NavLinkProps } from "react-router-dom"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faThLarge } from "@fortawesome/free-solid-svg-icons/faThLarge"

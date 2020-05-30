@@ -1,7 +1,7 @@
 import React from "react"
 
 import { motion } from "framer-motion"
-import { startOfDay, endOfDay, startOfToday, endOfToday, startOfWeek, endOfWeek, subMonths } from "date-fns"
+import { startOfDay, endOfDay, startOfToday, endOfToday, startOfWeek, endOfWeek } from "date-fns"
 import { DateRangePicker } from "react-date-range"
 
 import { format, getDateLocale } from "~/date"
