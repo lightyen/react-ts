@@ -8,6 +8,7 @@ import PageD from "~/views/PageD"
 import PageE from "~/views/PageE"
 import PageF from "~/views/PageF"
 import PageG from "~/views/PageG"
+import PageH from "~/views/PageH"
 
 interface RouteItem extends RouteProps {
 	name: React.ReactNode
@@ -22,6 +23,7 @@ export const routes: RouteItem[] = [
 	{ path: "/page-e", name: <div>Page E</div>, component: PageE },
 	{ path: "/page-f", name: <div>Page F</div>, component: PageF },
 	{ path: "/page-g", name: <div>Page G</div>, component: PageG },
+	{ path: "/page-h", name: <div>Page H</div>, component: PageH },
 ]
 
 export function getRouteName(url: string): React.ReactNode {

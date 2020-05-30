@@ -25,7 +25,6 @@ interface Props {
 
 export const Sidebar: React.FC<Props> = ({ top, width }) => {
 	const collapsed = useSelector(state => state.app.collapsed)
-	const location = useLocation()
 	return (
 		<nav
 			className="nav-sidebar"
@@ -78,6 +77,12 @@ export const Sidebar: React.FC<Props> = ({ top, width }) => {
 						<FontAwesomeIcon icon={faCode} />
 					</div>
 					<div>CodeMirror</div>
+				</RippleNavLink>
+				<RippleNavLink to="/page-h" className="nav-item" activeClassName="active">
+					<div className="w-8 mr-2 relative" style={{ left: "0.8rem" }}>
+						<FontAwesomeIcon icon={faCode} />
+					</div>
+					<div>Carousel</div>
 				</RippleNavLink>
 			</ul>
 		</nav>
