@@ -25,8 +25,13 @@ const config: Configuration = {
 	module: {
 		rules: [
 			{
+				test: /\.worker\.ts$/,
+				exclude: /node_modules/,
+				use: ["worker-loader", "babel-loader", { loader: "ts-loader", options: { happyPackMode: true } }],
+			},
+			{
 				test: /\.tsx?$/,
-				exclude: /node_modules|\.test.tsx?$/,
+				exclude: /node_modules|\.test.tsx?|\.worker\.ts$/,
 				use: [
 					{
 						loader: "cache-loader",

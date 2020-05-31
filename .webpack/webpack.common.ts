@@ -1,7 +1,7 @@
 import packageJSON from "../package.json"
 
 import path from "path"
-import { EnvironmentPlugin, ExtendedAPIPlugin } from "webpack"
+import { EnvironmentPlugin } from "webpack"
 import type { Configuration, Plugin, Loader } from "webpack"
 
 // Plugins
@@ -9,9 +9,6 @@ import HtmlWebpackPlugin from "html-webpack-plugin"
 import MiniCssExtractPlugin from "mini-css-extract-plugin"
 import WebpackBarPlugin from "webpackbar"
 import TsPathsResolvePlugin from "ts-paths-resolve-plugin"
-
-// NOTE: 關閉 webpack 要求 donate 訊息
-process.env.DISABLE_OPENCOLLECTIVE = "true"
 
 export default function (): Configuration {
 	const outputCSS = "css"
@@ -47,10 +44,6 @@ export default function (): Configuration {
 		}),
 	]
 
-	if (!isDevelopment) {
-		plugins.push(new ExtendedAPIPlugin())
-	}
-
 	const styleLoader: Loader = {
 		loader: isDevelopment ? "style-loader" : MiniCssExtractPlugin.loader,
 		options: {
@@ -73,6 +66,7 @@ export default function (): Configuration {
 		},
 		entry: {
 			index: path.resolve(src, "index.tsx"),
+			worker: path.resolve(src, "test.worker.ts"),
 		},
 		output: {
 			path: dist,
@@ -137,23 +131,6 @@ export default function (): Configuration {
 						"postcss-loader",
 					],
 				},
-				// {
-				//     exclude: /node_modules/,
-				//     test: /\.less$/,
-				//     use: [
-				//         styleLoader,
-				//         {
-				//             loader: "css-loader",
-				//             options: {
-				//                 url: true,
-				//                 modules: true,
-				//                 importLoaders: 2,
-				//             },
-				//         },
-				//         "postcss-loader",
-				//         "less-loader",
-				//     ],
-				// },
 				{
 					exclude: /node_modules/,
 					test: /\.s(a|c)ss$/,
@@ -181,11 +158,6 @@ export default function (): Configuration {
 					test: /.css$/,
 					use: [styleLoader, "css-loader", "postcss-loader"],
 				},
-				// {
-				//     include: /node_modules/,
-				//     test: /\.less$/,
-				//     use: [styleLoader, "css-loader", "postcss-loader", "less-loader"],
-				// },
 				{
 					include: /node_modules/,
 					test: /\.s(a|c)ss$/,
