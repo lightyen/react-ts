@@ -12,6 +12,7 @@ const Page: React.FC = () => {
 	)
 }
 
+// https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver
 const ResizeObserver = window["ResizeObserver"]
 
 const Carousel: React.FC = () => {
@@ -67,12 +68,21 @@ const Carousel: React.FC = () => {
 		return bg.darken(0.4).css()
 	})
 
+	const color = useTransform(background, value => {
+		try {
+			return chroma.contrast(value, "#f7fafc") > 2 ? "#f7fafc" : "#1a202c"
+		} catch {
+			return "#f7fafc"
+		}
+	})
+
 	return (
 		<motion.div
 			ref={viewport}
-			className="relative text-gray-200 text-center select-none overflow-hidden"
+			className="relative text-center select-none overflow-hidden"
 			style={{
 				background,
+				color,
 				lineHeight: "100px",
 				left: 0,
 				right: 0,
@@ -112,64 +122,24 @@ const Carousel: React.FC = () => {
 						dragOriginX.set(t)
 						return false
 					}
-					return { type: "spring", damping: 1000 }
+					return { type: "spring", damping: 100 }
 				}}
 			>
-				<div
-					className="text-center shadow-lg"
-					style={{
-						width: `calc(100% / ${colors.length})`,
-						height: "16rem",
-						lineHeight: "16rem",
-						background: colors[0],
-					}}
-				>
-					0
-				</div>
-				<div
-					className="text-center shadow-lg"
-					style={{
-						width: `calc(100% / ${colors.length})`,
-						height: "16rem",
-						lineHeight: "16rem",
-						background: colors[1],
-					}}
-				>
-					1
-				</div>
-				<div
-					className="text-center shadow-lg"
-					style={{
-						width: `calc(100% / ${colors.length})`,
-						height: "16rem",
-						lineHeight: "16rem",
-						background: colors[2],
-					}}
-				>
-					2
-				</div>
-				<div
-					className="text-center shadow-lg"
-					style={{
-						width: `calc(100% / ${colors.length})`,
-						height: "16rem",
-						lineHeight: "16rem",
-						background: colors[3],
-					}}
-				>
-					3
-				</div>
-				<div
-					className="text-center shadow-lg"
-					style={{
-						width: "20%",
-						height: "16rem",
-						lineHeight: "16rem",
-						background: colors[4],
-					}}
-				>
-					4
-				</div>
+				{colors.map((c, i) => (
+					<div
+						key={i}
+						className="text-center shadow-lg font-bold text-2xl"
+						style={{
+							width: `calc(100% / ${colors.length})`,
+							height: "16rem",
+							lineHeight: "16rem",
+							background: colors[i],
+							color: chroma.contrast(colors[i], "#f7fafc") > 2 ? "#f7fafc" : "#1a202c",
+						}}
+					>
+						{i}
+					</div>
+				))}
 			</motion.div>
 		</motion.div>
 	)
