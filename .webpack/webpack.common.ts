@@ -66,7 +66,6 @@ export default function (): Configuration {
 		},
 		entry: {
 			index: path.resolve(src, "index.tsx"),
-			worker: path.resolve(src, "test.worker.ts"),
 		},
 		output: {
 			path: dist,
