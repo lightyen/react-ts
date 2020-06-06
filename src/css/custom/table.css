@@ -9,7 +9,9 @@ thead {
 
 tr > td,
 tr > th {
-	@apply trans text-gray-900 bg-white whitespace-no-wrap box-border;
+	transition-property: all;
+	transition-duration: 200ms;
+	@apply text-gray-900 bg-white whitespace-no-wrap box-border;
 }
 
 td {
@@ -72,7 +74,10 @@ tbody.hover tr:hover > td {
 }
 
 .filter-close-btn {
-	@apply pr-2 trans;
+	transition-property: color;
+	transition-duration: 200ms;
+	transition-timing-function: ease;
+	@apply pr-2;
 }
 .filter-close-btn:hover {
 	color: #ee2200;

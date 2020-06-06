@@ -3,10 +3,6 @@
 	src: local("Fira Code"), url(~assets/fonts/FiraCode-Regular.woff2);
 }
 
-.trans {
-	transition: all ease 0.16s;
-}
-
 body {
 	@apply m-0 leading-normal overflow-hidden;
 	font-family: Roboto, 微軟正黑體, Microsoft JhengHei, Helvetica Neue,
