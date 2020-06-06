@@ -61,9 +61,7 @@ window.customElements.define(
 const PageF = () => {
 	return (
 		<div className="m-3 p-3 bg-white">
-			<x-search class="hover:underline" search="Test">
-				{/* <div>Helloworld</div> */}
-			</x-search>
+			<x-search class="hover:underline" search="Test"></x-search>
 		</div>
 	)
 }

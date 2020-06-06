@@ -57,6 +57,9 @@ export default function (): Configuration {
 		// NOTE: https://webpack.js.org/configuration/resolve/
 		resolve: {
 			extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
+			alias: {
+				assets: path.join(workingDirectory, "public", "assets"),
+			},
 			plugins: [new TsPathsResolvePlugin({ configFile: path.resolve(src, "tsconfig.json") })],
 		},
 		resolveLoader: {
@@ -92,7 +95,7 @@ export default function (): Configuration {
 						{
 							loader: "url-loader",
 							options: {
-								name: join_network("assets", "images", "[name].[ext]"),
+								name: join_network("img", "[name].[ext]?[hash:8]"),
 								limit: 8192,
 							},
 						},
@@ -108,8 +111,7 @@ export default function (): Configuration {
 						{
 							loader: "file-loader",
 							options: {
-								name: "[name].[ext]?[hash:8]",
-								outputPath: join_network("assets", "fonts"),
+								name: join_network("fonts", "[name].[ext]?[hash:8]"),
 							},
 						},
 					],

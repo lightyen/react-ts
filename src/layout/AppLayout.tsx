@@ -8,8 +8,6 @@ import { motion } from "framer-motion"
 import Login from "~/pages/Login"
 import Page404 from "~/pages/404"
 
-import "~/scss/styles.scss"
-
 import "react-date-range/dist/styles.css" // main style file
 import "react-date-range/dist/theme/default.css" // theme css file
 import "~/css/styles.css"

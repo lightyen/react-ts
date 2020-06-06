@@ -1,16 +1,13 @@
 {
   "extends": "../tsconfig",
   "compilerOptions": {
-    "allowJs": false,
-    "checkJs": false,
+    "noImplicitAny": false,
     "strictNullChecks": false, // Not worth when I use react ref, so close it.
-    "experimentalDecorators": false, // I don't like this.
     "jsx": "preserve",
     "module": "esnext",
     "moduleResolution": "node",
     "target": "esnext",
     "lib": ["esnext", "dom", "dom.iterable", "webworker"],
-    "types": ["react", "webpack-env"],
     "baseUrl": ".",
     "paths": {
       "~/*": ["./*"],
