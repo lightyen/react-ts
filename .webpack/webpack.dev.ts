@@ -73,21 +73,16 @@ const config: Configuration = {
 	plugins: [
 		new HotModuleReplacementPlugin(),
 		new ForkTsCheckerWebpackPlugin({
-			checkSyntacticErrors: true,
-			tsconfig: path.resolve(process.cwd(), "src", "tsconfig.json"),
+			typescript: {
+				configFile: path.resolve(process.cwd(), "src", "tsconfig.json"),
+			},
 		}),
 	],
-	// output: {
-	// 	publicPath: `http://localhost:${defaultPort}/`,
-	// },
 	devServer: {
 		hot: true,
 		compress: true,
 		open: true,
 		host: "localhost",
-		// port: defaultPort,
-		// public: `localhost:${defaultPort}`,
-		// publicPath: "/",
 		clientLogLevel: "none",
 		contentBase: false,
 		noInfo: true,
