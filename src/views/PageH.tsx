@@ -70,7 +70,7 @@ const Carousel: React.FC = () => {
 
 	const color = useTransform(background, value => {
 		try {
-			return chroma.contrast(value, "#f7fafc") > 2 ? "#f7fafc" : "#1a202c"
+			return chroma(value).luminance() < 0.5 ? "#f7fafc" : "#1a202c"
 		} catch {
 			return "#f7fafc"
 		}
@@ -134,7 +134,7 @@ const Carousel: React.FC = () => {
 							height: "16rem",
 							lineHeight: "16rem",
 							background: colors[i],
-							color: chroma.contrast(colors[i], "#f7fafc") > 2 ? "#f7fafc" : "#1a202c",
+							color: chroma(colors[i]).luminance() < 0.5 ? "#f7fafc" : "#1a202c",
 						}}
 					>
 						{i}

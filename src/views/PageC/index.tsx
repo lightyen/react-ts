@@ -16,7 +16,7 @@ interface Item extends VirtualItem {
 
 function randomItem(): Item {
 	const background = chroma.random().brighten().hex()
-	const color = chroma.contrast(background, "white") > 2 ? "#f7fafc" : "#1a202c"
+	const color = chroma(background).luminance() < 0.5 ? "#f7fafc" : "#1a202c"
 	return { background, color, height: Math.round(200.0 * (Math.random() + 1.0)) }
 }
 

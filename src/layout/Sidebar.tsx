@@ -84,6 +84,12 @@ export const Sidebar: React.FC<Props> = ({ top, width }) => {
 					</div>
 					<div>Carousel</div>
 				</RippleNavLink>
+				<RippleNavLink to="/page-i" className="nav-item" activeClassName="active">
+					<div className="w-8 mr-2 relative" style={{ left: "0.8rem" }}>
+						<FontAwesomeIcon icon={faCode} />
+					</div>
+					<div>Color Picker</div>
+				</RippleNavLink>
 			</ul>
 		</nav>
 	)

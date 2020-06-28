@@ -1,8 +1,9 @@
-@import "./spinner.css";
-@import "./button.css";
-@import "./layout.css";
-@import "./modal.css";
-@import "./validated-input.css";
-@import "./table.css";
-@import "./codemirror.css";
-@import "./range-date.css";
+@import "./components/spinner.css";
+@import "./components/button.css";
+@import "./components/layout.css";
+@import "./components/modal.css";
+@import "./components/validated-input.css";
+@import "./components/table.css";
+@import "./components/codemirror.css";
+@import "./components/range-date.css";
+@import "./components/color-picker.css";

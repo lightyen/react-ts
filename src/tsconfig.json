@@ -11,7 +11,7 @@
     "baseUrl": ".",
     "paths": {
       "~/*": ["./*"],
-      "assets/*": ["../public/assets/*"]
+      "assets/*": ["./assets/*"]
     }
   }
 }

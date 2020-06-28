@@ -31,16 +31,16 @@ export default function (): Configuration {
 			TAILWIND_CONFIG: JSON.stringify(require(path.resolve(workingDirectory, "tailwind.config"))),
 		}),
 		new MiniCssExtractPlugin({
-			filename: join_network(outputCSS, "[name].[contenthash:8].css"),
-			chunkFilename: join_network(outputCSS, "[name].[contenthash:8].chunk.css"),
+			filename: join_network(outputCSS, "[name].css?[hash]"),
+			chunkFilename: join_network(outputCSS, "[name].chunk.css?[hash:8]"),
 		}),
 		new HtmlWebpackPlugin({
-			inject: false,
-			filename: "index.html",
+			inject: true,
 			title: "React App",
-			template: path.join(workingDirectory, "public", "index.pug"),
+			minify: true,
+			template: path.join(workingDirectory, "public", "index.ejs"),
 			favicon: path.join(workingDirectory, "public", "favicon.ico"),
-			minify: false,
+			isDevelopment,
 		}),
 	]
 
@@ -72,30 +72,19 @@ export default function (): Configuration {
 		},
 		output: {
 			path: dist,
-			filename: join_network(outputJS, "[name].[hash:8].js"),
-			chunkFilename: join_network(outputJS, "[name].[hash:8].chunk.js"),
+			filename: join_network(outputJS, "[name].js?[hash]"),
+			chunkFilename: join_network(outputJS, "[name].js?.[hash:8]"),
 			publicPath,
 		},
 		module: {
 			rules: [
-				{
-					test: /\.pug$/,
-					use: [
-						{
-							loader: "pug-loader",
-							options: {
-								pretty: true,
-							},
-						},
-					],
-				},
 				{
 					test: /\.(png|jpe?g|gif|svg|ico)$/i,
 					use: [
 						{
 							loader: "url-loader",
 							options: {
-								name: join_network("img", "[name].[ext]?[hash:8]"),
+								name: join_network("img", "[name].[ext]?[hash]"),
 								limit: 8192,
 							},
 						},
@@ -111,7 +100,7 @@ export default function (): Configuration {
 						{
 							loader: "file-loader",
 							options: {
-								name: join_network("fonts", "[name].[ext]?[hash:8]"),
+								name: join_network("fonts", "[name].[ext]?[hash]"),
 							},
 						},
 					],

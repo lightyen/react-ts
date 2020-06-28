@@ -1,9 +1,0 @@
-.rdrStaticRangeLabel,
-.rdrWeekDay,
-.rdrDayNumber {
-	@apply font-black text-gray-700;
-}
-
-.rdrStaticRangeLabel:first-letter {
-	@apply uppercase;
-}

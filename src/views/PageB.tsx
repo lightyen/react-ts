@@ -116,11 +116,7 @@ const PageB: React.FC = () => {
 								...styles,
 								whiteSpace: "nowrap",
 								background: isSelected ? data.color : isFocused ? color.alpha(0.1).css() : null,
-								color: isSelected
-									? chroma.contrast(color, "white") > 2
-										? "white"
-										: "black"
-									: data.color,
+								color: isSelected ? (color.luminance() < 0.5 ? "white" : "black") : data.color,
 							}
 						},
 						indicatorsContainer: style => ({ ...style, paddingLeft: "1.5rem" }),
