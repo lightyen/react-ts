@@ -4,9 +4,10 @@ import { motion } from "framer-motion"
 import { startOfDay, endOfDay, startOfToday, endOfToday, startOfWeek, endOfWeek } from "date-fns"
 import { DateRangePicker } from "react-date-range"
 
-import { format, getDateLocale } from "~/date"
+import { format } from "~/date"
 import { useIntl } from "react-intl"
 import { startOfMonth, subDays, endOfMonth } from "date-fns/esm"
+import { getDateLocale } from "~/store/i18n/languages"
 
 export interface DateRange {
 	startDate: Date

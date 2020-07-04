@@ -16,7 +16,9 @@ export const ValidatedInput = React.forwardRef<
 	Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange"> & Props
 >((props, ref) => {
 	const { defaultValue, value, validator, className, onChange, ...rest } = props
-	const [inputValue, setInputValue] = React.useState<number | string | string[]>(props.value || defaultValue || "")
+	const [inputValue, setInputValue] = React.useState<number | string | readonly string[]>(
+		props.value || defaultValue || "",
+	)
 
 	// when props changed
 	React.useEffect(() => {

@@ -6,7 +6,7 @@ import { faLanguage } from "@fortawesome/free-solid-svg-icons/faLanguage"
 import { Link } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
 import { FormattedMessage } from "react-intl"
-import { languageNames } from "~/store/i18n/language"
+import { supports } from "~/store/i18n/languages"
 import { entries } from "~/type-safed"
 
 interface Props {
@@ -87,7 +87,7 @@ const LanguageSelect: React.FC = () => {
 							transition: { easings: "easeOut", duration: 0.1 },
 						}}
 					>
-						{entries(languageNames).map(([locale, value]) => (
+						{entries(supports).map(([locale, value]) => (
 							<li key={locale} className="language-item" onClick={() => setLocale({ locale })}>
 								{value}
 							</li>

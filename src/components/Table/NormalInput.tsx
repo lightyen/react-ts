@@ -12,7 +12,7 @@ export const NormalInput = React.forwardRef<
 >((props, ref) => {
 	const { onChange, onKeyDown, onBlur, value, defaultValue, ...rest } = props
 
-	const [inputValue, setInputValue] = React.useState<number | string | string[]>(value || defaultValue || "")
+	const [inputValue, setInputValue] = React.useState<number | string | readonly string[]>(value || defaultValue || "")
 
 	// restore when props changed
 	React.useEffect(() => {

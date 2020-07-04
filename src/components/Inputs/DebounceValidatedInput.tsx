@@ -29,7 +29,7 @@ export const DebounceValidatedInput = React.forwardRef<
 	Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange"> & Props
 >((props, ref) => {
 	const { timeout = 200, defaultValue, value, validator, className, onChange, ...rest } = props
-	const [inputValue, setInputValue] = React.useState<number | string | string[]>(value || defaultValue || "")
+	const [inputValue, setInputValue] = React.useState<number | string | readonly string[]>(value || defaultValue || "")
 
 	const debounceChange = useDebounce(onChange, timeout)
 
