@@ -68,9 +68,8 @@ const FileUploader: React.FC = () => {
 	React.useEffect(() => {
 		const el = inputRef.current
 		el.setAttribute("webkitdirectory", "")
-		el.setAttribute("mozdirectory", "")
+		el.setAttribute("allowdirs", "")
 		el.setAttribute("directory", "")
-		el.setAttribute("multiple", "")
 	}, [])
 	return (
 		<div className="flex">
@@ -87,6 +86,7 @@ const FileUploader: React.FC = () => {
 					ref={inputRef}
 					type="file"
 					style={{ display: "none" }}
+					multiple
 					onChange={e => {
 						const files = e.target.files
 						for (let i = 0; i < files.length; i++) {
