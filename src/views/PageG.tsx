@@ -16,6 +16,8 @@ import "codemirror/mode/go/go"
 import "codemirror/mode/sass/sass"
 import "codemirror/mode/css/css"
 
+import Page from "~/components/Page"
+
 interface MyProps {
 	options?: EditorConfiguration
 	onChange?: (value: string) => void
@@ -86,7 +88,7 @@ const Card: React.FC = () => {
 	)
 
 	return (
-		<div className="m-3 p-3 bg-white">
+		<Page>
 			<CodeMirror
 				id="hehehe"
 				ref={ref}
@@ -113,7 +115,7 @@ const Card: React.FC = () => {
 				defaultValue={cache.current}
 				onChange={e => (cache.current = e)}
 			/>
-		</div>
+		</Page>
 	)
 }
 

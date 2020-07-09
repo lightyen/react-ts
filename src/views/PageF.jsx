@@ -1,5 +1,6 @@
 import React from "react"
 import ReactDOM from "react-dom"
+import Page from "~/components/Page"
 
 // reference
 // https://www.webcomponents.org/
@@ -60,9 +61,9 @@ window.customElements.define(
 
 const PageF = () => {
 	return (
-		<div className="m-3 p-3 bg-white">
+		<Page>
 			<x-search class="hover:underline" search="Test"></x-search>
-		</div>
+		</Page>
 	)
 }
 

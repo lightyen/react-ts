@@ -1,12 +1,13 @@
 import React from "react"
 import ColorPicker from "~/components/ColorPicker"
+import Page from "~/components/Page"
 
-const Page: React.FC = () => {
+const PageI: React.FC = () => {
 	return (
-		<div className="m-3 p-3">
+		<Page>
 			<ColorPicker />
-		</div>
+		</Page>
 	)
 }
 
-export default Page
+export default PageI

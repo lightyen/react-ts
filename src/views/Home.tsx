@@ -1,13 +1,14 @@
 import React from "react"
 import { FormattedMessage } from "react-intl"
-import FileUploader from "~/components/FileUploader"
+import Page from "~/components/Page"
+import DarkModeToggle from "~/components/DarkModeToggle"
 
 const Home: React.FC = () => {
 	return (
-		<div className="m-3 p-3 bg-white">
+		<Page>
 			<FormattedMessage id="test" values={{ name: "React" }} />
-			<FileUploader />
-		</div>
+			<DarkModeToggle />
+		</Page>
 	)
 }
 

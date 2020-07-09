@@ -19,3 +19,4 @@ select_placeholder: 選擇...
 select_no_options: 沒有選項
 clear: 清除
 pagination_total: "從 {from} 至 {to} 總共 {total} 項"
+components: 元件範例

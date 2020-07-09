@@ -1,21 +1,22 @@
 language: Language
-home: Home
-button: Button
-date_range_picker: Date Range Picker
-card: Card
-input: Input
-modal: Modal
+home: home
+button: button
+date_range_picker: date range picker
+card: card
+input: input
+modal: modal
 themes: themes
 themes.light: light
 themes.dark: dark
 version: version
-hello: "Hello World!"
+hello: Hello World!
 test: "{name} is awesome!"
 input_placeholder: keyword...
-title: Title
-data_empty: Empty
-add_filter: Filter
-select_placeholder: Select...
+title: title
+data_empty: empty
+add_filter: filter
+select_placeholder: select...
 select_no_options: no options
 clear: clear
 pagination_total: "{from} - {to} of {total}"
+components: components

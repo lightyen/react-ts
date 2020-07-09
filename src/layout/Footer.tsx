@@ -7,9 +7,9 @@ export const Footer: React.FC = () => {
 	return (
 		<footer className="app-footer">
 			<motion.a
-				className="text-gray-700 focus:outline-none"
-				initial={{ opacity: 0.5 }}
-				whileHover={{ opacity: 1, transition: { duration: 0.15 } }}
+				className="focus:outline-none"
+				initial={{ opacity: 0.4 }}
+				whileHover={{ opacity: 1 }}
 				href="https://github.com/lightyen/react-ts"
 				aria-label="repository"
 				target="_blank"

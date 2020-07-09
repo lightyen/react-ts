@@ -1,10 +1,10 @@
 import React from "react"
 import styled from "styled-components"
-import { useSelector } from "~/store"
+import { useTheme } from "~/store"
 
 interface CustomScrollBarProps {
-	/** Color with scrollbar thumb, ex: #cccccc */
-	color?: string
+	color: string
+	background: string
 	/** The width of scrollbar thumb */
 	width?: number
 	padding?: number
@@ -14,7 +14,6 @@ interface CustomScrollBarProps {
 const CustomScrollBar = styled.div.attrs(({ className, style, ...props }) => ({
 	width: 6,
 	padding: 4,
-	color: "black",
 	...props,
 }))<CustomScrollBarProps>`
 	color: transparent;
@@ -25,10 +24,10 @@ const CustomScrollBar = styled.div.attrs(({ className, style, ...props }) => ({
 	::-webkit-scrollbar {
 		width: ${({ width, padding }) => width + padding * 2}px;
 		height: ${({ width, padding }) => width + padding * 2}px;
-		background: #333333;
+		background: ${({ background }) => background};
 	}
 	::-webkit-scrollbar-corner {
-		background: #333333;
+		background: ${({ background }) => background};
 	}
 
 	::-webkit-scrollbar-track {
@@ -46,7 +45,7 @@ const CustomScrollBar = styled.div.attrs(({ className, style, ...props }) => ({
 	::-webkit-scrollbar-thumb {
 		transition: all 3s ease;
 		width: 2px;
-		min-height: 30px;
+		min-height: 45px;
 		border: ${({ padding }) => padding}px solid transparent;
 		border-radius: ${({ width, padding }) => width / 2 + padding}px;
 		box-shadow: inset 0 0 0 100px;
@@ -58,9 +57,14 @@ const CustomScrollBar = styled.div.attrs(({ className, style, ...props }) => ({
 	}
 `
 const ScrollBarContext = React.createContext<HTMLDivElement>(null)
+const ScrollBarVisibleContext = React.createContext<boolean>(null)
 
 export function useScrollBarSource() {
 	return React.useContext(ScrollBarContext)
+}
+
+export function useScollBarVisible() {
+	return React.useContext(ScrollBarVisibleContext)
 }
 
 export function useScrollTop({ scrollbar }: { scrollbar: HTMLElement }) {
@@ -90,9 +94,11 @@ export const ScrollBar: React.FC<ScrollBarProps> = ({ children, ...props }) => {
 	const [handle, setHandle] = React.useState<HTMLDivElement>(ref.current)
 	const isMount = React.useRef(false)
 
-	const backgroundColor = useSelector(state => state.theme.backgroundColor)
-	const textColor = useSelector(state => state.theme.textColor)
-	const [thumbColor, setThumbColor] = React.useState(backgroundColor)
+	const {
+		background,
+		text: { primary: color },
+	} = useTheme()
+	const [thumbColor, setThumbColor] = React.useState(background)
 	React.useEffect(() => {
 		isMount.current = true
 		setHandle(ref.current)
@@ -108,10 +114,10 @@ export const ScrollBar: React.FC<ScrollBarProps> = ({ children, ...props }) => {
 		function cb() {
 			window.requestAnimationFrame(() => {
 				window.clearTimeout(tick.current)
-				setThumbColor(backgroundColor)
+				setThumbColor(color)
 				tick.current = window.setTimeout(() => {
 					if (isMount.current) {
-						setThumbColor(textColor)
+						setThumbColor(background)
 					}
 				}, 3000)
 			})
@@ -125,7 +131,22 @@ export const ScrollBar: React.FC<ScrollBarProps> = ({ children, ...props }) => {
 			target.removeEventListener("mousemove", cb)
 			target.removeEventListener("wheel", cb)
 		}
-	}, [textColor, backgroundColor])
+	}, [background, color])
+
+	const [visible, setVisible] = React.useState(false)
+	React.useEffect(() => {
+		if (!handle) {
+			return () => {
+				/** */
+			}
+		}
+		const el = handle.children[0]
+		const observer = new ResizeObserver(entries => {
+			setVisible(handle.scrollHeight > handle.clientHeight)
+		})
+		observer.observe(el)
+		return () => observer.disconnect()
+	}, [handle])
 
 	return (
 		<CustomScrollBar
@@ -133,22 +154,23 @@ export const ScrollBar: React.FC<ScrollBarProps> = ({ children, ...props }) => {
 			ref={ref}
 			onMouseDown={() => {
 				window.clearTimeout(tick.current)
-				setThumbColor(backgroundColor)
+				setThumbColor(color)
 			}}
 			onMouseUp={() => {
 				tick.current = window.setTimeout(() => {
 					if (isMount.current) {
-						setThumbColor(textColor)
+						setThumbColor(background)
 					}
 				}, 3000)
 			}}
 			color={thumbColor}
+			background={background}
 			{...props}
 		>
 			{handle && (
 				<ScrollBarContext.Provider value={handle}>
-					<div className="flex-grow flex flex-col" style={{ color: textColor }}>
-						{children}
+					<div className="flex-grow flex flex-col" style={{ color }}>
+						<ScrollBarVisibleContext.Provider value={visible}>{children}</ScrollBarVisibleContext.Provider>
 					</div>
 				</ScrollBarContext.Provider>
 			)}

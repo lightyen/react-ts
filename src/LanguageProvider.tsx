@@ -1,17 +1,22 @@
 import React from "react"
 import { IntlProvider } from "react-intl"
-import { useSelector } from "~/store"
+import { useI18n, useTheme } from "~/store"
 import { motion } from "framer-motion"
 import { getLocaleMessages } from "~/store/i18n/languages"
 
 const LanguageProvider: React.FC = ({ children }) => {
-	const locale = useSelector(state => state.i18n.locale)
+	const { locale } = useI18n()
+	const {
+		background: backgroundColor,
+		text: { background: color },
+	} = useTheme()
 	return (
 		<IntlProvider locale={locale} key={locale} messages={getLocaleMessages(locale)}>
 			<motion.div
 				key={locale}
 				initial={{ opacity: 0 }}
 				animate={{ opacity: 1, transition: { easings: "linear" } }}
+				style={{ color, backgroundColor }}
 			>
 				{children}
 			</motion.div>

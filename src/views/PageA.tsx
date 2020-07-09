@@ -9,6 +9,7 @@ import { startOfDay, endOfDay, subDays } from "date-fns"
 import { CustomDateRangePicker, DateRange } from "~/components/DateRangePicker/DateRangePicker"
 import { PromptModal } from "~/components/PromptModal"
 import { useRipple } from "~/components/Button/hooks"
+import Page from "~/components/Page"
 
 const Button: React.FC<{ className?: string }> = ({ className, children }) => {
 	const ref = useRipple<HTMLButtonElement>()
@@ -28,10 +29,12 @@ const PageA: React.FC = () => {
 	const [open, setOpen] = React.useState(false)
 	const [open2, setOpen2] = React.useState(false)
 	return (
-		<div className="m-3 p-3 bg-white">
+		<Page>
 			<PromptModal when={false} />
-			<h2 className="text-3xl mt-8 mb-5 font-black">Components</h2>
-			<h3 className="text-xl mt-6 mb-3 font-bold">
+			<h2 className="text-3xl mt-8 mb-5 font-black capitalize">
+				<FormattedMessage id="components" />
+			</h2>
+			<h3 className="text-xl mt-6 mb-3 font-bold capitalize">
 				<FormattedMessage id="button" />
 			</h3>
 			<div className="-pb-2 mb-6">
@@ -44,30 +47,30 @@ const PageA: React.FC = () => {
 					Button
 				</Button>
 			</div>
-			<h3 className="text-xl mt-6 mb-3 font-bold">
+			<h3 className="text-xl mt-6 mb-3 font-bold capitalize">
 				<FormattedMessage id="date_range_picker" />
 			</h3>
 			<div className="mb-6">
 				<CustomDateRangePicker
-					className="btn btn-blue font-normal"
+					className="btn btn-blue font-normal capitalize"
 					range={dateRange}
 					onChange={e => setDateRange(e)}
 				/>
 			</div>
-			<h3 className="text-xl mt-6 mb-3 font-bold">
+			<h3 className="text-xl mt-6 mb-3 font-bold capitalize">
 				<FormattedMessage id="card" />
 			</h3>
 			<div className="max-w-sm mb-6 rounded overflow-hidden shadow-lg">
-				<div className="bg-darkslateblue-300 w-auto h-48 " />
+				<div className="bg-darkslateblue-300 w-auto h-48" />
 				<div className="px-6 py-4">
 					<div className="font-bold text-xl mb-2">The Coldest Sunset</div>
-					<p className="text-gray-700 text-base">
+					<p className="text-base">
 						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et
 						perferendis eaque, exercitationem praesentium nihil.
 					</p>
 				</div>
 			</div>
-			<h3 className="text-xl mt-6 mb-3 font-bold">
+			<h3 className="text-xl mt-6 mb-3 font-bold capitalize">
 				<FormattedMessage id="input" />
 				{value ? `: ${value}` : ""}
 			</h3>
@@ -79,12 +82,12 @@ const PageA: React.FC = () => {
 					onChange={v => setValue(v)}
 				/>
 			</div>
-			<h3 className="text-xl mt-6 mb-3 font-bold">
+			<h3 className="text-xl mt-6 mb-3 font-bold capitalize">
 				<FormattedMessage id="modal" />
 			</h3>
 			<div className="mb-6">
 				<button className="btn mr-3" onClick={e => setOpen(true)}>
-					Modal
+					modal
 				</button>
 				<Modal open={open} onMouseDownOutside={e => setOpen(false)}>
 					<div className="px-6 my-3">
@@ -107,7 +110,7 @@ const PageA: React.FC = () => {
 					</div>
 				</Modal>
 				<button className="btn btn-green" onClick={e => setOpen2(true)}>
-					Modal
+					modal
 				</button>
 				<Modal className="w-3/4" open={open2} exitAnime={false} onMouseDownOutside={e => setOpen2(false)}>
 					<div className="px-6 my-3">
@@ -130,7 +133,7 @@ const PageA: React.FC = () => {
 					</div>
 				</Modal>
 			</div>
-		</div>
+		</Page>
 	)
 }
 

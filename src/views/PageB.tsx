@@ -5,6 +5,8 @@ import chroma from "chroma-js"
 import { useSelector } from "~/store"
 import type { BreakingPoint } from "~/store/app/model"
 import { Column, register } from "~/components/Table"
+import Page from "~/components/Page"
+
 register("#mytable")
 
 interface Item {
@@ -152,7 +154,7 @@ const PageB: React.FC = () => {
 	]
 
 	return (
-		<div className="m-3 p-3 bg-white">
+		<Page>
 			<h2 className="text-3xl mt-8 mb-5 font-black">Table</h2>
 
 			<Table
@@ -168,7 +170,7 @@ const PageB: React.FC = () => {
 					</div>
 				)}
 			/>
-		</div>
+		</Page>
 	)
 }
 

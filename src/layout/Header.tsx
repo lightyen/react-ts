@@ -1,5 +1,5 @@
 import React from "react"
-import { useSelector, useAction } from "~/store"
+import { useSelector, useAction, useI18n } from "~/store"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBars } from "@fortawesome/free-solid-svg-icons/faBars"
 import { faLanguage } from "@fortawesome/free-solid-svg-icons/faLanguage"
@@ -16,7 +16,7 @@ interface Props {
 export const Header: React.FC<Props> = ({ height }) => {
 	const { setSidebarVisible } = useAction().app
 	const visible = useSelector(state => state.app.sidebarVisible)
-	const enableI18n = useSelector(state => state.i18n.enable)
+	const { enable } = useI18n()
 	return (
 		<header className="app-header" style={{ height }}>
 			<Link className="px-3 outline-none hover:underline" to="/">
@@ -30,7 +30,7 @@ export const Header: React.FC<Props> = ({ height }) => {
 			>
 				<FontAwesomeIcon icon={faBars} />
 			</motion.button>
-			{enableI18n && (
+			{enable && (
 				<div className="flex-grow flex justify-end px-6">
 					<LanguageSelect />
 				</div>

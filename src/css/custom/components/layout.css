@@ -1,6 +1,8 @@
 .nav-sidebar {
 	transition: margin-left ease 0.2s;
-	@apply bg-blue-700 text-gray-100 fixed overflow-x-hidden;
+	background: var(--theme-sider-bg);
+	color: var(--theme-sider-text);
+	@apply fixed overflow-x-hidden;
 }
 .nav-item {
 	transition-property: transform, background-color;
@@ -9,32 +11,38 @@
 	@apply relative py-2 px-4 h-12 flex items-center font-medium whitespace-no-wrap select-none outline-none;
 }
 .nav-item:hover {
-	@apply underline bg-blue-500;
+	background: var(--theme-nav-item-hover);
+	@apply underline;
 }
 .nav-item:active {
-	@apply bg-blue-800;
+	background: var(--theme-nav-item-active);
 }
 .nav-item.active {
 	transform: translateX(10px);
-	@apply bg-blue-600;
+	background: var(--theme-nav-item-active);
 }
 
 .app-main {
 	transition-property: color background;
 	transition-duration: 0.2s;
 	transition-timing-function: ease;
-	@apply bg-gray-100 flex-grow flex flex-col overflow-x-hidden overflow-y-auto;
+	background: var(--theme-main-bg);
+	@apply flex-grow flex flex-col overflow-x-hidden overflow-y-auto;
 }
 .app-container {
 	@apply flex-grow h-full;
 }
 
 .app-header {
-	@apply flex items-center bg-teal-300 text-gray-700;
+	background: var(--theme-header-bg);
+	color: var(--theme-header-text);
+	@apply flex items-center;
 }
 
 .app-footer {
-	@apply px-6 py-3 bg-gray-100 flex justify-end;
+	background: var(--theme-footer-bg);
+	color: var(--theme-footer-text);
+	@apply px-6 py-3 flex justify-end;
 }
 
 .language-menu {
@@ -43,11 +51,11 @@
 }
 
 .language-item {
-	@apply bg-blue-300 text-gray-700 border border-blue-200 px-8 py-2 text-center cursor-pointer whitespace-no-wrap select-none;
+	background: var(--theme-header-bg);
+	color: var(--theme-header-text);
+	@apply border border-gray-500 px-8 py-2 text-center cursor-pointer whitespace-no-wrap select-none;
 }
 .language-item:hover {
-	@apply bg-blue-400 underline;
-}
-.language-item:focus {
-	@apply bg-blue-500;
+	background: var(--theme-header-hover);
+	@apply underline;
 }

@@ -11,11 +11,20 @@ export const useSelector: TypedUseSelectorHook<RootStore> = useReduxSelector
 
 export function useAction() {
 	const dispatch = useDispatch()
-	return React.useMemo(() => {
-		const acmap = { app, theme, i18n }
-		for (const key in acmap) {
-			acmap[key] = { ...bindActionCreators(acmap[key], dispatch) }
-		}
-		return acmap
-	}, [dispatch])
+	return React.useMemo(
+		() => ({
+			app: bindActionCreators(app, dispatch),
+			theme: bindActionCreators(theme, dispatch),
+			i18n: bindActionCreators(i18n, dispatch),
+		}),
+		[dispatch],
+	)
+}
+
+export function useTheme() {
+	return useSelector(state => state.theme)
+}
+
+export function useI18n() {
+	return useSelector(state => state.i18n)
 }

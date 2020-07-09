@@ -1,5 +1,6 @@
 import React from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import Page from "~/components/Page"
 
 // const PageD: React.FC = () => {
 // 	const x = useMotionValue(500)
@@ -75,7 +76,7 @@ const Box: React.FC<{ value: number; onRemove: (v: number) => void }> = ({ value
 const PageD: React.FC = () => {
 	const [data, setData] = React.useState([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
 	return (
-		<div className="bg-white m-3 p-3 relative">
+		<Page className="pt-0">
 			<AnimatePresence>
 				{data.map(d => (
 					<Box
@@ -92,7 +93,7 @@ const PageD: React.FC = () => {
 					/>
 				))}
 			</AnimatePresence>
-		</div>
+		</Page>
 	)
 }
 

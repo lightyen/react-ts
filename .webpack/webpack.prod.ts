@@ -1,4 +1,4 @@
-import webpackMerge from "webpack-merge"
+import { merge } from "webpack-merge"
 import createBaseConfig from "./webpack.common"
 import type { Configuration } from "webpack"
 
@@ -76,4 +76,4 @@ const config: Configuration = {
 	],
 }
 
-export default webpackMerge(createBaseConfig(), config)
+export default merge(createBaseConfig(), config)

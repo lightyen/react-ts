@@ -2,6 +2,7 @@ import React from "react"
 import chroma from "chroma-js"
 import { useVirtualScroll, useStay, VirtualItem, VirtualScrollProps } from "./useVirtualScroll"
 import { useScrollBarSource } from "~/components/ScrollBar"
+import Page from "~/components/Page"
 
 function outerHeight(target: HTMLElement) {
 	const marginTop = parseInt(document.defaultView.getComputedStyle(target).getPropertyValue("margin-top"))
@@ -214,10 +215,10 @@ const PageC: React.FC = () => {
 	const value = React.useMemo(() => ({ ...state, dispatch }), [state, dispatch])
 	return (
 		<MyContext.Provider value={value}>
-			<div className="m-3 pt-3 px-3 pb-6 relative bg-white">
+			<Page className="m-3 pt-3 px-3 pb-6 relative">
 				<h2 className="text-3xl mt-8 mb-5 font-black">Virtual List</h2>
 				<VirtualList />
-			</div>
+			</Page>
 		</MyContext.Provider>
 	)
 }
