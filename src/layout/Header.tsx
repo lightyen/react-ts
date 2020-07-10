@@ -19,7 +19,7 @@ export const Header: React.FC<Props> = ({ height }) => {
 	const { enable } = useI18n()
 	return (
 		<header className="app-header" style={{ height }}>
-			<Link className="px-3 outline-none hover:underline" to="/">
+			<Link className="px-3 capitalize outline-none hover:underline" to="/">
 				<FormattedMessage id="home" />
 			</Link>
 			<motion.button

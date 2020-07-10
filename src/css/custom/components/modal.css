@@ -7,15 +7,16 @@
 .modal-base {
 	@apply w-full h-full;
 }
+
 .modal-cover {
 	background-color: var(--theme-modal-cover-bg);
 	backdrop-filter: blur(1px);
 	z-index: 9999;
 	@apply w-full h-full flex justify-center items-center;
 }
+
 .modal {
 	background-color: var(--theme-modal-bg);
-	@apply w-64 rounded shadow-lg;
-	box-shadow: 2px 2px 8px 2px rgba(255, 255, 255, 0.15),
-		0px 0px 10px 3px rgba(255, 255, 255, 0.05);
+	box-shadow: 2px 2px 12px -1px var(--theme-modal-shadow);
+	@apply w-64 rounded;
 }

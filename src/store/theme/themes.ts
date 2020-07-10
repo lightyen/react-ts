@@ -62,7 +62,7 @@ export const themes: { [key: string]: Theme } = {
 		secondary: colors.green[900],
 		secondaryVariant: colors.green[800],
 		background: colors.gray[900],
-		surface: colors.gray[700],
+		surface: "#232933",
 		error: colors.red[500],
 		success: colors.green[500],
 		text: {

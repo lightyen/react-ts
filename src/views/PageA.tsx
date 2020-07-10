@@ -60,7 +60,7 @@ const PageA: React.FC = () => {
 			<h3 className="text-xl mt-6 mb-3 font-bold capitalize">
 				<FormattedMessage id="card" />
 			</h3>
-			<div className="max-w-sm mb-6 rounded overflow-hidden shadow-lg">
+			<div className="max-w-sm mb-6 rounded overflow-hidden t-shadow">
 				<div className="bg-darkslateblue-300 w-auto h-48" />
 				<div className="px-6 py-4">
 					<div className="font-bold text-xl mb-2">The Coldest Sunset</div>

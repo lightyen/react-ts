@@ -118,7 +118,7 @@ export const CustomDateRangePicker: React.FC<Props> = ({ className, range, onCha
 		<div className="relative">
 			{focus && (
 				<motion.div
-					className="absolute border z-10 shadow-lg"
+					className="absolute border z-10 t-shadow"
 					style={{ top: "-0.5rem", left: "-0.375rem" }}
 					ref={ref}
 					initial={{ opacity: 0.7, y: "-1rem" }}

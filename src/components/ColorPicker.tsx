@@ -121,7 +121,7 @@ const ColorPicker = React.forwardRef<
 		root.style.setProperty("--hue-slider-y", ((h / 360) * elRect.height).toString())
 		root.style.setProperty("--selected-alpha", c.alpha().toString())
 		root.style.setProperty("--alpha-slider-y", (elRect.height * (1 - c.alpha())).toString())
-		const bg = chroma("#fff")
+		const bg = chroma(document.body.style.backgroundColor)
 		root.style.setProperty(
 			"--color-picker-background",
 			bg.luminance() > 0.5 ? bg.darken(0.5).css() : bg.brighten(0.5).css(),

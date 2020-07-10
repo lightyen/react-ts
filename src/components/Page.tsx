@@ -14,7 +14,7 @@ const Page: React.FC<Props> = ({ children, className }) => {
 	} = useTheme()
 	const visible = useScollBarVisible()
 	return (
-		<div className={classnames("m-3 p-3", { "mr-0": visible }, className)} style={{ backgroundColor, color }}>
+		<div className={classnames("m-3 p-3", { "mr-1": visible }, className)} style={{ backgroundColor, color }}>
 			{children}
 		</div>
 	)

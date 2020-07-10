@@ -1,7 +1,5 @@
 import React from "react"
 
-import { motion } from "framer-motion"
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSun } from "@fortawesome/free-solid-svg-icons/faSun"
 import { faMoon } from "@fortawesome/free-solid-svg-icons/faMoon"
