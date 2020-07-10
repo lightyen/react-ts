@@ -23,11 +23,12 @@ const Slider = styled.label.attrs(props => ({ ...props, htmlFor: "toggle" }))`
 	justify-content: space-between;
 	padding: 0 0.4rem;
 	cursor: pointer;
+	user-select: none;
 
 	background: #c1f7d4;
 	color: #555;
 	${Check}:checked + & {
-		background: #222;
+		background: #183022;
 		color: #f2ec0c;
 	}
 
@@ -42,12 +43,21 @@ const Slider = styled.label.attrs(props => ({ ...props, htmlFor: "toggle" }))`
 		cursor: pointer;
 		position: absolute;
 		border-radius: 9999px;
-		background: #999;
+		background: #eee;
+		border: solid 1px #869c8d;
+	}
+
+	&:hover::after {
+		box-shadow: 0 0 1px 2px rgba(66, 153, 225, 0.5);
+	}
+
+	&:hover {
+		color: #333;
 	}
 
 	${Check}:checked + &::after {
 		transform: translateX(2rem);
-		background: #fff;
+		background: #eee;
 	}
 `
 
@@ -55,7 +65,7 @@ const DarkModeToggle: React.FC = () => {
 	const { name } = useTheme()
 	const { changeTheme } = useAction().theme
 	return (
-		<div className="relative mx-2">
+		<div className="relative">
 			<Check
 				defaultChecked={name == "dark"}
 				onChange={e => {

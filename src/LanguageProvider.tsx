@@ -14,8 +14,8 @@ const LanguageProvider: React.FC = ({ children }) => {
 		<IntlProvider locale={locale} key={locale} messages={getLocaleMessages(locale)}>
 			<motion.div
 				key={locale}
-				initial={{ opacity: 0 }}
-				animate={{ opacity: 1, transition: { easings: "linear" } }}
+				initial={{ opacity: 0.3 }}
+				animate={{ opacity: 1 }}
 				style={{ color, backgroundColor }}
 			>
 				{children}

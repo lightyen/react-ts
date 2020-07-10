@@ -33,7 +33,9 @@ export const Header: React.FC<Props> = ({ height }) => {
 				<FontAwesomeIcon icon={faBars} />
 			</motion.button>
 			<div className="flex-grow flex justify-end px-6">
-				<DarkModeToggle />
+				<div className="mr-3">
+					<DarkModeToggle />
+				</div>
 				{enable && <LanguageSelect />}
 			</div>
 		</header>
