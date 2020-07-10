@@ -6,7 +6,7 @@
 	--palette-pointer-y: 0;
 	--hue-slider-y: 0;
 	--alpha-slider-y: 0;
-	background: var(--color-picker-background);
+	background: var(--theme--color-picker-background);
 }
 
 .color-picker-controls {

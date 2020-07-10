@@ -1,0 +1,30 @@
+.toggle-control {
+	width: 3rem;
+	height: 1.5rem;
+	@apply relative block;
+}
+
+.toggle-control::before {
+	content: "";
+	transition: all 200ms ease;
+	@apply absolute w-full h-full cursor-pointer bg-gray-500 rounded-full;
+}
+
+.toggle-input:checked + .toggle-control::before {
+	@apply bg-green-500;
+}
+
+.toggle-control::after {
+	font-family: "Font Awesome 5 Free";
+	content: "\f1ea";
+	transition: all 200ms ease;
+	width: 1.2rem;
+	height: 1.2rem;
+	top: 0.15rem;
+	left: 0.15rem;
+	@apply absolute cursor-pointer bg-gray-100 rounded-full;
+}
+
+.toggle-input:checked + .toggle-control::after {
+	transform: translateX(1.5rem);
+}

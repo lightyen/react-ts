@@ -37,55 +37,55 @@ export const Sidebar: React.FC<Props> = ({ top, width }) => {
 		>
 			<ul>
 				<RippleNavLink to="/page-a" className="nav-item" activeClassName="active">
-					<div className="w-8 mr-2 flex justify-end">
+					<div className="w-8 mr-1 text-center">
 						<FontAwesomeIcon icon={faThLarge} />
 					</div>
 					<div>Components</div>
 				</RippleNavLink>
 				<RippleNavLink to="/page-b" className="nav-item" activeClassName="active">
-					<div className="w-8 mr-2 flex justify-end">
+					<div className="w-8 mr-1 text-center">
 						<FontAwesomeIcon icon={faThList} />
 					</div>
 					<div>Table</div>
 				</RippleNavLink>
 				<RippleNavLink to="/page-c" className="nav-item" activeClassName="active">
-					<div className="w-8 mr-2 flex justify-end">
+					<div className="w-8 mr-1 text-center">
 						<FontAwesomeIcon icon={faInfinity} />
 					</div>
 					<div>Virtual List</div>
 				</RippleNavLink>
 				<RippleNavLink to="/page-d" className="nav-item" activeClassName="active">
-					<div className="w-8 mr-2 relative" style={{ left: "0.875rem" }}>
+					<div className="w-8 mr-1 text-center">
 						<FontAwesomeIcon icon={faDiceD6} />
 					</div>
 					<div>Transition</div>
 				</RippleNavLink>
 				<RippleNavLink to="/page-e" className="nav-item" activeClassName="active">
-					<div className="w-8 mr-2 relative" style={{ left: "0.8rem" }}>
+					<div className="w-8 mr-1 text-center">
 						<FontAwesomeIcon icon={faDiceD20} />
 					</div>
 					<div>Chart</div>
 				</RippleNavLink>
 				<RippleNavLink to="/page-f" className="nav-item" activeClassName="active">
-					<div className="w-8 mr-2 relative" style={{ left: "0.8rem" }}>
+					<div className="w-8 mr-1 text-center">
 						<FontAwesomeIcon icon={faBox} />
 					</div>
 					<div>Web Components</div>
 				</RippleNavLink>
 				<RippleNavLink to="/page-g" className="nav-item" activeClassName="active">
-					<div className="w-8 mr-2 relative" style={{ left: "0.8rem" }}>
+					<div className="w-8 mr-1 text-center">
 						<FontAwesomeIcon icon={faCode} />
 					</div>
 					<div>CodeMirror</div>
 				</RippleNavLink>
 				<RippleNavLink to="/page-h" className="nav-item" activeClassName="active">
-					<div className="w-8 mr-2 relative" style={{ left: "0.8rem" }}>
+					<div className="w-8 mr-1 text-center">
 						<FontAwesomeIcon icon={faCode} />
 					</div>
 					<div>Carousel</div>
 				</RippleNavLink>
 				<RippleNavLink to="/page-i" className="nav-item" activeClassName="active">
-					<div className="w-8 mr-2 relative" style={{ left: "0.8rem" }}>
+					<div className="w-8 mr-1 text-center">
 						<FontAwesomeIcon icon={faCode} />
 					</div>
 					<div>Color Picker</div>

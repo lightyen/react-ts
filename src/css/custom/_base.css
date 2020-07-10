@@ -10,10 +10,10 @@ body {
 		Apple LiGothic Medium, sans-serif;
 }
 
-::selection {
+/* ::selection {
 	background: rgb(115, 80, 196);
 	@apply text-gray-100;
-}
+} */
 
 button:-moz-focusring,
 [type="button"]:-moz-focusring,

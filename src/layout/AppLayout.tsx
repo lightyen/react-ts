@@ -28,7 +28,7 @@ const NoAuthenticatedRoute: React.FC<RouteProps> = ({ children, ...rest }) => (
 
 const AppLayout: React.FC = props => {
 	const h = 45
-	const w = 230
+	const w = 246
 	return (
 		<div className="h-screen flex flex-col relative">
 			<Header height={h} />

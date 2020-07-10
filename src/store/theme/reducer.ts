@@ -10,23 +10,24 @@ export interface ThemeStore extends Theme {
 // You will need to change gtk3 theme and restart the browser if you are on linux.
 const darkmodeQuery = window.matchMedia("(prefers-color-scheme: dark)")
 
-function getTheme(): Theme & { name: ThemeMode } {
+function getTheme(): ThemeMode {
 	const theme = localStorage.getItem("theme")
 	if (theme == "dark") {
-		return { name: "dark", ...themes.dark }
+		return "dark"
 	}
 	if (theme == "light") {
-		return { name: "light", ...themes.light }
+		return "light"
 	}
 	// auto
 	const darkmode = darkmodeQuery.matches
 	if (darkmode) {
-		return { name: "dark", ...themes.dark }
+		return "dark"
 	}
-	return { name: "light", ...themes.light }
+	return "light"
 }
 
-function initTheme(theme: Theme) {
+function initTheme(name: ThemeMode, cached: boolean) {
+	const theme = themes[name]
 	document.body.style.color = theme.text.background
 	document.body.style.backgroundColor = theme.background
 	const root = document.documentElement
@@ -46,17 +47,22 @@ function initTheme(theme: Theme) {
 	root.style.setProperty("--theme-modal-shadow", chroma(theme.background).alpha(0.2).css())
 	root.style.setProperty("--theme-shadow", chroma(theme.text.background).alpha(0.2).css())
 	root.style.setProperty("--theme-shadow-ambient", chroma(theme.text.background).alpha(0.05).css())
-}
 
-const init: ThemeStore = {
-	...getTheme(),
-}
-initTheme(init)
+	const bg = chroma(theme.background)
+	const darkmode = bg.luminance() < 0.3
+	root.style.setProperty("--theme--color-picker-background", darkmode ? bg.brighten(0.5).css() : bg.darken(0.5).css())
 
-export const theme = createReducer(init, builder =>
-	builder.addCase(changeTheme, (state, { payload: { name } }) => {
+	if (cached) {
 		localStorage.setItem("theme", name)
-		initTheme(themes[name])
+	} else {
+		localStorage.setItem("theme", "auto")
+	}
+	return { ...theme, name: darkmode ? "dark" : "light" }
+}
+
+export const theme = createReducer(initTheme(getTheme(), false), builder =>
+	builder.addCase(changeTheme, (state, { payload: { name, cached = false } }) => {
+		initTheme(name, cached)
 		return { ...state, name, ...themes[name] }
 	}),
 )

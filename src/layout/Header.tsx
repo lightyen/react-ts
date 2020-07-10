@@ -9,6 +9,8 @@ import { FormattedMessage } from "react-intl"
 import { supports } from "~/store/i18n/languages"
 import { entries } from "~/type-safed"
 
+import DarkModeToggle from "~/components/DarkModeToggle"
+
 interface Props {
 	height: number
 }
@@ -30,11 +32,10 @@ export const Header: React.FC<Props> = ({ height }) => {
 			>
 				<FontAwesomeIcon icon={faBars} />
 			</motion.button>
-			{enable && (
-				<div className="flex-grow flex justify-end px-6">
-					<LanguageSelect />
-				</div>
-			)}
+			<div className="flex-grow flex justify-end px-6">
+				<DarkModeToggle />
+				{enable && <LanguageSelect />}
+			</div>
 		</header>
 	)
 }
@@ -60,9 +61,9 @@ const LanguageSelect: React.FC = () => {
 		<div className="relative">
 			<motion.button
 				ref={button}
-				className="cursor-pointer focus:outline-none hover:underline"
-				initial={{ opacity: 0.5 }}
-				animate={{ opacity: spread ? 1 : 0.5 }}
+				className="cursor-pointer select-none focus:outline-none hover:underline"
+				initial={{ opacity: 0.8 }}
+				animate={{ opacity: spread ? 1 : 0.8 }}
 				whileHover={{ opacity: 1 }}
 				onClick={() => setSpread(true)}
 			>
