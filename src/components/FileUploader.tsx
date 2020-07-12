@@ -1,4 +1,5 @@
 import React from "react"
+import { v4 as uuidv4 } from "uuid"
 
 interface FileSystemEntry {
 	filesystem: unknown
@@ -65,6 +66,7 @@ async function handleSubmit(e: React.DragEvent) {
 
 const FileUploader: React.FC = () => {
 	const inputRef = React.useRef<HTMLInputElement>()
+	const uuid = React.useRef(uuidv4())
 	React.useEffect(() => {
 		const el = inputRef.current
 		el.setAttribute("webkitdirectory", "")
@@ -73,28 +75,29 @@ const FileUploader: React.FC = () => {
 	}, [])
 	return (
 		<div className="flex">
+			<input
+				ref={inputRef}
+				type="file"
+				className="hidden"
+				id={uuid.current}
+				multiple
+				onChange={e => {
+					const files = e.target.files
+					for (let i = 0; i < files.length; i++) {
+						console.log(files[i]["webkitRelativePath"])
+					}
+				}}
+			/>
 			<label
 				className="bg-gray-300"
+				htmlFor={uuid.current}
 				style={{ width: 500, height: 320 }}
 				onDragOver={e => e.preventDefault()}
 				onDrop={e => {
 					e.preventDefault()
 					handleSubmit(e)
 				}}
-			>
-				<input
-					ref={inputRef}
-					type="file"
-					style={{ display: "none" }}
-					multiple
-					onChange={e => {
-						const files = e.target.files
-						for (let i = 0; i < files.length; i++) {
-							console.log(files[i]["webkitRelativePath"])
-						}
-					}}
-				/>
-			</label>
+			></label>
 		</div>
 	)
 }
