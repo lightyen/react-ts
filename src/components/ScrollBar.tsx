@@ -91,12 +91,12 @@ interface ScrollBarProps {
 
 export const ScrollBar: React.FC<ScrollBarProps> = ({ children, ...props }) => {
 	const ref = React.useRef<HTMLDivElement>()
-	const [handle, setHandle] = React.useState<HTMLDivElement>(ref.current)
+	const [handle, setHandle] = React.useState<HTMLDivElement>()
 	const isMount = React.useRef(false)
 
 	const {
 		background,
-		text: { primary: color },
+		text: { background: color },
 	} = useTheme()
 	const [thumbColor, setThumbColor] = React.useState(background)
 	React.useEffect(() => {
@@ -136,9 +136,8 @@ export const ScrollBar: React.FC<ScrollBarProps> = ({ children, ...props }) => {
 	const [visible, setVisible] = React.useState(false)
 	React.useEffect(() => {
 		if (!handle) {
-			return () => {
-				/** */
-			}
+			// eslint-disable-next-line @typescript-eslint/no-empty-function
+			return () => {}
 		}
 		const el = handle.children[0]
 		const observer = new ResizeObserver(entries => {
@@ -150,7 +149,6 @@ export const ScrollBar: React.FC<ScrollBarProps> = ({ children, ...props }) => {
 
 	return (
 		<CustomScrollBar
-			tabIndex={0}
 			ref={ref}
 			onMouseDown={() => {
 				window.clearTimeout(tick.current)

@@ -1,32 +1,34 @@
 .nav-sidebar {
-	transition: margin-left ease 0.2s;
-	background: var(--theme-sider-bg);
-	color: var(--theme-sider-text);
+	background: var(--theme-primary);
+	color: var(--theme-text-primary);
+	transition: all 200ms ease;
 	@apply fixed overflow-x-hidden;
 }
 .nav-item {
 	transition-property: transform, background-color;
 	transition-timing-function: ease;
 	transition-duration: 150ms;
+	color: var(--theme-text-primary);
 	@apply relative py-2 px-4 h-12 flex items-center font-medium whitespace-no-wrap select-none outline-none;
 }
 .nav-item:hover {
-	background: var(--theme-nav-item-hover);
+	background: var(--theme-hover-primary);
 	@apply underline;
 }
-.nav-item:active {
-	background: var(--theme-nav-item-active);
-}
+
 .nav-item.active {
 	transform: translateX(10px);
-	background: var(--theme-nav-item-active);
+	background: var(--theme-hover-primary);
+}
+
+.nav-item:active {
+	background: var(--theme-primaryvariant);
 }
 
 .app-main {
 	transition-property: color background;
 	transition-duration: 0.2s;
 	transition-timing-function: ease;
-	background: var(--theme-main-bg);
 	@apply flex-grow flex flex-col overflow-x-hidden overflow-y-auto;
 }
 .app-container {
@@ -34,14 +36,12 @@
 }
 
 .app-header {
-	background: var(--theme-header-bg);
-	color: var(--theme-header-text);
+	background: var(--theme-secondary);
+	color: var(--theme-text-secondary);
 	@apply flex items-center;
 }
 
 .app-footer {
-	background: var(--theme-footer-bg);
-	color: var(--theme-footer-text);
 	@apply px-6 py-3 flex justify-end;
 }
 
@@ -51,11 +51,11 @@
 }
 
 .language-item {
-	background: var(--theme-header-bg);
-	color: var(--theme-header-text);
+	background: var(--theme-secondary);
+	color: var(--theme-text-secondary);
 	@apply border border-gray-500 px-8 py-2 text-center cursor-pointer whitespace-no-wrap select-none;
 }
 .language-item:hover {
-	background: var(--theme-header-hover);
+	background: var(--theme-hover-secondary);
 	@apply underline;
 }

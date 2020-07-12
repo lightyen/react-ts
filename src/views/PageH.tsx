@@ -2,12 +2,16 @@ import React from "react"
 import { motion, useMotionValue, useTransform } from "framer-motion"
 import chroma from "chroma-js"
 import Page from "~/components/Page"
+import { FormattedMessage } from "react-intl"
 
 const colors = ["#48bb78", "#4299e1", "#f56565", "#ed8936", "#9f7aea"]
 
 const PageH: React.FC = () => {
 	return (
 		<Page>
+			<h2 className="text-3xl mt-8 mb-2 font-black capitalize">
+				<FormattedMessage id="nav_carousel" />
+			</h2>
 			<Carousel />
 		</Page>
 	)

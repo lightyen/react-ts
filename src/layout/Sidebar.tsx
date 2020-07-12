@@ -2,6 +2,7 @@ import React from "react"
 import classnames from "classnames"
 import { useSelector } from "~/store"
 import { NavLink, NavLinkProps } from "react-router-dom"
+import { FormattedMessage } from "react-intl"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faThLarge } from "@fortawesome/free-solid-svg-icons/faThLarge"
@@ -40,55 +41,55 @@ export const Sidebar: React.FC<Props> = ({ top, width }) => {
 					<div className="w-8 mr-1 text-center">
 						<FontAwesomeIcon icon={faThLarge} />
 					</div>
-					<div>Components</div>
+					<FormattedMessage id="nav_components" />
 				</RippleNavLink>
 				<RippleNavLink to="/page-b" className="nav-item" activeClassName="active">
 					<div className="w-8 mr-1 text-center">
 						<FontAwesomeIcon icon={faThList} />
 					</div>
-					<div>Table</div>
+					<FormattedMessage id="nav_table" />
 				</RippleNavLink>
 				<RippleNavLink to="/page-c" className="nav-item" activeClassName="active">
 					<div className="w-8 mr-1 text-center">
 						<FontAwesomeIcon icon={faInfinity} />
 					</div>
-					<div>Virtual List</div>
+					<FormattedMessage id="nav_virtual_list" />
 				</RippleNavLink>
 				<RippleNavLink to="/page-d" className="nav-item" activeClassName="active">
 					<div className="w-8 mr-1 text-center">
 						<FontAwesomeIcon icon={faDiceD6} />
 					</div>
-					<div>Transition</div>
+					<FormattedMessage id="nav_transition" />
 				</RippleNavLink>
 				<RippleNavLink to="/page-e" className="nav-item" activeClassName="active">
 					<div className="w-8 mr-1 text-center">
 						<FontAwesomeIcon icon={faDiceD20} />
 					</div>
-					<div>Chart</div>
+					<FormattedMessage id="nav_chart" />
 				</RippleNavLink>
 				<RippleNavLink to="/page-f" className="nav-item" activeClassName="active">
 					<div className="w-8 mr-1 text-center">
 						<FontAwesomeIcon icon={faBox} />
 					</div>
-					<div>Web Components</div>
+					<FormattedMessage id="nav_web_component" />
 				</RippleNavLink>
 				<RippleNavLink to="/page-g" className="nav-item" activeClassName="active">
 					<div className="w-8 mr-1 text-center">
 						<FontAwesomeIcon icon={faCode} />
 					</div>
-					<div>CodeMirror</div>
+					<FormattedMessage id="nav_editor" />
 				</RippleNavLink>
 				<RippleNavLink to="/page-h" className="nav-item" activeClassName="active">
 					<div className="w-8 mr-1 text-center">
 						<FontAwesomeIcon icon={faCode} />
 					</div>
-					<div>Carousel</div>
+					<FormattedMessage id="nav_carousel" />
 				</RippleNavLink>
 				<RippleNavLink to="/page-i" className="nav-item" activeClassName="active">
 					<div className="w-8 mr-1 text-center">
 						<FontAwesomeIcon icon={faCode} />
 					</div>
-					<div>Color Picker</div>
+					<FormattedMessage id="nav_color_picker" />
 				</RippleNavLink>
 			</ul>
 		</nav>

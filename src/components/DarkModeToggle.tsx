@@ -3,7 +3,7 @@ import React from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSun } from "@fortawesome/free-solid-svg-icons/faSun"
 import { faMoon } from "@fortawesome/free-solid-svg-icons/faMoon"
-import { useTheme, useAction } from "~/store"
+import { useTheme, useAction, useSelector } from "~/store"
 
 import styled from "styled-components"
 
@@ -28,7 +28,7 @@ const Slider = styled.label.attrs(props => ({ ...props, htmlFor: "toggle" }))`
 	background: #c1f7d4;
 	color: #555;
 	${Check}:checked + & {
-		background: #183022;
+		background: #183622;
 		color: #f2ec0c;
 	}
 
@@ -64,6 +64,12 @@ const Slider = styled.label.attrs(props => ({ ...props, htmlFor: "toggle" }))`
 const DarkModeToggle: React.FC = () => {
 	const { name } = useTheme()
 	const { changeTheme } = useAction().theme
+
+	const bk = useSelector(state => state.app.breakpoint)
+	const hide = bk == "xs" || bk == "sm"
+	if (hide) {
+		return null
+	}
 	return (
 		<div className="relative">
 			<Check

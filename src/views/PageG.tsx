@@ -17,6 +17,7 @@ import "codemirror/mode/sass/sass"
 import "codemirror/mode/css/css"
 
 import Page from "~/components/Page"
+import { FormattedMessage } from "react-intl"
 
 interface MyProps {
 	options?: EditorConfiguration
@@ -89,6 +90,9 @@ const Card: React.FC = () => {
 
 	return (
 		<Page>
+			<h2 className="text-3xl mt-8 mb-2 font-black capitalize">
+				<FormattedMessage id="nav_editor" />
+			</h2>
 			<CodeMirror
 				id="hehehe"
 				ref={ref}

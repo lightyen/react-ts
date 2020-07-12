@@ -155,7 +155,9 @@ const PageB: React.FC = () => {
 
 	return (
 		<Page>
-			<h2 className="text-3xl mt-8 mb-5 font-black">Table</h2>
+			<h2 className="text-3xl mt-8 mb-5 font-black">
+				<FormattedMessage id="nav_table" />
+			</h2>
 
 			<Table
 				id="#mytable"

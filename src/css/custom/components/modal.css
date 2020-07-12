@@ -16,7 +16,7 @@
 }
 
 .modal {
-	background-color: var(--theme-modal-bg);
+	background-color: var(--theme-surface);
 	box-shadow: 2px 2px 12px -1px var(--theme-modal-shadow);
 	@apply w-64 rounded;
 }

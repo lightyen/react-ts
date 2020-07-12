@@ -23,7 +23,14 @@ const MyPie: React.FC<MyPieProps> = ({ data, width, height, theme }) => (
 		data={data}
 		width={width}
 		height={height}
-		theme={theme}
+		theme={{
+			...theme,
+			tooltip: {
+				container: {
+					color: "#1a202c",
+				},
+			},
+		}}
 		margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
 		innerRadius={0.5}
 		padAngle={0.7}

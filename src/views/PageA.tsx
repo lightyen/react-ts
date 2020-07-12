@@ -32,19 +32,27 @@ const PageA: React.FC = () => {
 		<Page>
 			<PromptModal when={false} />
 			<h2 className="text-3xl mt-8 mb-5 font-black capitalize">
-				<FormattedMessage id="components" />
+				<FormattedMessage id="nav_components" />
 			</h2>
 			<h3 className="text-xl mt-6 mb-3 font-bold capitalize">
 				<FormattedMessage id="button" />
 			</h3>
 			<div className="-pb-2 mb-6">
-				<Button className="inline-block mr-2 mb-2">Button</Button>
-				<Button className="btn-blue inline-block mr-2 mb-2">Button</Button>
-				<Button className="btn-green inline-block mr-2 mb-2">Button</Button>
-				<Button className="btn-red inline-block mr-2 mb-2">Button</Button>
+				<Button className="inline-block mr-2 mb-2">
+					<FormattedMessage id="button" />
+				</Button>
+				<Button className="btn-blue inline-block mr-2 mb-2">
+					<FormattedMessage id="button" />
+				</Button>
+				<Button className="btn-green inline-block mr-2 mb-2">
+					<FormattedMessage id="button" />
+				</Button>
+				<Button className="btn-red inline-block mr-2 mb-2">
+					<FormattedMessage id="button" />
+				</Button>
 				<Button className="btn-orange inline-block mr-2 mb-2">
 					<FontAwesomeIcon className="mr-2" icon={faBars} />
-					Button
+					<FormattedMessage id="button" />
 				</Button>
 			</div>
 			<h3 className="text-xl mt-6 mb-3 font-bold capitalize">
@@ -87,12 +95,14 @@ const PageA: React.FC = () => {
 			</h3>
 			<div className="mb-6">
 				<button className="btn mr-3" onClick={e => setOpen(true)}>
-					modal
+					<FormattedMessage id="modal" />
 				</button>
 				<Modal open={open} onMouseDownOutside={e => setOpen(false)}>
 					<div className="px-6 my-3">
 						<div className="mt-4 mb-2">
-							<div className="font-bold text-xl mb-2">Title</div>
+							<div className="font-bold text-xl mb-2 capitalize">
+								<FormattedMessage id="title" />
+							</div>
 						</div>
 						<div className="h-12 mb-3">bla bla bla...</div>
 						<div className="mb-3 flex justify-end">
@@ -104,30 +114,48 @@ const PageA: React.FC = () => {
 									setOpen(false)
 								}}
 							>
-								Ok
+								<FormattedMessage id="ok" />
 							</button>
 						</div>
 					</div>
 				</Modal>
 				<button className="btn btn-green" onClick={e => setOpen2(true)}>
-					modal
+					<FormattedMessage id="modal" />
 				</button>
 				<Modal className="w-3/4" open={open2} exitAnime={false} onMouseDownOutside={e => setOpen2(false)}>
 					<div className="px-6 my-3">
 						<div className="mt-4 mb-2">
-							<div className="font-bold text-xl mb-2">Title</div>
+							<div className="font-bold text-xl mb-2 capitalize">
+								<FormattedMessage id="title" />
+							</div>
 						</div>
 						<div className="h-12 mb-3">ha ha ha...</div>
 						<div className="mb-3 flex justify-end">
 							<button
-								className="btn btn-green"
+								className="btn btn-green flex items-center"
 								onClick={e => {
 									e.preventDefault()
 									e.stopPropagation()
 									setOpen2(false)
 								}}
 							>
-								Ok
+								<svg
+									id="i-checkmark"
+									xmlns="http://www.w3.org/2000/svg"
+									viewBox="0 0 32 32"
+									width="16"
+									height="16"
+									fill="none"
+									stroke="currentcolor"
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									strokeWidth="4"
+								>
+									<path d="M2 20 L12 28 30 4" />
+								</svg>
+								<span className="pl-2">
+									<FormattedMessage id="ok" />
+								</span>
 							</button>
 						</div>
 					</div>

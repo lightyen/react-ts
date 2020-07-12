@@ -1,5 +1,6 @@
 import React from "react"
 import chroma from "chroma-js"
+import { FormattedMessage } from "react-intl"
 import { useVirtualScroll, useStay, VirtualItem, VirtualScrollProps } from "./useVirtualScroll"
 import { useScrollBarSource } from "~/components/ScrollBar"
 import Page from "~/components/Page"
@@ -74,8 +75,6 @@ function useMyContext() {
 	return { ...state, changeData, changeOffsetTop }
 }
 
-// ///////
-
 const VirtualList: React.FC = () => {
 	const { data, offsetTop, changeOffsetTop } = useMyContext()
 	const scrollbar = useScrollBarSource()
@@ -147,8 +146,8 @@ const Information: React.FC<VirtualScrollProps> = ({ scrollTop, start, end, accH
 	return (
 		<div
 			ref={ref}
-			className="sticky text-xl text-gray-600 z-10 w-4/5 mx-auto"
-			style={{ top: "1rem", marginBottom }}
+			className="sticky text-xl text-gray-600 w-4/5 mx-auto"
+			style={{ top: "1rem", marginBottom, zIndex: 1 }}
 		>
 			<div className="p-3 bg-gray-300" style={{ background: "#e2e8f0a0" }}>
 				<button
@@ -216,7 +215,9 @@ const PageC: React.FC = () => {
 	return (
 		<MyContext.Provider value={value}>
 			<Page className="m-3 pt-3 px-3 pb-6 relative">
-				<h2 className="text-3xl mt-8 mb-5 font-black">Virtual List</h2>
+				<h2 className="text-3xl mt-8 mb-5 font-black">
+					<FormattedMessage id="nav_virtual_list" />
+				</h2>
 				<VirtualList />
 			</Page>
 		</MyContext.Provider>

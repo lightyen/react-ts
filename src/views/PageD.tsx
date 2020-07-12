@@ -1,6 +1,7 @@
 import React from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Page from "~/components/Page"
+import { FormattedMessage } from "react-intl"
 
 // const PageD: React.FC = () => {
 // 	const x = useMotionValue(500)
@@ -76,7 +77,10 @@ const Box: React.FC<{ value: number; onRemove: (v: number) => void }> = ({ value
 const PageD: React.FC = () => {
 	const [data, setData] = React.useState([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
 	return (
-		<Page className="pt-0">
+		<Page>
+			<h2 className="text-3xl mt-8 mb-2 font-black capitalize">
+				<FormattedMessage id="nav_transition" />
+			</h2>
 			<AnimatePresence>
 				{data.map(d => (
 					<Box

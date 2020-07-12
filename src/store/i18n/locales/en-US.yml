@@ -19,4 +19,13 @@ select_placeholder: select...
 select_no_options: no options
 clear: clear
 pagination_total: "{from} - {to} of {total}"
-components: components
+ok: OK
+nav_components: Components
+nav_table: Table
+nav_virtual_list: Virtual List
+nav_transition: Transition
+nav_chart: Chart
+nav_web_component: Web Component
+nav_editor: Editor
+nav_carousel: Carousel
+nav_color_picker: Color Picker

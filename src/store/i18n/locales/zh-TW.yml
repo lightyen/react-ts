@@ -19,4 +19,13 @@ select_placeholder: 選擇...
 select_no_options: 沒有選項
 clear: 清除
 pagination_total: "從 {from} 至 {to} 總共 {total} 項"
-components: 元件範例
+ok: 確定
+nav_components: 元件
+nav_table: 表格
+nav_virtual_list: 虛擬列表
+nav_transition: 動畫
+nav_chart: 圖表
+nav_web_component: Web Component
+nav_editor: 編輯器
+nav_carousel: Carousel
+nav_color_picker: 色彩選擇
