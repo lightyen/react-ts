@@ -17,6 +17,7 @@ import {
 	endOfMonth,
 } from "date-fns"
 import { getDateLocale } from "~/date/locale"
+import { css as _css, InterpolationWithTheme } from "@emotion/core"
 
 export interface DateRange {
 	startDate: Date
@@ -38,12 +39,13 @@ type StaticRangeLabel = {
 }
 
 interface Props {
-	className?: string
+	css?: InterpolationWithTheme<unknown>
+	tw?: string
 	range?: DateRange
 	onChange?(range: DateRange): void
 }
 
-export const CustomDateRangePicker: React.FC<Props> = ({ className, range, onChange }) => {
+export const CustomDateRangePicker: React.FC<Props> = ({ range, onChange, ...props }) => {
 	const ref = React.useRef<HTMLDivElement>()
 	const intl = useIntl()
 
@@ -124,10 +126,14 @@ export const CustomDateRangePicker: React.FC<Props> = ({ className, range, onCha
 	}
 
 	return (
-		<div className="relative">
+		<div tw="relative">
 			{focus && (
 				<motion.div
-					className="absolute border z-10 t-shadow"
+					tw="absolute border z-10"
+					css={_css`
+						box-shadow: 2px 2px 12px -1px rgba(var(--theme-shadow)),
+							0px 0px 6px 0px rgba(var(--theme-shadow-ambient));
+					`}
 					style={{ top: "-0.5rem", left: "-0.375rem" }}
 					ref={ref}
 					initial={{ opacity: 0.7, y: "-1rem" }}
@@ -159,7 +165,7 @@ export const CustomDateRangePicker: React.FC<Props> = ({ className, range, onCha
 					/>
 				</motion.div>
 			)}
-			<button className={className} onMouseDown={() => setFocus(true)}>
+			<button onMouseDown={() => setFocus(true)} {...props}>
 				{format(startDate, "PPP")} ~ {format(endDate, "PPP")}
 			</button>
 		</div>

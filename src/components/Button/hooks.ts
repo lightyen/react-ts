@@ -6,6 +6,7 @@ export function useRipple<T extends HTMLElement>() {
 	const ref = React.useRef<T>()
 	React.useEffect(() => {
 		const el = ref.current
+
 		function ripple(el: HTMLElement, e: MouseEvent) {
 			const c = document.createElement("div")
 			c.addEventListener(

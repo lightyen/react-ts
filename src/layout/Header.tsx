@@ -8,6 +8,8 @@ import { motion } from "framer-motion"
 
 import DarkModeToggle from "~/components/DarkModeToggle"
 import LanguageSelect from "~/components/LanguageSelect"
+import { css } from "@emotion/core"
+import tw from "twin.macro"
 
 interface Props {
 	height: number
@@ -18,20 +20,29 @@ export const Header: React.FC<Props> = ({ height }) => {
 	const visible = useSelector(state => state.app.sidebarVisible)
 	const { enable } = useI18n()
 	return (
-		<header className="app-header" style={{ height }}>
-			<Link className="px-3 capitalize outline-none hover:underline" to="/">
+		<header
+			css={[
+				tw`flex items-center`,
+				css`
+					background: rgb(var(--theme-secondary));
+					color: rgb(var(--theme-text-secondary));
+				`,
+				{ height },
+			]}
+		>
+			<Link tw="px-3 capitalize outline-none hover:underline" to="/">
 				<FontAwesomeIcon icon={faHome} />
 			</Link>
 			<motion.button
-				className="px-3 focus:outline-none select-none"
+				tw="px-3 focus:outline-none select-none"
 				initial={{ opacity: visible ? 1 : 0.5 }}
 				animate={{ opacity: visible ? 1 : 0.5 }}
 				onClick={() => setSidebarVisible({ visible: !visible })}
 			>
 				<FontAwesomeIcon icon={faBars} />
 			</motion.button>
-			<div className="flex-grow flex justify-end px-3">
-				<div className="mr-3">
+			<div tw="flex-grow flex justify-end px-3">
+				<div tw="mr-3">
 					<DarkModeToggle />
 				</div>
 				{enable && <LanguageSelect />}

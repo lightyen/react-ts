@@ -1,5 +1,4 @@
 import React from "react"
-import classnames from "classnames"
 import { useSelector } from "~/store"
 import { NavLink, NavLinkProps } from "react-router-dom"
 import { FormattedMessage } from "react-intl"
@@ -13,10 +12,32 @@ import { faDiceD20 } from "@fortawesome/free-solid-svg-icons/faDiceD20"
 import { faBox } from "@fortawesome/free-solid-svg-icons/faBox"
 import { faCode } from "@fortawesome/free-solid-svg-icons/faCode"
 import { useRipple } from "~/components/Button/hooks"
+import styled from "@emotion/styled"
+import tw from "twin.macro"
+import { css } from "@emotion/core"
 
-const RippleNavLink: React.FC<NavLinkProps> = ({ className, ...props }) => {
+const StyledNavLink = styled(NavLink)`
+	transition-property: transform, background-color;
+	transition-timing-function: ease;
+	transition-duration: 150ms;
+	color: rgb(var(--theme-text-primary));
+	${tw`relative overflow-hidden py-2 px-4 h-12 flex items-center font-medium whitespace-no-wrap select-none outline-none`}
+	:hover {
+		background: rgb(var(--theme-hover-primary));
+		${tw`underline`}
+	}
+	&.active {
+		transform: translateX(10px);
+		background: rgb(var(--theme-hover-primary));
+	}
+	:active {
+		background: rgb(var(--theme-primaryvariant));
+	}
+`
+
+const RippleNavLink: React.FC<NavLinkProps> = props => {
 	const ref = useRipple<HTMLAnchorElement>()
-	return <NavLink ref={ref} className={classnames("relative overflow-hidden", className)} {...props} />
+	return <StyledNavLink ref={ref} {...props} />
 }
 
 interface Props {
@@ -24,69 +45,76 @@ interface Props {
 	width: number
 }
 
-export const Sidebar: React.FC<Props> = ({ top, width }) => {
+export const Sidebar: React.FC<Props> = ({ children, top, width }) => {
 	const collapsed = useSelector(state => state.app.collapsed)
 	return (
 		<nav
-			className="nav-sidebar"
-			style={{
-				height: `calc(100vh - ${top}px)`,
-				top,
-				width,
-				marginLeft: collapsed ? `${-width}px` : "0px",
-			}}
+			css={[
+				tw`fixed overflow-x-hidden`,
+				css`
+					background: rgb(var(--theme-primary));
+					color: rgb(var(--theme-text-primary));
+					transition: all 200ms ease;
+				`,
+				{
+					height: `calc(100vh - ${top}px)`,
+					top,
+					width,
+					marginLeft: collapsed ? `${-width}px` : "0px",
+				},
+			]}
 		>
 			<ul>
-				<RippleNavLink to="/page-a" className="nav-item" activeClassName="active">
-					<div className="w-8 mr-1 text-center">
+				<RippleNavLink to="/page-a">
+					<div tw="w-8 mr-1 text-center">
 						<FontAwesomeIcon icon={faThLarge} />
 					</div>
 					<FormattedMessage id="nav_components" />
 				</RippleNavLink>
-				<RippleNavLink to="/page-b" className="nav-item" activeClassName="active">
-					<div className="w-8 mr-1 text-center">
+				<RippleNavLink to="/page-b">
+					<div tw="w-8 mr-1 text-center">
 						<FontAwesomeIcon icon={faThList} />
 					</div>
 					<FormattedMessage id="nav_table" />
 				</RippleNavLink>
-				<RippleNavLink to="/page-c" className="nav-item" activeClassName="active">
-					<div className="w-8 mr-1 text-center">
+				<RippleNavLink to="/page-c">
+					<div tw="w-8 mr-1 text-center">
 						<FontAwesomeIcon icon={faInfinity} />
 					</div>
 					<FormattedMessage id="nav_virtual_list" />
 				</RippleNavLink>
-				<RippleNavLink to="/page-d" className="nav-item" activeClassName="active">
-					<div className="w-8 mr-1 text-center">
+				<RippleNavLink to="/page-d">
+					<div tw="w-8 mr-1 text-center">
 						<FontAwesomeIcon icon={faDiceD6} />
 					</div>
 					<FormattedMessage id="nav_transition" />
 				</RippleNavLink>
-				<RippleNavLink to="/page-e" className="nav-item" activeClassName="active">
-					<div className="w-8 mr-1 text-center">
+				<RippleNavLink to="/page-e">
+					<div tw="w-8 mr-1 text-center">
 						<FontAwesomeIcon icon={faDiceD20} />
 					</div>
 					<FormattedMessage id="nav_chart" />
 				</RippleNavLink>
-				<RippleNavLink to="/page-f" className="nav-item" activeClassName="active">
-					<div className="w-8 mr-1 text-center">
+				<RippleNavLink to="/page-f">
+					<div tw="w-8 mr-1 text-center">
 						<FontAwesomeIcon icon={faBox} />
 					</div>
 					<FormattedMessage id="nav_web_component" />
 				</RippleNavLink>
-				<RippleNavLink to="/page-g" className="nav-item" activeClassName="active">
-					<div className="w-8 mr-1 text-center">
+				<RippleNavLink to="/page-g">
+					<div tw="w-8 mr-1 text-center">
 						<FontAwesomeIcon icon={faCode} />
 					</div>
 					<FormattedMessage id="nav_editor" />
 				</RippleNavLink>
-				<RippleNavLink to="/page-h" className="nav-item" activeClassName="active">
-					<div className="w-8 mr-1 text-center">
+				<RippleNavLink to="/page-h">
+					<div tw="w-8 mr-1 text-center">
 						<FontAwesomeIcon icon={faCode} />
 					</div>
 					<FormattedMessage id="nav_carousel" />
 				</RippleNavLink>
-				<RippleNavLink to="/page-i" className="nav-item" activeClassName="active">
-					<div className="w-8 mr-1 text-center">
+				<RippleNavLink to="/page-i">
+					<div tw="w-8 mr-1 text-center">
 						<FontAwesomeIcon icon={faCode} />
 					</div>
 					<FormattedMessage id="nav_color_picker" />

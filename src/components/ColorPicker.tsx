@@ -1,7 +1,7 @@
 import React from "react"
 import chroma from "chroma-js"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faExchangeAlt } from "@fortawesome/free-solid-svg-icons/faExchangeAlt"
+import { css } from "@emotion/core"
+import tw from "twin.macro"
 
 function clamp(value: number, min: number, max: number) {
 	return Math.min(Math.max(value, min), max)
@@ -59,7 +59,7 @@ interface Props {
 	defaultValue?: string | chroma.Color
 }
 
-const ColorPicker = React.forwardRef<
+export default React.forwardRef<
 	HTMLDivElement,
 	Omit<React.HTMLAttributes<HTMLDivElement>, "onChange" | "defaultValue"> & Props
 >(({ onChange, defaultValue = chroma("#ff0000") }, ref) => {
@@ -100,7 +100,7 @@ const ColorPicker = React.forwardRef<
 				el.innerText = color.alpha(alpha).css("hsl")
 				break
 		}
-		const bg = chroma("#fff")
+		const bg = chroma(document.body.style.backgroundColor)
 		if (chroma.scale([bg, color])(alpha).luminance() > 0.5) {
 			result.current.style.setProperty("--result-text-color", "#1a202c")
 		} else {
@@ -116,11 +116,16 @@ const ColorPicker = React.forwardRef<
 		root.style.setProperty("--selected-color", c.hex())
 		const el = palette.current
 		const elRect = el.getBoundingClientRect()
-		root.style.setProperty("--palette-pointer-x", (elRect.width * c.get("hsv.s")).toString())
-		root.style.setProperty("--palette-pointer-y", (elRect.height * (1 - c.get("hsv.v"))).toString())
+		root.style.setProperty("--palette-marker-x", (elRect.width * c.get("hsv.s")).toString())
+		root.style.setProperty("--palette-marker-y", (elRect.height * (1 - c.get("hsv.v"))).toString())
 		root.style.setProperty("--hue-slider-y", ((h / 360) * elRect.height).toString())
 		root.style.setProperty("--selected-alpha", c.alpha().toString())
 		root.style.setProperty("--alpha-slider-y", (elRect.height * (1 - c.alpha())).toString())
+		const bg = chroma(document.body.style.backgroundColor)
+		root.style.setProperty(
+			"--color-picker-background",
+			bg.luminance() > 0.5 ? bg.darken(0.5).css() : bg.brighten(0.5).css(),
+		)
 		resultText.current.dataset["type"] = "hex"
 		updateText()
 	}, [picker, updateText, defaultValue])
@@ -131,17 +136,17 @@ const ColorPicker = React.forwardRef<
 		const elRect = el.getBoundingClientRect()
 		let x = clamp(e.clientX - elRect.left, 0, elRect.width)
 		if (e.ctrlKey) {
-			x = parseFloat(root.style.getPropertyValue("--palette-pointer-x"))
+			x = parseFloat(root.style.getPropertyValue("--palette-marker-x"))
 		}
 		let y = clamp(e.clientY - elRect.top, 0, elRect.height)
 		if (e.shiftKey) {
-			y = parseFloat(root.style.getPropertyValue("--palette-pointer-y"))
+			y = parseFloat(root.style.getPropertyValue("--palette-marker-y"))
 		}
 		const h = chroma(root.style.getPropertyValue("--selected-hue")).get("hsv.h")
 		const selectedColor = chroma.hsv(h, x / elRect.width, 1 - y / elRect.height)
 		root.style.setProperty("--selected-color", selectedColor.hex())
-		root.style.setProperty("--palette-pointer-x", x.toString())
-		root.style.setProperty("--palette-pointer-y", y.toString())
+		root.style.setProperty("--palette-marker-x", x.toString())
+		root.style.setProperty("--palette-marker-y", y.toString())
 		updateText()
 		onchange()
 	})
@@ -157,8 +162,8 @@ const ColorPicker = React.forwardRef<
 		root.style.setProperty("--hue-slider-y", y.toString())
 
 		const plRect = pl.getBoundingClientRect()
-		const px = root.style.getPropertyValue("--palette-pointer-x")
-		const py = root.style.getPropertyValue("--palette-pointer-y")
+		const px = root.style.getPropertyValue("--palette-marker-x")
+		const py = root.style.getPropertyValue("--palette-marker-y")
 		const c1 = chroma.mix("#fff", "#000", parseFloat(py) / plRect.height, "rgb")
 		const c2 = chroma.mix(selectedHue, "#000", parseFloat(py) / plRect.height, "rgb")
 		const selectedColor = chroma.mix(c1, c2, parseFloat(px) / plRect.width, "rgb")
@@ -200,38 +205,221 @@ const ColorPicker = React.forwardRef<
 	}
 
 	return (
-		<div ref={picker} className="color-picker" style={{ width: 460 }}>
-			<div ref={result} className="color-picker-result" style={{ height: 46 }}>
-				<div className="color-picker-alpha-bg1" />
-				<div className="color-picker-result-bg" />
-				<div className="absolute w-full h-full flex items-center justify-center select-text">
-					<div ref={resultText} className="px-1" />
-					<button className="px-2 rounded-lg focus:outline-none hover:text-gray-600" onClick={changeText}>
-						<FontAwesomeIcon icon={faExchangeAlt} />
+		<div
+			aria-label="color-picker"
+			ref={picker}
+			css={[
+				tw`p-3`,
+				css`
+					--selected-color: #ffffff;
+					--selected-hue: #ff0000;
+					--palette-marker-x: 0;
+					--palette-marker-y: 0;
+					--hue-slider-y: 0;
+					--alpha-slider-y: 0;
+					width: 460px;
+					box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 2px, rgba(0, 0, 0, 0.3) 0px 4px 8px;
+					background: var(--color-picker-background);
+				`,
+			]}
+		>
+			<div
+				aria-label="result"
+				ref={result}
+				css={[
+					tw`relative h-12`,
+					css`
+						color: var(--result-text-color);
+					`,
+				]}
+			>
+				<div
+					css={[
+						tw`w-full h-full absolute`,
+						css`
+							background-image: linear-gradient(45deg, #888 25%, transparent 25%),
+								linear-gradient(-45deg, #888 25%, transparent 25%),
+								linear-gradient(45deg, transparent 75%, #888 75%),
+								linear-gradient(-45deg, transparent 75%, #888 75%);
+							background-size: 16px 16px;
+							background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+						`,
+					]}
+				/>
+				<div
+					css={[
+						tw`w-full h-full absolute`,
+						css`
+							background: var(--selected-color);
+							opacity: var(--selected-alpha);
+						`,
+					]}
+				/>
+				<div css={tw`absolute w-full h-full flex items-center justify-center select-text`}>
+					<div ref={resultText} />
+					<button
+						onClick={changeText}
+						css={[
+							tw`px-2 rounded-lg`,
+							css`
+								:focus {
+									${tw`outline-none`}
+								}
+								:hover {
+									${tw`text-gray-600`}
+								}
+							`,
+						]}
+					>
+						<svg
+							id="i-options"
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 32 32"
+							width="16"
+							height="16"
+							fill="none"
+							stroke="currentcolor"
+							strokeLinecap="round"
+							strokeLinejoin="round"
+							strokeWidth="2"
+						>
+							<path d="M28 6 L4 6 M28 16 L4 16 M28 26 L4 26 M24 3 L24 9 M8 13 L8 19 M20 23 L20 29" />
+						</svg>
 					</button>
 				</div>
 			</div>
-			<div className="color-picker-controls" style={{ height: 300 }}>
-				<div ref={palette} className="color-picker-palette">
-					<div className="color-picker-palette-bg">
-						<div className="color-picker-palette-bg1" />
-						<div className="color-picker-palette-bg2" />
-						<div className="color-picker-palette-bg2" />
+			<div
+				aria-label="panel"
+				css={[
+					tw`mt-3 grid gap-3`,
+					css`
+						height: 300px;
+						grid-template-columns: 1fr 50px 50px;
+					`,
+				]}
+			>
+				<div aria-label="palette" css={tw`relative bg-white`} ref={palette}>
+					<div
+						css={[
+							tw`w-full h-full absolute`,
+							css`
+								background: var(--selected-hue);
+							`,
+						]}
+					>
+						<div
+							css={[
+								tw`w-full h-full absolute`,
+								css`
+									background: linear-gradient(to right, #fff 0%, transparent 100%);
+								`,
+							]}
+						/>
+						<div
+							css={[
+								tw`w-full h-full absolute`,
+								css`
+									background: linear-gradient(to bottom, transparent 0%, #000 100%);
+								`,
+							]}
+						/>
+						<div
+							css={[
+								tw`w-full h-full absolute`,
+								css`
+									background: linear-gradient(to bottom, transparent 0%, #000 100%);
+								`,
+							]}
+						/>
 					</div>
-					<div className="color-picker-palette-pointer" />
+					<div
+						aria-label="marker"
+						css={[
+							tw`absolute w-4 h-4 rounded-full`,
+							css`
+								border-color: #f7fafc;
+								background-color: var(--selected-color);
+								border-width: 2px;
+								transform: translate(
+									calc(var(--palette-marker-x, 0) * 1px - 8px),
+									calc(var(--palette-marker-y, 0) * 1px - 8px)
+								);
+							`,
+						]}
+					/>
 				</div>
-				<div ref={alpha} className="color-picker-alpha">
-					<div className="color-picker-alpha-bg1" />
-					<div className="color-picker-alpha-bg2" />
-					<div className="color-picker-alpha-slider" />
+				<div aria-label="alpha" ref={alpha} css={tw`relative h-full bg-white`}>
+					<div
+						css={[
+							tw`w-full h-full absolute`,
+							css`
+								background-image: linear-gradient(45deg, #888 25%, transparent 25%),
+									linear-gradient(-45deg, #888 25%, transparent 25%),
+									linear-gradient(45deg, transparent 75%, #888 75%),
+									linear-gradient(-45deg, transparent 75%, #888 75%);
+								background-size: 16px 16px;
+								background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+							`,
+						]}
+					/>
+					<div
+						css={[
+							tw`w-full h-full absolute`,
+							css`
+								background: linear-gradient(to bottom, var(--selected-color) 0%, transparent 100%);
+							`,
+						]}
+					/>
+					<div
+						aria-label="slider"
+						css={[
+							tw`absolute rounded-full`,
+							css`
+								border-color: #f7fafc;
+								border-width: 2px;
+								width: calc(100% + 4px);
+								left: -2px;
+								height: 10px;
+								transform: translate(0px, calc(var(--alpha-slider-y, 0) * 1px - 5px));
+							`,
+						]}
+					/>
 				</div>
-				<div ref={hue} className="color-picker-hue">
-					<div className="color-picker-hue-bg" />
-					<div className="color-picker-hue-slider" />
+				<div aria-label="hue" ref={hue} css={tw`relative bg-white`}>
+					<div
+						css={[
+							tw`w-full h-full absolute`,
+							css`
+								background: linear-gradient(
+									to bottom,
+									hsl(0, 100%, 50%),
+									hsl(60, 100%, 50%),
+									hsl(120, 100%, 50%),
+									hsl(180, 100%, 50%),
+									hsl(240, 100%, 50%),
+									hsl(300, 100%, 50%),
+									hsl(360, 100%, 50%)
+								);
+							`,
+						]}
+					/>
+					<div
+						aria-label="slider"
+						css={[
+							tw`absolute rounded-full`,
+							css`
+								border-color: #f7fafc;
+								background-color: var(--selected-hue);
+								border-width: 2px;
+								width: calc(100% + 4px);
+								left: -2px;
+								height: 10px;
+								transform: translate(0px, calc(var(--hue-slider-y, 0) * 1px - 5px));
+							`,
+						]}
+					/>
 				</div>
 			</div>
 		</div>
 	)
 })
-
-export default ColorPicker

@@ -1,4 +1,5 @@
 import React from "react"
+import { spinner } from "../styles"
 
 function useVisible(timeout = 0) {
 	const [visible, setVisible] = React.useState(false)
@@ -52,7 +53,7 @@ const PageE: React.FC = () => {
 					fallback={
 						<Loadable timeout={500}>
 							<div style={{ width, height: 600 }} className="relative p-6 flex justify-center">
-								<div className="spinner" />
+								<div css={spinner} />
 							</div>
 						</Loadable>
 					}

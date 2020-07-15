@@ -11,7 +11,7 @@ interface RootStoreType {
 }
 
 type DeepReadonly<T> = {
-	readonly [K in keyof T]: DeepReadonly<T[K]>
+	readonly [K in keyof T]: T[K] extends Record<string, unknown> ? DeepReadonly<T[K]> : T[K]
 }
 
 export type RootStore = DeepReadonly<RootStoreType>

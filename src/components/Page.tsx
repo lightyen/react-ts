@@ -1,22 +1,21 @@
 import React from "react"
-import { useTheme } from "~/store"
-import classnames from "classnames"
+import styled from "@emotion/styled"
 import { useScollBarVisible } from "./ScrollBar"
+import tw from "twin.macro"
 
-interface Props {
-	className?: string
-}
+const PageDetectScrollbar = styled.div<{ hasScrollbar: boolean }>`
+	${tw`m-3 p-3`}
+	${({ hasScrollbar }) => hasScrollbar && tw`mr-1`}
+	background-color: var(--theme-surface);
+	color: var(--theme-text-surface);
+`
 
-const Page: React.FC<Props> = ({ children, className }) => {
-	const {
-		surface: backgroundColor,
-		text: { surface: color },
-	} = useTheme()
-	const visible = useScollBarVisible()
+const Page: React.FC = ({ children, ...props }) => {
+	const hasScrollbar = useScollBarVisible()
 	return (
-		<div className={classnames("m-3 p-3", { "mr-1": visible }, className)} style={{ backgroundColor, color }}>
+		<PageDetectScrollbar hasScrollbar={hasScrollbar} {...props}>
 			{children}
-		</div>
+		</PageDetectScrollbar>
 	)
 }
 

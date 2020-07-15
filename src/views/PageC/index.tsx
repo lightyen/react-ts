@@ -4,6 +4,7 @@ import { FormattedMessage } from "react-intl"
 import { useVirtualScroll, useStay, VirtualItem, VirtualScrollProps } from "./useVirtualScroll"
 import { useScrollBarSource } from "~/components/ScrollBar"
 import Page from "~/components/Page"
+import { spinner } from "../styles"
 
 function outerHeight(target: HTMLElement) {
 	const marginTop = parseInt(document.defaultView.getComputedStyle(target).getPropertyValue("margin-top"))
@@ -110,7 +111,7 @@ const VirtualList: React.FC = () => {
 					{data.slice(start, end).map(({ ...style }, i) => (
 						<div key={start + i} className="flex flex-col items-center text-2xl pt-6" style={style}>
 							<div>{start + i}</div>
-							<div className="spinner" />
+							<div css={spinner} />
 						</div>
 					))}
 				</div>
@@ -214,8 +215,8 @@ const PageC: React.FC = () => {
 	const value = React.useMemo(() => ({ ...state, dispatch }), [state, dispatch])
 	return (
 		<MyContext.Provider value={value}>
-			<Page className="m-3 pt-3 px-3 pb-6 relative">
-				<h2 className="text-3xl mt-8 mb-5 font-black">
+			<Page tw="m-3 pt-3 px-3 pb-6 relative">
+				<h2 tw="text-3xl mt-8 mb-5 font-black">
 					<FormattedMessage id="nav_virtual_list" />
 				</h2>
 				<VirtualList />

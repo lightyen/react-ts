@@ -5,12 +5,14 @@ import { routes } from "~/routes"
 import { motion, AnimatePresence } from "framer-motion"
 import { Footer } from "./Footer"
 import { ScrollBar } from "~/components/ScrollBar"
+import { css } from "@emotion/core"
+import tw from "twin.macro"
 
 const ViewRoute: React.FC<RouteProps> = ({ component, ...props }) => {
 	const Component = component as React.ComponentType
 	return (
 		<motion.div
-			className="app-container"
+			tw="flex-grow h-full"
 			initial={{ opacity: 0, x: "1rem" }}
 			animate={{ opacity: 1, x: 0, transition: { duration: 0.15, ease: "easeInOut" } }}
 			exit={{ opacity: 0, transition: { duration: 0.15, ease: "easeInOut" } }}
@@ -51,11 +53,18 @@ export const AppContainer: React.FC<Props> = ({ headerHeight, sidebarWidth }) =>
 	const collapsed = useSelector(state => state.app.collapsed)
 	return (
 		<ScrollBar
-			className="app-main"
-			style={{
-				height: `calc(100vh - ${headerHeight}px)`,
-				marginLeft: collapsed ? 0 : sidebarWidth,
-			}}
+			css={[
+				tw`flex-grow flex flex-col overflow-x-hidden overflow-y-auto`,
+				css`
+					transition-property: color background;
+					transition-duration: 0.2s;
+					transition-timing-function: ease;
+				`,
+				{
+					height: `calc(100vh - ${headerHeight}px)`,
+					marginLeft: collapsed ? 0 : sidebarWidth,
+				},
+			]}
 		>
 			<article className="flex-grow flex flex-col">
 				<AppSwitch />

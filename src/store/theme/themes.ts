@@ -85,7 +85,8 @@ function setTheme(obj: Theme, prefix = "--theme") {
 	const root = document.documentElement
 	for (const key in obj) {
 		if (typeof obj[key] === "string") {
-			root.style.setProperty(prefix + "-" + key.toLowerCase(), obj[key])
+			const color = chroma(obj[key])
+			root.style.setProperty(prefix + "-" + key.toLowerCase(), color.rgb().join(","))
 		} else {
 			setTheme(obj[key], prefix + "-" + key.toLowerCase())
 		}
@@ -98,13 +99,16 @@ export function prepareTheme(name = "", cached = false) {
 	document.body.style.backgroundColor = theme.background
 	document.body.style.color = theme.text.background
 	const root = document.documentElement
-	root.style.setProperty("--theme-modal-cover-bg", chroma(theme.text.background).alpha(0.5).css())
-	root.style.setProperty("--theme-modal-shadow", chroma(theme.background).alpha(0.2).css())
-	root.style.setProperty("--theme-shadow", chroma(theme.text.background).alpha(0.2).css())
-	root.style.setProperty("--theme-shadow-ambient", chroma(theme.text.background).alpha(0.05).css())
+	root.style.setProperty("--theme-modal-cover-bg", chroma(theme.text.background).alpha(0.5).rgba().join(","))
+	root.style.setProperty("--theme-modal-shadow", chroma(theme.background).alpha(0.2).rgba().join(","))
+	root.style.setProperty("--theme-shadow", chroma(theme.text.background).alpha(0.2).rgba().join(","))
+	root.style.setProperty("--theme-shadow-ambient", chroma(theme.text.background).alpha(0.05).rgba().join(","))
 	const bg = chroma(theme.background)
 	const darkmode = bg.luminance() < 0.3
-	root.style.setProperty("--theme--color-picker-background", darkmode ? bg.brighten(0.5).css() : bg.darken(0.5).css())
+	root.style.setProperty(
+		"--theme--color-picker-background",
+		darkmode ? bg.brighten(0.5).rgb().join(",") : bg.darken(0.5).rgb().join(","),
+	)
 	cached && localStorage.setItem("theme", name)
 	return { ...theme, name: darkmode ? "dark" : "light" }
 }

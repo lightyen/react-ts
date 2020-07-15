@@ -1,33 +1,26 @@
 import React from "react"
-import styled from "styled-components"
+import styled from "@emotion/styled"
 import { useTheme } from "~/store"
+import tw from "twin.macro"
 
 interface CustomScrollBarProps {
 	color: string
-	background: string
-	/** The width of scrollbar thumb */
 	width?: number
 	padding?: number
 }
 
 // https://css-tricks.com/custom-scrollbars-in-webkit/
-const CustomScrollBar = styled.div.attrs(({ className, style, ...props }) => ({
-	width: 6,
-	padding: 4,
-	...props,
-}))<CustomScrollBarProps>`
-	color: transparent;
-	overflow-x: hidden;
-	overflow-y: auto;
+const CustomScrollBar = styled.div`
+	${tw`text-transparent overflow-x-hidden overflow-y-auto`}
 	overflow-anchor: none;
 
 	::-webkit-scrollbar {
-		width: ${({ width, padding }) => width + padding * 2}px;
+		width: ${({ width, padding }: CustomScrollBarProps) => width + padding * 2}px;
 		height: ${({ width, padding }) => width + padding * 2}px;
-		background: ${({ background }) => background};
+		background: rgb(var(--theme-background));
 	}
 	::-webkit-scrollbar-corner {
-		background: ${({ background }) => background};
+		background: rgb(var(--theme-background));
 	}
 
 	::-webkit-scrollbar-track {
@@ -84,8 +77,6 @@ export function useScrollTop({ scrollbar }: { scrollbar: HTMLElement }) {
 }
 
 interface ScrollBarProps {
-	className?: string
-	style?: React.CSSProperties
 	top?: number
 }
 
@@ -150,6 +141,8 @@ export const ScrollBar: React.FC<ScrollBarProps> = ({ children, ...props }) => {
 	return (
 		<CustomScrollBar
 			ref={ref}
+			width={6}
+			padding={4}
 			onMouseDown={() => {
 				window.clearTimeout(tick.current)
 				setThumbColor(color)
@@ -162,12 +155,11 @@ export const ScrollBar: React.FC<ScrollBarProps> = ({ children, ...props }) => {
 				}, 3000)
 			}}
 			color={thumbColor}
-			background={background}
 			{...props}
 		>
 			{handle && (
 				<ScrollBarContext.Provider value={handle}>
-					<div className="flex-grow flex flex-col" style={{ color }}>
+					<div tw="flex-grow flex flex-col" style={{ color }}>
 						<ScrollBarVisibleContext.Provider value={visible}>{children}</ScrollBarVisibleContext.Provider>
 					</div>
 				</ScrollBarContext.Provider>

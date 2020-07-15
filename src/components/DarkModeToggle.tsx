@@ -3,15 +3,17 @@ import React from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSun } from "@fortawesome/free-solid-svg-icons/faSun"
 import { faMoon } from "@fortawesome/free-solid-svg-icons/faMoon"
-import { useTheme, useAction, useSelector } from "~/store"
+import { useAction, useSelector } from "~/store"
+import { v4 as uuidv4 } from "uuid"
 
-import styled from "styled-components"
+import styled from "@emotion/styled"
+import tw from "twin.macro"
 
-const Check = styled.input.attrs(props => ({ ...props, type: "checkbox", id: "toggle" }))`
+const Check = styled.input`
 	display: none;
 `
 
-const Slider = styled.label.attrs(props => ({ ...props, htmlFor: "toggle" }))`
+const Slider = styled.label`
 	width: 3.6rem;
 	height: 1.5rem;
 	border-radius: 9999px;
@@ -62,23 +64,25 @@ const Slider = styled.label.attrs(props => ({ ...props, htmlFor: "toggle" }))`
 `
 
 const DarkModeToggle: React.FC = () => {
-	const { name } = useTheme()
+	const name = useSelector(state => state.theme.name)
 	const { changeTheme } = useAction().theme
+	const uuid = React.useRef(uuidv4())
 
 	const bk = useSelector(state => state.app.breakpoint)
 	const hide = bk == "xs" || bk == "sm"
 	if (hide) {
 		return null
 	}
+
 	return (
-		<div className="relative">
+		<div css={tw`relative`}>
 			<Check
+				id={uuid.current}
+				type="checkbox"
 				defaultChecked={name == "dark"}
-				onChange={e => {
-					changeTheme({ name: e.target.checked ? "dark" : "light", cached: false })
-				}}
+				onChange={e => changeTheme({ name: e.target.checked ? "dark" : "light", cached: false })}
 			/>
-			<Slider>
+			<Slider htmlFor={uuid.current}>
 				<FontAwesomeIcon icon={faMoon} />
 				<FontAwesomeIcon icon={faSun} />
 			</Slider>

@@ -1,6 +1,6 @@
 # react-ts
 
-This is a template for react with typescript, include many useful tools. For example: redux, tailwindcss, styled-components ...
+This is a template for react with typescript, include many useful tools. For example: redux, tailwindcss, ...
 
 ## Prepare your environment
 

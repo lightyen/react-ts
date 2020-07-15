@@ -7,24 +7,19 @@ import { FormattedMessage } from "react-intl"
 import { supports } from "~/store/i18n/languages"
 import { entries } from "~/type-safed"
 
-import styled, { ThemedStyledProps } from "styled-components"
-import { ThemeStore } from "~/store/theme/reducer"
+import styled from "@emotion/styled"
+import { css } from "@emotion/core"
+import tw from "twin.macro"
 
-type Props = ThemedStyledProps<
-	{
-		/** */
-	},
-	ThemeStore
->
+// background: ${({ theme }: Props) => (theme.name == "dark" ? "#183622" : "#c1f7d4")};
+// :hover {
+// 	opacity: 1;
+// 	background: ${({ theme }: Props) => (theme.name == "dark" ? "#21422c" : "#aae6bf")};
+// }
 
 const Button = styled.button`
 	opacity: 0.8;
 	transition: all 200ms ease;
-	background: ${({ theme }: Props) => (theme.name == "dark" ? "#183622" : "#c1f7d4")};
-	:hover {
-		opacity: 1;
-		background: ${({ theme }: Props) => (theme.name == "dark" ? "#21422c" : "#aae6bf")};
-	}
 `
 
 const LanguageSelect: React.FC = () => {
@@ -58,7 +53,12 @@ const LanguageSelect: React.FC = () => {
 				{spread && (
 					<motion.ul
 						ref={ul}
-						className="language-menu z-10"
+						css={[
+							tw`absolute right-0 shadow-lg z-10`,
+							css`
+								top: 1.5rem;
+							`,
+						]}
 						initial={{ opacity: 0, scaleY: 0.2, translateY: -20 }}
 						animate={{
 							opacity: 1,
@@ -74,7 +74,21 @@ const LanguageSelect: React.FC = () => {
 						}}
 					>
 						{entries(supports).map(([locale, value]) => (
-							<li key={locale} className="language-item" onClick={() => setLocale({ locale })}>
+							<li
+								key={locale}
+								css={[
+									tw`border border-gray-500 px-8 py-2 text-center cursor-pointer whitespace-no-wrap select-none`,
+									css`
+										background: rgb(var(--theme-secondary));
+										color: rgb(var(--theme-text-secondary));
+										:hover {
+											background: rgb(var(--theme-hover-secondary));
+											${tw`underline`}
+										}
+									`,
+								]}
+								onClick={() => setLocale({ locale })}
+							>
 								{value}
 							</li>
 						))}

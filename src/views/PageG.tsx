@@ -19,6 +19,49 @@ import "codemirror/mode/css/css"
 import Page from "~/components/Page"
 import { FormattedMessage } from "react-intl"
 
+import "codemirror/lib/codemirror.css"
+import "codemirror/theme/dracula.css"
+
+import { Global, css } from "@emotion/core"
+import tw from "twin.macro"
+
+const globalStyle = css`
+	.CodeMirror {
+		font-family: Fira Code, Roboto, Helvetica Neue, Helvetica, Arial, PingFang TC, 黑體-繁, Heiti TC, 蘋果儷中黑,
+			Apple LiGothic Medium, 微軟正黑體, Microsoft JhengHei, sans-serif;
+		${tw`bg-gray-300 text-gray-900 h-auto text-base`}
+	}
+
+	.CodeMirror-selected {
+		/* background: #96dfcf !important; */
+	}
+
+	.CodeMirror-lines {
+		/* @apply p-0; */
+	}
+
+	.CodeMirror pre.CodeMirror-line,
+	.CodeMirror pre.CodeMirror-line-like {
+		${tw`px-2`}
+	}
+
+	.cm-tab {
+		position: relative;
+	}
+	.cm-tab::before {
+		content: "";
+		height: 100%;
+		position: absolute;
+		border-right: 1px solid #424242;
+	}
+	.cm-tab::after {
+		position: absolute;
+		left: 2px;
+		content: "→";
+		color: #424242;
+	}
+`
+
 interface MyProps {
 	options?: EditorConfiguration
 	onChange?: (value: string) => void
@@ -27,7 +70,7 @@ interface MyProps {
 type Textarea = Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, "onChange">
 type Props = Textarea & MyProps
 
-const CodeMirror = forwardRef<Editor, Props>(({ options, className, style, onChange, ...props }, ref) => {
+const CodeMirror = forwardRef<Editor, Props>(({ options, onChange, css, ...props }, ref) => {
 	const textareaRef = useRef<HTMLTextAreaElement>()
 	const editorRef = useRef<EditorFromTextArea>()
 	useImperativeHandle<Partial<Editor>, Partial<Editor>>(ref, () => ({
@@ -57,15 +100,18 @@ const CodeMirror = forwardRef<Editor, Props>(({ options, className, style, onCha
 	}, [onChange])
 
 	return (
-		<div className={className} style={style}>
-			<textarea
-				ref={textareaRef}
-				{...props}
-				onChange={e => {
-					// no code
-				}}
-			/>
-		</div>
+		<>
+			<Global styles={globalStyle} />
+			<div css={css}>
+				<textarea
+					ref={textareaRef}
+					{...props}
+					onChange={e => {
+						// no code
+					}}
+				/>
+			</div>
+		</>
 	)
 })
 
@@ -90,11 +136,10 @@ const Card: React.FC = () => {
 
 	return (
 		<Page>
-			<h2 className="text-3xl mt-8 mb-2 font-black capitalize">
+			<h2 tw="text-3xl mt-8 mb-2 font-black capitalize">
 				<FormattedMessage id="nav_editor" />
 			</h2>
 			<CodeMirror
-				id="hehehe"
 				ref={ref}
 				options={{
 					lineNumbers: true,

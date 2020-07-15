@@ -2,11 +2,8 @@
 /* https://tailwindcss.com/docs/functions-and-directives/ */
 
 @import "tailwindcss/base";
-@import "./custom/_variables.css";
-@import "./custom/_base.css";
 
 @import "tailwindcss/components";
 @import "./custom/_components.css";
 
-@import "tailwindcss/utilities";
 @import "./custom/_utilities.css";
