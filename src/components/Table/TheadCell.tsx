@@ -62,7 +62,6 @@ function SortIcon({ type }: { type: SortType }) {
 }
 
 export const TheadCell: React.FC<Props> = ({ children, hide, sortType, onClick, css }) => {
-	console.log(css)
 	if (sortType) {
 		return (
 			<th
@@ -71,7 +70,7 @@ export const TheadCell: React.FC<Props> = ({ children, hide, sortType, onClick, 
 						transition: all ease 0.16s;
 					`,
 					hide && tw`hidden`,
-					tw`text-gray-900 bg-white whitespace-no-wrap box-border px-3 py-2 border whitespace-no-wrap`,
+					tw`text-gray-900 bg-white whitespace-no-wrap box-border p-3 whitespace-no-wrap`,
 					tw`select-none hover:bg-gray-300 cursor-pointer`,
 					css,
 				]}
@@ -95,7 +94,7 @@ export const TheadCell: React.FC<Props> = ({ children, hide, sortType, onClick, 
 				css={[
 					css,
 					hide && tw`hidden`,
-					tw`text-gray-900 bg-white whitespace-no-wrap box-border px-3 py-2 border whitespace-no-wrap`,
+					tw`text-gray-900 bg-white whitespace-no-wrap box-border p-3 whitespace-no-wrap`,
 				]}
 			>
 				{children}

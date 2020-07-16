@@ -192,7 +192,7 @@ const Information: React.FC<VirtualScrollProps> = ({ scrollTop, start, end, accH
 				<Button variant="blue" onClick={e => changeData(createData())}>
 					Create
 				</Button>
-				<div>Items: {accHeights.length}</div>
+				<div tw="mt-3">Items: {accHeights.length}</div>
 				<div>ScrollTop: {scrollTop}px</div>
 				<div>Start: {start}</div>
 				<div>End: {end}</div>

@@ -10,6 +10,7 @@ import { entries } from "~/type-safed"
 import styled from "@emotion/styled"
 import { css } from "@emotion/core"
 import tw from "twin.macro"
+import { useSelector } from "~/store"
 
 // background: ${({ theme }: Props) => (theme.name == "dark" ? "#183622" : "#c1f7d4")};
 // :hover {
@@ -27,6 +28,7 @@ const LanguageSelect: React.FC = () => {
 	const { setLocale } = useAction().i18n
 	const button = React.useRef<HTMLButtonElement>()
 	const ul = React.useRef<HTMLUListElement>()
+	const darkmode = useSelector(state => state.theme.name == "dark")
 
 	React.useEffect(() => {
 		const btn = button.current
@@ -45,6 +47,17 @@ const LanguageSelect: React.FC = () => {
 			<Button
 				ref={button}
 				tw="cursor-pointer select-none rounded-lg px-3 focus:outline-none hover:underline"
+				css={[
+					css`
+						:hover {
+							opacity: 1;
+							background: ${darkmode ? "#21422c" : "#aae6bf"};
+						}
+					`,
+					{
+						backgroundColor: darkmode ? "#183622" : "#c1f7d4",
+					},
+				]}
 				onClick={() => setSpread(true)}
 			>
 				<FontAwesomeIcon icon={faLanguage} /> <FormattedMessage id="language" />

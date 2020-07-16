@@ -37,7 +37,7 @@ const globalStyle = css`
 	}
 
 	.CodeMirror-lines {
-		/* @apply p-0; */
+		/* ${tw`p-0`} */
 	}
 
 	.CodeMirror pre.CodeMirror-line,

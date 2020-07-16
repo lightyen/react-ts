@@ -8,7 +8,7 @@ import { Global, css } from "@emotion/core"
 import tw from "twin.macro"
 
 import "~/fonts.css"
-import "tailwindcss/dist/base.css"
+import "tailwindcss/dist/base.min.css"
 
 const globalStyle = css`
 	body {
