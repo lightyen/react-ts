@@ -110,7 +110,7 @@ const PageA: React.FC = () => {
 				<FormattedMessage id="modal" />
 			</h3>
 			<div tw="mb-6">
-				<RippleButton tw="mr-3" onClick={e => setOpen(true)}>
+				<RippleButton variant="blue" tw="mr-3" onClick={e => setOpen(true)}>
 					<FormattedMessage id="modal" />
 				</RippleButton>
 				<Modal open={open} onMouseDownOutside={e => setOpen(false)}>
@@ -135,7 +135,7 @@ const PageA: React.FC = () => {
 						</div>
 					</div>
 				</Modal>
-				<RippleButton variant="green" onClick={e => setOpen2(true)}>
+				<RippleButton onClick={e => setOpen2(true)}>
 					<FormattedMessage id="modal" />
 				</RippleButton>
 				<Modal tw="w-3/4" open={open2} exitAnime={false} onMouseDownOutside={e => setOpen2(false)}>

@@ -268,7 +268,7 @@ function TableLayout<T>({
 					</thead>
 					<tbody
 						css={css`
-							tr:nth-child(odd) > td {
+							tr:nth-of-type(odd) > td {
 								${tw`bg-gray-300`}
 							}
 							tr:hover > td {

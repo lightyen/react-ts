@@ -77,16 +77,6 @@ export const CustomDateRangePicker: React.FC<Props> = ({ range, onChange, ...pro
 			endDate: subDays(et, 1),
 		},
 		{
-			label: intl.formatRelativeTime(-7, "day", { numeric: "auto" }),
-			startDate: subDays(st, 6),
-			endDate: et,
-		},
-		{
-			label: intl.formatRelativeTime(-30, "day", { numeric: "auto" }),
-			startDate: subDays(st, 29),
-			endDate: et,
-		},
-		{
 			label: intl.formatRelativeTime(0, "week", { numeric: "auto" }),
 			startDate: startOfWeek(st),
 			endDate: endOfWeek(et),

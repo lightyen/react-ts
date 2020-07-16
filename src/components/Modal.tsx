@@ -118,7 +118,7 @@ const ModalContent: React.FC<ModalContentProps> = ({ children, onMouseDownOutsid
 
 	return (
 		<motion.div
-			css={{ height: "100%" }}
+			css={{ height: "100%", backdropFilter: "blur(1px)" }}
 			initial={{ opacity: 0 }}
 			animate={{ opacity: 1 }}
 			exit={exitAnime ? { opacity: 0 } : undefined}

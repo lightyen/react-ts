@@ -25,7 +25,7 @@ const Button = styled.button<ButtonProps>(({ variant = "gray" }) => {
 				}
 				:hover {
 					box-shadow: 0 0 0 3px rgba(160, 174, 192, 0.5);
-					${tw`bg-gray-500`}
+					${tw`bg-gray-600`}
 				}
 			`,
 		variant === "blue" &&

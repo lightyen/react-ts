@@ -62,7 +62,7 @@ interface Props {
 export default React.forwardRef<
 	HTMLDivElement,
 	Omit<React.HTMLAttributes<HTMLDivElement>, "onChange" | "defaultValue"> & Props
->(({ onChange, defaultValue = chroma("#ff0000") }, ref) => {
+>(({ onChange, defaultValue = "#ff0000" }, ref) => {
 	const picker = useCombinedRefs(React.useRef<HTMLDivElement>(), ref)
 	const palette = React.useRef<HTMLDivElement>()
 	const alpha = React.useRef<HTMLDivElement>()

@@ -99,12 +99,14 @@ export function prepareTheme(name = "", cached = false) {
 	document.body.style.backgroundColor = theme.background
 	document.body.style.color = theme.text.background
 	const root = document.documentElement
-	root.style.setProperty("--theme-modal-cover-bg", chroma(theme.text.background).alpha(0.5).rgba().join(","))
+	const bg = chroma(theme.background)
+	const darkmode = bg.luminance() < 0.3
+	const cover = darkmode ? bg.brighten(3).alpha(0.5) : bg.darken(3).alpha(0.5)
+	root.style.setProperty("--theme-modal-cover-bg", cover.rgba().join(","))
 	root.style.setProperty("--theme-modal-shadow", chroma(theme.background).alpha(0.2).rgba().join(","))
 	root.style.setProperty("--theme-shadow", chroma(theme.text.background).alpha(0.2).rgba().join(","))
 	root.style.setProperty("--theme-shadow-ambient", chroma(theme.text.background).alpha(0.05).rgba().join(","))
-	const bg = chroma(theme.background)
-	const darkmode = bg.luminance() < 0.3
+
 	root.style.setProperty(
 		"--theme--color-picker-background",
 		darkmode ? bg.brighten(0.5).rgb().join(",") : bg.darken(0.5).rgb().join(","),

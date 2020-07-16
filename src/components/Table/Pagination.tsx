@@ -30,10 +30,10 @@ const PageLink = styled.button<{ active?: boolean; disabled?: boolean }>`
 const PageLinkItem = styled.li`
 	min-width: 33px;
 	${tw`flex overflow-hidden`}
-	:first-child {
+	:first-of-type {
 		${tw`rounded-l`}
 	}
-	:last-child {
+	:last-of-type {
 		${tw`rounded-r`}
 	}
 `
