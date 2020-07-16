@@ -66,7 +66,7 @@ export const AppContainer: React.FC<Props> = ({ headerHeight, sidebarWidth }) =>
 				},
 			]}
 		>
-			<article className="flex-grow flex flex-col">
+			<article tw="flex-grow flex flex-col">
 				<AppSwitch />
 			</article>
 			<Footer />

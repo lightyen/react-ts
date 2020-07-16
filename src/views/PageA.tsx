@@ -7,96 +7,10 @@ import { Modal } from "~/components/Modal"
 import { startOfDay, endOfDay, subDays } from "date-fns"
 import { CustomDateRangePicker, DateRange } from "~/components/DateRangePicker/DateRangePicker"
 import { PromptModal } from "~/components/PromptModal"
-import { useRipple } from "~/components/Button/hooks"
+import { RippleButton } from "~/components/Button"
 import Page from "~/components/Page"
 import tw from "twin.macro"
-import styled from "@emotion/styled"
 import { css } from "@emotion/core"
-
-interface ButtonProps {
-	variant?: "gray" | "blue" | "green" | "orange" | "red"
-	onClick?: (e: React.MouseEvent) => void
-}
-
-const StyledButton = styled.button<ButtonProps>(({ variant = "gray" }) => {
-	return [
-		css`
-			transition-property: background-color, box-shadow;
-			transition-duration: 200ms;
-			transition-timing-function: ease;
-		`,
-		tw`py-3 px-6 rounded text-white leading-none relative overflow-hidden`,
-		variant === "gray" &&
-			css`
-				${tw`bg-gray-700 text-white`}
-				:focus {
-					box-shadow: 0 0 0 3px rgba(160, 174, 192, 0.5);
-					${tw`outline-none`}
-				}
-				:hover {
-					box-shadow: 0 0 0 3px rgba(160, 174, 192, 0.5);
-					${tw`bg-gray-500`}
-				}
-			`,
-		variant === "blue" &&
-			css`
-				${tw`bg-blue-500 text-white`}
-				:focus {
-					box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
-					${tw`outline-none`}
-				}
-				:hover {
-					box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
-					${tw`bg-blue-600`}
-				}
-			`,
-		variant === "green" &&
-			css`
-				${tw`bg-green-500 text-white`}
-				:focus {
-					box-shadow: 0 0 0 3px rgba(72, 187, 120, 0.5);
-					${tw`outline-none`}
-				}
-				:hover {
-					box-shadow: 0 0 0 3px rgba(72, 187, 120, 0.5);
-					${tw`bg-green-600`}
-				}
-			`,
-		variant === "orange" &&
-			css`
-				${tw`bg-orange-500 text-white`}
-				:focus {
-					box-shadow: 0 0 0 3px rgba(237, 137, 54, 0.5);
-					${tw`outline-none`}
-				}
-				:hover {
-					box-shadow: 0 0 0 3px rgba(237, 137, 54, 0.5);
-					${tw`bg-orange-600`}
-				}
-			`,
-		variant === "red" &&
-			css`
-				${tw`bg-red-500 text-white`}
-				:focus {
-					box-shadow: 0 0 0 3px rgba(245, 101, 101, 0.5);
-					${tw`outline-none`}
-				}
-				:hover {
-					box-shadow: 0 0 0 3px rgba(245, 101, 101, 0.5);
-					${tw`bg-red-600`}
-				}
-			`,
-	]
-})
-
-const Button: React.FC<ButtonProps> = ({ children, ...props }) => {
-	const ref = useRipple<HTMLButtonElement>()
-	return (
-		<StyledButton ref={ref} {...props}>
-			{children}
-		</StyledButton>
-	)
-}
 
 const PageA: React.FC = () => {
 	const [dateRange, setDateRange] = React.useState<DateRange>(() => {
@@ -117,28 +31,44 @@ const PageA: React.FC = () => {
 				<FormattedMessage id="button" />
 			</h3>
 			<div tw="-mb-2">
-				<Button tw="inline-block mr-2 mb-2">
+				<RippleButton tw="inline-block mr-2 mb-2">
 					<FormattedMessage id="button" />
-				</Button>
-				<Button variant="blue" tw="inline-block mr-2 mb-2">
+				</RippleButton>
+				<RippleButton variant="blue" tw="inline-block mr-2 mb-2">
 					<FormattedMessage id="button" />
-				</Button>
-				<Button variant="green" tw="inline-block mr-2 mb-2">
+				</RippleButton>
+				<RippleButton variant="green" tw="inline-block mr-2 mb-2">
 					<FormattedMessage id="button" />
-				</Button>
-				<Button variant="red" tw="inline-block mr-2 mb-2">
+				</RippleButton>
+				<RippleButton variant="red" tw="inline-block mr-2 mb-2">
 					<FormattedMessage id="button" />
-				</Button>
-				<Button variant="orange" tw="inline-block mr-2 mb-2">
+				</RippleButton>
+				<RippleButton variant="orange" tw="inline-block mr-2 mb-2">
 					<FontAwesomeIcon tw="mr-2" icon={faBars} />
 					<FormattedMessage id="button" />
-				</Button>
+				</RippleButton>
 			</div>
 			<h3 tw="text-xl mt-6 mb-3 font-bold capitalize">
 				<FormattedMessage id="date_range_picker" />
 			</h3>
 			<div tw="mb-6">
-				<CustomDateRangePicker tw="font-normal capitalize" range={dateRange} onChange={e => setDateRange(e)} />
+				<CustomDateRangePicker
+					tw="font-normal capitalize py-2 px-3 rounded"
+					css={css`
+						${tw`bg-blue-500 text-white`}
+						transition: all 200ms ease;
+						:focus {
+							box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+							${tw`outline-none`}
+						}
+						:hover {
+							box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+							${tw`bg-blue-600`}
+						}
+					`}
+					range={dateRange}
+					onChange={e => setDateRange(e)}
+				/>
 			</div>
 			<h3 tw="text-xl mt-6 mb-3 font-bold capitalize">
 				<FormattedMessage id="card" />
@@ -180,9 +110,9 @@ const PageA: React.FC = () => {
 				<FormattedMessage id="modal" />
 			</h3>
 			<div tw="mb-6">
-				<Button tw="mr-3" onClick={e => setOpen(true)}>
+				<RippleButton tw="mr-3" onClick={e => setOpen(true)}>
 					<FormattedMessage id="modal" />
-				</Button>
+				</RippleButton>
 				<Modal open={open} onMouseDownOutside={e => setOpen(false)}>
 					<div tw="px-6 my-3">
 						<div tw="mt-4 mb-2">
@@ -192,7 +122,7 @@ const PageA: React.FC = () => {
 						</div>
 						<div tw="h-12 mb-3">bla bla bla...</div>
 						<div tw="mb-3 flex justify-end">
-							<Button
+							<RippleButton
 								variant="blue"
 								onClick={e => {
 									e.preventDefault()
@@ -201,13 +131,13 @@ const PageA: React.FC = () => {
 								}}
 							>
 								<FormattedMessage id="ok" />
-							</Button>
+							</RippleButton>
 						</div>
 					</div>
 				</Modal>
-				<Button variant="green" onClick={e => setOpen2(true)}>
+				<RippleButton variant="green" onClick={e => setOpen2(true)}>
 					<FormattedMessage id="modal" />
-				</Button>
+				</RippleButton>
 				<Modal tw="w-3/4" open={open2} exitAnime={false} onMouseDownOutside={e => setOpen2(false)}>
 					<div tw="px-6 my-3">
 						<div tw="mt-4 mb-2">
@@ -217,7 +147,7 @@ const PageA: React.FC = () => {
 						</div>
 						<div tw="h-12 mb-3">ha ha ha...</div>
 						<div tw="mb-3 flex justify-end">
-							<Button
+							<RippleButton
 								variant="green"
 								tw="flex items-center"
 								onClick={e => {
@@ -243,7 +173,7 @@ const PageA: React.FC = () => {
 								<span tw="pl-2">
 									<FormattedMessage id="ok" />
 								</span>
-							</Button>
+							</RippleButton>
 						</div>
 					</div>
 				</Modal>

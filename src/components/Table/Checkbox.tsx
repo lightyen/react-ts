@@ -1,7 +1,6 @@
-import React from "react"
 import styled from "@emotion/styled"
 
-const Input = styled.input`
+export const Checkbox = styled.input`
 	display: flex;
 	appearance: none;
 	width: 1rem;
@@ -21,24 +20,3 @@ const Input = styled.input`
 		box-shadow: 0 0 2px 3px #7cbff7;
 	}
 `
-
-interface Props {
-	checked?: boolean
-	onChecked?(c: boolean): void
-	className?: string
-	style?: React.CSSProperties
-}
-
-export const CheckBox: React.FC<Props> = ({ className, style, checked, onChecked }) => {
-	return (
-		<Input
-			type="checkbox"
-			style={style}
-			className={className}
-			checked={checked}
-			onChange={e => {
-				onChecked && onChecked(e.target.checked)
-			}}
-		/>
-	)
-}

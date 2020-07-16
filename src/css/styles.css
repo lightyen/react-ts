@@ -1,9 +1,0 @@
-/* https://tailwindcss.com/docs/using-with-preprocessors/ */
-/* https://tailwindcss.com/docs/functions-and-directives/ */
-
-@import "tailwindcss/base";
-
-@import "tailwindcss/components";
-@import "./custom/_components.css";
-
-@import "tailwindcss/utilities";

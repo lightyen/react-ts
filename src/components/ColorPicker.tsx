@@ -219,7 +219,7 @@ export default React.forwardRef<
 					--alpha-slider-y: 0;
 					width: 460px;
 					box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 2px, rgba(0, 0, 0, 0.3) 0px 4px 8px;
-					background: var(--color-picker-background);
+					background: rgb(var(--color-picker-background));
 				`,
 			]}
 		>

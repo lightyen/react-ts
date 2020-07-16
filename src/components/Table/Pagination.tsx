@@ -1,5 +1,6 @@
 import React from "react"
-import classnames from "classnames"
+import styled from "@emotion/styled"
+import tw from "twin.macro"
 
 interface PaginationProps {
 	pageIndex: number
@@ -14,19 +15,40 @@ interface PaginationProps {
 	disablePrevious: boolean
 }
 
+const PageLink = styled.button<{ active?: boolean; disabled?: boolean }>`
+	${tw`w-full select-none rounded-none cursor-pointer py-1 px-3 text-blue-500`}
+	:hover {
+		${tw`bg-blue-300 text-gray-100`}
+	}
+	:focus {
+		${tw`outline-none`}
+	}
+	${({ active }) => active && tw`bg-blue-500 text-gray-100`}
+	${({ disabled }) => disabled && tw`text-gray-500 bg-gray-100 cursor-not-allowed`}
+`
+
+const PageLinkItem = styled.li`
+	min-width: 33px;
+	${tw`flex overflow-hidden`}
+	:first-child {
+		${tw`rounded-l`}
+	}
+	:last-child {
+		${tw`rounded-r`}
+	}
+`
+
 interface PageItemProps {
 	active?: boolean
 	disabled?: boolean
 	onClick?(): void
 }
 
-const PageItem: React.FC<PageItemProps> = ({ children, active, disabled, onClick }) => {
+const PageItem: React.FC<PageItemProps> = ({ children, ...props }) => {
 	return (
-		<li className="page-item">
-			<button className={classnames("page-link", { active, disabled })} onClick={() => onClick && onClick()}>
-				{children}
-			</button>
-		</li>
+		<PageLinkItem>
+			<PageLink {...props}>{children}</PageLink>
+		</PageLinkItem>
 	)
 }
 
@@ -43,7 +65,7 @@ export const Pagination: React.FC<PaginationProps> = ({
 	disablePrevious,
 }) => {
 	return (
-		<ul className="flex mb-3 md:mb-0">
+		<ul tw="flex mb-3 md:mb-0">
 			<PageItem disabled={disablePrevious} onClick={() => gotoPage(0)}>
 				&laquo;
 			</PageItem>

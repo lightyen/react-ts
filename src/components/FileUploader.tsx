@@ -1,5 +1,6 @@
 import React from "react"
 import { v4 as uuidv4 } from "uuid"
+import "twin.macro"
 
 interface FileSystemEntry {
 	filesystem: unknown
@@ -74,11 +75,11 @@ const FileUploader: React.FC = () => {
 		el.setAttribute("directory", "")
 	}, [])
 	return (
-		<div className="flex">
+		<div tw="flex">
 			<input
 				ref={inputRef}
 				type="file"
-				className="hidden"
+				tw="hidden"
 				id={uuid.current}
 				multiple
 				onChange={e => {
@@ -89,9 +90,9 @@ const FileUploader: React.FC = () => {
 				}}
 			/>
 			<label
-				className="bg-gray-300"
+				tw="bg-gray-300"
 				htmlFor={uuid.current}
-				style={{ width: 500, height: 320 }}
+				css={{ width: 500, height: 320 }}
 				onDragOver={e => e.preventDefault()}
 				onDrop={e => {
 					e.preventDefault()

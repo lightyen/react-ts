@@ -3,13 +3,14 @@ import { motion, useMotionValue, useTransform } from "framer-motion"
 import chroma from "chroma-js"
 import Page from "~/components/Page"
 import { FormattedMessage } from "react-intl"
+import "twin.macro"
 
 const colors = ["#48bb78", "#4299e1", "#f56565", "#ed8936", "#9f7aea"]
 
 const PageH: React.FC = () => {
 	return (
 		<Page>
-			<h2 className="text-3xl mt-8 mb-2 font-black capitalize">
+			<h2 tw="text-3xl mt-8 mb-2 font-black capitalize">
 				<FormattedMessage id="nav_carousel" />
 			</h2>
 			<Carousel />
@@ -84,7 +85,7 @@ const Carousel: React.FC = () => {
 	return (
 		<motion.div
 			ref={viewport}
-			className="relative text-center select-none overflow-hidden"
+			tw="relative text-center select-none overflow-hidden"
 			style={{
 				background,
 				color,
@@ -97,7 +98,7 @@ const Carousel: React.FC = () => {
 			{index}
 			<motion.div
 				ref={container}
-				className="absolute flex"
+				tw="absolute flex"
 				style={{
 					top: "30%",
 					left: -(index * width),
@@ -133,8 +134,8 @@ const Carousel: React.FC = () => {
 				{colors.map((c, i) => (
 					<div
 						key={i}
-						className="text-center shadow-lg font-bold text-2xl"
-						style={{
+						tw="text-center shadow-lg font-bold text-2xl"
+						css={{
 							width: `calc(100% / ${colors.length})`,
 							height: "16rem",
 							lineHeight: "16rem",

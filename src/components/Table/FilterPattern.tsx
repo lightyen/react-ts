@@ -7,6 +7,8 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes"
 import { faBackspace } from "@fortawesome/free-solid-svg-icons/faBackspace"
 import { useFiltersSelector, useFiltersAction } from "./store"
 import { NormalInput } from "./NormalInput"
+import { css } from "@emotion/core"
+import tw from "twin.macro"
 
 const CloseButton = styled.div`
 	position: absolute;
@@ -59,7 +61,7 @@ export const FilterPattern: React.FC<FilterInputProps> = ({ tabIndex, label, onC
 	}, [id, fid, focus, setFocus, input, onCancel])
 
 	return (
-		<div className="mb-2 mr-3 sm:h-12 outline-none" tabIndex={tabIndex}>
+		<div tw="mb-2 mr-3 sm:h-12 outline-none" tabIndex={tabIndex}>
 			{focus && (
 				<motion.div
 					initial={{ opacity: 0.7, scaleY: 0.7 }}
@@ -67,14 +69,14 @@ export const FilterPattern: React.FC<FilterInputProps> = ({ tabIndex, label, onC
 					onAnimationComplete={() => inputRef.current.focus()}
 				>
 					<div ref={container}>
-						<label className="capitalize font-bold">{label}</label>
-						<div className="relative">
+						<label tw="capitalize font-bold">{label}</label>
+						<div tw="relative">
 							<NormalInput
 								ref={inputRef}
 								type="text"
 								defaultValue={input}
-								className="block outline-none bg-transparent border-0 pl-1 pr-6 pb-2"
-								style={{ borderBottom: "2px solid #20a8d8" }}
+								tw="block outline-none bg-transparent border-0 pl-1 pr-6 pb-2"
+								css={{ borderBottom: "2px solid #20a8d8" }}
 								placeholder={intl.formatMessage({ id: "input_placeholder" })}
 								onChange={e => {
 									onChange && onChange(e)
@@ -103,13 +105,28 @@ export const FilterPattern: React.FC<FilterInputProps> = ({ tabIndex, label, onC
 			)}
 			{!focus && (
 				<motion.button
+					css={css`
+						transition-property: background-color, box-shadow;
+						transition-duration: 200ms;
+						transition-timing-function: ease;
+						${tw`rounded bg-blue-500 text-white leading-none px-4 py-2`}
+						:hover,:focus {
+							box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+							${tw`outline-none`}
+						}
+					`}
 					initial={{ scaleY: 0.4 }}
 					animate={{ scaleY: 1, transition: { duration: 0.13 } }}
-					className="pattern-filter"
 					onMouseDown={() => setFocus({ id, fid, focus: true })}
 				>
 					<span
-						className="filter-close-btn"
+						css={css`
+							transition: all ease 160ms;
+							${tw`pr-2`}
+							:hover {
+								color: #ee2200;
+							}
+						`}
 						title={intl.formatMessage({ id: "clear" })}
 						onMouseDown={e => {
 							e.stopPropagation()
@@ -120,7 +137,7 @@ export const FilterPattern: React.FC<FilterInputProps> = ({ tabIndex, label, onC
 					>
 						<FontAwesomeIcon icon={faTimes} />
 					</span>
-					<span className="text-capitalize">{label}</span>
+					<span tw="capitalize">{label}</span>
 					{input && <span>:&quot;{input}&quot;</span>}
 				</motion.button>
 			)}

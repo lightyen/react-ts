@@ -30,7 +30,7 @@ const AppLayout: React.FC = props => {
 	const h = 45
 	const w = 246
 	return (
-		<div className="h-screen flex flex-col relative">
+		<div tw="h-screen flex flex-col relative">
 			<Header height={h} />
 			<Sidebar top={h} width={w} />
 			<AppContainer headerHeight={h} sidebarWidth={w} />

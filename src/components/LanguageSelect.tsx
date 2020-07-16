@@ -41,10 +41,10 @@ const LanguageSelect: React.FC = () => {
 	}, [spread])
 
 	return (
-		<div className="relative whitespace-no-wrap">
+		<div tw="relative whitespace-no-wrap">
 			<Button
 				ref={button}
-				className="cursor-pointer select-none rounded-lg px-3 focus:outline-none hover:underline"
+				tw="cursor-pointer select-none rounded-lg px-3 focus:outline-none hover:underline"
 				onClick={() => setSpread(true)}
 			>
 				<FontAwesomeIcon icon={faLanguage} /> <FormattedMessage id="language" />

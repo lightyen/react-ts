@@ -1,9 +1,12 @@
 import React from "react"
-import classnames from "classnames"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons/faArrowUp"
 import { faArrowsAltV } from "@fortawesome/free-solid-svg-icons/faArrowsAltV"
 import { motion, AnimatePresence } from "framer-motion"
+import type { Interpolation } from "@emotion/core"
+import { css as _css } from "@emotion/core"
+import styled from "@emotion/styled"
+import tw from "twin.macro"
 
 export type SortType = "none" | "ascending" | "descending"
 
@@ -11,17 +14,22 @@ interface Props {
 	hide?: boolean
 	sortType?: SortType
 	onClick?(e: React.MouseEvent): void
-	className?: string
-	style?: React.CSSProperties
+	css?: Interpolation
 }
+
+const Icon = styled.div`
+	width: 1rem;
+	height: 24px;
+	position: relative;
+`
 
 function SortIcon({ type }: { type: SortType }) {
 	return (
-		<div className="sort-icon-container">
+		<Icon>
 			<AnimatePresence exitBeforeEnter>
 				{(type === "ascending" || type === "descending") && (
 					<motion.div
-						className="sort-icon-2"
+						tw="absolute"
 						initial={{ opacity: 0 }}
 						animate={{
 							rotate: type === "descending" ? 180 : 0,
@@ -36,7 +44,11 @@ function SortIcon({ type }: { type: SortType }) {
 			<AnimatePresence exitBeforeEnter>
 				{type !== "ascending" && type !== "descending" && (
 					<motion.div
-						className="sort-icon-1"
+						tw="absolute"
+						css={_css`
+							left: 50%;
+							transform: translateX(-50%);
+						`}
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
 						exit={{ opacity: 0 }}
@@ -45,31 +57,33 @@ function SortIcon({ type }: { type: SortType }) {
 					</motion.div>
 				)}
 			</AnimatePresence>
-		</div>
+		</Icon>
 	)
 }
 
-export const TheadCell: React.FC<Props> = ({ children, hide, sortType, onClick, className, style }) => {
+export const TheadCell: React.FC<Props> = ({ children, hide, sortType, onClick, css }) => {
+	console.log(css)
 	if (sortType) {
 		return (
 			<th
-				className={classnames(
-					className,
-					{ hidden: hide },
-					"select-none",
-					"text-nowrap",
-					"hover:bg-gray-300 cursor-pointer",
-				)}
+				css={[
+					_css`
+						transition: all ease 0.16s;
+					`,
+					hide && tw`hidden`,
+					tw`text-gray-900 bg-white whitespace-no-wrap box-border px-3 py-2 border whitespace-no-wrap`,
+					tw`select-none hover:bg-gray-300 cursor-pointer`,
+					css,
+				]}
 				onClick={e => {
 					e.preventDefault()
 					e.stopPropagation()
 					onClick && onClick(e)
 				}}
-				style={style}
 			>
-				<div className="flex justify-between">
+				<div tw="flex justify-between">
 					{children}
-					<div className="pl-3">
+					<div tw="pl-3">
 						<SortIcon type={sortType} />
 					</div>
 				</div>
@@ -77,7 +91,13 @@ export const TheadCell: React.FC<Props> = ({ children, hide, sortType, onClick, 
 		)
 	} else {
 		return (
-			<th className={classnames(className, "text-nowrap", { hidden: hide })} style={style}>
+			<th
+				css={[
+					css,
+					hide && tw`hidden`,
+					tw`text-gray-900 bg-white whitespace-no-wrap box-border px-3 py-2 border whitespace-no-wrap`,
+				]}
+			>
 				{children}
 			</th>
 		)

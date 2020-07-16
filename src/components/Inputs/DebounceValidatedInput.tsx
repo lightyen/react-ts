@@ -1,5 +1,5 @@
 import React from "react"
-import classnames from "classnames"
+import Input from "./StyledInput"
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function useDebounce<T extends (...args: any[]) => void>(callback: T, delay: number) {
@@ -28,7 +28,7 @@ export const DebounceValidatedInput = React.forwardRef<
 	HTMLInputElement,
 	Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange"> & Props
 >((props, ref) => {
-	const { timeout = 200, defaultValue, value, validator, className, onChange, ...rest } = props
+	const { timeout = 200, defaultValue, value, validator, onChange, ...rest } = props
 	const [inputValue, setInputValue] = React.useState<number | string | readonly string[]>(value || defaultValue || "")
 
 	const debounceChange = useDebounce(onChange, timeout)
@@ -40,28 +40,27 @@ export const DebounceValidatedInput = React.forwardRef<
 	}, [props])
 
 	const msgs = validator && validator(inputValue.toString())
-	const classes = msgs?.error?.length ? "invalid" : msgs?.success?.length ? "valid" : ""
-
 	return (
 		<div>
-			<input
+			<Input
 				ref={ref}
+				invalid={msgs?.error?.length > 0}
+				valid={msgs?.error?.length == 0 && msgs?.success?.length > 0}
 				value={inputValue}
 				onChange={e => {
 					setInputValue(e.target.value)
 					onChange && debounceChange(e.target.value)
 				}}
-				className={classnames("validated-input", classes, className)}
 				{...rest}
 			/>
 			{msgs?.error?.map((e, i) => (
-				<div key={i} className="invalid-message">
+				<div key={i} aria-label="invalid-message">
 					{e}
 				</div>
 			))}
 			{msgs?.error?.length == 0 &&
 				msgs?.success?.map((e, i) => (
-					<div key={i} className="valid-message">
+					<div key={i} aria-label="valid-message">
 						{e}
 					</div>
 				))}

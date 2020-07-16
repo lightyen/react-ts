@@ -1,6 +1,5 @@
 import React from "react"
 import { useTable, BaseColumnProps, WithCheckbox } from "./hooks"
-import classnames from "classnames"
 import { FormattedMessage } from "react-intl"
 import { TheadCell } from "./TheadCell"
 import { AddFilter } from "./AddFilter"
@@ -10,18 +9,30 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faInbox } from "@fortawesome/free-solid-svg-icons/faInbox"
 import { Pagination } from "./Pagination"
 import { ViewOption, ViewCount } from "./ViewCount"
-import { CheckBox } from "./Checkbox"
+import { Checkbox } from "./Checkbox"
 export * from "./common"
 
 import { Provider } from "react-redux"
 import { store, Context, useFiltersAction, useFiltersSelector, register } from "./store"
 export { register }
+import "twin.macro"
+import { css, Interpolation } from "@emotion/core"
+import styled from "@emotion/styled"
+import tw from "twin.macro"
+
+const TD = styled.td`
+	transition: all ease 0.16s;
+	${tw`text-gray-900 bg-white whitespace-no-wrap box-border px-3 py-2 border`}
+`
+
+const CheckboxTH = styled(TD)`
+	${tw`py-3`}
+`
 
 export interface Column<T> extends BaseColumnProps<T> {
 	title?: string
-	className?: string
+	css?: Interpolation
 	attributes?: (record: T, row: number) => { [key: string]: unknown }
-	style?: React.CSSProperties
 	render: (record: T, row: number) => React.ReactNode
 }
 
@@ -79,7 +90,7 @@ function FilterComponents<T>({ id, columns, setFilterInput }: FilterComponentsPr
 		}))
 
 	return (
-		<div className="flex flex-wrap z-10 sm:h-12">
+		<div tw="flex flex-wrap z-10 sm:h-12">
 			{filters.map((f, i) =>
 				f.type === "pattern" ? (
 					<FilterPattern
@@ -204,10 +215,10 @@ function TableLayout<T>({
 
 	return (
 		<div>
-			<div className="flex justify-between">
+			<div tw="flex justify-between">
 				<FilterComponents id={id} columns={columns} setFilterInput={setFilterInput} />
 				{pageCountOpts.length > 0 && (
-					<div className="mb-4 sm:h-12">
+					<div tw="mb-4 sm:h-12">
 						<ViewCount
 							options={pageCountOpts}
 							count={_pageSize}
@@ -221,28 +232,32 @@ function TableLayout<T>({
 				)}
 			</div>
 			{paginationTop && _pageSize != undefined && <Pagination {...pagination} />}
-			<div className="w-full overflow-x-auto">
-				<table>
-					<thead>
+			<div tw="w-full overflow-x-auto">
+				<table
+					tw="border-collapse table-auto leading-normal"
+					css={css`
+						width: calc(100% - 1px);
+					`}
+				>
+					<thead tw="font-bold text-left text-gray-800">
 						<tr>
 							{enableCheckbox && (
-								<th style={{ width: 50 }}>
-									<div className="flex items-stretch">
-										<CheckBox
+								<CheckboxTH>
+									<div tw="flex items-stretch">
+										<Checkbox
 											checked={allChecked}
-											onChecked={e => {
-												const result = setAllChecked(e)
+											onChange={e => {
+												const result = setAllChecked(e.target.checked)
 												onChecked && onChecked(result)
 											}}
 										/>
 									</div>
-								</th>
+								</CheckboxTH>
 							)}
 							{columns.map((column, col) => (
 								<TheadCell
 									key={col}
-									className={column.className}
-									style={column.style}
+									css={column.css}
 									sortType={sortTypes[col]}
 									onClick={() => nextSortType(col)}
 								>
@@ -251,55 +266,64 @@ function TableLayout<T>({
 							))}
 						</tr>
 					</thead>
-					<tbody className="striped hover">
+					<tbody
+						css={css`
+							tr:nth-child(odd) > td {
+								${tw`bg-gray-300`}
+							}
+							tr:hover > td {
+								${tw`bg-blue-300`}
+							}
+						`}
+					>
 						{view.map((record, row) => (
 							<tr key={rowKey(record, row)} onDoubleClick={e => onRowClick && onRowClick(e, record)}>
 								{enableCheckbox && (
-									<td className="border">
-										<div style={{ display: "flex", alignItems: "center" }}>
-											<CheckBox
+									<TD>
+										<div tw="flex items-center">
+											<Checkbox
 												checked={(record as WithCheckbox<T>).__checkbox__}
-												onChecked={e => {
-													const result = setChecked(record as WithCheckbox<T>, e)
+												onChange={e => {
+													const result = setChecked(
+														record as WithCheckbox<T>,
+														e.target.checked,
+													)
 													onChecked && onChecked(result)
 												}}
 											/>
 										</div>
-									</td>
+									</TD>
 								)}
 								{columns.map((column, col) => (
-									<td
-										className={classnames("border", column.className)}
+									<TD
+										css={column.css}
 										key={`${rowKey(record, row)}&${col}`}
 										{...(!!column.attributes && column.attributes(record, row))}
 									>
 										{column.render(record, row)}
-									</td>
+									</TD>
 								))}
 							</tr>
 						))}
 						{view.length === 0 && (
 							<tr>
-								<td
-									className={classnames("border")}
-									colSpan={columns.length + (enableCheckbox ? 1 : 0)}
-								>
-									<div className="flex justify-center items-center text-gray-500">
+								<TD colSpan={columns.length + (enableCheckbox ? 1 : 0)}>
+									<div tw="flex justify-center items-center text-gray-500">
 										<FontAwesomeIcon icon={faInbox} size="2x" />
-										<span className="p-4">
+										<span tw="p-4">
 											<FormattedMessage id="data_empty" />
 										</span>
 									</div>
-								</td>
+								</TD>
 							</tr>
 						)}
 					</tbody>
 				</table>
 			</div>
-			<div className="pt-3 md:flex md:justify-between">
+			<div tw="pt-3 md:flex md:justify-between">
 				{_pageSize != undefined && <Pagination {...pagination} />}
 				{showTotal && _pageSize != undefined && (
-					<div className="mb-3 md:mb-0">
+					<div tw="mb-3 md:mb-0">
 						{showTotal(
 							rows.length,
 							rows.length ? pageIndex * _pageSize + 1 : 0,

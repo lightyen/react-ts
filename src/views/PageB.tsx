@@ -6,6 +6,7 @@ import { useSelector } from "~/store"
 import type { BreakingPoint } from "~/store/app/model"
 import { Column, register } from "~/components/Table"
 import Page from "~/components/Page"
+import tw from "twin.macro"
 
 register("#mytable")
 
@@ -76,7 +77,7 @@ const PageB: React.FC = () => {
 	const columns: Array<Column<Item>> = [
 		{
 			title: intl.formatMessage({ id: "title" }),
-			className: "md:w-1/2 hidden sm:table-cell",
+			css: tw`md:w-1/2 hidden sm:table-cell`,
 			render: record => record.title,
 			filters: [
 				{
@@ -88,7 +89,7 @@ const PageB: React.FC = () => {
 		},
 		{
 			title: "Author",
-			className: "md:w-1/4",
+			css: tw`md:w-1/4`,
 			render: record => record.author,
 			sorter: (a, b) => a.author.localeCompare(b.author),
 			filters: [
@@ -147,7 +148,7 @@ const PageB: React.FC = () => {
 		},
 		{
 			title: "Views",
-			className: "md:w-1/4",
+			css: tw`md:w-1/4`,
 			render: record => record.views,
 			sorter: (a, b) => a.views - b.views,
 		},
@@ -155,7 +156,7 @@ const PageB: React.FC = () => {
 
 	return (
 		<Page>
-			<h2 className="text-3xl mt-8 mb-5 font-black">
+			<h2 tw="text-3xl mt-8 mb-5 font-black">
 				<FormattedMessage id="nav_table" />
 			</h2>
 
@@ -167,7 +168,7 @@ const PageB: React.FC = () => {
 				pageSize={[10, 100]}
 				maxPageItem={getMaxPageCount(bk)}
 				showTotal={(total, from, to) => (
-					<div className="pr-2 text-gray-600">
+					<div tw="pr-2 text-gray-600">
 						<FormattedMessage id="pagination_total" values={{ total, from, to }} />
 					</div>
 				)}

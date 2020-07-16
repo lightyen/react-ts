@@ -2,56 +2,12 @@ import React from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Page from "~/components/Page"
 import { FormattedMessage } from "react-intl"
-
-// const PageD: React.FC = () => {
-// 	const x = useMotionValue(500)
-// 	const input = [0, 500, 1000]
-// 	const output = [0.1, 1, 0.1]
-// 	const opacity = useTransform(x, input, output)
-// 	const color = useMotionValue("#cd00bb")
-
-// 	useEffect(() => {
-// 		function update() {
-// 			color.set(transform(x.get(), [0, 1000], ["#F00", "#80F"]))
-// 		}
-// 		const unsubscribe = x.onChange(() => {
-// 			update()
-// 		})
-// 		return () => {
-// 			unsubscribe()
-// 		}
-// 	}, [color, x])
-// 	return (
-// 		<div className="m-3 p-3 bg-white">
-// 			<div className="bg-gray-800 text-gray-100 relative" style={{ height: 700 }}>
-// 				<motion.svg
-// 					className="cursor-pointer"
-// 					height="100"
-// 					width="100"
-// 					drag
-// 					dragConstraints={{
-// 						left: 0,
-// 						right: 800,
-// 						top: 0,
-// 						bottom: 300,
-// 					}}
-// 					style={{
-// 						x,
-// 						opacity,
-// 						color,
-// 					}}
-// 				>
-// 					<circle cx={50} cy={50} r="50" fill="currentColor" />
-// 				</motion.svg>
-// 			</div>
-// 		</div>
-// 	)
-// }
+import "twin.macro"
 
 const Box: React.FC<{ value: number; onRemove: (v: number) => void }> = ({ value, onRemove }) => {
 	return (
 		<motion.div
-			className="inline-block relative p-3 -mr-3 -mb-3"
+			tw="inline-block relative p-3 -mr-3 -mb-3"
 			exit={{ opacity: 0, scale: 0, transition: { duration: 0.16 } }}
 			positionTransition={{
 				type: "spring",
@@ -60,8 +16,8 @@ const Box: React.FC<{ value: number; onRemove: (v: number) => void }> = ({ value
 			}}
 		>
 			<motion.button
-				className="bg-gray-900 text-gray-100 rounded-lg focus:outline-none"
-				style={{
+				tw="bg-gray-900 text-gray-100 rounded-lg focus:outline-none"
+				css={{
 					width: 300,
 					height: 80,
 				}}
@@ -78,7 +34,7 @@ const PageD: React.FC = () => {
 	const [data, setData] = React.useState([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
 	return (
 		<Page>
-			<h2 className="text-3xl mt-8 mb-2 font-black capitalize">
+			<h2 tw="text-3xl mt-8 mb-2 font-black capitalize">
 				<FormattedMessage id="nav_transition" />
 			</h2>
 			<AnimatePresence>

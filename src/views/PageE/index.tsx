@@ -1,5 +1,7 @@
 import React from "react"
 import { spinner } from "../styles"
+import { css } from "@emotion/core"
+import "twin.macro"
 
 function useVisible(timeout = 0) {
 	const [visible, setVisible] = React.useState(false)
@@ -43,16 +45,19 @@ const PageE: React.FC = () => {
 	}, [width])
 
 	return (
-		<div className="h-full relative p-3">
+		<div tw="h-full relative p-3">
 			<div
 				ref={ref}
-				className="absolute bg-gray-900"
-				style={{ width: "calc(100% - 1.5rem)", height: "calc(100% - 1.5rem)" }}
+				tw="absolute bg-gray-900"
+				css={css`
+					width: calc(100% - 1.5rem);
+					height: calc(100% - 1.5rem);
+				`}
 			>
 				<React.Suspense
 					fallback={
 						<Loadable timeout={500}>
-							<div style={{ width, height: 600 }} className="relative p-6 flex justify-center">
+							<div css={{ width, height: 600 }} tw="relative p-6 flex justify-center">
 								<div css={spinner} />
 							</div>
 						</Loadable>

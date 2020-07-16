@@ -4,6 +4,20 @@ import { motion } from "framer-motion"
 import { FormattedMessage, useIntl } from "react-intl"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faFilter } from "@fortawesome/free-solid-svg-icons/faFilter"
+import styled from "@emotion/styled"
+import tw from "twin.macro"
+
+const AddFilerButton = styled.button`
+	transition-property: background-color, box-shadow;
+	transition-duration: 200ms;
+	transition-timing-function: ease;
+	${tw`rounded bg-green-500 px-4 py-2 text-white font-bold leading-none whitespace-no-wrap`}
+
+	:hover,:focus {
+		box-shadow: 0 0 0 3px rgba(72, 187, 120, 0.5);
+		${tw`outline-none`}
+	}
+`
 
 export interface OptionType<T> {
 	label: React.ReactNode
@@ -38,14 +52,14 @@ export const AddFilter: React.FC<Props> = ({ tabIndex, options, onChange }) => {
 	const intl = useIntl()
 	const { focus, setFocus, exit, ref } = useFocusExit()
 	return (
-		<div className="mb-2 mr-3 sm:h-12 outline-none" tabIndex={tabIndex}>
+		<div tw="mb-2 mr-3 sm:h-12 outline-none" tabIndex={tabIndex}>
 			{focus && (
 				<motion.div
 					initial={{ scaleY: 0.7, opacity: 0.5 }}
 					animate={{ scaleY: 1, opacity: 1, transition: { duration: 0.15 } }}
 					onAnimationComplete={() => window.addEventListener("mousedown", exit)}
 				>
-					<div ref={ref} style={{ width: 180 }}>
+					<div ref={ref} css={{ width: 180 }}>
 						<Select
 							menuIsOpen
 							isSearchable
@@ -65,12 +79,12 @@ export const AddFilter: React.FC<Props> = ({ tabIndex, options, onChange }) => {
 				</motion.div>
 			)}
 			{!focus && (
-				<button className="add-filter" onMouseDown={e => setFocus(true)}>
+				<AddFilerButton onMouseDown={e => setFocus(true)}>
 					<FontAwesomeIcon icon={faFilter} />
-					<span className="pl-2 whitespace-no-wrap">
+					<span tw="pl-2 whitespace-no-wrap">
 						<FormattedMessage id="add_filter" />
 					</span>
-				</button>
+				</AddFilerButton>
 			)}
 		</div>
 	)

@@ -6,6 +6,8 @@ import { useIntl } from "react-intl"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes"
 import { useFiltersSelector, useFiltersAction } from "./store"
+import { css } from "@emotion/core"
+import tw from "twin.macro"
 
 export interface CustomOption {
 	label: string
@@ -72,7 +74,7 @@ export const FilterSelect: React.FC<Props> = ({
 	}, [focus, exit])
 
 	return (
-		<div className="mb-2 mr-3 sm:h-12 outline-none" tabIndex={tabIndex}>
+		<div tw="mb-2 mr-3 sm:h-12 outline-none" tabIndex={tabIndex}>
 			{focus && (
 				<motion.div
 					initial={{ opacity: 0.7, scaleY: 0.7, zIndex: 999 }}
@@ -85,8 +87,8 @@ export const FilterSelect: React.FC<Props> = ({
 						mount.current = true
 					}}
 				>
-					<div ref={container} style={{ minWidth: 200 }}>
-						<label className="capitalize font-bold">{label}</label>
+					<div ref={container} css={{ minWidth: 200 }}>
+						<label tw="capitalize font-bold">{label}</label>
 						<Select
 							value={value}
 							options={options}
@@ -112,15 +114,30 @@ export const FilterSelect: React.FC<Props> = ({
 			)}
 			{!focus && (
 				<motion.button
+					css={css`
+						transition-property: background-color, box-shadow;
+						transition-duration: 200ms;
+						transition-timing-function: ease;
+						${tw`rounded bg-blue-500 text-white leading-none px-4 py-2`}
+						:hover,:focus {
+							box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+							${tw`outline-none`}
+						}
+					`}
 					initial={{ scaleY: 0.4 }}
 					animate={{ opacity: 1, scaleY: 1, transition: { duration: 0.13 } }}
-					className="select-filter"
 					onMouseDown={e => {
 						setFocus({ id, fid, focus: true })
 					}}
 				>
 					<span
-						className="filter-close-btn"
+						css={css`
+							transition: all ease 0.16s;
+							${tw`pr-2`}
+							:hover {
+								color: #ee2200;
+							}
+						`}
 						title={intl.formatMessage({ id: "clear" })}
 						onMouseDown={e => {
 							e.stopPropagation()
@@ -131,7 +148,7 @@ export const FilterSelect: React.FC<Props> = ({
 					>
 						<FontAwesomeIcon icon={faTimes} />
 					</span>
-					<span className="text-capitalize">{label}</span>
+					<span tw="capitalize">{label}</span>
 					{isMulti
 						? inputs && <span>: &quot;{inputs.map(v => v).join(",")}&quot;</span>
 						: input && <span>: &quot;{input}&quot;</span>}

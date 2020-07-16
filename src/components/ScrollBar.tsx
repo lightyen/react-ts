@@ -159,7 +159,7 @@ export const ScrollBar: React.FC<ScrollBarProps> = ({ children, ...props }) => {
 		>
 			{handle && (
 				<ScrollBarContext.Provider value={handle}>
-					<div tw="flex-grow flex flex-col" style={{ color }}>
+					<div tw="flex-grow flex flex-col" css={{ color }}>
 						<ScrollBarVisibleContext.Provider value={visible}>{children}</ScrollBarVisibleContext.Provider>
 					</div>
 				</ScrollBarContext.Provider>

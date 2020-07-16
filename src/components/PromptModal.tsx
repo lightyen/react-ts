@@ -43,14 +43,13 @@ export const PromptModal: React.FC<Props> = ({ when = true }) => {
 					}
 				}}
 			>
-				<div className="px-6 my-3">
-					<div className="mt-4 mb-2">
-						<div className="font-bold text-xl mb-2">路由跳轉</div>
+				<div tw="px-6 my-3">
+					<div tw="mt-4 mb-2">
+						<div tw="font-bold text-xl mb-2">路由跳轉</div>
 					</div>
-					<div className="h-12 mb-3">確定要離開？</div>
-					<div className="mb-3 flex justify-end">
+					<div tw="h-12 mb-3">確定要離開？</div>
+					<div tw="mb-3 flex justify-end">
 						<button
-							className="btn btn-blue"
 							onClick={e => {
 								e.preventDefault()
 								e.stopPropagation()

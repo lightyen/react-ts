@@ -1,7 +1,7 @@
 import React from "react"
 
 const Page404: React.FC = () => {
-	return <div className="text-red-700 m-3 text-xl">404 Not Found</div>
+	return <div tw="text-red-700 m-3 text-xl">404 Not Found</div>
 }
 
 export default Page404

@@ -4,7 +4,9 @@ import { FormattedMessage } from "react-intl"
 import { useVirtualScroll, useStay, VirtualItem, VirtualScrollProps } from "./useVirtualScroll"
 import { useScrollBarSource } from "~/components/ScrollBar"
 import Page from "~/components/Page"
+import Button from "~/components/Button"
 import { spinner } from "../styles"
+import "twin.macro"
 
 function outerHeight(target: HTMLElement) {
 	const marginTop = parseInt(document.defaultView.getComputedStyle(target).getPropertyValue("margin-top"))
@@ -98,18 +100,18 @@ const VirtualList: React.FC = () => {
 	const { start, end, paddingTop, totalHeight } = virtual
 
 	return (
-		<div ref={container} className="relative">
+		<div ref={container} tw="relative">
 			<Information {...virtual} />
-			<div className="relative" style={{ height: totalHeight }}>
+			<div tw="relative" css={{ height: totalHeight }}>
 				<div
-					className="relative"
-					style={{
+					tw="relative"
+					css={{
 						willChange: "transform",
 						transform: `translateY(${paddingTop}px)`,
 					}}
 				>
 					{data.slice(start, end).map(({ ...style }, i) => (
-						<div key={start + i} className="flex flex-col items-center text-2xl pt-6" style={style}>
+						<div key={start + i} tw="flex flex-col items-center text-2xl pt-6" style={style}>
 							<div>{start + i}</div>
 							<div css={spinner} />
 						</div>
@@ -145,14 +147,10 @@ const Information: React.FC<VirtualScrollProps> = ({ scrollTop, start, end, accH
 	}, [])
 
 	return (
-		<div
-			ref={ref}
-			className="sticky text-xl text-gray-600 w-4/5 mx-auto"
-			style={{ top: "1rem", marginBottom, zIndex: 1 }}
-		>
-			<div className="p-3 bg-gray-300" style={{ background: "#e2e8f0a0" }}>
-				<button
-					className="btn btn-blue mb-3 opacity-75"
+		<div ref={ref} tw="sticky text-xl text-gray-600 w-4/5 mx-auto" css={{ top: "1rem", marginBottom, zIndex: 1 }}>
+			<div tw="p-3 bg-gray-300" css={{ background: "#e2e8f0a0" }}>
+				<Button
+					variant="blue"
 					onClick={e =>
 						scrollTo({
 							scrollbar,
@@ -164,9 +162,9 @@ const Information: React.FC<VirtualScrollProps> = ({ scrollTop, start, end, accH
 					}
 				>
 					Goto
-				</button>
+				</Button>
 				<input
-					className="border-gray-300 rounded-lg mx-3 py-2 px-4"
+					tw="border-gray-300 rounded-lg mx-3 py-2 px-4"
 					type="number"
 					defaultValue={0}
 					onChange={e => {
@@ -191,13 +189,9 @@ const Information: React.FC<VirtualScrollProps> = ({ scrollTop, start, end, accH
 						}
 					}}
 				/>
-				<button
-					className="btn btn-blue opacity-75"
-					style={{ top: 120 }}
-					onClick={e => changeData(createData())}
-				>
+				<Button variant="blue" onClick={e => changeData(createData())}>
 					Create
-				</button>
+				</Button>
 				<div>Items: {accHeights.length}</div>
 				<div>ScrollTop: {scrollTop}px</div>
 				<div>Start: {start}</div>
