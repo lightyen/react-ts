@@ -148,7 +148,7 @@ const Information: React.FC<VirtualScrollProps> = ({ scrollTop, start, end, accH
 
 	return (
 		<div ref={ref} tw="sticky text-xl text-gray-600 w-4/5 mx-auto" css={{ top: "1rem", marginBottom, zIndex: 1 }}>
-			<div tw="p-3 bg-gray-300" css={{ background: "#e2e8f0a0" }}>
+			<div tw="p-3 bg-gray-300" css={{ background: "#e2e8f0", opacity: 0.7 }}>
 				<Button
 					variant="blue"
 					onClick={e =>
