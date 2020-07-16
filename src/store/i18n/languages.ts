@@ -4,7 +4,9 @@ export const supports = {
 	"zh-TW": "正體中文",
 }
 
-export const defaultLocale = "en-US"
+export type Locale = keyof typeof supports
+
+export const defaultLocale: keyof typeof supports = "en-US"
 
 export function storeLocale(locale: string) {
 	if (Object.keys(supports).some(loc => loc === locale)) {
@@ -14,18 +16,23 @@ export function storeLocale(locale: string) {
 	}
 }
 
-export function getLocale() {
-	const result = localStorage.getItem("locale")
-	if (result) {
-		return result
+export function getLocale(): keyof typeof supports {
+	const locale = localStorage.getItem("locale") || window.navigator.language || defaultLocale
+	const [primary] = locale.toLocaleLowerCase().split(/-/)
+	switch (primary) {
+		case "en":
+			return "en-US"
+		case "zh":
+			return "zh-TW"
+		default:
+			return "en-US"
 	}
-	return window.navigator.language || defaultLocale
 }
 
 import $enUS from "./locales/en-US.yml"
 import $zhTW from "./locales/zh-TW.yml"
 
-export function getLocaleMessages(locale: string) {
+export function getLocaleMessages(locale: Locale) {
 	const [primary] = locale.toLocaleLowerCase().split(/-/)
 	switch (primary) {
 		case "en":

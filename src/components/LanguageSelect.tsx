@@ -12,12 +12,6 @@ import { css } from "@emotion/core"
 import tw from "twin.macro"
 import { useSelector } from "~/store"
 
-// background: ${({ theme }: Props) => (theme.name == "dark" ? "#183622" : "#c1f7d4")};
-// :hover {
-// 	opacity: 1;
-// 	background: ${({ theme }: Props) => (theme.name == "dark" ? "#21422c" : "#aae6bf")};
-// }
-
 const Button = styled.button`
 	opacity: 0.8;
 	transition: all 200ms ease;

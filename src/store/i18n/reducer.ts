@@ -1,10 +1,11 @@
 import { createReducer } from "@reduxjs/toolkit"
 import { setLocale } from "./action"
 import { getLocale, storeLocale } from "./languages"
+import type { Locale } from "./languages"
 
 interface I18nStoreType {
 	enable: boolean
-	locale: string
+	locale: Locale
 }
 
 export type I18nStore = Readonly<I18nStoreType>
@@ -14,14 +15,12 @@ const init: I18nStore = {
 	locale: getLocale(),
 }
 
-globalThis.__locale__ = getLocale()
+window.__locale__ = getLocale()
 
 export const i18n = createReducer(init, builder =>
 	builder.addCase(setLocale, (state, { payload: { locale, cached = false } }) => {
-		if (cached) {
-			storeLocale(locale)
-		}
-		globalThis.__locale__ = locale
+		cached && storeLocale(locale)
+		window.__locale__ = locale
 		state.locale = locale
 	}),
 )
