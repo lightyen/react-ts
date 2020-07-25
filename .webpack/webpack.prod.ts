@@ -12,7 +12,6 @@ process.env.NODE_ENV = "production"
 const config: Configuration = {
 	mode: "production",
 	devtool: "source-map",
-	externals: ["lodash"],
 	stats: {
 		children: false,
 		modules: false,

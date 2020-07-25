@@ -1,16 +1,20 @@
 import React from "react"
 import { makeStore } from "~/store"
 import { Provider } from "react-redux"
-import StyledThemeProvider from "~/StyledThemeProvider"
-import LanguageProvider from "~/LanguageProvider"
+import StyledThemeProvider from "~/components/StyledThemeProvider"
+import LanguageProvider from "~/components/LanguageProvider"
 import AppLayout from "~/layout/AppLayout"
 import { Global, css } from "@emotion/core"
 import tw from "twin.macro"
 
-import "~/fonts.css"
+import FiraCodeFont from "assets/fonts/FiraCode-Regular.woff2"
 import "tailwindcss/dist/base.min.css"
 
 const globalStyle = css`
+	@font-face {
+		font-family: Fira Code;
+		src: local("Fira Code"), url(${FiraCodeFont}) format("woff2");
+	}
 	body {
 		${tw`m-0 leading-normal overflow-hidden`}
 		font-family: Roboto, 微軟正黑體, Microsoft JhengHei, Helvetica Neue,
@@ -35,15 +39,17 @@ const globalStyle = css`
 	}
 `
 
-export default () => (
-	<React.StrictMode>
-		<Global styles={globalStyle} />
-		<Provider store={makeStore()}>
-			<StyledThemeProvider>
-				<LanguageProvider>
-					<AppLayout />
-				</LanguageProvider>
-			</StyledThemeProvider>
-		</Provider>
-	</React.StrictMode>
-)
+export default function App() {
+	return (
+		<React.StrictMode>
+			<Global styles={globalStyle} />
+			<Provider store={makeStore()}>
+				<StyledThemeProvider>
+					<LanguageProvider>
+						<AppLayout />
+					</LanguageProvider>
+				</StyledThemeProvider>
+			</Provider>
+		</React.StrictMode>
+	)
+}
