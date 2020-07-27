@@ -21,28 +21,31 @@ export function makeStore() {
 		devTools: process.env.NODE_ENV === "development" ? { name: "react is awesome" } : false,
 	})
 
-	// TODO: 也許這幾乎沒什麼卵用，未來考慮移除
-	module.hot?.accept([require.resolve("~/store/reducer")] as string[], () => {
-		console.log("hot replacement root reducer")
-		store.replaceReducer(reducer)
-	})
-
 	let sagaTask = sagaMiddleware.run(rootSaga)
-	module.hot?.accept([require.resolve("~/store/saga")] as string[], () => {
-		console.log("hot replacement redux-saga")
-		sagaTask.cancel()
-		sagaTask.toPromise().then(() => {
-			sagaTask = sagaMiddleware.run(rootSaga)
+
+	if (module.hot) {
+		module.hot.accept("~/store/reducer", () => {
+			console.log("@@HMR reducer")
+			store.replaceReducer(reducer)
 		})
-	})
+		module.hot.accept("~/store/saga", () => {
+			console.log("@@HMR saga")
+			sagaTask.cancel()
+			sagaTask.toPromise().then(() => {
+				sagaTask = sagaMiddleware.run(rootSaga)
+			})
+		})
+	}
 
 	// const epic$ = new BehaviorSubject(rootEpic)
 	// epicMiddleware.run((action$, state$, dep$) => epic$.pipe(switchMap(epic => epic(action$, state$, dep$))))
-	// module.hot?.accept(require.resolve("~/store/epic") as string, () => {
-	//     console.log("hot replacement redux-observable")
-	//     const nextRootEpic = require("~/store/epic").rootEpic
-	//     epic$.next(nextRootEpic)
-	// })
+	// if (module.hot) {
+	// 	module.hot.accept("~/store/epic" as string, () => {
+	// 		console.log("@@HMR epic")
+	// 		const nextRootEpic = require("~/store/epic").rootEpic
+	// 		epic$.next(nextRootEpic)
+	// 	})
+	// }
 
 	return store
 }

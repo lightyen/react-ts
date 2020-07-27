@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "@emotion/styled"
-import { useTheme } from "~/store"
+import { useTheme } from "~/store/hooks"
 import tw from "twin.macro"
 
 interface CustomScrollBarProps {

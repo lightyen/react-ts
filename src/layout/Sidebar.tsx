@@ -1,5 +1,5 @@
 import React from "react"
-import { useSelector } from "~/store"
+import { useSelector } from "~/store/hooks"
 import { NavLink, NavLinkProps } from "react-router-dom"
 import { FormattedMessage } from "react-intl"
 

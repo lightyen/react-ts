@@ -1,5 +1,5 @@
 import React from "react"
-import { useAction } from "~/store"
+import { useAction } from "~/store/hooks"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faLanguage } from "@fortawesome/free-solid-svg-icons/faLanguage"
 import { motion, AnimatePresence } from "framer-motion"
@@ -10,7 +10,7 @@ import { entries } from "~/type-safed"
 import styled from "@emotion/styled"
 import { css } from "@emotion/core"
 import tw from "twin.macro"
-import { useSelector } from "~/store"
+import { useSelector } from "~/store/hooks"
 
 const Button = styled.button`
 	opacity: 0.8;

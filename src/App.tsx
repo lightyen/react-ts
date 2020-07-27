@@ -1,5 +1,5 @@
 import React from "react"
-import { makeStore } from "~/store"
+import { makeStore } from "~/store/store"
 import { Provider } from "react-redux"
 import StyledThemeProvider from "~/components/StyledThemeProvider"
 import LanguageProvider from "~/components/LanguageProvider"

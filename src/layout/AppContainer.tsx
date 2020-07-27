@@ -1,5 +1,5 @@
 import React from "react"
-import { useSelector } from "~/store"
+import { useSelector } from "~/store/hooks"
 import { Switch, useLocation } from "react-router-dom"
 import { routes } from "~/routes"
 import { AnimatePresence } from "framer-motion"

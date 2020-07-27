@@ -1,4 +1,3 @@
-import { HotModuleReplacementPlugin } from "webpack"
 import { merge } from "webpack-merge"
 import createBaseConfig from "./webpack.common"
 import type { Configuration } from "webpack"
@@ -71,7 +70,6 @@ const config: Configuration = {
 		},
 	},
 	plugins: [
-		new HotModuleReplacementPlugin(),
 		new ForkTsCheckerWebpackPlugin({
 			typescript: {
 				configFile: path.resolve(process.cwd(), "src", "tsconfig.json"),
