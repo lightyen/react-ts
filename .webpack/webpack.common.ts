@@ -60,7 +60,7 @@ export default function (): Configuration {
 			alias: {
 				assets: path.join(workingDirectory, "public", "assets"),
 			},
-			plugins: [new TsPathsResolvePlugin({ configFile: path.resolve(src, "tsconfig.json") })],
+			plugins: [new TsPathsResolvePlugin({ tsConfigPath: path.resolve(src, "tsconfig.json") })],
 		},
 		resolveLoader: {
 			alias: {
