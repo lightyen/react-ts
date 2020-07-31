@@ -57,9 +57,6 @@ export default function (): Configuration {
 		// NOTE: https://webpack.js.org/configuration/resolve/
 		resolve: {
 			extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
-			alias: {
-				assets: path.join(workingDirectory, "public", "assets"),
-			},
 			plugins: [new TsPathsResolvePlugin({ tsConfigPath: path.resolve(src, "tsconfig.json") })],
 		},
 		resolveLoader: {
