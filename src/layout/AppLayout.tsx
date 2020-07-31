@@ -1,5 +1,4 @@
 import React from "react"
-import { hot } from "react-hot-loader/root"
 import { BrowserRouter, RouteProps, RedirectProps, Redirect, Route, Switch } from "react-router-dom"
 import { Sidebar } from "./Sidebar"
 import { Header } from "./Header"
@@ -60,4 +59,4 @@ const Router: React.FC = () => (
 	</BrowserRouter>
 )
 
-export default hot(Router)
+export default Router

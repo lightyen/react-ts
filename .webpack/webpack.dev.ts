@@ -2,6 +2,7 @@ import { merge } from "webpack-merge"
 import createBaseConfig from "./webpack.common"
 import type { Configuration } from "webpack"
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin"
+import ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin"
 import path from "path"
 
 process.env.NODE_ENV = "development"
@@ -64,17 +65,13 @@ const config: Configuration = {
 			},
 		],
 	},
-	resolve: {
-		alias: {
-			"react-dom": "@hot-loader/react-dom",
-		},
-	},
 	plugins: [
 		new ForkTsCheckerWebpackPlugin({
 			typescript: {
 				configFile: path.resolve(process.cwd(), "src", "tsconfig.json"),
 			},
 		}),
+		new ReactRefreshWebpackPlugin(),
 	],
 	devServer: {
 		hot: true,
