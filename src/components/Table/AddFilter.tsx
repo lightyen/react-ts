@@ -48,7 +48,7 @@ function useFocusExit() {
 	return { ref, exit, focus, setFocus }
 }
 
-export const AddFilter: React.FC<Props> = ({ tabIndex, options, onChange }) => {
+export const AddFilter = ({ tabIndex, options, onChange }: Props) => {
 	const intl = useIntl()
 	const { focus, setFocus, exit, ref } = useFocusExit()
 	return (

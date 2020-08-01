@@ -3,7 +3,7 @@ import { FormattedMessage } from "react-intl"
 import Page from "~/components/Page"
 import "twin.macro"
 
-const Home: React.FC = () => {
+const Home = () => {
 	return (
 		<Page>
 			<FormattedMessage id="test" values={{ name: "React" }} />

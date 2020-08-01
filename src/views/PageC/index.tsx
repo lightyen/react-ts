@@ -78,7 +78,7 @@ function useMyContext() {
 	return { ...state, changeData, changeOffsetTop }
 }
 
-const VirtualList: React.FC = () => {
+const VirtualList = () => {
 	const { data, offsetTop, changeOffsetTop } = useMyContext()
 	const scrollbar = useScrollBarSource()
 	const container = React.useRef<HTMLDivElement>()
@@ -136,7 +136,7 @@ function scrollTo(options: {
 	}
 }
 
-const Information: React.FC<VirtualScrollProps> = ({ scrollTop, start, end, accHeights, scrollbar }) => {
+const Information = ({ scrollTop, start, end, accHeights, scrollbar }: VirtualScrollProps) => {
 	const { offsetTop, changeData } = useMyContext()
 	const input = React.useRef(0)
 	const ref = React.useRef<HTMLDivElement>()
@@ -204,7 +204,7 @@ const Information: React.FC<VirtualScrollProps> = ({ scrollTop, start, end, accH
 	)
 }
 
-const PageC: React.FC = () => {
+const PageC = () => {
 	const [state, dispatch] = React.useReducer(reducer, null, () => ({ offsetTop: 0, data: createData() }))
 	const value = React.useMemo(() => ({ ...state, dispatch }), [state, dispatch])
 	return (

@@ -4,7 +4,7 @@ import Page from "~/components/Page"
 import { FormattedMessage } from "react-intl"
 import "twin.macro"
 
-const Box: React.FC<{ value: number; onRemove: (v: number) => void }> = ({ value, onRemove }) => {
+const Box = ({ value, onRemove }: { value: number; onRemove: (v: number) => void }) => {
 	return (
 		<motion.div
 			tw="inline-block relative p-3 -mr-3 -mb-3"
@@ -30,7 +30,7 @@ const Box: React.FC<{ value: number; onRemove: (v: number) => void }> = ({ value
 	)
 }
 
-const PageD: React.FC = () => {
+const PageD = () => {
 	const [data, setData] = React.useState([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
 	return (
 		<Page>

@@ -4,7 +4,7 @@ import { Route, Redirect } from "react-router"
 import type { RouteProps, RedirectProps } from "react-router"
 import "twin.macro"
 
-export const MotionRoute: React.FC<RouteProps> = ({ children, component, ...props }) => {
+export const MotionRoute = ({ component, ...props }: Omit<RouteProps, "children">) => {
 	const Component = component as React.ComponentType
 	return (
 		<Route {...props}>
@@ -20,7 +20,7 @@ export const MotionRoute: React.FC<RouteProps> = ({ children, component, ...prop
 	)
 }
 
-export const MotionRedirect: React.FC<RedirectProps> = ({ ...props }) => (
+export const MotionRedirect = ({ ...props }: Omit<RedirectProps, "children">) => (
 	<motion.div exit="undefined">
 		<Redirect {...props} />
 	</motion.div>

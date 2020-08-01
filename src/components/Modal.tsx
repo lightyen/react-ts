@@ -9,7 +9,13 @@ interface Props extends ModalContentProps {
 	afterClose?: () => void
 }
 
-export const Modal: React.FC<Props> = ({ children, open = false, exitAnime = true, afterClose, ...rest }) => {
+export const Modal = ({
+	children,
+	open = false,
+	exitAnime = true,
+	afterClose,
+	...rest
+}: React.PropsWithChildren<Props>) => {
 	const root = document.getElementById("root")
 	const modalRoot = document.getElementById("modal-root")
 	const element = React.useRef(document.createElement("div"))
@@ -103,7 +109,12 @@ const ModalBox = styled.div`
 	${tw`w-64 rounded`}
 `
 
-const ModalContent: React.FC<ModalContentProps> = ({ children, onMouseDownOutside, exitAnime, ...props }) => {
+const ModalContent = ({
+	children,
+	onMouseDownOutside,
+	exitAnime,
+	...props
+}: React.PropsWithChildren<ModalContentProps>) => {
 	const ref = React.useRef<HTMLDivElement>()
 	React.useEffect(() => {
 		const modal = ref.current

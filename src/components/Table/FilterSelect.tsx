@@ -26,17 +26,7 @@ interface Props {
 	onChange(value: unknown): void
 }
 
-export const FilterSelect: React.FC<Props> = ({
-	tabIndex,
-	label,
-	options,
-	styles,
-	isMulti,
-	onChange,
-	onCancel,
-	id,
-	fid,
-}) => {
+export const FilterSelect = ({ tabIndex, label, options, styles, isMulti, onChange, onCancel, id, fid }: Props) => {
 	const container = React.useRef<HTMLDivElement>()
 	const intl = useIntl()
 	const focus = useFiltersSelector(state => state[id].focus[fid] ?? true)

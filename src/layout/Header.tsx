@@ -15,7 +15,7 @@ interface Props {
 	height: number
 }
 
-export const Header: React.FC<Props> = ({ height }) => {
+export const Header = ({ height }: Props) => {
 	const { setSidebarVisible } = useAction().app
 	const visible = useSelector(state => state.app.sidebarVisible)
 	const { enable } = useI18n()

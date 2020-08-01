@@ -28,7 +28,7 @@ interface Props {
 	sidebarWidth: number
 }
 
-export const AppContainer: React.FC<Props> = ({ headerHeight, sidebarWidth }) => {
+export const AppContainer = ({ headerHeight, sidebarWidth }: Props) => {
 	const collapsed = useSelector(state => state.app.collapsed)
 	return (
 		<ScrollBar

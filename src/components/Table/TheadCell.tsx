@@ -15,6 +15,7 @@ interface Props {
 	sortType?: SortType
 	onClick?(e: React.MouseEvent): void
 	css?: Interpolation
+	children: React.ReactNode
 }
 
 const Icon = styled.div`
@@ -61,7 +62,7 @@ function SortIcon({ type }: { type: SortType }) {
 	)
 }
 
-export const TheadCell: React.FC<Props> = ({ children, hide, sortType, onClick, css }) => {
+export const TheadCell = ({ children, hide, sortType, onClick, css }: Props) => {
 	if (sortType) {
 		return (
 			<th

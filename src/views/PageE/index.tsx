@@ -12,14 +12,14 @@ function useVisible(timeout = 0) {
 	return visible
 }
 
-const Loadable: React.FC<{ timeout: number }> = ({ timeout = 500, children }) => {
+const Loadable = ({ timeout = 500, children }: { timeout: number; children?: React.ReactNode }) => {
 	const visible = useVisible(timeout)
 	return visible ? <>{children}</> : null
 }
 
 const MyChart = React.lazy(() => import("./MyChart"))
 
-const PageE: React.FC = () => {
+const PageE = () => {
 	const ref = React.useRef<HTMLDivElement>()
 	const [width, setWidth] = React.useState(0)
 

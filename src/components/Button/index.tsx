@@ -4,11 +4,11 @@ import tw from "twin.macro"
 import styled from "@emotion/styled"
 import { css } from "@emotion/core"
 
-interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
+interface Props {
 	variant?: "gray" | "blue" | "green" | "orange" | "red"
 }
 
-const Button = styled.button<ButtonProps>(({ variant = "gray" }) => {
+const Button = styled.button<Props>(({ variant = "gray" }) => {
 	return [
 		css`
 			transition-property: background-color, box-shadow;
@@ -79,7 +79,10 @@ const Button = styled.button<ButtonProps>(({ variant = "gray" }) => {
 	]
 })
 
-export const RippleButton: React.FC<ButtonProps> = ({ children, ...props }) => {
+export const RippleButton = ({
+	children,
+	...props
+}: React.PropsWithChildren<Props & Omit<JSX.IntrinsicElements["button"], "ref">>) => {
 	const ref = useRipple<HTMLButtonElement>()
 	return (
 		<Button ref={ref} {...props}>

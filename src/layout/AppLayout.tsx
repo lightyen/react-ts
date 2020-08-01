@@ -7,7 +7,7 @@ import { motion } from "framer-motion"
 import Login from "~/pages/Login"
 import Page404 from "~/pages/404"
 
-const MotionRedirect: React.FC<RedirectProps> = ({ children, ...props }) => (
+const MotionRedirect = ({ children, ...props }: React.PropsWithChildren<RedirectProps>) => (
 	<motion.div exit="undefined">
 		<Redirect {...props} />
 	</motion.div>
@@ -17,15 +17,15 @@ const isAuthenticated = (): boolean => {
 	return true // try get localstorage token
 }
 
-const AuthenticatedRoute: React.FC<RouteProps> = ({ children, ...rest }) => (
+const AuthenticatedRoute = ({ children, ...rest }: React.PropsWithChildren<RouteProps>) => (
 	<Route {...rest}>{isAuthenticated() ? children : <MotionRedirect to="/login" />}</Route>
 )
 
-const NoAuthenticatedRoute: React.FC<RouteProps> = ({ children, ...rest }) => (
+const NoAuthenticatedRoute = ({ children, ...rest }: React.PropsWithChildren<RouteProps>) => (
 	<Route {...rest}>{!isAuthenticated() ? children : <MotionRedirect to="/" />}</Route>
 )
 
-const AppLayout: React.FC = props => {
+const AppLayout = () => {
 	const h = 45
 	const w = 246
 	return (
@@ -37,7 +37,7 @@ const AppLayout: React.FC = props => {
 	)
 }
 
-const AppRouter: React.FC = () => {
+const AppRouter = () => {
 	return (
 		<Switch>
 			<Route path="/404" exact>
@@ -53,7 +53,7 @@ const AppRouter: React.FC = () => {
 	)
 }
 
-const Router: React.FC = () => (
+const Router = () => (
 	<BrowserRouter>
 		<AppRouter />
 	</BrowserRouter>

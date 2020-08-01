@@ -17,7 +17,7 @@ const Button = styled.button`
 	transition: all 200ms ease;
 `
 
-const LanguageSelect: React.FC = () => {
+const LanguageSelect = () => {
 	const [spread, setSpread] = React.useState(false)
 	const { setLocale } = useAction().i18n
 	const button = React.useRef<HTMLButtonElement>()

@@ -62,7 +62,7 @@ interface Props {
 	onChange?(range: DateRange): void
 }
 
-export const CustomDateRangePicker: React.FC<Props> = ({ range, onChange, ...props }) => {
+export const CustomDateRangePicker = ({ range, onChange, ...props }: Props) => {
 	const ref = React.useRef<HTMLDivElement>()
 	const intl = useIntl()
 

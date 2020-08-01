@@ -78,9 +78,10 @@ export function useScrollTop({ scrollbar }: { scrollbar: HTMLElement }) {
 
 interface ScrollBarProps {
 	top?: number
+	children: React.ReactNode
 }
 
-export const ScrollBar: React.FC<ScrollBarProps> = ({ children, ...props }) => {
+export const ScrollBar = ({ children, ...props }: ScrollBarProps) => {
 	const ref = React.useRef<HTMLDivElement>()
 	const [handle, setHandle] = React.useState<HTMLDivElement>()
 	const isMount = React.useRef(false)

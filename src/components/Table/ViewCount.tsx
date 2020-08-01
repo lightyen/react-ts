@@ -14,7 +14,7 @@ interface Props {
 	container?: React.CSSProperties
 }
 
-export const ViewCount: React.FC<Props> = ({ count, options, onChange, option, container }) => {
+export const ViewCount = ({ count, options, onChange, option, container }: Props) => {
 	return (
 		<Select
 			options={options}

@@ -115,7 +115,7 @@ const CodeMirror = forwardRef<Editor, Props>(({ options, onChange, css, ...props
 	)
 })
 
-const PageG: React.FC = () => {
+const PageG = () => {
 	const ref = useRef<Editor>()
 
 	const cache = React.useRef(
@@ -125,7 +125,7 @@ code
 
 \`\`\`tsx
 import React from "react"
-const Card: React.FC = () => {
+const Card = () => {
     return (
         <div>Card</div>
     )

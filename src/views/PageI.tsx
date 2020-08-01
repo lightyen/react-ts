@@ -4,7 +4,7 @@ import Page from "~/components/Page"
 import { FormattedMessage } from "react-intl"
 import "twin.macro"
 
-const PageI: React.FC = () => {
+const PageI = () => {
 	return (
 		<Page>
 			<h2 tw="text-3xl mt-8 mb-2 font-black capitalize">

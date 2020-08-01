@@ -7,7 +7,7 @@ import "twin.macro"
 
 const colors = ["#48bb78", "#4299e1", "#f56565", "#ed8936", "#9f7aea"]
 
-const PageH: React.FC = () => {
+const PageH = () => {
 	return (
 		<Page>
 			<h2 tw="text-3xl mt-8 mb-2 font-black capitalize">
@@ -21,7 +21,7 @@ const PageH: React.FC = () => {
 // https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver
 const ResizeObserver = window["ResizeObserver"]
 
-const Carousel: React.FC = () => {
+const Carousel = () => {
 	const [isDragging, setDragging] = React.useState(false)
 	const dragOriginX = useMotionValue(0)
 	const x = useMotionValue(0)

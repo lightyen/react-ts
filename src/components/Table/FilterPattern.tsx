@@ -34,7 +34,7 @@ interface FilterInputProps {
 	onCancel(): void
 }
 
-export const FilterPattern: React.FC<FilterInputProps> = ({ tabIndex, label, onChange, onCancel, id, fid }) => {
+export const FilterPattern = ({ tabIndex, label, onChange, onCancel, id, fid }: FilterInputProps) => {
 	const container = React.useRef<HTMLDivElement>()
 	const inputRef = React.useRef<HTMLInputElement>()
 	const intl = useIntl()

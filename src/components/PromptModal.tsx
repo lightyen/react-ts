@@ -8,7 +8,7 @@ interface Props {
 	when?: boolean
 }
 
-export const PromptModal: React.FC<Props> = ({ when = true }) => {
+export const PromptModal = ({ when = true }: Props) => {
 	const [modalVisible, setModalVisible] = React.useState(false)
 	const location = useLocation()
 	const history = useHistory()

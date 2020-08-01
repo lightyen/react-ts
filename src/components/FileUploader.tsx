@@ -65,7 +65,7 @@ async function handleSubmit(e: React.DragEvent) {
 	}
 }
 
-const FileUploader: React.FC = () => {
+const FileUploader = () => {
 	const inputRef = React.useRef<HTMLInputElement>()
 	const uuid = React.useRef(uuidv4())
 	React.useEffect(() => {

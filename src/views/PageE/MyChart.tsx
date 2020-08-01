@@ -18,7 +18,7 @@ interface MyPieProps {
 	theme?: Theme
 }
 
-const MyPie: React.FC<MyPieProps> = ({ data, width, height, theme }) => (
+const MyPie = ({ data, width, height, theme }: MyPieProps) => (
 	<Pie
 		data={data}
 		width={width}
@@ -143,7 +143,7 @@ const MyPie: React.FC<MyPieProps> = ({ data, width, height, theme }) => (
 	/>
 )
 
-const MyChart: React.FC<{ width: number; height: number }> = ({ width, height }) => {
+const MyChart = ({ width, height }: { width: number; height: number }) => {
 	const data: PieDatum[] = [
 		{
 			id: "javascript",

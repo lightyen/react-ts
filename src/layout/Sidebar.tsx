@@ -35,7 +35,7 @@ const StyledNavLink = styled(NavLink)`
 	}
 `
 
-const RippleNavLink: React.FC<NavLinkProps> = props => {
+const RippleNavLink = (props: NavLinkProps) => {
 	const ref = useRipple<HTMLAnchorElement>()
 	return <StyledNavLink ref={ref} {...props} />
 }
@@ -45,7 +45,7 @@ interface Props {
 	width: number
 }
 
-export const Sidebar: React.FC<Props> = ({ children, top, width }) => {
+export const Sidebar = ({ top, width }: Props) => {
 	const collapsed = useSelector(state => state.app.collapsed)
 	return (
 		<nav

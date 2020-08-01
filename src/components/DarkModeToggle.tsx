@@ -63,7 +63,7 @@ const Slider = styled.label`
 	}
 `
 
-const DarkModeToggle: React.FC = () => {
+const DarkModeToggle = () => {
 	const name = useSelector(state => state.theme.name)
 	const { changeTheme } = useAction().theme
 	const uuid = React.useRef(uuidv4())

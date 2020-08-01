@@ -10,13 +10,9 @@ const PageDetectScrollbar = styled.div<{ hasScrollbar: boolean }>`
 	color: rgb(var(--theme-text-surface));
 `
 
-const Page: React.FC = ({ children, ...props }) => {
+const Page = ({ children }: { children: React.ReactNode }) => {
 	const hasScrollbar = useScollBarVisible()
-	return (
-		<PageDetectScrollbar hasScrollbar={hasScrollbar} {...props}>
-			{children}
-		</PageDetectScrollbar>
-	)
+	return <PageDetectScrollbar hasScrollbar={hasScrollbar}>{children}</PageDetectScrollbar>
 }
 
 export default Page

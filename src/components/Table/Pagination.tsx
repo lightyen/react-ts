@@ -42,9 +42,10 @@ interface PageItemProps {
 	active?: boolean
 	disabled?: boolean
 	onClick?(): void
+	children: React.ReactNode
 }
 
-const PageItem: React.FC<PageItemProps> = ({ children, ...props }) => {
+const PageItem = ({ children, ...props }: PageItemProps) => {
 	return (
 		<PageLinkItem>
 			<PageLink {...props}>{children}</PageLink>
@@ -52,7 +53,7 @@ const PageItem: React.FC<PageItemProps> = ({ children, ...props }) => {
 	)
 }
 
-export const Pagination: React.FC<PaginationProps> = ({
+export const Pagination = ({
 	pageIndex,
 	links,
 	pageCount,
@@ -63,7 +64,7 @@ export const Pagination: React.FC<PaginationProps> = ({
 	hasMorePrevPage,
 	disableNext,
 	disablePrevious,
-}) => {
+}: PaginationProps) => {
 	return (
 		<ul tw="flex mb-3 md:mb-0">
 			<PageItem disabled={disablePrevious} onClick={() => gotoPage(0)}>

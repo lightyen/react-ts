@@ -4,7 +4,7 @@ import { faGithub } from "@fortawesome/free-brands-svg-icons/faGithub"
 import { motion } from "framer-motion"
 import "twin.macro"
 
-export const Footer: React.FC = () => {
+export const Footer = () => {
 	return (
 		<footer tw="px-6 py-3 flex justify-end">
 			<motion.a

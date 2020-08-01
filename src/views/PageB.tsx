@@ -61,7 +61,7 @@ const data: Item[] = [
 	{ title: "Intro to JavaScript", author: "Chris", views: 1280 },
 ]
 
-const PageB: React.FC = () => {
+const PageB = () => {
 	const intl = useIntl()
 	const bk = useSelector(state => state.app.breakpoint)
 	function getMaxPageCount(breakpoint: BreakingPoint) {
