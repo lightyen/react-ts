@@ -115,7 +115,7 @@ const CodeMirror = forwardRef<Editor, Props>(({ options, onChange, css, ...props
 	)
 })
 
-const PageG = () => {
+const EditorPage = () => {
 	const ref = useRef<Editor>()
 
 	const cache = React.useRef(
@@ -168,4 +168,4 @@ const Card = () => {
 	)
 }
 
-export default PageG
+export default EditorPage

@@ -131,8 +131,8 @@ const ModalContent = ({
 		<motion.div
 			css={{ height: "100%", backdropFilter: "blur(1px)" }}
 			initial={{ opacity: 0 }}
-			animate={{ opacity: 1 }}
-			exit={exitAnime ? { opacity: 0 } : undefined}
+			animate={{ opacity: 1, transition: { duration: 0.1 } }}
+			exit={exitAnime ? { opacity: 0, transition: { duration: 0.1 } } : undefined}
 		>
 			<Cover>
 				<ModalBox ref={ref} {...props}>

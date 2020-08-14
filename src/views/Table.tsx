@@ -61,7 +61,7 @@ const data: Item[] = [
 	{ title: "Intro to JavaScript", author: "Chris", views: 1280 },
 ]
 
-const PageB = () => {
+const TablePage = () => {
 	const intl = useIntl()
 	const bk = useSelector(state => state.app.breakpoint)
 	function getMaxPageCount(breakpoint: BreakingPoint) {
@@ -177,4 +177,4 @@ const PageB = () => {
 	)
 }
 
-export default PageB
+export default TablePage

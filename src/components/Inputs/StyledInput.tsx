@@ -9,13 +9,19 @@ const Input = styled.input<{ invalid?: boolean; valid?: boolean }>`
 	& ~ [aria-label=".valid-message"] {
 		${tw`mt-1 text-green-500 text-xs italic`}
 	}
-	${tw`bg-white border border-gray-300 rounded-lg py-2 px-4 block w-full`}
+	${tw`border border-gray-300 rounded-lg py-2 px-4 block w-full`}
+	background: rgb(var(--theme-background));
 	:focus {
 		${tw`outline-none shadow-outline`}
 	}
-	${({ invalid }) => invalid && tw`bg-red-200 border-red-500`}
+	${({ invalid }) => invalid && "background: rgba(var(--theme-error), 0.3);"}
 	:focus {
-		${({ invalid }) => invalid && tw`bg-red-100`}
+		${({ invalid }) => {
+			if (invalid) {
+				return "background: rgba(var(--theme-error), 0.8); color: rgba(var(--theme-text-error), 0.4);"
+			}
+			return null
+		}}
 		${({ invalid }) => invalid && `box-shadow: 0 0 0 3px rgba(225, 66, 66, 0.507);`}
 	}
 

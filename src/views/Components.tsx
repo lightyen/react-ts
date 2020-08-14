@@ -12,7 +12,7 @@ import Page from "~/components/Page"
 import tw from "twin.macro"
 import { css } from "@emotion/core"
 
-const PageA = () => {
+const ComponentsPage = () => {
 	const [dateRange, setDateRange] = React.useState<DateRange>(() => {
 		const now = new Date()
 		return { startDate: startOfDay(subDays(now, 2)), endDate: endOfDay(now) }
@@ -182,4 +182,4 @@ const PageA = () => {
 	)
 }
 
-export default PageA
+export default ComponentsPage

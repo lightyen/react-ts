@@ -59,7 +59,7 @@ window.customElements.define(
 	},
 )
 
-const PageF = () => {
+const WebComponentPage = () => {
 	return (
 		<Page>
 			<x-search class="hover:underline" search="Test"></x-search>
@@ -67,4 +67,4 @@ const PageF = () => {
 	)
 }
 
-export default PageF
+export default WebComponentPage

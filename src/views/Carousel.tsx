@@ -7,7 +7,7 @@ import "twin.macro"
 
 const colors = ["#48bb78", "#4299e1", "#f56565", "#ed8936", "#9f7aea"]
 
-const PageH = () => {
+const CarouselPage = () => {
 	return (
 		<Page>
 			<h2 tw="text-3xl mt-8 mb-2 font-black capitalize">
@@ -151,4 +151,4 @@ const Carousel = () => {
 	)
 }
 
-export default PageH
+export default CarouselPage

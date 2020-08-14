@@ -1,31 +1,30 @@
 import React from "react"
+import { FormattedMessage } from "react-intl"
 import { RouteProps } from "react-router-dom"
 import Home from "~/views/Home"
-import PageA from "~/views/PageA"
-import PageB from "~/views/PageB"
-import PageC from "~/views/PageC"
-import PageD from "~/views/PageD"
-import PageE from "~/views/PageE"
-import PageF from "~/views/PageF"
-import PageG from "~/views/PageG"
-import PageH from "~/views/PageH"
-import PageI from "~/views/PageI"
+import Components from "~/views/Components"
+import VirtualList from "~/views/VirtualList"
+import Table from "~/views/Table"
+import Transition from "~/views/Transition"
+import WebComponent from "~/views/WebComponent"
+import Editor from "~/views/Editor"
+import Carousel from "~/views/Carousel"
+import ColorPicker from "~/views/ColorPicker"
 
 interface RouteItem extends RouteProps {
 	name: React.ReactNode
 }
 
 export const routes: RouteItem[] = [
-	{ path: "/", exact: true, name: "Home", component: Home },
-	{ path: "/page-a", name: <div>Page A</div>, component: PageA },
-	{ path: "/page-b", name: <div>Page B</div>, component: PageB },
-	{ path: "/page-c", name: <div>Page C</div>, component: PageC },
-	{ path: "/page-d", name: <div>Page D</div>, component: PageD },
-	{ path: "/page-e", name: <div>Page E</div>, component: PageE },
-	{ path: "/page-f", name: <div>Page F</div>, component: PageF },
-	{ path: "/page-g", name: <div>Page G</div>, component: PageG },
-	{ path: "/page-h", name: <div>Page H</div>, component: PageH },
-	{ path: "/page-i", name: <div>Page I</div>, component: PageI },
+	{ path: "/", exact: true, name: <FormattedMessage id="home" />, component: Home },
+	{ path: "/components", name: <FormattedMessage id="nav_components" />, component: Components },
+	{ path: "/virtual-list", name: <FormattedMessage id="nav_virtual_list" />, component: VirtualList },
+	{ path: "/table", name: <FormattedMessage id="nav_table" />, component: Table },
+	{ path: "/transition", name: <FormattedMessage id="nav_transition" />, component: Transition },
+	{ path: "/web-component", name: <FormattedMessage defaultMessage="Web Components" />, component: WebComponent },
+	{ path: "/codemirror", name: <FormattedMessage id="nav_editor" />, component: Editor },
+	{ path: "/carousel", name: <FormattedMessage id="nav_carousel" />, component: Carousel },
+	{ path: "/color-picker", name: <FormattedMessage id="nav_color_picker" />, component: ColorPicker },
 ]
 
 export function getRouteName(url: string): React.ReactNode {

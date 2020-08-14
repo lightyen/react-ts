@@ -30,7 +30,7 @@ const Box = ({ value, onRemove }: { value: number; onRemove: (v: number) => void
 	)
 }
 
-const PageD = () => {
+const TransitionPage = () => {
 	const [data, setData] = React.useState([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
 	return (
 		<Page>
@@ -57,4 +57,4 @@ const PageD = () => {
 	)
 }
 
-export default PageD
+export default TransitionPage

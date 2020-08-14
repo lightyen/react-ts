@@ -204,7 +204,7 @@ const Information = ({ scrollTop, start, end, accHeights, scrollbar }: VirtualSc
 	)
 }
 
-const PageC = () => {
+const VirtualListPage = () => {
 	const [state, dispatch] = React.useReducer(reducer, null, () => ({ offsetTop: 0, data: createData() }))
 	const value = React.useMemo(() => ({ ...state, dispatch }), [state, dispatch])
 	return (
@@ -219,4 +219,4 @@ const PageC = () => {
 	)
 }
 
-export default PageC
+export default VirtualListPage

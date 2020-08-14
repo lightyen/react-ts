@@ -3,7 +3,7 @@ import { FormattedMessage } from "react-intl"
 import Page from "~/components/Page"
 import "twin.macro"
 
-const Home = () => {
+const HomePage = () => {
 	return (
 		<Page>
 			<FormattedMessage id="test" values={{ name: "React" }} />
@@ -11,4 +11,4 @@ const Home = () => {
 	)
 }
 
-export default Home
+export default HomePage

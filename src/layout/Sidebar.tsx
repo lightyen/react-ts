@@ -8,7 +8,6 @@ import { faThLarge } from "@fortawesome/free-solid-svg-icons/faThLarge"
 import { faThList } from "@fortawesome/free-solid-svg-icons/faThList"
 import { faInfinity } from "@fortawesome/free-solid-svg-icons/faInfinity"
 import { faDiceD6 } from "@fortawesome/free-solid-svg-icons/faDiceD6"
-import { faDiceD20 } from "@fortawesome/free-solid-svg-icons/faDiceD20"
 import { faBox } from "@fortawesome/free-solid-svg-icons/faBox"
 import { faCode } from "@fortawesome/free-solid-svg-icons/faCode"
 import { useRipple } from "~/components/Button/hooks"
@@ -65,55 +64,49 @@ export const Sidebar = ({ top, width }: Props) => {
 			]}
 		>
 			<ul>
-				<RippleNavLink to="/page-a">
+				<RippleNavLink to="/components">
 					<div tw="w-8 mr-1 text-center">
 						<FontAwesomeIcon icon={faThLarge} />
 					</div>
 					<FormattedMessage id="nav_components" />
 				</RippleNavLink>
-				<RippleNavLink to="/page-b">
-					<div tw="w-8 mr-1 text-center">
-						<FontAwesomeIcon icon={faThList} />
-					</div>
-					<FormattedMessage id="nav_table" />
-				</RippleNavLink>
-				<RippleNavLink to="/page-c">
+				<RippleNavLink to="/virtual-list">
 					<div tw="w-8 mr-1 text-center">
 						<FontAwesomeIcon icon={faInfinity} />
 					</div>
 					<FormattedMessage id="nav_virtual_list" />
 				</RippleNavLink>
-				<RippleNavLink to="/page-d">
+				<RippleNavLink to="/table">
+					<div tw="w-8 mr-1 text-center">
+						<FontAwesomeIcon icon={faThList} />
+					</div>
+					<FormattedMessage id="nav_table" />
+				</RippleNavLink>
+				<RippleNavLink to="/transition">
 					<div tw="w-8 mr-1 text-center">
 						<FontAwesomeIcon icon={faDiceD6} />
 					</div>
 					<FormattedMessage id="nav_transition" />
 				</RippleNavLink>
-				<RippleNavLink to="/page-e">
-					<div tw="w-8 mr-1 text-center">
-						<FontAwesomeIcon icon={faDiceD20} />
-					</div>
-					<FormattedMessage id="nav_chart" />
-				</RippleNavLink>
-				<RippleNavLink to="/page-f">
+				<RippleNavLink to="/web-component">
 					<div tw="w-8 mr-1 text-center">
 						<FontAwesomeIcon icon={faBox} />
 					</div>
 					<FormattedMessage id="nav_web_component" />
 				</RippleNavLink>
-				<RippleNavLink to="/page-g">
+				<RippleNavLink to="/codemirror">
 					<div tw="w-8 mr-1 text-center">
 						<FontAwesomeIcon icon={faCode} />
 					</div>
 					<FormattedMessage id="nav_editor" />
 				</RippleNavLink>
-				<RippleNavLink to="/page-h">
+				<RippleNavLink to="/carousel">
 					<div tw="w-8 mr-1 text-center">
 						<FontAwesomeIcon icon={faCode} />
 					</div>
 					<FormattedMessage id="nav_carousel" />
 				</RippleNavLink>
-				<RippleNavLink to="/page-i">
+				<RippleNavLink to="/color-picker">
 					<div tw="w-8 mr-1 text-center">
 						<FontAwesomeIcon icon={faCode} />
 					</div>
