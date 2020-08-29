@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBars } from "@fortawesome/free-solid-svg-icons/faBars"
 import { FormattedMessage } from "react-intl"
-import { DebounceValidatedInput } from "~/components/Inputs/DebounceValidatedInput"
 import { Modal } from "~/components/Modal"
 import { startOfDay, endOfDay, subDays } from "date-fns"
 import { CustomDateRangePicker, DateRange } from "~/components/DateRangePicker"
@@ -11,13 +12,42 @@ import { RippleButton } from "~/components/Button"
 import Page from "~/components/Page"
 import tw from "twin.macro"
 import { css } from "@emotion/core"
+import StyledInput from "~/components/StyledInput"
+import { useForm } from "react-hook-form"
+
+function useDebounce<T extends (...args: any[]) => void>(cb: T, delay: number) {
+	const handle = React.useRef<number>()
+	return React.useCallback(
+		(...args: Parameters<T>) => {
+			window.clearTimeout(handle.current)
+			handle.current = window.setTimeout(cb, delay, args)
+		},
+		[cb, delay],
+	)
+}
+
+function debounceValidate<T extends (...args: any[]) => any>(cb: T, delay: number): (...args: any[]) => Promise<any> {
+	let h: number
+	return (...args: any[]) =>
+		new Promise<any>(resolve => {
+			window.clearTimeout(h)
+			h = window.setTimeout(() => resolve(cb(...args)), delay)
+		})
+}
+
+interface FormData {
+	test: string
+}
 
 const ComponentsPage = () => {
 	const [dateRange, setDateRange] = React.useState<DateRange>(() => {
 		const now = new Date()
 		return { startDate: startOfDay(subDays(now, 2)), endDate: endOfDay(now) }
 	})
+	const { register, handleSubmit, errors } = useForm<FormData>()
 	const [value, setValue] = React.useState("")
+	const [submitedValue, setSubmitedValue] = React.useState("")
+	const debounceChange = useDebounce(e => setValue(e), 500)
 	const [open, setOpen] = React.useState(false)
 	const [open2, setOpen2] = React.useState(false)
 
@@ -98,14 +128,31 @@ const ComponentsPage = () => {
 				<FormattedMessage id="input" />
 				{value ? `: ${value}` : ""}
 			</h3>
-			<div tw="mb-6">
-				<DebounceValidatedInput
+			<form
+				tw="mb-6"
+				onSubmit={handleSubmit(data => {
+					setSubmitedValue(data.test)
+				})}
+			>
+				<StyledInput
 					placeholder="text"
-					defaultValue={value}
-					validator={e => !e && { error: ["Value is required."] }}
-					onChange={v => setValue(v)}
+					ref={register({
+						required: { value: true, message: "Value is required." },
+						// validate: debounceValidate(data => {
+						// 	if (!data) {
+						// 		return "Value is required."
+						// 	}
+						// 	return null
+						// }, 500),
+					})}
+					name="test"
+					autoComplete="off"
+					// onChange={e => debounceChange(e.target.value)}
+					invalid={!!errors.test}
 				/>
-			</div>
+				{errors.test && <p aria-label="invalid-message">{errors.test.message}</p>}
+				{submitedValue && <p>{submitedValue}</p>}
+			</form>
 			<h3 tw="text-xl mt-6 mb-3 font-bold capitalize">
 				<FormattedMessage id="modal" />
 			</h3>
