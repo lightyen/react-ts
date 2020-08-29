@@ -13,8 +13,7 @@ import tw from "twin.macro"
 import { useSelector } from "~/store/hooks"
 
 const Button = styled.button`
-	opacity: 0.8;
-	transition: all 200ms ease;
+	${tw`transition ease-in-out duration-200 opacity-75`}
 `
 
 const LanguageSelect = () => {

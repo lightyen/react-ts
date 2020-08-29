@@ -3,13 +3,18 @@ import { render } from "react-dom"
 import App from "~/App"
 import { createInstance } from "localforage"
 
-const store = createInstance({ name: "app" })
+import { makeStore } from "~/store/store"
 
-// store.setItem("test", "helloworld")
+const store = createInstance({ name: "app" })
 
 store.getItem("test", (err, value) => {
 	console.log(typeof value)
-	render(<App />, document.getElementById("root"))
+	render(
+		<React.StrictMode>
+			<App store={makeStore()} />
+		</React.StrictMode>,
+		document.getElementById("root"),
+	)
 })
 
 import TestWorker from "./test.worker"

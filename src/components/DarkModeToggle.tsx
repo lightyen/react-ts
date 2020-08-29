@@ -17,7 +17,7 @@ const Slider = styled.label`
 	width: 3.6rem;
 	height: 1.5rem;
 	border-radius: 9999px;
-	transition: all 200ms ease;
+	${tw`transition ease-in-out duration-200`}
 
 	position: relative;
 	display: flex;
@@ -36,7 +36,7 @@ const Slider = styled.label`
 
 	&::after {
 		content: "";
-		transition: all 200ms ease;
+		${tw`transition ease-in-out duration-200`}
 		width: 1.2rem;
 		height: 1.2rem;
 		top: 0.15rem;

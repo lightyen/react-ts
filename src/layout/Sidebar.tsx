@@ -49,11 +49,10 @@ export const Sidebar = ({ top, width }: Props) => {
 	return (
 		<nav
 			css={[
-				tw`fixed overflow-x-hidden`,
+				tw`fixed overflow-x-hidden transition-all ease-in-out duration-200`,
 				css`
 					background: rgb(var(--theme-primary));
 					color: rgb(var(--theme-text-primary));
-					transition: all 200ms ease;
 				`,
 				{
 					height: `calc(100vh - ${top}px)`,

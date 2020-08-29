@@ -28,7 +28,7 @@ export default function (): Configuration {
 			NODE_ENV: "development",
 			PUBLIC_URL: "",
 			APP_NAME: packageJSON.name,
-			TAILWIND_CONFIG: JSON.stringify(require(path.resolve(workingDirectory, "tailwind.config"))),
+			TAILWIND_CONFIG: JSON.stringify(require(path.resolve(workingDirectory, "tailwind"))),
 		}),
 		new MiniCssExtractPlugin({
 			filename: join_network(outputCSS, "[name].css?[hash]"),

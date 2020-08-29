@@ -8,10 +8,7 @@ import styled from "@emotion/styled"
 import tw from "twin.macro"
 
 const AddFilerButton = styled.button`
-	transition-property: background-color, box-shadow;
-	transition-duration: 200ms;
-	transition-timing-function: ease;
-	${tw`rounded bg-green-500 px-4 py-2 text-white font-bold leading-none whitespace-no-wrap`}
+	${tw`transition ease-in-out duration-200 rounded bg-green-500 px-4 py-2 text-white font-bold leading-none whitespace-no-wrap`}
 
 	:hover,:focus {
 		box-shadow: 0 0 0 3px rgba(72, 187, 120, 0.5);

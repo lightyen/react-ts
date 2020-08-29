@@ -1,13 +1,17 @@
 import React from "react"
-import { makeStore } from "~/store/store"
+import type { Store } from "redux"
 import { Provider } from "react-redux"
-import StyledThemeProvider from "~/components/StyledThemeProvider"
-import LanguageProvider from "~/components/LanguageProvider"
 import AppLayout from "~/layout/AppLayout"
 import { Global, css } from "@emotion/core"
 import tw from "twin.macro"
 
+import { useSelector } from "~/store/hooks"
+import { ThemeProvider } from "emotion-theming"
+import { IntlProvider } from "react-intl"
+import { getLocaleMessages } from "~/store/i18n/languages"
+
 import FiraCodeFont from "assets/fonts/FiraCode-Regular.woff2"
+
 import "tailwindcss/dist/base.min.css"
 
 const globalStyle = css`
@@ -22,8 +26,8 @@ const globalStyle = css`
 		Apple LiGothic Medium, sans-serif;
 	}
 	/* ::selection {
-	background: rgb(115, 80, 196);
-	@apply text-gray-100;
+		background: rgb(115, 80, 196);
+		${tw`text-gray-100`}
 	} */
 	button:-moz-focusring,
 	[type="button"]:-moz-focusring,
@@ -39,17 +43,27 @@ const globalStyle = css`
 	}
 `
 
-export default function App() {
+const StyledThemeProvider = ({ children }: { children: React.ReactNode }) => {
+	const theme = useSelector(state => state.theme)
+	return <ThemeProvider theme={theme}>{children}</ThemeProvider>
+}
+
+const LanguageProvider = ({ children }: { children: React.ReactNode }) => {
+	const locale = useSelector(state => state.i18n.locale)
 	return (
-		<React.StrictMode>
-			<Global styles={globalStyle} />
-			<Provider store={makeStore()}>
-				<StyledThemeProvider>
-					<LanguageProvider>
-						<AppLayout />
-					</LanguageProvider>
-				</StyledThemeProvider>
-			</Provider>
-		</React.StrictMode>
+		<IntlProvider locale={locale} key={locale} messages={getLocaleMessages(locale)}>
+			{children}
+		</IntlProvider>
 	)
 }
+
+export default ({ store }: { store: Store }) => (
+	<Provider store={store}>
+		<Global styles={globalStyle} />
+		<StyledThemeProvider>
+			<LanguageProvider>
+				<AppLayout />
+			</LanguageProvider>
+		</StyledThemeProvider>
+	</Provider>
+)

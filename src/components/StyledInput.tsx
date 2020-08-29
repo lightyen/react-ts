@@ -7,14 +7,13 @@ interface Props {
 }
 
 export default styled.input<Props>`
-	transition: all ease 160ms;
+	${tw`rounded-lg py-2 px-4 block w-full transition ease-in-out duration-200`}
 	& ~ [aria-label="invalid-message"] {
 		${tw`mt-1 text-red-500 text-xs italic`}
 	}
 	& ~ [aria-label=".valid-message"] {
 		${tw`mt-1 text-green-500 text-xs italic`}
 	}
-	${tw`rounded-lg py-2 px-4 block w-full`}
 	background: rgb(var(--theme-background));
 	:focus {
 		${tw`outline-none shadow-outline`}
