@@ -2,7 +2,7 @@ import React from "react"
 import { BrowserRouter, RouteProps, RedirectProps, Redirect, Route, Switch } from "react-router-dom"
 import { Sidebar } from "./Sidebar"
 import { Header } from "./Header"
-import { AppContainer } from "./AppContainer"
+import AppMain from "./AppMain"
 import { motion } from "framer-motion"
 import Login from "~/pages/Login"
 import Page404 from "~/pages/404"
@@ -32,7 +32,7 @@ const AppLayout = () => {
 		<div tw="h-screen flex flex-col relative">
 			<Header height={h} />
 			<Sidebar top={h} width={w} />
-			<AppContainer headerHeight={h} sidebarWidth={w} />
+			<AppMain headerHeight={h} sidebarWidth={w} />
 		</div>
 	)
 }

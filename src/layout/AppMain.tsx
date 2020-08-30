@@ -9,14 +9,16 @@ import { MotionRoute, MotionRedirect } from "~/components/MotionReactRouter"
 import { css } from "@emotion/core"
 import tw from "twin.macro"
 
-const AppRouter = () => {
+const Routes = () => {
 	const location = useLocation()
 	return (
 		<AnimatePresence exitBeforeEnter>
 			<Switch location={location} key={location.pathname}>
-				{routes.map((props, i) => {
-					return <MotionRoute key={i} {...props} />
-				})}
+				<React.Suspense fallback={null}>
+					{routes.map((props, i) => {
+						return <MotionRoute key={i} {...props} />
+					})}
+				</React.Suspense>
 				<MotionRedirect to="/404" />
 			</Switch>
 		</AnimatePresence>
@@ -28,7 +30,7 @@ interface Props {
 	sidebarWidth: number
 }
 
-export const AppContainer = ({ headerHeight, sidebarWidth }: Props) => {
+export default ({ headerHeight, sidebarWidth }: Props) => {
 	const collapsed = useSelector(state => state.app.collapsed)
 	return (
 		<ScrollBar
@@ -46,7 +48,7 @@ export const AppContainer = ({ headerHeight, sidebarWidth }: Props) => {
 			]}
 		>
 			<article tw="flex-grow flex flex-col">
-				<AppRouter />
+				<Routes />
 			</article>
 			<Footer />
 		</ScrollBar>

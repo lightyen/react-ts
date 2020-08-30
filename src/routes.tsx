@@ -1,30 +1,54 @@
 import React from "react"
 import { FormattedMessage } from "react-intl"
 import { RouteProps } from "react-router-dom"
-import Home from "~/views/Home"
-import Components from "~/views/Components"
-import VirtualList from "~/views/VirtualList"
-import Table from "~/views/Table"
-import Transition from "~/views/Transition"
-import WebComponent from "~/views/WebComponent"
-import Editor from "~/views/Editor"
-import Carousel from "~/views/Carousel"
-import ColorPicker from "~/views/ColorPicker"
 
 interface RouteItem extends RouteProps {
 	name: React.ReactNode
 }
 
 export const routes: RouteItem[] = [
-	{ path: "/", exact: true, name: <FormattedMessage id="home" />, component: Home },
-	{ path: "/components", name: <FormattedMessage id="nav_components" />, component: Components },
-	{ path: "/virtual-list", name: <FormattedMessage id="nav_virtual_list" />, component: VirtualList },
-	{ path: "/table", name: <FormattedMessage id="nav_table" />, component: Table },
-	{ path: "/transition", name: <FormattedMessage id="nav_transition" />, component: Transition },
-	{ path: "/web-component", name: <FormattedMessage defaultMessage="Web Components" />, component: WebComponent },
-	{ path: "/codemirror", name: <FormattedMessage id="nav_editor" />, component: Editor },
-	{ path: "/carousel", name: <FormattedMessage id="nav_carousel" />, component: Carousel },
-	{ path: "/color-picker", name: <FormattedMessage id="nav_color_picker" />, component: ColorPicker },
+	{
+		path: "/",
+		exact: true,
+		component: React.lazy(() => import("~/views/Home")),
+		name: <FormattedMessage id="home" />,
+	},
+	{
+		path: "/components",
+		component: React.lazy(() => import("~/views/Components")),
+		name: <FormattedMessage id="nav_components" />,
+	},
+	{
+		path: "/virtual-list",
+		component: React.lazy(() => import("~/views/VirtualList")),
+		name: <FormattedMessage id="nav_virtual_list" />,
+	},
+	{ path: "/table", component: React.lazy(() => import("~/views/Table")), name: <FormattedMessage id="nav_table" /> },
+	{
+		path: "/transition",
+		component: React.lazy(() => import("~/views/Transition")),
+		name: <FormattedMessage id="nav_transition" />,
+	},
+	{
+		path: "/web-component",
+		component: React.lazy(() => import("~/views/WebComponent")),
+		name: <FormattedMessage defaultMessage="Web Components" />,
+	},
+	{
+		path: "/codemirror",
+		component: React.lazy(() => import("~/views/Editor")),
+		name: <FormattedMessage id="nav_editor" />,
+	},
+	{
+		path: "/carousel",
+		component: React.lazy(() => import("~/views/Carousel")),
+		name: <FormattedMessage id="nav_carousel" />,
+	},
+	{
+		path: "/color-picker",
+		component: React.lazy(() => import("~/views/ColorPicker")),
+		name: <FormattedMessage id="nav_color_picker" />,
+	},
 ]
 
 export function getRouteName(url: string): React.ReactNode {
