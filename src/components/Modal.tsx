@@ -1,7 +1,7 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import { motion, AnimatePresence } from "framer-motion"
-import styled from "@emotion/styled"
+import { motion, AnimatePresence, Variants } from "framer-motion"
+import { css } from "@emotion/core"
 import tw from "twin.macro"
 
 interface Props extends ModalContentProps {
@@ -9,13 +9,7 @@ interface Props extends ModalContentProps {
 	afterClose?: () => void
 }
 
-export const Modal = ({
-	children,
-	open = false,
-	exitAnime = true,
-	afterClose,
-	...rest
-}: React.PropsWithChildren<Props>) => {
+export default ({ children, open = false, exitAnime = true, afterClose, ...rest }: React.PropsWithChildren<Props>) => {
 	const root = document.getElementById("root")
 	const modalRoot = document.getElementById("modal-root")
 	const element = React.useRef(document.createElement("div"))
@@ -96,18 +90,22 @@ interface ModalContentProps {
 	onMouseDownOutside?: (e: MouseEvent) => void
 }
 
-const Cover = styled.div`
-	background-color: rgba(var(--theme-modal-cover-bg));
-	backdrop-filter: blur(1px);
-	z-index: 9999;
-	${tw`w-full h-full flex justify-center items-center`}
-`
+const container: Variants = {
+	hidden: { opacity: 0 },
+	visible: {
+		opacity: 1,
+		transition: {
+			when: "beforeChildren",
+		},
+	},
+	exit: { opacity: 0 },
+}
 
-const ModalBox = styled.div`
-	background-color: rgb(var(--theme-surface));
-	filter: drop-shadow(2px 2px 8px rgba(var(--theme-modal-shadow)));
-	${tw`w-64 rounded`}
-`
+const modal: Variants = {
+	hidden: { y: "5rem" },
+	visible: { y: "10rem" },
+	exit: { y: "10rem" },
+}
 
 const ModalContent = ({
 	children,
@@ -129,16 +127,31 @@ const ModalContent = ({
 
 	return (
 		<motion.div
-			css={{ height: "100%", backdropFilter: "blur(1px)" }}
-			initial={{ opacity: 0 }}
-			animate={{ opacity: 1, transition: { duration: 0.1 } }}
-			exit={exitAnime ? { opacity: 0, transition: { duration: 0.1 } } : undefined}
+			tw="w-screen h-screen flex justify-center items-start"
+			css={css`
+				background-color: rgba(var(--theme-modal-cover-bg));
+				backdrop-filter: blur(1px);
+				z-index: 9999;
+			`}
+			variants={container}
+			initial="hidden"
+			animate="visible"
+			exit={exitAnime ? "exit" : undefined}
 		>
-			<Cover>
-				<ModalBox ref={ref} {...props}>
-					{children}
-				</ModalBox>
-			</Cover>
+			<motion.div
+				ref={ref}
+				variants={modal}
+				css={[
+					tw`rounded`,
+					css`
+						background-color: rgb(var(--theme-surface));
+						filter: drop-shadow(2px 2px 8px rgba(var(--theme-modal-shadow)));
+					`,
+				]}
+				{...props}
+			>
+				{children}
+			</motion.div>
 		</motion.div>
 	)
 }

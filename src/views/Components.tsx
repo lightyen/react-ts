@@ -4,7 +4,7 @@ import React from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBars } from "@fortawesome/free-solid-svg-icons/faBars"
 import { FormattedMessage } from "react-intl"
-import { Modal } from "~/components/Modal"
+import Modal from "~/components/Modal"
 import { startOfDay, endOfDay, subDays } from "date-fns"
 import { CustomDateRangePicker, DateRange } from "~/components/DateRangePicker"
 import { PromptModal } from "~/components/PromptModal"
@@ -159,7 +159,7 @@ const ComponentsPage = () => {
 				<RippleButton variant="blue" tw="mr-3" onClick={e => setOpen(true)}>
 					<FormattedMessage id="modal" />
 				</RippleButton>
-				<Modal open={open} onMouseDownOutside={e => setOpen(false)}>
+				<Modal tw="w-1/2" open={open} onMouseDownOutside={e => setOpen(false)}>
 					<div tw="px-6 my-3">
 						<div tw="mt-4 mb-2">
 							<div tw="font-bold text-xl mb-2 capitalize">
@@ -184,7 +184,7 @@ const ComponentsPage = () => {
 				<RippleButton onClick={e => setOpen2(true)}>
 					<FormattedMessage id="modal" />
 				</RippleButton>
-				<Modal tw="w-3/4" open={open2} exitAnime={false} onMouseDownOutside={e => setOpen2(false)}>
+				<Modal tw="w-1/2" open={open2} exitAnime={false} onMouseDownOutside={e => setOpen2(false)}>
 					<div tw="px-6 my-3">
 						<div tw="mt-4 mb-2">
 							<div tw="font-bold text-xl mb-2 capitalize">

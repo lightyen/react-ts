@@ -1,7 +1,7 @@
 import React from "react"
 
 import { Prompt, useLocation, useHistory } from "react-router-dom"
-import { Modal } from "./Modal"
+import Modal from "./Modal"
 
 interface Props {
 	/** 是否要攔截路由跳轉？ */
