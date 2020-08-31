@@ -103,8 +103,8 @@ const container: Variants = {
 
 const modal: Variants = {
 	hidden: { y: "5rem" },
-	visible: { y: "10rem" },
-	exit: { y: "10rem" },
+	visible: { y: "10rem", transition: { ease: "backOut" } },
+	exit: { y: "12rem", transition: { ease: "backIn" } },
 }
 
 const ModalContent = ({
