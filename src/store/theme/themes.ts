@@ -101,7 +101,7 @@ export function prepareTheme(name = "", cached = false) {
 	const root = document.documentElement
 	const bg = chroma(theme.background)
 	const darkmode = bg.luminance() < 0.3
-	const cover = darkmode ? bg.brighten(3).alpha(0.5) : bg.darken(3).alpha(0.5)
+	const cover = darkmode ? bg.brighten(1).alpha(0.5) : bg.darken(3).alpha(0.5)
 	root.style.setProperty("--theme-modal-cover-bg", cover.rgba().join(","))
 	root.style.setProperty("--theme-modal-shadow", chroma(theme.background).alpha(0.2).rgba().join(","))
 	root.style.setProperty("--theme-shadow", chroma(theme.text.background).alpha(0.2).rgba().join(","))
