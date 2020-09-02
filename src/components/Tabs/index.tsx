@@ -5,7 +5,7 @@ import { NavLink as __NavLink } from "react-router-dom"
 import type { NavLinkProps } from "react-router-dom"
 
 const Link = styled(__NavLink)`
-	${tw`bg-white inline-block py-2 px-4 rounded-t text-blue-500 hover:text-blue-800 font-semibold focus:outline-none`}
+	${tw`bg-gray-100 inline-block py-2 px-4 rounded-t text-blue-500 hover:text-blue-800 font-semibold focus:outline-none`}
 	&.active {
 		${tw`border-l border-t border-r text-blue-700`}
 	}
@@ -28,4 +28,4 @@ export const TabLink = (props: NavLinkProps) => {
 	)
 }
 
-export const TabContent = tw.div`bg-white shadow rounded-b p-6`
+export const TabContent = tw.div`bg-gray-100 shadow rounded-b p-6`
