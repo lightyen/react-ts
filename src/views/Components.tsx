@@ -12,7 +12,7 @@ import { RippleButton } from "~/components/Button"
 import Page from "~/components/Page"
 import tw from "twin.macro"
 import { css } from "@emotion/core"
-import StyledInput from "~/components/StyledInput"
+import { FormGroup, Label, Field, InputText, ErrorMessage } from "~/components/Form"
 import { useForm } from "react-hook-form"
 
 function useDebounce<T extends (...args: any[]) => void>(cb: T, delay: number) {
@@ -124,33 +124,43 @@ const ComponentsPage = () => {
 				</div>
 			</div>
 			<h3 tw="text-xl mt-6 mb-3 font-bold capitalize">
-				<FormattedMessage id="input" />
-				{value ? `: ${value}` : ""}
+				<FormattedMessage id="form" />
 			</h3>
 			<form
-				tw="mb-6"
+				tw="mb-6 p-6 border border-gray-500"
 				onSubmit={handleSubmit(data => {
+					console.log(data)
 					setSubmitedValue(data.test)
 				})}
 			>
-				<StyledInput
-					placeholder="text"
-					ref={register({
-						required: { value: true, message: "Value is required." },
-						// validate: debounceValidate(data => {
-						// 	if (!data) {
-						// 		return "Value is required."
-						// 	}
-						// 	return null
-						// }, 500),
-					})}
-					name="test"
-					autoComplete="off"
-					// onChange={e => debounceChange(e.target.value)}
-					invalid={!!errors.test}
-				/>
-				{errors.test && <p aria-label="invalid-message">{errors.test.message}</p>}
-				{submitedValue && <p>{submitedValue}</p>}
+				<FormGroup>
+					<Label>Name</Label>
+					<Field>
+						<InputText
+							name="test"
+							placeholder="placeholder"
+							spellCheck="false"
+							invalid={!!errors.test}
+							ref={register({
+								required: { value: true, message: "Value is required." },
+								// validate: debounceValidate(data => {
+								// 	if (!data) {
+								// 		return "Value is required."
+								// 	}
+								// 	return null
+								// }, 500),
+							})}
+						/>
+						{errors.test?.type === "required" && (
+							<ErrorMessage>
+								<FormattedMessage id="invalid_required" />
+							</ErrorMessage>
+						)}
+					</Field>
+				</FormGroup>
+				<RippleButton variant="blue" tw="w-full md:w-auto">
+					<FormattedMessage id="submit" />
+				</RippleButton>
 			</form>
 			<h3 tw="text-xl mt-6 mb-3 font-bold capitalize">
 				<FormattedMessage id="modal" />

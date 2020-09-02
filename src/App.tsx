@@ -12,7 +12,7 @@ import { getLocaleMessages } from "~/store/i18n/languages"
 
 import FiraCodeFont from "assets/fonts/FiraCode-Regular.woff2"
 
-import "tailwindcss/dist/base.min.css"
+import "~/style.css"
 
 const globalStyle = css`
 	@font-face {

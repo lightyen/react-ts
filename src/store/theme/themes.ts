@@ -5,6 +5,7 @@ const colors = tailwind.theme.colors
 
 export const themes = {
 	light: {
+		name: "light",
 		primary: colors.blue[300],
 		primaryVariant: colors.blue[400],
 		secondary: colors.green[300],
@@ -31,6 +32,7 @@ export const themes = {
 		},
 	},
 	dark: {
+		name: "dark",
 		primary: colors.blue[900],
 		primaryVariant: colors.blue[800],
 		secondary: colors.green[900],
@@ -85,8 +87,10 @@ function setTheme(obj: Theme, prefix = "--theme") {
 	const root = document.documentElement
 	for (const key in obj) {
 		if (typeof obj[key] === "string") {
-			const color = chroma(obj[key])
-			root.style.setProperty(prefix + "-" + key.toLowerCase(), color.rgb().join(","))
+			try {
+				const color = chroma(obj[key])
+				root.style.setProperty(prefix + "-" + key.toLowerCase(), color.rgb().join(","))
+			} catch (e: unknown) {}
 		} else {
 			setTheme(obj[key], prefix + "-" + key.toLowerCase())
 		}
@@ -98,6 +102,7 @@ export function prepareTheme(name = "", cached = false) {
 	setTheme(theme)
 	document.body.style.backgroundColor = theme.background
 	document.body.style.color = theme.text.background
+	document.body.style.borderColor = theme.background
 	const root = document.documentElement
 	const bg = chroma(theme.background)
 	const darkmode = bg.luminance() < 0.3
