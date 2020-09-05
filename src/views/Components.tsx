@@ -14,6 +14,7 @@ import tw from "twin.macro"
 import { css } from "@emotion/core"
 import { FormGroup, Label, Field, InputText, ErrorMessage } from "~/components/Form"
 import { useForm } from "react-hook-form"
+import Skeleton from "~/components/Skeleton"
 
 function useDebounce<T extends (...args: any[]) => void>(cb: T, delay: number) {
 	const handle = React.useRef<number>()
@@ -35,8 +36,93 @@ function debounceValidate<T extends (...args: any[]) => any>(cb: T, delay: numbe
 		})
 }
 
-interface FormData {
+interface Data {
 	test: string
+}
+
+const SectionHeader = tw.h3`text-xl mt-6 mb-3 font-bold capitalize`
+
+const ModalButton = () => {
+	const [open, setOpen] = React.useState(false)
+	return (
+		<>
+			<RippleButton variant="blue" tw="mr-3" onClick={e => setOpen(true)}>
+				<FormattedMessage id="modal" />
+			</RippleButton>
+			<Modal tw="w-1/2" open={open} onMouseDownOutside={e => setOpen(false)}>
+				<div tw="px-6 my-3">
+					<div tw="mt-4 mb-2">
+						<div tw="font-bold text-xl mb-2 capitalize">
+							<FormattedMessage id="title" />
+						</div>
+					</div>
+					<div tw="h-12 mb-3">bla bla bla...</div>
+					<div tw="mb-3 flex justify-end">
+						<RippleButton
+							variant="blue"
+							onClick={e => {
+								e.preventDefault()
+								e.stopPropagation()
+								setOpen(false)
+							}}
+						>
+							<FormattedMessage id="ok" />
+						</RippleButton>
+					</div>
+				</div>
+			</Modal>
+		</>
+	)
+}
+
+const ModalButton2 = () => {
+	const [open2, setOpen2] = React.useState(false)
+	return (
+		<>
+			<RippleButton onClick={e => setOpen2(true)}>
+				<FormattedMessage id="modal" />
+			</RippleButton>
+			<Modal tw="w-1/2" open={open2} exitAnime={false} onMouseDownOutside={e => setOpen2(false)}>
+				<div tw="px-6 my-3">
+					<div tw="mt-4 mb-2">
+						<div tw="font-bold text-xl mb-2 capitalize">
+							<FormattedMessage id="title" />
+						</div>
+					</div>
+					<div tw="h-12 mb-3">ha ha ha...</div>
+					<div tw="mb-3 flex justify-end">
+						<RippleButton
+							variant="green"
+							tw="flex items-center"
+							onClick={e => {
+								e.preventDefault()
+								e.stopPropagation()
+								setOpen2(false)
+							}}
+						>
+							<svg
+								id="i-checkmark"
+								xmlns="http://www.w3.org/2000/svg"
+								viewBox="0 0 32 32"
+								width="16"
+								height="16"
+								fill="none"
+								stroke="currentcolor"
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								strokeWidth="4"
+							>
+								<path d="M2 20 L12 28 30 4" />
+							</svg>
+							<span tw="pl-2">
+								<FormattedMessage id="ok" />
+							</span>
+						</RippleButton>
+					</div>
+				</div>
+			</Modal>
+		</>
+	)
 }
 
 const ComponentsPage = () => {
@@ -44,12 +130,9 @@ const ComponentsPage = () => {
 		const now = new Date()
 		return { startDate: startOfDay(subDays(now, 2)), endDate: endOfDay(now) }
 	})
-	const { register, handleSubmit, errors } = useForm<FormData>()
+	const { register, handleSubmit, errors } = useForm<Data>()
 	const [value, setValue] = React.useState("")
-	const [submitedValue, setSubmitedValue] = React.useState("")
 	const debounceChange = useDebounce(e => setValue(e), 500)
-	const [open, setOpen] = React.useState(false)
-	const [open2, setOpen2] = React.useState(false)
 
 	return (
 		<Page>
@@ -57,9 +140,9 @@ const ComponentsPage = () => {
 			<h2 tw="text-3xl mt-8 mb-5 font-black capitalize">
 				<FormattedMessage id="nav_components" />
 			</h2>
-			<h3 tw="text-xl mt-6 mb-3 font-bold capitalize">
+			<SectionHeader>
 				<FormattedMessage id="button" />
-			</h3>
+			</SectionHeader>
 			<div tw="-mb-2">
 				<RippleButton tw="inline-block mr-2 mb-2">
 					<FormattedMessage id="button" />
@@ -78,9 +161,13 @@ const ComponentsPage = () => {
 					<FormattedMessage id="button" />
 				</RippleButton>
 			</div>
-			<h3 tw="text-xl mt-6 mb-3 font-bold capitalize">
+			<SectionHeader>Skeleton</SectionHeader>
+			<Skeleton pending={true}>
+				<div>Test</div>
+			</Skeleton>
+			<SectionHeader>
 				<FormattedMessage id="date_range_picker" />
-			</h3>
+			</SectionHeader>
 			<div tw="mb-6">
 				<CustomDateRangePicker
 					tw="font-normal capitalize py-2 px-3 rounded"
@@ -99,9 +186,9 @@ const ComponentsPage = () => {
 					onChange={e => setDateRange(e)}
 				/>
 			</div>
-			<h3 tw="text-xl mt-6 mb-3 font-bold capitalize">
+			<SectionHeader>
 				<FormattedMessage id="card" />
-			</h3>
+			</SectionHeader>
 			<div
 				tw="max-w-sm mb-6 rounded overflow-hidden"
 				css={css`
@@ -123,14 +210,13 @@ const ComponentsPage = () => {
 					</p>
 				</div>
 			</div>
-			<h3 tw="text-xl mt-6 mb-3 font-bold capitalize">
+			<SectionHeader>
 				<FormattedMessage id="form" />
-			</h3>
+			</SectionHeader>
 			<form
 				tw="mb-6 p-6 border border-gray-500"
 				onSubmit={handleSubmit(data => {
 					console.log(data)
-					setSubmitedValue(data.test)
 				})}
 			>
 				<FormGroup>
@@ -158,81 +244,16 @@ const ComponentsPage = () => {
 						)}
 					</Field>
 				</FormGroup>
-				<RippleButton variant="blue" tw="w-full md:w-auto">
+				<RippleButton type="submit" variant="blue" tw="w-full md:w-auto">
 					<FormattedMessage id="submit" />
 				</RippleButton>
 			</form>
-			<h3 tw="text-xl mt-6 mb-3 font-bold capitalize">
+			<SectionHeader>
 				<FormattedMessage id="modal" />
-			</h3>
+			</SectionHeader>
 			<div tw="mb-6">
-				<RippleButton variant="blue" tw="mr-3" onClick={e => setOpen(true)}>
-					<FormattedMessage id="modal" />
-				</RippleButton>
-				<Modal tw="w-1/2" open={open} onMouseDownOutside={e => setOpen(false)}>
-					<div tw="px-6 my-3">
-						<div tw="mt-4 mb-2">
-							<div tw="font-bold text-xl mb-2 capitalize">
-								<FormattedMessage id="title" />
-							</div>
-						</div>
-						<div tw="h-12 mb-3">bla bla bla...</div>
-						<div tw="mb-3 flex justify-end">
-							<RippleButton
-								variant="blue"
-								onClick={e => {
-									e.preventDefault()
-									e.stopPropagation()
-									setOpen(false)
-								}}
-							>
-								<FormattedMessage id="ok" />
-							</RippleButton>
-						</div>
-					</div>
-				</Modal>
-				<RippleButton onClick={e => setOpen2(true)}>
-					<FormattedMessage id="modal" />
-				</RippleButton>
-				<Modal tw="w-1/2" open={open2} exitAnime={false} onMouseDownOutside={e => setOpen2(false)}>
-					<div tw="px-6 my-3">
-						<div tw="mt-4 mb-2">
-							<div tw="font-bold text-xl mb-2 capitalize">
-								<FormattedMessage id="title" />
-							</div>
-						</div>
-						<div tw="h-12 mb-3">ha ha ha...</div>
-						<div tw="mb-3 flex justify-end">
-							<RippleButton
-								variant="green"
-								tw="flex items-center"
-								onClick={e => {
-									e.preventDefault()
-									e.stopPropagation()
-									setOpen2(false)
-								}}
-							>
-								<svg
-									id="i-checkmark"
-									xmlns="http://www.w3.org/2000/svg"
-									viewBox="0 0 32 32"
-									width="16"
-									height="16"
-									fill="none"
-									stroke="currentcolor"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									strokeWidth="4"
-								>
-									<path d="M2 20 L12 28 30 4" />
-								</svg>
-								<span tw="pl-2">
-									<FormattedMessage id="ok" />
-								</span>
-							</RippleButton>
-						</div>
-					</div>
-				</Modal>
+				<ModalButton />
+				<ModalButton2 />
 			</div>
 		</Page>
 	)
