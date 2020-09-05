@@ -1,7 +1,7 @@
 import React from "react"
 import { motion } from "framer-motion"
-import { Route, Redirect } from "react-router"
-import type { RouteProps, RedirectProps } from "react-router"
+import { Route, Redirect } from "react-router-dom"
+import type { RouteProps, RedirectProps } from "react-router-dom"
 import "twin.macro"
 
 export const MotionRoute = ({ component, ...props }: Omit<RouteProps, "children">) => {

@@ -15,6 +15,7 @@ import { css } from "@emotion/core"
 import { FormGroup, Label, Field, InputText, ErrorMessage } from "~/components/Form"
 import { useForm } from "react-hook-form"
 import Skeleton from "~/components/Skeleton"
+import Spinner from "~/components/Spinner"
 
 function useDebounce<T extends (...args: any[]) => void>(cb: T, delay: number) {
 	const handle = React.useRef<number>()
@@ -143,20 +144,21 @@ const ComponentsPage = () => {
 			<SectionHeader>
 				<FormattedMessage id="button" />
 			</SectionHeader>
-			<div tw="-mb-2">
-				<RippleButton tw="inline-block mr-2 mb-2">
+			<div tw="-mb-2 flex flex-wrap">
+				<RippleButton tw="inline-flex mr-2 mb-2">
+					<Spinner tw="mr-3" />
 					<FormattedMessage id="button" />
 				</RippleButton>
-				<RippleButton variant="blue" tw="inline-block mr-2 mb-2">
+				<RippleButton variant="blue" tw="inline-flex mr-2 mb-2">
 					<FormattedMessage id="button" />
 				</RippleButton>
-				<RippleButton variant="green" tw="inline-block mr-2 mb-2">
+				<RippleButton variant="green" tw="inline-flex mr-2 mb-2">
 					<FormattedMessage id="button" />
 				</RippleButton>
-				<RippleButton variant="red" tw="inline-block mr-2 mb-2">
+				<RippleButton variant="red" tw="inline-flex mr-2 mb-2">
 					<FormattedMessage id="button" />
 				</RippleButton>
-				<RippleButton variant="orange" tw="inline-block mr-2 mb-2">
+				<RippleButton variant="orange" tw="inline-flex mr-2 mb-2">
 					<FontAwesomeIcon tw="mr-2" icon={faBars} />
 					<FormattedMessage id="button" />
 				</RippleButton>
