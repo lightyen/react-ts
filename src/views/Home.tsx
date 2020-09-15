@@ -2,6 +2,7 @@ import React from "react"
 import { FormattedMessage } from "react-intl"
 import Page from "~/components/Page"
 import "twin.macro"
+import "dayjs/locale/zh-tw"
 
 const HomePage = () => {
 	return (

@@ -51,7 +51,7 @@ const StyledThemeProvider = ({ children }: { children: React.ReactNode }) => {
 const LanguageProvider = ({ children }: { children: React.ReactNode }) => {
 	const locale = useSelector(state => state.i18n.locale)
 	return (
-		<IntlProvider locale={locale} key={locale} messages={getLocaleMessages(locale)}>
+		<IntlProvider locale={locale} messages={getLocaleMessages(locale)}>
 			{children}
 		</IntlProvider>
 	)

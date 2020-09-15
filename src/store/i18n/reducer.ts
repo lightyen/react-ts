@@ -17,10 +17,18 @@ const init: I18nStore = {
 
 window.__locale__ = getLocale()
 
+import "dayjs/locale/en"
+import "dayjs/locale/zh-tw"
+import localizedFormat from "dayjs/plugin/localizedFormat"
+import dayjs from "dayjs"
+dayjs.extend(localizedFormat)
+dayjs.locale(window.__locale__.toLocaleLowerCase())
+
 export const i18n = createReducer(init, builder =>
 	builder.addCase(setLocale, (state, { payload: { locale, cached = false } }) => {
 		cached && storeLocale(locale)
 		window.__locale__ = locale
 		state.locale = locale
+		dayjs.locale(locale.toLocaleLowerCase())
 	}),
 )
