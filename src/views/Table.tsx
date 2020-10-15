@@ -1,4 +1,3 @@
-import React from "react"
 import { Table, withTextRegexp } from "~/components/Table"
 import { useIntl, FormattedMessage } from "react-intl"
 import chroma from "chroma-js"

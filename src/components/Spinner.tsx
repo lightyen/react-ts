@@ -1,4 +1,3 @@
-import React from "react"
 import "twin.macro"
 
 export default (props: React.SVGProps<SVGSVGElement>) => (

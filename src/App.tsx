@@ -1,4 +1,3 @@
-import React from "react"
 import type { Store } from "redux"
 import { Provider } from "react-redux"
 import AppLayout from "~/layout/AppLayout"

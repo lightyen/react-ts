@@ -1,4 +1,3 @@
-import React from "react"
 import ColorPicker from "~/components/ColorPicker"
 import Page from "~/components/Page"
 import { FormattedMessage } from "react-intl"

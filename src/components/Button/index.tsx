@@ -1,4 +1,3 @@
-import React from "react"
 import { useRipple } from "./hooks"
 import tw from "twin.macro"
 import styled from "@emotion/styled"
