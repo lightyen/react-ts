@@ -5,6 +5,7 @@ import type { Configuration } from "webpack"
 import { CleanWebpackPlugin } from "clean-webpack-plugin"
 import TerserPlugin from "terser-webpack-plugin"
 import OptimizeCSSAssetsPlugin from "optimize-css-assets-webpack-plugin"
+import ESLintPlugin from "eslint-webpack-plugin"
 import path from "path"
 
 process.env.NODE_ENV = "production"
@@ -38,12 +39,6 @@ const config: Configuration = {
 	module: {
 		rules: [
 			{
-				enforce: "pre",
-				test: /\.(jsx?|tsx?)$/,
-				exclude: /node_modules/,
-				loader: "eslint-loader",
-			},
-			{
 				test: /\.worker\.ts$/,
 				exclude: /node_modules/,
 				use: [
@@ -68,6 +63,7 @@ const config: Configuration = {
 		],
 	},
 	plugins: [
+		new ESLintPlugin({ context: path.join(process.cwd(), "src"), extensions: ["js", "jsx", "ts", "tsx"] }),
 		new CleanWebpackPlugin({
 			cleanOnceBeforeBuildPatterns: ["**/*"],
 			cleanAfterEveryBuildPatterns: ["assets"],

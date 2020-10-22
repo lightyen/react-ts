@@ -21,6 +21,7 @@ export interface SelectOption<Value> extends SelectOptionStyle {
 	value: Value
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 type OptionValueType<T> = T extends { label: string; value: infer T } ? T : never
 
 export interface SelectFilterSingle<T, V> {
@@ -30,7 +31,7 @@ export interface SelectFilterSingle<T, V> {
 	isMulti?: false
 	type: "select"
 	label: string
-	filterOptions?: SelectOption<V>[]
+	filterOptions?: Array<SelectOption<V>>
 	filter: (value: OptionValueType<SelectOption<V>>, record: T) => boolean
 }
 
@@ -41,6 +42,6 @@ export interface SelectFilterMulti<T, V> {
 	isMulti: true
 	type: "select"
 	label: string
-	filterOptions?: SelectOption<V>[]
-	filter: (value: OptionValueType<SelectOption<V>>[], record: T) => boolean
+	filterOptions?: Array<SelectOption<V>>
+	filter: (value: Array<OptionValueType<SelectOption<V>>>, record: T) => boolean
 }
