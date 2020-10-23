@@ -12,11 +12,6 @@ process.env.NODE_ENV = "production"
 const config: Configuration = {
 	mode: "production",
 	devtool: "source-map",
-	stats: {
-		children: false,
-		modules: false,
-		entrypoints: false,
-	},
 	performance: {
 		hints: "warning",
 		maxEntrypointSize: 1 << 20,
