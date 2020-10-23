@@ -4,7 +4,7 @@ import type { Configuration } from "webpack"
 
 import { CleanWebpackPlugin } from "clean-webpack-plugin"
 import TerserPlugin from "terser-webpack-plugin"
-import OptimizeCSSAssetsPlugin from "optimize-css-assets-webpack-plugin"
+import CssMinimizerPlugin from "css-minimizer-webpack-plugin"
 import ESLintPlugin from "eslint-webpack-plugin"
 import path from "path"
 
@@ -30,10 +30,9 @@ const config: Configuration = {
 	optimization: {
 		minimizer: [
 			new TerserPlugin({
-				sourceMap: true,
 				parallel: true,
 			}),
-			new OptimizeCSSAssetsPlugin(),
+			new CssMinimizerPlugin(),
 		],
 	},
 	module: {

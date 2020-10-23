@@ -2,7 +2,7 @@ import packageJSON from "../package.json"
 
 import path from "path"
 import { EnvironmentPlugin } from "webpack"
-import type { Configuration, Plugin, Loader } from "webpack"
+import { Configuration } from "webpack"
 
 // Plugins
 import HtmlWebpackPlugin from "html-webpack-plugin"
@@ -22,29 +22,7 @@ export default function (): Configuration {
 
 	const join_network = (...args: string[]) => path.join(...args).replace(path.sep, "/")
 
-	const plugins: Plugin[] = [
-		new WebpackBarPlugin({ color: "blue", name: "React" }),
-		new EnvironmentPlugin({
-			NODE_ENV: "development",
-			PUBLIC_URL: "",
-			APP_NAME: packageJSON.name,
-			TAILWIND_CONFIG: JSON.stringify(require(path.resolve(workingDirectory, "tailwind.config.js"))),
-		}),
-		new MiniCssExtractPlugin({
-			filename: join_network(outputCSS, "[name].css?[hash]"),
-			chunkFilename: join_network(outputCSS, "[name].chunk.css?[hash:8]"),
-		}),
-		new HtmlWebpackPlugin({
-			inject: true,
-			title: "React App",
-			minify: true,
-			template: path.join(workingDirectory, "public", "index.ejs"),
-			favicon: path.join(workingDirectory, "public", "favicon.ico"),
-			isDevelopment,
-		}),
-	]
-
-	const styleLoader: Loader = {
+	const styleLoader = {
 		loader: isDevelopment ? "style-loader" : MiniCssExtractPlugin.loader,
 		options: {
 			...(!isDevelopment && { publicPath: path.relative(path.join(publicPath, outputCSS), publicPath) }),
@@ -53,7 +31,27 @@ export default function (): Configuration {
 
 	return {
 		target: "web",
-		plugins,
+		plugins: [
+			new WebpackBarPlugin({ color: "blue", name: "React" }),
+			new EnvironmentPlugin({
+				NODE_ENV: "development",
+				PUBLIC_URL: "",
+				APP_NAME: packageJSON.name,
+				TAILWIND_CONFIG: JSON.stringify(require(path.resolve(workingDirectory, "tailwind.config.js"))),
+			}),
+			new MiniCssExtractPlugin({
+				filename: join_network(outputCSS, "[name].css?[fullhash]"),
+				chunkFilename: join_network(outputCSS, "[name].chunk.css?[fullhash:8]"),
+			}),
+			new HtmlWebpackPlugin({
+				inject: true,
+				title: "React App",
+				minify: true,
+				template: path.join(workingDirectory, "public", "index.ejs"),
+				favicon: path.join(workingDirectory, "public", "favicon.ico"),
+				isDevelopment,
+			}),
+		],
 		// NOTE: https://webpack.js.org/configuration/resolve/
 		resolve: {
 			extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
@@ -69,8 +67,8 @@ export default function (): Configuration {
 		},
 		output: {
 			path: dist,
-			filename: join_network(outputJS, "[name].js?[hash]"),
-			chunkFilename: join_network(outputJS, "[name].js?.[hash:8]"),
+			filename: join_network(outputJS, "[name].js?[fullhash]"),
+			chunkFilename: join_network(outputJS, "[name].js?.[fullhash:8]"),
 			publicPath,
 		},
 		module: {
@@ -81,7 +79,7 @@ export default function (): Configuration {
 						{
 							loader: "url-loader",
 							options: {
-								name: join_network("img", "[name].[ext]?[hash]"),
+								name: join_network("img", "[name].[ext]?[fullhash]"),
 								limit: 8192,
 							},
 						},
@@ -97,7 +95,7 @@ export default function (): Configuration {
 						{
 							loader: "file-loader",
 							options: {
-								name: join_network("fonts", "[name].[ext]?[hash]"),
+								name: join_network("fonts", "[name].[ext]?[fullhash]"),
 							},
 						},
 					],
