@@ -2,7 +2,6 @@ import { merge } from "webpack-merge"
 import createBaseConfig from "./webpack.common"
 import type { Configuration } from "webpack"
 
-import { CleanWebpackPlugin } from "clean-webpack-plugin"
 import TerserPlugin from "terser-webpack-plugin"
 import CssMinimizerPlugin from "css-minimizer-webpack-plugin"
 import ESLintPlugin from "eslint-webpack-plugin"
@@ -61,13 +60,7 @@ const config: Configuration = {
 			},
 		],
 	},
-	plugins: [
-		new ESLintPlugin({ context: path.join(process.cwd(), "src"), extensions: ["js", "jsx", "ts", "tsx"] }),
-		new CleanWebpackPlugin({
-			cleanOnceBeforeBuildPatterns: ["**/*"],
-			cleanAfterEveryBuildPatterns: ["assets"],
-		}),
-	],
+	plugins: [new ESLintPlugin({ context: path.join(process.cwd(), "src"), extensions: ["js", "jsx", "ts", "tsx"] })],
 }
 
 export default merge(createBaseConfig(), config)
