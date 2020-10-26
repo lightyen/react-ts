@@ -1,10 +1,11 @@
 import { merge } from "webpack-merge"
 import createBaseConfig from "./webpack.common"
 import type { Configuration } from "webpack"
-
 import TerserPlugin from "terser-webpack-plugin"
 import CssMinimizerPlugin from "css-minimizer-webpack-plugin"
 import ESLintPlugin from "eslint-webpack-plugin"
+import ForkTsCheckerPlugin from "fork-ts-checker-webpack-plugin"
+
 import path from "path"
 
 process.env.NODE_ENV = "production"
@@ -39,14 +40,17 @@ const config: Configuration = {
 					"babel-loader",
 					{
 						loader: "ts-loader",
-						options: { context: path.join(process.cwd(), "src") },
+						options: { context: path.join(process.cwd(), "src"), happyPackMode: true },
 					},
 				],
 			},
 			{
 				test: /\.tsx?$/,
 				exclude: /node_modules|\.test.tsx?|\.worker\.ts$/,
-				use: ["babel-loader", { loader: "ts-loader", options: { context: path.join(process.cwd(), "src") } }],
+				use: [
+					"babel-loader",
+					{ loader: "ts-loader", options: { context: path.join(process.cwd(), "src"), happyPackMode: true } },
+				],
 			},
 			{
 				test: /\.jsx?$/,
@@ -55,7 +59,14 @@ const config: Configuration = {
 			},
 		],
 	},
-	plugins: [new ESLintPlugin({ context: path.join(process.cwd(), "src"), extensions: ["js", "jsx", "ts", "tsx"] })],
+	plugins: [
+		new ForkTsCheckerPlugin({
+			typescript: {
+				configFile: path.resolve(process.cwd(), "src", "tsconfig.json"),
+			},
+		}),
+		new ESLintPlugin({ context: path.join(process.cwd(), "src"), extensions: ["js", "jsx", "ts", "tsx"] }),
+	],
 }
 
 export default merge(createBaseConfig(), config)
