@@ -61,7 +61,6 @@ export default function (): Configuration {
 		resolveLoader: {
 			plugins: [PnpPlugin.moduleLoader(module)],
 			alias: {
-				process: "process/browser",
 				"custom-loader": path.resolve(__dirname, "loaders", "custom-loader.ts"),
 			},
 		},

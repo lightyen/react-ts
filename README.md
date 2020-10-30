@@ -29,8 +29,11 @@ yarn -v
 git clone https://github.com/lightyen/react-ts.git
 cd react-ts
 
+# switch yarn 2
+yarn set version berry
+
 # check dependencies
-yarn
+yarn install
 
 # start dev
 yarn start
@@ -48,5 +51,4 @@ yarn test
 
 ## Plan in future
 
-- Use webpack 5
 - Use react-router 6
