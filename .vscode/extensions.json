@@ -1,15 +1,16 @@
 {
-	"recommendations": [
-		"naumovs.color-highlight",
-		"dbaeumer.vscode-eslint",
-		"christian-kohler.npm-intellisense",
-		"esbenp.prettier-vscode",
-		"editorconfig.editorconfig",
-		"stylelint.vscode-stylelint",
-		"bradlc.vscode-tailwindcss",
-		"jpoissonnier.vscode-styled-components",
-		"visualstudioexptteam.vscodeintellicode",
-		"antfu.i18n-ally",
-		"pkief.material-icon-theme"
-	]
+  "recommendations": [
+    "naumovs.color-highlight",
+    "dbaeumer.vscode-eslint",
+    "christian-kohler.npm-intellisense",
+    "esbenp.prettier-vscode",
+    "editorconfig.editorconfig",
+    "stylelint.vscode-stylelint",
+    "bradlc.vscode-tailwindcss",
+    "jpoissonnier.vscode-styled-components",
+    "visualstudioexptteam.vscodeintellicode",
+    "antfu.i18n-ally",
+    "pkief.material-icon-theme",
+    "arcanis.vscode-zipfs"
+  ]
 }

@@ -13,3 +13,7 @@ package-lock.json
 yarn.lock
 thumbs.db
 stat.json
+
+
+.yarn/*
+.pnp.*

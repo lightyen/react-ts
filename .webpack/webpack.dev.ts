@@ -54,12 +54,12 @@ const config: Configuration = {
 				test: /\.jsx?$/,
 				exclude: /node_modules/,
 				use: [
-					{
-						loader: "cache-loader",
-						options: {
-							cacheDirectory: path.resolve(".cache"),
-						},
-					},
+					// {
+					// 	loader: "cache-loader",
+					// 	options: {
+					// 		cacheDirectory: path.resolve(".cache"),
+					// 	},
+					// },
 					{ loader: "thread-loader" },
 					{ loader: "babel-loader" },
 				],
@@ -77,7 +77,7 @@ const config: Configuration = {
 	devServer: {
 		hot: true,
 		compress: true,
-		open: true,
+		open: false,
 		host: "localhost",
 		clientLogLevel: "none",
 		contentBase: false,

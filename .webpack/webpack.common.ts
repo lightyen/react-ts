@@ -9,6 +9,7 @@ import HtmlWebpackPlugin from "html-webpack-plugin"
 import MiniCssExtractPlugin from "mini-css-extract-plugin"
 import WebpackBarPlugin from "webpackbar"
 import TsPathsResolvePlugin from "ts-paths-resolve-plugin"
+import PnpPlugin from "pnp-webpack-plugin"
 
 export default function (): Configuration {
 	const outputCSS = "css"
@@ -55,10 +56,12 @@ export default function (): Configuration {
 		// NOTE: https://webpack.js.org/configuration/resolve/
 		resolve: {
 			extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
-			plugins: [new TsPathsResolvePlugin({ tsConfigPath: path.resolve(src, "tsconfig.json") })],
+			plugins: [PnpPlugin, new TsPathsResolvePlugin({ tsConfigPath: path.resolve(src, "tsconfig.json") })],
 		},
 		resolveLoader: {
+			plugins: [PnpPlugin.moduleLoader(module)],
 			alias: {
+				process: "process/browser",
 				"custom-loader": path.resolve(__dirname, "loaders", "custom-loader.ts"),
 			},
 		},
