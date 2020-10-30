@@ -18,7 +18,7 @@
     "analyzer": "cross-env TS_NODE_PROJECT=\".webpack/tsconfig.json\" webpack --config .webpack/webpack.analyzer.ts",
     "start": "cross-env TS_NODE_PROJECT=\".webpack/tsconfig.json\" webpack serve --config .webpack/webpack.dev.ts",
     "build": "cross-env TS_NODE_PROJECT=\".webpack/tsconfig.json\" webpack --config .webpack/webpack.prod.ts",
-    "doit": "yarn upgrade-interactive --latest",
+    "doit": "yarn upgrade-interactive",
     "test": "yarn run build",
     "jest": "jest"
   },
