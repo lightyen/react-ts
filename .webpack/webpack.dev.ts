@@ -74,6 +74,9 @@ const config: Configuration = {
 		}),
 		new ReactRefreshPlugin(),
 	],
+	resolve: {
+		fallback: { querystring: false },
+	},
 	devServer: {
 		hot: true,
 		compress: true,

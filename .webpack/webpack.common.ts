@@ -5,9 +5,9 @@ import { EnvironmentPlugin } from "webpack"
 import { Configuration } from "webpack"
 
 // Plugins
-import HtmlWebpackPlugin from "html-webpack-plugin"
+import HtmlPlugin from "html-webpack-plugin"
 import MiniCssExtractPlugin from "mini-css-extract-plugin"
-import WebpackBarPlugin from "webpackbar"
+import BarPlugin from "webpackbar"
 import TsPathsResolvePlugin from "ts-paths-resolve-plugin"
 import PnpPlugin from "pnp-webpack-plugin"
 
@@ -33,7 +33,7 @@ export default function (): Configuration {
 	return {
 		target: "web",
 		plugins: [
-			new WebpackBarPlugin({ color: "blue", name: "React" }),
+			new BarPlugin({ color: "blue", name: "React" }),
 			new EnvironmentPlugin({
 				NODE_ENV: "development",
 				PUBLIC_URL: "",
@@ -44,7 +44,8 @@ export default function (): Configuration {
 				filename: join_network(outputCSS, "[name].css?[fullhash]"),
 				chunkFilename: join_network(outputCSS, "[name].chunk.css?[fullhash:8]"),
 			}),
-			new HtmlWebpackPlugin({
+			new HtmlPlugin({
+				filename: "index.html",
 				inject: true,
 				title: "React App",
 				minify: true,
