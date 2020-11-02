@@ -9,7 +9,6 @@ import HtmlPlugin from "html-webpack-plugin"
 import MiniCssExtractPlugin from "mini-css-extract-plugin"
 import BarPlugin from "webpackbar"
 import TsPathsResolvePlugin from "ts-paths-resolve-plugin"
-import PnpPlugin from "pnp-webpack-plugin"
 
 export default function (): Configuration {
 	const outputCSS = "css"
@@ -41,8 +40,8 @@ export default function (): Configuration {
 				TAILWIND_CONFIG: JSON.stringify(require(path.resolve(workingDirectory, "tailwind.config.js"))),
 			}),
 			new MiniCssExtractPlugin({
-				filename: join_network(outputCSS, "[name].css?[fullhash]"),
-				chunkFilename: join_network(outputCSS, "[name].chunk.css?[fullhash:8]"),
+				filename: join_network(outputCSS, "[name].css?[contenthash]"),
+				chunkFilename: join_network(outputCSS, "[name].chunk.css?[contenthash:8]"),
 			}),
 			new HtmlPlugin({
 				filename: "index.html",
@@ -56,11 +55,11 @@ export default function (): Configuration {
 		],
 		// NOTE: https://webpack.js.org/configuration/resolve/
 		resolve: {
+			fallback: { querystring: false },
 			extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
-			plugins: [PnpPlugin, new TsPathsResolvePlugin({ tsConfigPath: path.resolve(src, "tsconfig.json") })],
+			plugins: [new TsPathsResolvePlugin({ tsConfigPath: path.resolve(src, "tsconfig.json") })],
 		},
 		resolveLoader: {
-			plugins: [PnpPlugin.moduleLoader(module)],
 			alias: {
 				"custom-loader": path.resolve(__dirname, "loaders", "custom-loader.ts"),
 			},
@@ -70,8 +69,8 @@ export default function (): Configuration {
 		},
 		output: {
 			path: dist,
-			filename: join_network(outputJS, "[name].js?[fullhash]"),
-			chunkFilename: join_network(outputJS, "[name].js?.[fullhash:8]"),
+			filename: join_network(outputJS, "[name].js?[contenthash]"),
+			chunkFilename: join_network(outputJS, "[name].js?.[contenthash:8]"),
 			publicPath,
 		},
 		module: {
@@ -82,7 +81,7 @@ export default function (): Configuration {
 						{
 							loader: "url-loader",
 							options: {
-								name: join_network("img", "[name].[ext]?[fullhash]"),
+								name: join_network("img", "[name].[ext]?[contenthash]"),
 								limit: 8192,
 							},
 						},
@@ -97,12 +96,12 @@ export default function (): Configuration {
 					use: "js-yaml-loader",
 				},
 				{
-					test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/i,
+					test: /\.(woff2?|eot|ttf|otf)$/i,
 					use: [
 						{
 							loader: "file-loader",
 							options: {
-								name: join_network("fonts", "[name].[ext]?[fullhash]"),
+								name: join_network("fonts", "[name].[ext]?[contenthash]"),
 							},
 						},
 					],
@@ -148,7 +147,7 @@ export default function (): Configuration {
 				{
 					include: /node_modules/,
 					test: /.css$/,
-					use: [styleLoader, "css-loader", "postcss-loader"],
+					use: [styleLoader, "css-loader"],
 				},
 				{
 					include: /node_modules/,

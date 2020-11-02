@@ -74,13 +74,10 @@ const config: Configuration = {
 		}),
 		new ReactRefreshPlugin(),
 	],
-	resolve: {
-		fallback: { querystring: false },
-	},
 	devServer: {
 		hot: true,
 		compress: true,
-		open: false,
+		open: true,
 		host: "localhost",
 		clientLogLevel: "none",
 		contentBase: false,

@@ -40,17 +40,14 @@ const config: Configuration = {
 					"babel-loader",
 					{
 						loader: "ts-loader",
-						options: { context: path.join(process.cwd(), "src"), happyPackMode: true },
+						options: { context: path.join(process.cwd(), "src") },
 					},
 				],
 			},
 			{
 				test: /\.tsx?$/,
 				exclude: /node_modules|\.test.tsx?|\.worker\.ts$/,
-				use: [
-					"babel-loader",
-					{ loader: "ts-loader", options: { context: path.join(process.cwd(), "src"), happyPackMode: true } },
-				],
+				use: ["babel-loader", { loader: "ts-loader", options: { context: path.join(process.cwd(), "src") } }],
 			},
 			{
 				test: /\.jsx?$/,
@@ -60,11 +57,11 @@ const config: Configuration = {
 		],
 	},
 	plugins: [
-		new ForkTsCheckerPlugin({
-			typescript: {
-				configFile: path.resolve(process.cwd(), "src", "tsconfig.json"),
-			},
-		}),
+		// new ForkTsCheckerPlugin({
+		// 	typescript: {
+		// 		configFile: path.resolve(process.cwd(), "src", "tsconfig.json"),
+		// 	},
+		// }),
 		new ESLintPlugin({ context: path.join(process.cwd(), "src"), extensions: ["js", "jsx", "ts", "tsx"] }),
 	],
 }
