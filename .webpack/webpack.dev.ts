@@ -34,14 +34,8 @@ const config: Configuration = {
 				test: /\.tsx?$/,
 				exclude: /node_modules|\.test.tsx?|\.worker\.ts$/,
 				use: [
-					{
-						loader: "cache-loader",
-						options: {
-							cacheDirectory: path.resolve(".cache"),
-						},
-					},
-					{ loader: "thread-loader" },
-					{ loader: "babel-loader" },
+					"thread-loader",
+					"babel-loader",
 					{
 						loader: "ts-loader",
 						options: {
@@ -53,16 +47,7 @@ const config: Configuration = {
 			{
 				test: /\.jsx?$/,
 				exclude: /node_modules/,
-				use: [
-					{
-						loader: "cache-loader",
-						options: {
-							cacheDirectory: path.resolve(".cache"),
-						},
-					},
-					{ loader: "thread-loader" },
-					{ loader: "babel-loader" },
-				],
+				use: ["thread-loader", "babel-loader"],
 			},
 		],
 	},

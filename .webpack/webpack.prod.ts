@@ -48,6 +48,7 @@ const config: Configuration = {
 				test: /\.tsx?$/,
 				exclude: /node_modules|\.test.tsx?|\.worker\.ts$/,
 				use: [
+					"thread-loader",
 					"babel-loader",
 					{ loader: "ts-loader", options: { context: path.join(process.cwd(), "src"), happyPackMode: true } },
 				],
@@ -55,7 +56,7 @@ const config: Configuration = {
 			{
 				test: /\.jsx?$/,
 				exclude: /node_modules/,
-				use: ["babel-loader"],
+				use: ["thread-loader", "babel-loader"],
 			},
 		],
 	},
