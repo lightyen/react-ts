@@ -3,8 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons/faArrowUp"
 import { faArrowsAltV } from "@fortawesome/free-solid-svg-icons/faArrowsAltV"
 import { motion, AnimatePresence } from "framer-motion"
-import type { Interpolation } from "@emotion/core"
-import { css as _css } from "@emotion/core"
+import type { Interpolation, Theme } from "@emotion/react"
+import { css as _css } from "@emotion/react"
 import styled from "@emotion/styled"
 import tw from "twin.macro"
 
@@ -14,7 +14,7 @@ interface Props {
 	hide?: boolean
 	sortType?: SortType
 	onClick?(e: React.MouseEvent): void
-	css?: Interpolation
+	css?: Interpolation<Theme>
 	children: React.ReactNode
 }
 

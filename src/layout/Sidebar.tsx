@@ -12,7 +12,7 @@ import { faCode } from "@fortawesome/free-solid-svg-icons/faCode"
 import { useRipple } from "~/components/Button/hooks"
 import styled from "@emotion/styled"
 import tw from "twin.macro"
-import { css } from "@emotion/core"
+import { css } from "@emotion/react"
 
 const StyledNavLink = styled(NavLink)`
 	transition-property: transform, background-color;

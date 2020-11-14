@@ -26,7 +26,3 @@ export function useAction() {
 export function useI18n() {
 	return useSelector(state => state.i18n)
 }
-
-import { useTheme as _useTheme } from "emotion-theming"
-import { ThemeStore } from "./theme/reducer"
-export const useTheme = () => _useTheme<ThemeStore>()

@@ -16,7 +16,7 @@ import { Provider } from "react-redux"
 import { store, Context, useFiltersAction, useFiltersSelector, register } from "./store"
 export { register }
 import "twin.macro"
-import { css, Interpolation } from "@emotion/core"
+import { css, Interpolation, Theme } from "@emotion/react"
 import styled from "@emotion/styled"
 import tw from "twin.macro"
 
@@ -31,7 +31,7 @@ const CheckboxTH = styled(TD)`
 
 export interface Column<T> extends BaseColumnProps<T> {
 	title?: string
-	css?: Interpolation
+	css?: Interpolation<Theme>
 	attributes?: (record: T, row: number) => { [key: string]: unknown }
 	render: (record: T, row: number) => React.ReactNode
 }

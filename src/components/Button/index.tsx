@@ -1,7 +1,7 @@
 import { useRipple } from "./hooks"
 import tw from "twin.macro"
 import styled from "@emotion/styled"
-import { css } from "@emotion/core"
+import { css } from "@emotion/react"
 
 interface Props {
 	variant?: "gray" | "blue" | "green" | "orange" | "red"

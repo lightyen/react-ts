@@ -17,12 +17,12 @@ import {
 	endOfMonth,
 } from "date-fns"
 import { getDateLocale } from "~/date/locale"
-import { css as _css, InterpolationWithTheme } from "@emotion/core"
+import { css as _css, Interpolation, Theme } from "@emotion/react"
 
 import "react-date-range/dist/styles.css"
 import "react-date-range/dist/theme/default.css"
 
-import { Global, css } from "@emotion/core"
+import { Global, css } from "@emotion/react"
 import tw from "twin.macro"
 
 const globalStyles = css`
@@ -56,7 +56,7 @@ type StaticRangeLabel = {
 }
 
 interface Props {
-	css?: InterpolationWithTheme<unknown>
+	css?: Interpolation<Theme>
 	tw?: string
 	range?: DateRange
 	onChange?(range: DateRange): void

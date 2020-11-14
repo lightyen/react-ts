@@ -1,6 +1,6 @@
 import React from "react"
 
-import { injectGlobal } from "emotion"
+import { injectGlobal } from "@emotion/css"
 
 injectGlobal`
 	.ripple-circle {

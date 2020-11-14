@@ -1,15 +1,16 @@
 {
   "presets": [
+    ["@babel/preset-env"],
     [
       "@babel/preset-react",
-      {
-        "runtime": "automatic"
-      }
-    ],
-    ["@babel/preset-env"],
-    ["@emotion/babel-preset-css-prop"]
+      { "runtime": "automatic", "importSource": "@emotion/react" }
+    ]
   ],
-  "plugins": ["@babel/plugin-transform-runtime", "emotion", "macros"],
+  "plugins": [
+    "@babel/plugin-transform-runtime",
+    "@emotion/babel-plugin",
+    "macros"
+  ],
   "env": {
     "development": {
       "plugins": ["react-refresh/babel"]

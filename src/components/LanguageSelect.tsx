@@ -8,7 +8,7 @@ import { supports } from "~/store/i18n/languages"
 import { entries } from "~/type-safed"
 
 import styled from "@emotion/styled"
-import { css } from "@emotion/core"
+import { css } from "@emotion/react"
 import tw from "twin.macro"
 import { useSelector } from "~/store/hooks"
 

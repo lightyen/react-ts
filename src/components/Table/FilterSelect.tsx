@@ -6,7 +6,7 @@ import { useIntl } from "react-intl"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes"
 import { useFiltersSelector, useFiltersAction } from "./store"
-import { css } from "@emotion/core"
+import { css } from "@emotion/react"
 import tw from "twin.macro"
 
 export interface CustomOption {

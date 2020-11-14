@@ -22,7 +22,7 @@ import { FormattedMessage } from "react-intl"
 import "codemirror/lib/codemirror.css"
 import "codemirror/theme/dracula.css"
 
-import { Global, css } from "@emotion/core"
+import { Global, css } from "@emotion/react"
 import tw from "twin.macro"
 
 const globalStyle = css`
@@ -70,7 +70,7 @@ interface MyProps {
 type Textarea = Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, "onChange">
 type Props = Textarea & MyProps
 
-const CodeMirror = forwardRef<Editor, Props>(({ options, onChange, css, ...props }, ref) => {
+const CodeMirror = forwardRef<Editor, Props>(({ options, onChange, ...props }, ref) => {
 	const textareaRef = useRef<HTMLTextAreaElement>()
 	const editorRef = useRef<EditorFromTextArea>()
 	useImperativeHandle<Partial<Editor>, Partial<Editor>>(ref, () => ({
@@ -102,7 +102,7 @@ const CodeMirror = forwardRef<Editor, Props>(({ options, onChange, css, ...props
 	return (
 		<>
 			<Global styles={globalStyle} />
-			<div css={css}>
+			<div>
 				<textarea
 					ref={textareaRef}
 					{...props}

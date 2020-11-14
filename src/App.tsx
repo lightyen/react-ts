@@ -1,11 +1,10 @@
 import type { Store } from "redux"
 import { Provider } from "react-redux"
 import AppLayout from "~/layout/AppLayout"
-import { Global, css } from "@emotion/core"
+import { Global, ThemeProvider, css } from "@emotion/react"
 import tw from "twin.macro"
 
 import { useSelector } from "~/store/hooks"
-import { ThemeProvider } from "emotion-theming"
 import { IntlProvider } from "react-intl"
 import { getLocaleMessages } from "~/store/i18n/languages"
 
