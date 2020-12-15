@@ -20,4 +20,3 @@ stat.json
 !.yarn/plugins
 !.yarn/sdks
 !.yarn/versions
-.pnp.*
