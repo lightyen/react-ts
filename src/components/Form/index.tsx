@@ -24,17 +24,15 @@ export const InputText = styled.input<{ invalid?: boolean; theme?: Theme }>`
 		${tw`bg-gray-200 cursor-not-allowed`}
 	}
 	:focus {
-		${tw`shadow-outline`}
+		${tw`ring`}
 		${props => props.theme.name === "dark" && tw`bg-gray-800`}
-		${props =>
-			props.theme.name === "light" && tw`bg-white`}
-		${({ invalid }) =>
-			invalid && `box-shadow: 0 0 0 2px rgba(245, 101, 101, 0.5);`}
+		${props => props.theme.name === "light" && tw`bg-white`}
+		${({ invalid }) => invalid && `box-shadow: 0 0 0 2px rgba(245, 101, 101, 0.5);`}
 	}
 `
 
 export const InputSelect = styled.select`
-	${tw`block w-full shadow appearance-none py-2 pl-3 pr-10 leading-tight bg-gray-100 text-gray-900 border border-gray-500 focus:bg-white focus:outline-none focus:shadow-outline`}
+	${tw`block w-full shadow appearance-none py-2 pl-3 pr-10 leading-tight bg-gray-100 text-gray-900 border border-gray-500 focus:bg-white focus:outline-none focus:ring`}
 	:disabled {
 		${tw`bg-gray-200 cursor-not-allowed`}
 	}

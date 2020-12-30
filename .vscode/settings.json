@@ -1,5 +1,11 @@
 {
   "editor.formatOnSave": true,
+  "emmet.excludeLanguages": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
   "formatFiles.excludePattern": "node_modules,build,.gitignore,.editorconfig,.browserslistrc,yarn.lock",
   "search.exclude": {
     "**/build": true,
@@ -8,6 +14,7 @@
   "typescript.tsdk": "node_modules/typescript/lib",
   "npm.autoDetect": "off",
   "typescript.tsc.autoDetect": "off",
+  "editor.snippetSuggestions": "none",
   "eslint.validate": [
     "javascript",
     "javascriptreact",
@@ -16,7 +23,6 @@
   ],
   "files.exclude": {
     "**/.cache": true,
-    "**/node_modules": true,
     "yarn.lock": true
   },
   "files.watcherExclude": {

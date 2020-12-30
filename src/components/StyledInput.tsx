@@ -16,14 +16,13 @@ export default styled.input<Props>`
 	}
 	background: rgb(var(--theme-background));
 	:focus {
-		${tw`outline-none shadow-outline`}
+		${tw`outline-none ring`}
 	}
 	${({ invalid }) => invalid && "background: rgba(var(--theme-error), 0.3);"}
 	:focus {
 		${({ invalid }) => invalid && "background: rgba(var(--theme-error), 0.8);"}
 		${({ invalid }) => invalid && "color: rgba(var(--theme-text-error));"}
-		${({ invalid }) =>
-			invalid && `box-shadow: 0 0 0 3px rgba(225, 66, 66, 0.507);`}
+		${({ invalid }) => invalid && `box-shadow: 0 0 0 3px rgba(225, 66, 66, 0.507);`}
 	}
 
 	${({ valid }) => valid && "background: rgba(var(--theme-success), 0.3);"}

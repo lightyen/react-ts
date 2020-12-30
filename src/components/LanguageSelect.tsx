@@ -36,7 +36,7 @@ const LanguageSelect = () => {
 	}, [spread])
 
 	return (
-		<div tw="relative whitespace-no-wrap">
+		<div tw="relative whitespace-nowrap">
 			<Button
 				ref={button}
 				tw="cursor-pointer select-none rounded-lg px-3 focus:outline-none hover:underline"
@@ -83,7 +83,7 @@ const LanguageSelect = () => {
 							<li
 								key={locale}
 								css={[
-									tw`border border-gray-500 px-8 py-2 text-center cursor-pointer whitespace-no-wrap select-none`,
+									tw`border border-gray-500 px-8 py-2 text-center cursor-pointer whitespace-nowrap select-none`,
 									css`
 										background: rgb(var(--theme-secondary));
 										color: rgb(var(--theme-text-secondary));

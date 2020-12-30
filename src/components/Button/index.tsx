@@ -4,7 +4,7 @@ import styled from "@emotion/styled"
 import { css } from "@emotion/core"
 
 interface Props {
-	variant?: "gray" | "blue" | "green" | "orange" | "red"
+	variant?: "gray" | "blue" | "green" | "yellow" | "red"
 }
 
 const Button = styled.button<Props>(({ variant = "gray" }) => {
@@ -46,16 +46,16 @@ const Button = styled.button<Props>(({ variant = "gray" }) => {
 					${tw`bg-green-600`}
 				}
 			`,
-		variant === "orange" &&
+		variant === "yellow" &&
 			css`
-				${tw`bg-orange-500 text-white`}
+				${tw`bg-yellow-500 text-white`}
 				:focus {
 					box-shadow: 0 0 0 3px rgba(237, 137, 54, 0.5);
 					${tw`outline-none`}
 				}
 				:hover {
 					box-shadow: 0 0 0 3px rgba(237, 137, 54, 0.5);
-					${tw`bg-orange-600`}
+					${tw`bg-yellow-600`}
 				}
 			`,
 		variant === "red" &&

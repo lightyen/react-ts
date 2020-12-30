@@ -1,3 +1,5 @@
 import { TailwindcssConfig } from "./typings/tailwind"
-const tailwindcssconfig: TailwindcssConfig = JSON.parse(process.env.TAILWIND_CONFIG)
-export default tailwindcssconfig
+
+import userConfig from "../tailwind.config.js"
+import resolveConfig from "tailwindcss/resolveConfig"
+export default resolveConfig(userConfig) as TailwindcssConfig

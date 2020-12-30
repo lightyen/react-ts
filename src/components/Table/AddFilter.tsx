@@ -8,7 +8,7 @@ import styled from "@emotion/styled"
 import tw from "twin.macro"
 
 const AddFilerButton = styled.button`
-	${tw`transition ease-in-out duration-200 rounded bg-green-500 px-4 py-2 text-white font-bold leading-none whitespace-no-wrap`}
+	${tw`transition ease-in-out duration-200 rounded bg-green-500 px-4 py-2 text-white font-bold leading-none whitespace-nowrap`}
 
 	:hover,:focus {
 		box-shadow: 0 0 0 3px rgba(72, 187, 120, 0.5);
@@ -78,7 +78,7 @@ export const AddFilter = ({ tabIndex, options, onChange }: Props) => {
 			{!focus && (
 				<AddFilerButton onMouseDown={e => setFocus(true)}>
 					<FontAwesomeIcon icon={faFilter} />
-					<span tw="pl-2 whitespace-no-wrap">
+					<span tw="pl-2 whitespace-nowrap">
 						<FormattedMessage id="add_filter" />
 					</span>
 				</AddFilerButton>

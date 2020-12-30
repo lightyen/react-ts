@@ -71,7 +71,7 @@ export const TheadCell = ({ children, hide, sortType, onClick, css }: Props) => 
 						transition: all ease 0.16s;
 					`,
 					hide && tw`hidden`,
-					tw`text-gray-900 bg-white whitespace-no-wrap box-border p-3 whitespace-no-wrap`,
+					tw`text-gray-900 bg-white whitespace-nowrap box-border p-3 whitespace-nowrap`,
 					tw`select-none hover:bg-gray-300 cursor-pointer`,
 					css,
 				]}
@@ -95,7 +95,7 @@ export const TheadCell = ({ children, hide, sortType, onClick, css }: Props) => 
 				css={[
 					css,
 					hide && tw`hidden`,
-					tw`text-gray-900 bg-white whitespace-no-wrap box-border p-3 whitespace-no-wrap`,
+					tw`text-gray-900 bg-white whitespace-nowrap box-border p-3 whitespace-nowrap`,
 				]}
 			>
 				{children}

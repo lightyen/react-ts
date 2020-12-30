@@ -19,7 +19,7 @@ const StyledNavLink = styled(NavLink)`
 	transition-timing-function: ease;
 	transition-duration: 150ms;
 	color: rgb(var(--theme-text-primary));
-	${tw`relative overflow-hidden py-2 px-4 h-12 flex items-center font-medium whitespace-no-wrap select-none outline-none`}
+	${tw`relative overflow-hidden py-2 px-4 h-12 flex items-center font-medium whitespace-nowrap select-none outline-none`}
 	:hover {
 		background: rgb(var(--theme-hover-primary));
 		${tw`underline`}

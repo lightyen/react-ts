@@ -39,6 +39,7 @@
     "@pmmmwh/react-refresh-webpack-plugin": "0.4.2",
     "@reduxjs/toolkit": "1.4.0",
     "@svgr/webpack": "^5.4.0",
+    "@tailwindcss/forms": "^0.2.1",
     "@types/chroma-js": "2.1.0",
     "@types/codemirror": "0.0.98",
     "@types/enzyme": "3.10.7",
@@ -114,7 +115,7 @@
     "rxjs": "6.6.3",
     "sass-loader": "10.0.4",
     "style-loader": "2.0.0",
-    "tailwindcss": "1.9.5",
+    "tailwindcss": "2.0.1",
     "tailwindcss-border-gradients": "2.0.3",
     "terser-webpack-plugin": "5.0.0",
     "thread-loader": "3.0.0",
@@ -123,16 +124,19 @@
     "ts-node": "9.0.0",
     "ts-paths-resolve-plugin": "5.2.2",
     "tsconfig-paths": "3.9.0",
-    "twin.macro": "1.11.0",
-    "typescript": "4.0.3",
+    "twin.macro": "^2.0.7",
+    "typescript": "^4.0.5",
     "url-loader": "4.1.1",
     "uuid": "8.3.1",
-    "webpack": "5.2.0",
+    "webpack": "5.10.0",
     "webpack-bundle-analyzer": "3.9.0",
-    "webpack-cli": "4.1.0",
+    "webpack-cli": "4.2.0",
     "webpack-dev-server": "3.11.0",
-    "webpack-merge": "5.2.0",
+    "webpack-merge": "5.4.1",
     "webpackbar": "4.0.0",
     "worker-loader": "3.0.5"
+  },
+  "dependencies": {
+    "@tailwindcss/typography": "^0.3.1"
   }
 }

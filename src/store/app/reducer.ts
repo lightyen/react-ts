@@ -1,7 +1,7 @@
 import { BreakingPoint } from "./model"
-import tailwind from "~/tailwind.config"
 import { createReducer } from "@reduxjs/toolkit"
 import { setBreakingPoint, setSidebarVisible } from "./action"
+import tailwind from "~/tailwind.config"
 
 export interface AppStore {
 	breakpoint: BreakingPoint

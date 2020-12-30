@@ -158,7 +158,7 @@ const ComponentsPage = () => {
 				<RippleButton variant="red" tw="inline-flex mr-2 mb-2">
 					<FormattedMessage id="button" />
 				</RippleButton>
-				<RippleButton variant="orange" tw="inline-flex mr-2 mb-2">
+				<RippleButton variant="yellow" tw="inline-flex mr-2 mb-2">
 					<FontAwesomeIcon tw="mr-2" icon={faBars} />
 					<FormattedMessage id="button" />
 				</RippleButton>

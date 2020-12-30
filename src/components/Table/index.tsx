@@ -22,7 +22,7 @@ import tw from "twin.macro"
 
 const TD = styled.td`
 	transition: all ease 0.16s;
-	${tw`text-gray-900 bg-white whitespace-no-wrap box-border px-3 py-2 border`}
+	${tw`text-gray-900 bg-white whitespace-nowrap box-border px-3 py-2 border`}
 `
 
 const CheckboxTH = styled(TD)`
