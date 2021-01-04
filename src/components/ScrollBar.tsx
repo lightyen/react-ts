@@ -1,7 +1,6 @@
 import React from "react"
-import styled from "@emotion/styled"
 import { useTheme } from "@emotion/react"
-import tw from "twin.macro"
+import tw, { styled } from "twin.macro"
 
 interface CustomScrollBarProps {
 	color: string
@@ -17,10 +16,6 @@ const CustomScrollBar = styled.div`
 	::-webkit-scrollbar {
 		width: ${({ width, padding }: CustomScrollBarProps) => width + padding * 2}px;
 		height: ${({ width, padding }) => width + padding * 2}px;
-		background: rgb(var(--theme-background));
-	}
-	::-webkit-scrollbar-corner {
-		background: rgb(var(--theme-background));
 	}
 
 	::-webkit-scrollbar-track {

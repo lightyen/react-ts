@@ -7,8 +7,7 @@ import { motion } from "framer-motion"
 
 import DarkModeToggle from "~/components/DarkModeToggle"
 import LanguageSelect from "~/components/LanguageSelect"
-import { css } from "@emotion/react"
-import tw from "twin.macro"
+import tw, { css } from "twin.macro"
 
 interface Props {
 	height: number

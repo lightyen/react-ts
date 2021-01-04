@@ -1,7 +1,6 @@
 import React from "react"
-import styled from "@emotion/styled"
 import { keyframes } from "@emotion/react"
-import tw from "twin.macro"
+import tw, { styled } from "twin.macro"
 import type { Theme } from "~/store/theme/themes"
 const shimmer = keyframes`
  100% {
@@ -33,7 +32,7 @@ export const skeleton = (component: React.ComponentType) => styled(component)<{ 
 	}
 `
 
-const Wrapper = styled.div<{ theme?: Theme }>`
+const Wrapper = styled.div`
 	${tw`rounded min-h-8 inline-flex items-center justify-center w-full px-4 py-2`}
 	${({ theme }) => (theme.name === "dark" ? tw`bg-gray-800 text-gray-300` : tw`bg-gray-300 text-gray-600`)}
 `

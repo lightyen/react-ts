@@ -1,7 +1,6 @@
 import React from "react"
 import chroma from "chroma-js"
-import { css } from "@emotion/react"
-import tw from "twin.macro"
+import tw, { css } from "twin.macro"
 
 function clamp(value: number, min: number, max: number) {
 	return Math.min(Math.max(value, min), max)

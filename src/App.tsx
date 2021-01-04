@@ -1,8 +1,8 @@
 import type { Store } from "redux"
 import { Provider } from "react-redux"
 import AppLayout from "~/layout/AppLayout"
-import { Global, ThemeProvider, css } from "@emotion/react"
-import tw from "twin.macro"
+import { Global, ThemeProvider } from "@emotion/react"
+import tw, { css, GlobalStyles } from "twin.macro"
 
 import { useSelector } from "~/store/hooks"
 import { IntlProvider } from "react-intl"
@@ -10,15 +10,13 @@ import { getLocaleMessages } from "~/store/i18n/languages"
 
 import FiraCodeFont from "assets/fonts/FiraCode-Regular.woff2"
 
-import "~/style.css"
-
 const globalStyle = css`
 	@font-face {
 		font-family: Fira Code;
 		src: local("Fira Code"), url(${FiraCodeFont}) format("woff2");
 	}
 	body {
-		${tw`m-0 leading-normal overflow-hidden`}
+		${tw`leading-normal overflow-hidden`}
 		font-family: Roboto, 微軟正黑體, Microsoft JhengHei, Helvetica Neue,
 		Helvetica, Arial, PingFang TC, 黑體-繁, Heiti TC, 蘋果儷中黑,
 		Apple LiGothic Medium, sans-serif;
@@ -57,6 +55,7 @@ const LanguageProvider = ({ children }: { children: React.ReactNode }) => {
 
 export default ({ store }: { store: Store }) => (
 	<Provider store={store}>
+		<GlobalStyles />
 		<Global styles={globalStyle} />
 		<StyledThemeProvider>
 			<LanguageProvider>

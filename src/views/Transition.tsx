@@ -2,49 +2,53 @@ import React from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Page from "~/components/Page"
 import { FormattedMessage } from "react-intl"
-import "twin.macro"
+import tw, { css } from "twin.macro"
 
-const Box = ({ value, onRemove }: { value: number; onRemove: (v: number) => void }) => {
-	return (
+const Box = ({ value, onClick }: { value: number; onClick?: () => void }) => (
+	<AnimatePresence>
 		<motion.div
-			tw="inline-block relative p-3 -mr-3 -mb-3"
+			tw="inline-block relative select-none p-3 -mr-3 -mb-3"
 			exit={{ opacity: 0, scale: 0, transition: { duration: 0.16 } }}
-			positionTransition={{
-				type: "spring",
-				damping: 30,
-				stiffness: 300,
-			}}
+			layout
 		>
 			<motion.button
-				tw="bg-gray-900 text-gray-100 rounded-lg focus:outline-none"
-				css={{
-					width: 300,
-					height: 80,
-				}}
+				tw="rounded-lg shadow-lg focus:outline-none"
+				css={[
+					{
+						width: 300,
+						height: 80,
+					},
+					({ background, text }) => css`
+						background: ${background};
+						color: ${text.background};
+						border-width: 1px;
+						border-color: ${text.background};
+					`,
+				]}
 				whileTap={{ scale: 0.98, opacity: 0.9 }}
-				onClick={() => onRemove(value)}
+				onClick={onClick}
 			>
 				#{value}
 			</motion.button>
 		</motion.div>
-	)
-}
+	</AnimatePresence>
+)
 
-const TransitionPage = () => {
-	const [data, setData] = React.useState([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+export default () => {
+	const [data, setData] = React.useState([1, 2, 3, 5, 8, 13, 21, 34, 55, 89])
 	return (
 		<Page>
 			<h2 tw="text-3xl mt-8 mb-2 font-black capitalize">
 				<FormattedMessage id="nav_transition" />
 			</h2>
-			<AnimatePresence>
+			<motion.div tw="bg-gray-500" css={data.length > 0 && tw`pb-3`} layout>
 				{data.map(d => (
 					<Box
 						key={d}
 						value={d}
-						onRemove={v => {
+						onClick={() => {
 							const newData = [...data]
-							const i = newData.findIndex(d => d === v)
+							const i = newData.findIndex(a => a === d)
 							if (i >= 0) {
 								newData.splice(i, 1)
 								setData(newData)
@@ -52,9 +56,7 @@ const TransitionPage = () => {
 						}}
 					/>
 				))}
-			</AnimatePresence>
+			</motion.div>
 		</Page>
 	)
 }
-
-export default TransitionPage

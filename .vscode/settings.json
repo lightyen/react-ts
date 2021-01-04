@@ -1,5 +1,9 @@
 {
   "editor.formatOnSave": true,
+  "editor.snippetSuggestions": "none",
+  "editor.autoClosingQuotes": "always",
+  "tailwindcss.diagnostics.conflict": "loose",
+  "emmet.excludeLanguages": ["javascriptreact", "typescriptreact"],
   "formatFiles.excludePattern": "node_modules,build,.gitignore,.editorconfig,.browserslistrc,yarn.lock",
   "search.exclude": {
     "**/build": true,

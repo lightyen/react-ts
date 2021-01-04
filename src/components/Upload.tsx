@@ -1,6 +1,5 @@
 import React from "react"
-import styled from "@emotion/styled"
-import tw from "twin.macro"
+import tw, { styled } from "twin.macro"
 import { v4 } from "uuid"
 import { FormattedMessage } from "react-intl"
 
@@ -13,7 +12,7 @@ const InputFile = styled.input`
 
 const Label = styled.label`
 	${tw`inline-flex items-center justify-center w-full px-4 py-2`}
-	${tw`cursor-pointer select-none transition duration-200`}
+	${tw`cursor-pointer select-none transition duration-200!`}
 `
 
 type Props = Omit<React.InputHTMLAttributes<HTMLInputElement>, "type">

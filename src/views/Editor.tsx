@@ -22,8 +22,8 @@ import { FormattedMessage } from "react-intl"
 import "codemirror/lib/codemirror.css"
 import "codemirror/theme/dracula.css"
 
-import { Global, css } from "@emotion/react"
-import tw from "twin.macro"
+import { Global } from "@emotion/react"
+import tw, { css } from "twin.macro"
 
 const globalStyle = css`
 	.CodeMirror {

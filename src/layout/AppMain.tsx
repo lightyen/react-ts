@@ -6,8 +6,7 @@ import { AnimatePresence } from "framer-motion"
 import { Footer } from "./Footer"
 import { ScrollBar } from "~/components/ScrollBar"
 import { MotionRoute, MotionRedirect } from "~/components/MotionReactRouter"
-import { css } from "@emotion/react"
-import tw from "twin.macro"
+import tw, { css } from "twin.macro"
 
 const Routes = () => {
 	const location = useLocation()

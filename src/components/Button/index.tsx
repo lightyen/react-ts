@@ -1,15 +1,13 @@
 import { useRipple } from "./hooks"
-import tw from "twin.macro"
-import styled from "@emotion/styled"
-import { css } from "@emotion/react"
+import tw, { styled, css } from "twin.macro"
 
 interface Props {
-	variant?: "gray" | "blue" | "green" | "orange" | "red"
+	variant?: "gray" | "blue" | "green" | "yellow" | "red"
 }
 
 const Button = styled.button<Props>(({ variant = "gray" }) => {
 	return [
-		tw`py-3 px-6 rounded text-white leading-none relative overflow-hidden transition ease-in-out duration-200`,
+		tw`py-3 px-6 rounded text-white leading-none relative overflow-hidden transition ease-in-out! duration-200!`,
 		variant === "gray" &&
 			css`
 				${tw`bg-gray-700 text-white`}
@@ -46,16 +44,16 @@ const Button = styled.button<Props>(({ variant = "gray" }) => {
 					${tw`bg-green-600`}
 				}
 			`,
-		variant === "orange" &&
+		variant === "yellow" &&
 			css`
-				${tw`bg-orange-500 text-white`}
+				${tw`bg-yellow-500 text-white`}
 				:focus {
 					box-shadow: 0 0 0 3px rgba(237, 137, 54, 0.5);
 					${tw`outline-none`}
 				}
 				:hover {
 					box-shadow: 0 0 0 3px rgba(237, 137, 54, 0.5);
-					${tw`bg-orange-600`}
+					${tw`bg-yellow-600`}
 				}
 			`,
 		variant === "red" &&

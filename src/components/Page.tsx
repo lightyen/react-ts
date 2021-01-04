@@ -1,7 +1,6 @@
 import React from "react"
-import styled from "@emotion/styled"
 import { useScollBarVisible } from "./ScrollBar"
-import tw from "twin.macro"
+import tw, { styled } from "twin.macro"
 
 const PageDetectScrollbar = styled.div<{ hasScrollbar: boolean }>`
 	${tw`m-3 p-3`}

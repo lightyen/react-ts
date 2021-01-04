@@ -1,6 +1,5 @@
 import React from "react"
-import tw from "twin.macro"
-import styled from "@emotion/styled"
+import tw, { styled } from "twin.macro"
 
 export const FormGroup = tw.div`md:flex mb-6`
 
@@ -17,24 +16,22 @@ export const Field = tw.div`md:w-2/3`
 import type { Theme } from "~/store/theme/themes"
 
 export const InputText = styled.input<{ invalid?: boolean; theme?: Theme }>`
-	${tw`w-full rounded shadow appearance-none py-2 px-4 leading-tight transition duration-200 focus:outline-none`}
+	${tw`w-full rounded shadow appearance-none py-2 px-4 leading-tight transition duration-200! focus:outline-none`}
 	background: rgb(var(--theme-background));
 	${({ invalid }) => invalid && tw`border border-red-500`}
 	:disabled {
 		${tw`bg-gray-200 cursor-not-allowed`}
 	}
 	:focus {
-		${tw`shadow-outline`}
+		${tw`ring`}
 		${props => props.theme.name === "dark" && tw`bg-gray-800`}
-		${props =>
-			props.theme.name === "light" && tw`bg-white`}
-		${({ invalid }) =>
-			invalid && `box-shadow: 0 0 0 2px rgba(245, 101, 101, 0.5);`}
+		${props => props.theme.name === "light" && tw`bg-white`}
+		${({ invalid }) => invalid && `box-shadow: 0 0 0 2px rgba(245, 101, 101, 0.5);`}
 	}
 `
 
 export const InputSelect = styled.select`
-	${tw`block w-full shadow appearance-none py-2 pl-3 pr-10 leading-tight bg-gray-100 text-gray-900 border border-gray-500 focus:bg-white focus:outline-none focus:shadow-outline`}
+	${tw`block w-full shadow appearance-none py-2 pl-3 pr-10 leading-tight bg-gray-100 text-gray-900 border border-gray-500 focus:bg-white focus:outline-none focus:ring`}
 	:disabled {
 		${tw`bg-gray-200 cursor-not-allowed`}
 	}

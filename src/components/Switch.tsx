@@ -1,8 +1,6 @@
 import React from "react"
 import { v4 } from "uuid"
-
-import styled from "@emotion/styled"
-import tw from "twin.macro"
+import tw, { styled } from "twin.macro"
 
 const Check = styled.input`
 	display: none;

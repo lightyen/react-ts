@@ -1,5 +1,4 @@
-import tw from "twin.macro"
-import styled from "@emotion/styled"
+import tw, { styled } from "twin.macro"
 import { NavLink as __NavLink } from "react-router-dom"
 import type { NavLinkProps } from "react-router-dom"
 

@@ -10,8 +10,7 @@ import { CustomDateRangePicker, DateRange } from "~/components/DateRangePicker"
 import { PromptModal } from "~/components/PromptModal"
 import { RippleButton } from "~/components/Button"
 import Page from "~/components/Page"
-import tw from "twin.macro"
-import { css } from "@emotion/react"
+import tw, { css } from "twin.macro"
 import { FormGroup, Label, Field, InputText, ErrorMessage } from "~/components/Form"
 import { useForm } from "react-hook-form"
 import Skeleton from "~/components/Skeleton"
@@ -158,7 +157,7 @@ const ComponentsPage = () => {
 				<RippleButton variant="red" tw="inline-flex mr-2 mb-2">
 					<FormattedMessage id="button" />
 				</RippleButton>
-				<RippleButton variant="orange" tw="inline-flex mr-2 mb-2">
+				<RippleButton variant="yellow" tw="inline-flex mr-2 mb-2">
 					<FontAwesomeIcon tw="mr-2" icon={faBars} />
 					<FormattedMessage id="button" />
 				</RippleButton>
@@ -174,7 +173,7 @@ const ComponentsPage = () => {
 				<CustomDateRangePicker
 					tw="font-normal capitalize py-2 px-3 rounded"
 					css={css`
-						${tw`bg-blue-500 text-white transition ease-in-out duration-200`}
+						${tw`bg-blue-500 text-white transition ease-in-out! duration-200!`}
 						:focus {
 							box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
 							${tw`outline-none`}
@@ -200,8 +199,8 @@ const ComponentsPage = () => {
 			>
 				<div
 					tw="w-auto h-48"
-					css={css`
-						background: rgb(var(--theme-primary));
+					css={({ primary }) => css`
+						background: ${primary};
 					`}
 				/>
 				<div tw="px-6 py-4">

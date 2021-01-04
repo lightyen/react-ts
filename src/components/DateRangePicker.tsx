@@ -17,12 +17,12 @@ import {
 	endOfMonth,
 } from "date-fns"
 import { getDateLocale } from "~/date/locale"
-import { css as _css, Interpolation, Theme } from "@emotion/react"
+import { css, Interpolation, Theme } from "@emotion/react"
 
 import "react-date-range/dist/styles.css"
 import "react-date-range/dist/theme/default.css"
 
-import { Global, css } from "@emotion/react"
+import { Global } from "@emotion/react"
 import tw from "twin.macro"
 
 const globalStyles = css`
@@ -140,10 +140,10 @@ export const CustomDateRangePicker = ({ range, onChange, ...props }: Props) => {
 					<motion.div
 						tw="absolute border z-10"
 						css={[
-							_css`
-						box-shadow: 2px 2px 12px -1px rgba(var(--theme-shadow)),
-							0px 0px 6px 0px rgba(var(--theme-shadow-ambient));
-					`,
+							css`
+								box-shadow: 2px 2px 12px -1px rgba(var(--theme-shadow)),
+									0px 0px 6px 0px rgba(var(--theme-shadow-ambient));
+							`,
 							{ top: "-0.5rem", left: "-0.375rem" },
 						]}
 						ref={ref}

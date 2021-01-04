@@ -7,9 +7,7 @@ import { FormattedMessage } from "react-intl"
 import { supports } from "~/store/i18n/languages"
 import { entries } from "~/type-safed"
 
-import styled from "@emotion/styled"
-import { css } from "@emotion/react"
-import tw from "twin.macro"
+import tw, { css, styled } from "twin.macro"
 import { useSelector } from "~/store/hooks"
 
 const Button = styled.button`
@@ -36,7 +34,7 @@ const LanguageSelect = () => {
 	}, [spread])
 
 	return (
-		<div tw="relative whitespace-no-wrap">
+		<div tw="relative whitespace-nowrap">
 			<Button
 				ref={button}
 				tw="cursor-pointer select-none rounded-lg px-3 focus:outline-none hover:underline"
@@ -83,7 +81,7 @@ const LanguageSelect = () => {
 							<li
 								key={locale}
 								css={[
-									tw`border border-gray-500 px-8 py-2 text-center cursor-pointer whitespace-no-wrap select-none`,
+									tw`border border-gray-500 px-8 py-2 text-center cursor-pointer whitespace-nowrap select-none`,
 									css`
 										background: rgb(var(--theme-secondary));
 										color: rgb(var(--theme-text-secondary));

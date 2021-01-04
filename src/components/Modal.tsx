@@ -1,8 +1,7 @@
 import React from "react"
 import ReactDOM from "react-dom"
 import { motion, AnimatePresence, Variants } from "framer-motion"
-import { css } from "@emotion/react"
-import tw from "twin.macro"
+import tw, { css } from "twin.macro"
 
 interface Props extends ModalContentProps {
 	open?: boolean

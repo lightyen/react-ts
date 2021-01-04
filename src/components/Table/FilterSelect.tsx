@@ -6,8 +6,7 @@ import { useIntl } from "react-intl"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes"
 import { useFiltersSelector, useFiltersAction } from "./store"
-import { css } from "@emotion/react"
-import tw from "twin.macro"
+import tw, { css } from "twin.macro"
 
 export interface CustomOption {
 	label: string
@@ -105,7 +104,7 @@ export const FilterSelect = ({ tabIndex, label, options, styles, isMulti, onChan
 			{!focus && (
 				<motion.button
 					css={[
-						tw`transition ease-in-out duration-200 rounded bg-blue-500 text-white leading-none px-4 py-2`,
+						tw`transition ease-in-out! duration-200! rounded bg-blue-500 text-white leading-none px-4 py-2`,
 						css`
 							:hover,
 							:focus {

@@ -10,16 +10,14 @@ import { faDiceD6 } from "@fortawesome/free-solid-svg-icons/faDiceD6"
 import { faBox } from "@fortawesome/free-solid-svg-icons/faBox"
 import { faCode } from "@fortawesome/free-solid-svg-icons/faCode"
 import { useRipple } from "~/components/Button/hooks"
-import styled from "@emotion/styled"
-import tw from "twin.macro"
-import { css } from "@emotion/react"
+import tw, { css, styled } from "twin.macro"
 
 const StyledNavLink = styled(NavLink)`
 	transition-property: transform, background-color;
 	transition-timing-function: ease;
 	transition-duration: 150ms;
 	color: rgb(var(--theme-text-primary));
-	${tw`relative overflow-hidden py-2 px-4 h-12 flex items-center font-medium whitespace-no-wrap select-none outline-none`}
+	${tw`relative overflow-hidden py-2 px-4 h-12 flex items-center font-medium whitespace-nowrap select-none outline-none`}
 	:hover {
 		background: rgb(var(--theme-hover-primary));
 		${tw`underline`}

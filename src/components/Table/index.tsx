@@ -16,13 +16,12 @@ import { Provider } from "react-redux"
 import { store, Context, useFiltersAction, useFiltersSelector, register } from "./store"
 export { register }
 import "twin.macro"
-import { css, Interpolation, Theme } from "@emotion/react"
-import styled from "@emotion/styled"
-import tw from "twin.macro"
+import type { Interpolation, Theme } from "@emotion/react"
+import tw, { css, styled } from "twin.macro"
 
 const TD = styled.td`
 	transition: all ease 0.16s;
-	${tw`text-gray-900 bg-white whitespace-no-wrap box-border px-3 py-2 border`}
+	${tw`text-gray-900 bg-white whitespace-nowrap box-border px-3 py-2 border`}
 `
 
 const CheckboxTH = styled(TD)`

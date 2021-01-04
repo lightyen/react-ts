@@ -4,9 +4,7 @@ import { faArrowUp } from "@fortawesome/free-solid-svg-icons/faArrowUp"
 import { faArrowsAltV } from "@fortawesome/free-solid-svg-icons/faArrowsAltV"
 import { motion, AnimatePresence } from "framer-motion"
 import type { Interpolation, Theme } from "@emotion/react"
-import { css as _css } from "@emotion/react"
-import styled from "@emotion/styled"
-import tw from "twin.macro"
+import tw, { styled, css as _css } from "twin.macro"
 
 export type SortType = "none" | "ascending" | "descending"
 
@@ -71,7 +69,7 @@ export const TheadCell = ({ children, hide, sortType, onClick, css }: Props) => 
 						transition: all ease 0.16s;
 					`,
 					hide && tw`hidden`,
-					tw`text-gray-900 bg-white whitespace-no-wrap box-border p-3 whitespace-no-wrap`,
+					tw`text-gray-900 bg-white box-border p-3 whitespace-nowrap`,
 					tw`select-none hover:bg-gray-300 cursor-pointer`,
 					css,
 				]}
@@ -91,13 +89,7 @@ export const TheadCell = ({ children, hide, sortType, onClick, css }: Props) => 
 		)
 	} else {
 		return (
-			<th
-				css={[
-					css,
-					hide && tw`hidden`,
-					tw`text-gray-900 bg-white whitespace-no-wrap box-border p-3 whitespace-no-wrap`,
-				]}
-			>
+			<th css={[css, hide && tw`hidden`, tw`text-gray-900 bg-white box-border p-3 whitespace-nowrap`]}>
 				{children}
 			</th>
 		)

@@ -6,8 +6,7 @@ import { faMoon } from "@fortawesome/free-solid-svg-icons/faMoon"
 import { useAction, useSelector } from "~/store/hooks"
 import { v4 as uuidv4 } from "uuid"
 
-import styled from "@emotion/styled"
-import tw from "twin.macro"
+import tw, { styled } from "twin.macro"
 
 const Check = styled.input`
 	display: none;

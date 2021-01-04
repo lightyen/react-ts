@@ -1,5 +1,4 @@
-import { css } from "@emotion/react"
-import tw from "twin.macro"
+import tw, { css } from "twin.macro"
 
 export const spinner = css`
 	width: 75px;

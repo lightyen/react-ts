@@ -1,5 +1,4 @@
 import React from "react"
-import styled from "@emotion/styled"
 import { motion } from "framer-motion"
 import { useIntl } from "react-intl"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -7,8 +6,7 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes"
 import { faBackspace } from "@fortawesome/free-solid-svg-icons/faBackspace"
 import { useFiltersSelector, useFiltersAction } from "./store"
 import { NormalInput } from "./NormalInput"
-import { css } from "@emotion/react"
-import tw from "twin.macro"
+import tw, { css, styled } from "twin.macro"
 
 const CloseButton = styled.div`
 	position: absolute;

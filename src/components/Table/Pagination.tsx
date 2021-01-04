@@ -1,6 +1,4 @@
-import styled from "@emotion/styled"
-import tw from "twin.macro"
-
+import tw, { styled } from "twin.macro"
 interface PaginationProps {
 	pageIndex: number
 	links: number[]
