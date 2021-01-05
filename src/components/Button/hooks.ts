@@ -1,28 +1,5 @@
 import React from "react"
 
-import { injectGlobal } from "@emotion/css"
-
-injectGlobal`
-	.ripple-circle {
-		position: absolute;
-		display: block;
-		background: var(--ripple-background, #e0e0e0);
-		border-radius: 50%;
-		pointer-events: none;
-
-		top: calc(var(--y) * 1px);
-		left: calc(var(--x) * 1px);
-		width: calc(var(--d) * 1px);
-		height: calc(var(--d) * 1px);
-
-		opacity: calc(var(--opacity, 1) * var(--ripple-opacity, 0.3));
-		transition: calc(var(--t, 0) * var(--ripple-duration, 1000ms))
-			var(--ripple-easing, ease-in);
-		transform: translate(-50%, -50%) scale(var(--scale, 1));
-		transform-origin: center;
-}
-`
-
 export function useRipple<T extends HTMLElement>() {
 	const ref = React.useRef<T>()
 	React.useEffect(() => {

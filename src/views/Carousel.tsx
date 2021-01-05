@@ -4,22 +4,16 @@ import Page from "~/components/Page"
 import "twin.macro"
 import { motion, useMotionValue } from "framer-motion"
 
-export default () => {
+export default function Carousel() {
 	return (
 		<Page>
 			<h2 tw="text-3xl mt-8 mb-2 font-black capitalize">
 				<FormattedMessage id="nav_carousel" />
 			</h2>
-			<Carousel />
+			<div tw="relative">
+				<Box />
+			</div>
 		</Page>
-	)
-}
-
-const Carousel = () => {
-	return (
-		<div tw="relative">
-			<Box />
-		</div>
 	)
 }
 

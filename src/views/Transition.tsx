@@ -34,7 +34,7 @@ const Box = ({ value, onClick }: { value: number; onClick?: () => void }) => (
 	</AnimatePresence>
 )
 
-export default () => {
+export default function Transition() {
 	const [data, setData] = React.useState([1, 2, 3, 5, 8, 13, 21, 34, 55, 89])
 	return (
 		<Page>

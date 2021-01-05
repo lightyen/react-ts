@@ -39,11 +39,11 @@ const Wrapper = styled.div`
 
 const SkeletonBox = skeleton(props => <Wrapper {...props} />)
 
-export default ({
+export default function Skeleton({
 	children,
 	pending = true,
 	content,
 	...props
-}: React.PropsWithChildren<{ pending?: boolean; content?: React.ReactNode }>) => {
+}: React.PropsWithChildren<{ pending?: boolean; content?: React.ReactNode }>) {
 	return pending ? <SkeletonBox {...props}>{content}</SkeletonBox> : <>{children}</>
 }

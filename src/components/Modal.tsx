@@ -8,7 +8,13 @@ interface Props extends ModalContentProps {
 	afterClose?: () => void
 }
 
-export default ({ children, open = false, exitAnime = true, afterClose, ...rest }: React.PropsWithChildren<Props>) => {
+export default function Modal({
+	children,
+	open = false,
+	exitAnime = true,
+	afterClose,
+	...rest
+}: React.PropsWithChildren<Props>) {
 	const root = document.getElementById("root")
 	const modalRoot = document.getElementById("modal-root")
 	const element = React.useRef(document.createElement("div"))

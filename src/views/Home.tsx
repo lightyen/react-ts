@@ -5,7 +5,7 @@ import "dayjs/locale/zh-tw"
 
 import ReactLogo from "~/assets/logo.svg"
 
-const HomePage = () => {
+export default function Home() {
 	return (
 		<Page>
 			<ReactLogo tw="w-32" />
@@ -13,5 +13,3 @@ const HomePage = () => {
 		</Page>
 	)
 }
-
-export default HomePage

@@ -1,8 +1,8 @@
 import "twin.macro"
-import __styled from "@emotion/styled"
-import { css as __css } from "@emotion/react"
+import styledComponent from "@emotion/styled"
+import { css as cssProperty } from "@emotion/react"
 
 declare module "twin.macro" {
-	const css: typeof __css
-	const styled: typeof __styled
+	const css: typeof cssProperty
+	const styled: typeof styledComponent
 }

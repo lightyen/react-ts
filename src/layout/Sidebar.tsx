@@ -41,7 +41,7 @@ interface Props {
 	width: number
 }
 
-export const Sidebar = ({ top, width }: Props) => {
+export default function Sidebar({ top, width }: Props) {
 	const collapsed = useSelector(state => state.app.collapsed)
 	return (
 		<nav

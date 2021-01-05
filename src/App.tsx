@@ -37,6 +37,24 @@ const globalStyle = css`
 		bottom: 100%;
 		${tw`left-0 right-0 top-0`}
 	}
+
+	.ripple-circle {
+		position: absolute;
+		display: block;
+		background: var(--ripple-background, #e0e0e0);
+		border-radius: 50%;
+		pointer-events: none;
+
+		top: calc(var(--y) * 1px);
+		left: calc(var(--x) * 1px);
+		width: calc(var(--d) * 1px);
+		height: calc(var(--d) * 1px);
+
+		opacity: calc(var(--opacity, 1) * var(--ripple-opacity, 0.3));
+		transition: calc(var(--t, 0) * var(--ripple-duration, 1000ms)) var(--ripple-easing, ease-in);
+		transform: translate(-50%, -50%) scale(var(--scale, 1));
+		transform-origin: center;
+	}
 `
 
 const StyledThemeProvider = ({ children }: { children: React.ReactNode }) => {
@@ -53,14 +71,16 @@ const LanguageProvider = ({ children }: { children: React.ReactNode }) => {
 	)
 }
 
-export default ({ store }: { store: Store }) => (
-	<Provider store={store}>
-		<GlobalStyles />
-		<Global styles={globalStyle} />
-		<StyledThemeProvider>
-			<LanguageProvider>
-				<AppLayout />
-			</LanguageProvider>
-		</StyledThemeProvider>
-	</Provider>
-)
+export default function App({ store }: { store: Store }) {
+	return (
+		<Provider store={store}>
+			<GlobalStyles />
+			<Global styles={globalStyle} />
+			<StyledThemeProvider>
+				<LanguageProvider>
+					<AppLayout />
+				</LanguageProvider>
+			</StyledThemeProvider>
+		</Provider>
+	)
+}

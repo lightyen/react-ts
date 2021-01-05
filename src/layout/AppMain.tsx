@@ -29,7 +29,7 @@ interface Props {
 	sidebarWidth: number
 }
 
-export default ({ headerHeight, sidebarWidth }: Props) => {
+export default function AppMain({ headerHeight, sidebarWidth }: Props) {
 	const collapsed = useSelector(state => state.app.collapsed)
 	return (
 		<ScrollBar

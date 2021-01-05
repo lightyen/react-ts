@@ -1,31 +1,33 @@
 import React from "react"
 import { BrowserRouter, RouteProps, RedirectProps, Redirect, Route, Switch } from "react-router-dom"
-import { Sidebar } from "./Sidebar"
-import { Header } from "./Header"
-import AppMain from "./AppMain"
 import { motion } from "framer-motion"
+import Sidebar from "./Sidebar"
+import Header from "./Header"
+import AppMain from "./AppMain"
 import Login from "~/pages/Login"
 import Page404 from "~/pages/404"
 
-const MotionRedirect = ({ children, ...props }: React.PropsWithChildren<RedirectProps>) => (
-	<motion.div exit="undefined">
-		<Redirect {...props} />
-	</motion.div>
-)
+function MotionRedirect({ children, ...props }: React.PropsWithChildren<RedirectProps>) {
+	return (
+		<motion.div exit="undefined">
+			<Redirect {...props} />
+		</motion.div>
+	)
+}
 
-const isAuthenticated = (): boolean => {
+function isAuthenticated(): boolean {
 	return true // try get localstorage token
 }
 
-const AuthenticatedRoute = ({ children, ...rest }: React.PropsWithChildren<RouteProps>) => (
-	<Route {...rest}>{isAuthenticated() ? children : <MotionRedirect to="/login" />}</Route>
-)
+function AuthenticatedRoute({ children, ...rest }: React.PropsWithChildren<RouteProps>) {
+	return <Route {...rest}>{isAuthenticated() ? children : <MotionRedirect to="/login" />}</Route>
+}
 
-const NoAuthenticatedRoute = ({ children, ...rest }: React.PropsWithChildren<RouteProps>) => (
-	<Route {...rest}>{!isAuthenticated() ? children : <MotionRedirect to="/" />}</Route>
-)
+function NoAuthenticatedRoute({ children, ...rest }: React.PropsWithChildren<RouteProps>) {
+	return <Route {...rest}>{!isAuthenticated() ? children : <MotionRedirect to="/" />}</Route>
+}
 
-const AppLayout = () => {
+function AppLayout() {
 	const h = 45
 	const w = 246
 	return (
@@ -37,7 +39,7 @@ const AppLayout = () => {
 	)
 }
 
-const AppRouter = () => {
+function AppRouter() {
 	return (
 		<Switch>
 			<Route path="/404" exact>
@@ -53,10 +55,10 @@ const AppRouter = () => {
 	)
 }
 
-const Router = () => (
-	<BrowserRouter>
-		<AppRouter />
-	</BrowserRouter>
-)
-
-export default Router
+export default function Router() {
+	return (
+		<BrowserRouter>
+			<AppRouter />
+		</BrowserRouter>
+	)
+}
