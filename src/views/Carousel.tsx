@@ -1,4 +1,4 @@
-import React from "react"
+import { useState } from "react"
 import { FormattedMessage } from "react-intl"
 import Page from "~/components/Page"
 import "twin.macro"
@@ -41,10 +41,10 @@ const items: Item[] = [
 ]
 
 const Box = () => {
-	const [isDragging, setDragging] = React.useState(false)
+	const [isDragging, setDragging] = useState(false)
 	const x = useMotionValue(0)
 	const width = 300
-	const [index, setIndex] = React.useState(0)
+	const [index, setIndex] = useState(0)
 	return (
 		<motion.div
 			layout

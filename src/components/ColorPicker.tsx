@@ -1,4 +1,4 @@
-import React from "react"
+import { useEffect, useRef, forwardRef, useCallback } from "react"
 import chroma from "chroma-js"
 import tw, { css } from "twin.macro"
 
@@ -7,11 +7,11 @@ function clamp(value: number, min: number, max: number) {
 }
 
 function useMousemove(ref: React.MutableRefObject<HTMLElement>, callback: (e: MouseEvent) => void) {
-	const cb = React.useRef<(e: MouseEvent) => void>()
-	React.useEffect(() => {
+	const cb = useRef<(e: MouseEvent) => void>()
+	useEffect(() => {
 		cb.current = callback
 	}, [callback])
-	React.useEffect(() => {
+	useEffect(() => {
 		const el = ref.current
 		const onmousemove = (e: MouseEvent) => {
 			e.preventDefault()
@@ -39,8 +39,8 @@ function useMousemove(ref: React.MutableRefObject<HTMLElement>, callback: (e: Mo
 function useCombinedRefs(
 	...refs: Array<React.MutableRefObject<HTMLDivElement> | ((instance: HTMLDivElement) => void)>
 ) {
-	const targetRef = React.useRef<HTMLDivElement>()
-	React.useEffect(() => {
+	const targetRef = useRef<HTMLDivElement>()
+	useEffect(() => {
 		for (const ref of refs) {
 			if (!ref) continue
 			if (typeof ref === "function") {
@@ -58,23 +58,23 @@ interface Props {
 	defaultValue?: string | chroma.Color
 }
 
-export default React.forwardRef<
+export default forwardRef<
 	HTMLDivElement,
 	Omit<React.HTMLAttributes<HTMLDivElement>, "onChange" | "defaultValue"> & Props
 >(({ onChange, defaultValue = "#ff0000" }, ref) => {
-	const picker = useCombinedRefs(React.useRef<HTMLDivElement>(), ref)
-	const palette = React.useRef<HTMLDivElement>()
-	const alpha = React.useRef<HTMLDivElement>()
-	const hue = React.useRef<HTMLDivElement>()
-	const result = React.useRef<HTMLDivElement>()
-	const resultText = React.useRef<HTMLDivElement>()
+	const picker = useCombinedRefs(useRef<HTMLDivElement>(), ref)
+	const palette = useRef<HTMLDivElement>()
+	const alpha = useRef<HTMLDivElement>()
+	const hue = useRef<HTMLDivElement>()
+	const result = useRef<HTMLDivElement>()
+	const resultText = useRef<HTMLDivElement>()
 
-	const handleChange = React.useRef<(color: chroma.Color) => void>()
-	React.useEffect(() => {
+	const handleChange = useRef<(color: chroma.Color) => void>()
+	useEffect(() => {
 		handleChange.current = onChange
 	}, [onChange])
 
-	const onchange = React.useCallback(() => {
+	const onchange = useCallback(() => {
 		if (handleChange.current) {
 			const root = picker.current
 			const alpha = parseFloat(root.style.getPropertyValue("--selected-alpha"))
@@ -83,7 +83,7 @@ export default React.forwardRef<
 		}
 	}, [picker])
 
-	const updateText = React.useCallback(() => {
+	const updateText = useCallback(() => {
 		const el = resultText.current
 		const root = picker.current
 		const alpha = parseFloat(root.style.getPropertyValue("--selected-alpha"))
@@ -107,7 +107,7 @@ export default React.forwardRef<
 		}
 	}, [picker])
 
-	React.useEffect(() => {
+	useEffect(() => {
 		const root = picker.current
 		const c = typeof defaultValue === "string" ? chroma(defaultValue) : defaultValue
 		const h = c.get("hsl.h") || 0

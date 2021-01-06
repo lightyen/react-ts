@@ -1,4 +1,4 @@
-import React from "react"
+import { Suspense } from "react"
 import { useSelector } from "~/store/hooks"
 import { Switch, useLocation } from "react-router-dom"
 import { routes } from "~/routes"
@@ -13,11 +13,11 @@ const Routes = () => {
 	return (
 		<AnimatePresence exitBeforeEnter>
 			<Switch location={location} key={location.pathname}>
-				<React.Suspense fallback={null}>
+				<Suspense fallback={null}>
 					{routes.map((props, i) => {
 						return <MotionRoute key={i} {...props} />
 					})}
-				</React.Suspense>
+				</Suspense>
 				<MotionRedirect to="/404" />
 			</Switch>
 		</AnimatePresence>

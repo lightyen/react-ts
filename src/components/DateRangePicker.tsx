@@ -1,4 +1,4 @@
-import React from "react"
+import { useEffect, useState, useRef } from "react"
 
 import { motion } from "framer-motion"
 import { DateRangePicker } from "react-date-range"
@@ -63,7 +63,7 @@ interface Props {
 }
 
 export const CustomDateRangePicker = ({ range, onChange, ...props }: Props) => {
-	const ref = React.useRef<HTMLDivElement>()
+	const ref = useRef<HTMLDivElement>()
 	const intl = useIntl()
 
 	const st = startOfToday()
@@ -88,8 +88,8 @@ export const CustomDateRangePicker = ({ range, onChange, ...props }: Props) => {
 		},
 	]
 
-	const [focus, setFocus] = React.useState(false)
-	const [ranges, setRanges] = React.useState<RangeWithKey[]>([
+	const [focus, setFocus] = useState(false)
+	const [ranges, setRanges] = useState<RangeWithKey[]>([
 		{
 			key: "selection",
 			startDate: range?.startDate || st,
@@ -99,7 +99,7 @@ export const CustomDateRangePicker = ({ range, onChange, ...props }: Props) => {
 
 	const { startDate, endDate } = ranges[0]
 
-	React.useEffect(() => {
+	useEffect(() => {
 		const exit = (e: MouseEvent) => {
 			if (focus && e.target instanceof Node) {
 				!ref.current.contains(e.target) && setFocus(false)

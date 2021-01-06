@@ -1,4 +1,4 @@
-import React from "react"
+import { StrictMode } from "react"
 import { render } from "react-dom"
 import App from "~/App"
 import { createInstance } from "localforage"
@@ -10,9 +10,9 @@ const store = createInstance({ name: "app" })
 store.getItem("test", (err, value) => {
 	console.log(typeof value)
 	render(
-		<React.StrictMode>
+		<StrictMode>
 			<App store={makeStore()} />
-		</React.StrictMode>,
+		</StrictMode>,
 		document.getElementById("root"),
 	)
 })

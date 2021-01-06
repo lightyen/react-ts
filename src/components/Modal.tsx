@@ -1,4 +1,4 @@
-import React from "react"
+import { useEffect, useRef, useState } from "react"
 import ReactDOM from "react-dom"
 import { motion, AnimatePresence, Variants } from "framer-motion"
 import tw, { css } from "twin.macro"
@@ -17,15 +17,15 @@ export default function Modal({
 }: React.PropsWithChildren<Props>) {
 	const root = document.getElementById("root")
 	const modalRoot = document.getElementById("modal-root")
-	const element = React.useRef(document.createElement("div"))
-	const [visible, setVisible] = React.useState(open)
+	const element = useRef(document.createElement("div"))
+	const [visible, setVisible] = useState(open)
 
 	function onExitComplete() {
 		setVisible(false)
 		modalRoot.style.bottom = ""
 	}
 
-	React.useEffect(() => {
+	useEffect(() => {
 		if (open) {
 			setVisible(open)
 		} else if (!exitAnime) {
@@ -34,8 +34,8 @@ export default function Modal({
 		}
 	}, [open, modalRoot, exitAnime])
 
-	const isOpen = React.useRef(false)
-	React.useEffect(() => {
+	const isOpen = useRef(false)
+	useEffect(() => {
 		if (isOpen.current && !visible && afterClose) {
 			afterClose()
 		}
@@ -44,7 +44,7 @@ export default function Modal({
 		}
 	}, [afterClose, visible])
 
-	React.useEffect(() => {
+	useEffect(() => {
 		const e = element.current
 		function wheel(e: Event) {
 			e.stopPropagation()
@@ -118,8 +118,8 @@ const ModalContent = ({
 	exitAnime,
 	...props
 }: React.PropsWithChildren<ModalContentProps>) => {
-	const ref = React.useRef<HTMLDivElement>()
-	React.useEffect(() => {
+	const ref = useRef<HTMLDivElement>()
+	useEffect(() => {
 		const modal = ref.current
 		function onMouseDown(e: MouseEvent) {
 			if (!modal.contains(e.target as Node)) {

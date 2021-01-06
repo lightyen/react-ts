@@ -1,4 +1,4 @@
-import React from "react"
+import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Page from "~/components/Page"
 import { FormattedMessage } from "react-intl"
@@ -35,7 +35,7 @@ const Box = ({ value, onClick }: { value: number; onClick?: () => void }) => (
 )
 
 export default function Transition() {
-	const [data, setData] = React.useState([1, 2, 3, 5, 8, 13, 21, 34, 55, 89])
+	const [data, setData] = useState([1, 2, 3, 5, 8, 13, 21, 34, 55, 89])
 	return (
 		<Page>
 			<h2 tw="text-3xl mt-8 mb-2 font-black capitalize">

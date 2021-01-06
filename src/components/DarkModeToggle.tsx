@@ -1,4 +1,4 @@
-import React from "react"
+import { useRef } from "react"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSun } from "@fortawesome/free-solid-svg-icons/faSun"
@@ -16,7 +16,7 @@ const Slider = styled.label`
 	width: 3.6rem;
 	height: 1.5rem;
 	border-radius: 9999px;
-	${tw`transition ease-in-out duration-200`}
+	${tw`transition ease-in-out! duration-200!`}
 
 	position: relative;
 	display: flex;
@@ -35,7 +35,7 @@ const Slider = styled.label`
 
 	&::after {
 		content: "";
-		${tw`transition ease-in-out duration-200`}
+		${tw`transition ease-in-out! duration-200!`}
 		width: 1.2rem;
 		height: 1.2rem;
 		top: 0.15rem;
@@ -65,7 +65,7 @@ const Slider = styled.label`
 const DarkModeToggle = () => {
 	const name = useSelector(state => state.theme.name)
 	const { changeTheme } = useAction().theme
-	const uuid = React.useRef(uuidv4())
+	const uuid = useRef(uuidv4())
 
 	const bk = useSelector(state => state.app.breakpoint)
 	const hide = bk == "xs" || bk == "sm"

@@ -1,4 +1,3 @@
-import React from "react"
 import { keyframes } from "@emotion/react"
 import tw, { styled } from "twin.macro"
 import type { Theme } from "~/store/theme/themes"

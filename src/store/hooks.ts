@@ -1,4 +1,4 @@
-import React from "react"
+import { useMemo } from "react"
 import { bindActionCreators } from "@reduxjs/toolkit"
 import { useSelector as useReduxSelector, useDispatch, TypedUseSelectorHook } from "react-redux"
 import { RootStore } from "./reducer"
@@ -12,7 +12,7 @@ export const useSelector: TypedUseSelectorHook<RootStore> = useReduxSelector
 
 export function useAction() {
 	const dispatch = useDispatch()
-	return React.useMemo(
+	return useMemo(
 		() => ({
 			app: bindActionCreators(app, dispatch),
 			theme: bindActionCreators(theme, dispatch),

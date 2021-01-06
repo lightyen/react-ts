@@ -1,4 +1,4 @@
-import React from "react"
+import { forwardRef, useRef, useState } from "react"
 import tw, { styled } from "twin.macro"
 import { v4 } from "uuid"
 import { FormattedMessage } from "react-intl"
@@ -17,9 +17,9 @@ const Label = styled.label`
 
 type Props = Omit<React.InputHTMLAttributes<HTMLInputElement>, "type">
 
-export default React.forwardRef<HTMLInputElement, Props>(({ onChange, ...props }, ref) => {
-	const id = React.useRef(v4()).current
-	const [file, setFile] = React.useState<File>()
+export default forwardRef<HTMLInputElement, Props>(({ onChange, ...props }, ref) => {
+	const id = useRef(v4()).current
+	const [file, setFile] = useState<File>()
 	return (
 		<>
 			<InputFile

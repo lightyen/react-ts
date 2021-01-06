@@ -1,4 +1,4 @@
-import React from "react"
+import { lazy } from "react"
 import { FormattedMessage } from "react-intl"
 import { RouteProps } from "react-router-dom"
 
@@ -10,43 +10,43 @@ export const routes: RouteItem[] = [
 	{
 		path: "/",
 		exact: true,
-		component: React.lazy(() => import("~/views/Home")),
+		component: lazy(() => import("~/views/Home")),
 		name: <FormattedMessage id="home" />,
 	},
 	{
 		path: "/components",
-		component: React.lazy(() => import("~/views/Components")),
+		component: lazy(() => import("~/views/Components")),
 		name: <FormattedMessage id="nav_components" />,
 	},
 	{
 		path: "/virtual-list",
-		component: React.lazy(() => import("~/views/VirtualList")),
+		component: lazy(() => import("~/views/VirtualList")),
 		name: <FormattedMessage id="nav_virtual_list" />,
 	},
-	{ path: "/table", component: React.lazy(() => import("~/views/Table")), name: <FormattedMessage id="nav_table" /> },
+	{ path: "/table", component: lazy(() => import("~/views/Table")), name: <FormattedMessage id="nav_table" /> },
 	{
 		path: "/transition",
-		component: React.lazy(() => import("~/views/Transition")),
+		component: lazy(() => import("~/views/Transition")),
 		name: <FormattedMessage id="nav_transition" />,
 	},
 	{
 		path: "/web-component",
-		component: React.lazy(() => import("~/views/WebComponent")),
+		component: lazy(() => import("~/views/WebComponent")),
 		name: <FormattedMessage defaultMessage="Web Components" />,
 	},
 	{
 		path: "/codemirror",
-		component: React.lazy(() => import("~/views/Editor")),
+		component: lazy(() => import("~/views/Editor")),
 		name: <FormattedMessage id="nav_editor" />,
 	},
 	{
 		path: "/carousel",
-		component: React.lazy(() => import("~/views/Carousel")),
+		component: lazy(() => import("~/views/Carousel")),
 		name: <FormattedMessage id="nav_carousel" />,
 	},
 	{
 		path: "/color-picker",
-		component: React.lazy(() => import("~/views/ColorPicker")),
+		component: lazy(() => import("~/views/ColorPicker")),
 		name: <FormattedMessage id="nav_color_picker" />,
 	},
 ]

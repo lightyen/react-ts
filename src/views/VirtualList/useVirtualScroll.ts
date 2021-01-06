@@ -1,4 +1,4 @@
-import React from "react"
+import { useMemo, useRef, useLayoutEffect } from "react"
 import { useScrollTop } from "~/components/ScrollBar"
 
 export interface VirtualItem {
@@ -28,7 +28,7 @@ interface VirtualOption {
 export function useVirtualScroll({ scrollbar, data, offsetTop = 0, minDisplay = 0 }: VirtualOption) {
 	const { clientHeight } = scrollbar
 	const scrollTop = useScrollTop({ scrollbar })
-	const accHeights = React.useMemo(() => {
+	const accHeights = useMemo(() => {
 		const array = new Array<number>(data.length)
 		for (let i = 0, length = data.length, acc = 0; i < length; i++) {
 			acc += data[i].height
@@ -87,9 +87,9 @@ export function useStay({
 }: VirtualScrollProps & UseStayOptions) {
 	const base = scrollTop + offsetTop
 	const delta = accHeights[index] - base
-	const cache = React.useRef(accHeights)
-	const memory = React.useRef({ index, delta })
-	React.useLayoutEffect(() => {
+	const cache = useRef(accHeights)
+	const memory = useRef({ index, delta })
+	useLayoutEffect(() => {
 		if (cache.current !== accHeights) {
 			cache.current = accHeights
 			const { index, delta } = memory.current

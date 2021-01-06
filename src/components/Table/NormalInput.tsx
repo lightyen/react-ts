@@ -1,4 +1,4 @@
-import React from "react"
+import { useState, useEffect, forwardRef } from "react"
 
 interface ExtendProps {
 	onChange?: (value: string) => void
@@ -6,16 +6,16 @@ interface ExtendProps {
 	onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void
 }
 
-export const NormalInput = React.forwardRef<
+export const NormalInput = forwardRef<
 	HTMLInputElement,
 	ExtendProps & Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange" | "onKeyDown" | "onBlur">
 >((props, ref) => {
 	const { onChange, onKeyDown, onBlur, value, defaultValue, ...rest } = props
 
-	const [inputValue, setInputValue] = React.useState<number | string | readonly string[]>(value || defaultValue || "")
+	const [inputValue, setInputValue] = useState<number | string | readonly string[]>(value || defaultValue || "")
 
 	// restore when props changed
-	React.useEffect(() => {
+	useEffect(() => {
 		const new_value = props.value || props.defaultValue || ""
 		setInputValue(new_value)
 	}, [props])

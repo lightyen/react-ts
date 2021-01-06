@@ -1,4 +1,4 @@
-import React from "react"
+import { useEffect, useRef } from "react"
 import { v4 as uuidv4 } from "uuid"
 import "twin.macro"
 
@@ -66,9 +66,9 @@ async function handleSubmit(e: React.DragEvent) {
 }
 
 const FileUploader = () => {
-	const inputRef = React.useRef<HTMLInputElement>()
-	const uuid = React.useRef(uuidv4())
-	React.useEffect(() => {
+	const inputRef = useRef<HTMLInputElement>()
+	const uuid = useRef(uuidv4())
+	useEffect(() => {
 		const el = inputRef.current
 		el.setAttribute("webkitdirectory", "")
 		el.setAttribute("allowdirs", "")

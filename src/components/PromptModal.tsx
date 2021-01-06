@@ -1,5 +1,4 @@
-import React from "react"
-
+import { useState, useRef } from "react"
 import { Prompt, useLocation, useHistory } from "react-router-dom"
 import Modal from "./Modal"
 
@@ -8,13 +7,13 @@ interface Props {
 	when?: boolean
 }
 
-export const PromptModal = ({ when = true }: Props) => {
-	const [modalVisible, setModalVisible] = React.useState(false)
+export default function PromptModal({ when = true }: Props) {
+	const [modalVisible, setModalVisible] = useState(false)
 	const location = useLocation()
 	const history = useHistory()
 
-	const target = React.useRef(undefined) // 要前往的目標路由
-	const isDone = React.useRef(false) // 使用者決定離開？
+	const target = useRef(undefined) // 要前往的目標路由
+	const isDone = useRef(false) // 使用者決定離開？
 
 	return (
 		<>

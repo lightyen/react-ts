@@ -1,4 +1,4 @@
-import React from "react"
+import { useEffect, useState, useRef } from "react"
 import { useAction } from "~/store/hooks"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faLanguage } from "@fortawesome/free-solid-svg-icons/faLanguage"
@@ -11,17 +11,17 @@ import tw, { css, styled } from "twin.macro"
 import { useSelector } from "~/store/hooks"
 
 const Button = styled.button`
-	${tw`transition ease-in-out duration-200 opacity-75`}
+	${tw`transition ease-in-out! duration-200! opacity-75`}
 `
 
 const LanguageSelect = () => {
-	const [spread, setSpread] = React.useState(false)
+	const [spread, setSpread] = useState(false)
 	const { setLocale } = useAction().i18n
-	const button = React.useRef<HTMLButtonElement>()
-	const ul = React.useRef<HTMLUListElement>()
+	const button = useRef<HTMLButtonElement>()
+	const ul = useRef<HTMLUListElement>()
 	const darkmode = useSelector(state => state.theme.name == "dark")
 
-	React.useEffect(() => {
+	useEffect(() => {
 		const btn = button.current
 		const menu = ul.current
 		function onMouseDown(e: MouseEvent) {

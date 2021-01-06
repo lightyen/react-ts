@@ -1,4 +1,4 @@
-import React from "react"
+import { useEffect, useRef } from "react"
 import { motion } from "framer-motion"
 import { useIntl } from "react-intl"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -33,13 +33,13 @@ interface FilterInputProps {
 }
 
 export const FilterPattern = ({ tabIndex, label, onChange, onCancel, id, fid }: FilterInputProps) => {
-	const container = React.useRef<HTMLDivElement>()
-	const inputRef = React.useRef<HTMLInputElement>()
+	const container = useRef<HTMLDivElement>()
+	const inputRef = useRef<HTMLInputElement>()
 	const intl = useIntl()
 	const input = useFiltersSelector(state => state[id].inputs[fid] ?? "") as string
 	const focus = useFiltersSelector(state => state[id].focus[fid] ?? true)
 	const { setFocus } = useFiltersAction()
-	React.useEffect(() => {
+	useEffect(() => {
 		const exit = (e: MouseEvent) => {
 			if (focus && e.target instanceof Node) {
 				if (!container.current.contains(e.target)) {
@@ -104,7 +104,7 @@ export const FilterPattern = ({ tabIndex, label, onChange, onCancel, id, fid }: 
 			{!focus && (
 				<motion.button
 					css={css`
-						${tw`transition ease-in-out duration-200 rounded bg-blue-500 text-white leading-none px-4 py-2`}
+						${tw`transition ease-in-out! duration-200! rounded bg-blue-500 text-white leading-none px-4 py-2`}
 						:hover,:focus {
 							box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
 							${tw`outline-none`}

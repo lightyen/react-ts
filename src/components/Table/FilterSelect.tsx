@@ -1,4 +1,4 @@
-import React from "react"
+import { useEffect, useCallback, useRef } from "react"
 import { motion } from "framer-motion"
 import { Styles } from "react-select"
 import Select from "react-select"
@@ -26,7 +26,7 @@ interface Props {
 }
 
 export const FilterSelect = ({ tabIndex, label, options, styles, isMulti, onChange, onCancel, id, fid }: Props) => {
-	const container = React.useRef<HTMLDivElement>()
+	const container = useRef<HTMLDivElement>()
 	const intl = useIntl()
 	const focus = useFiltersSelector(state => state[id].focus[fid] ?? true)
 	const inputOption = useFiltersSelector(state => state[id].inputs[fid] ?? "")
@@ -36,7 +36,7 @@ export const FilterSelect = ({ tabIndex, label, options, styles, isMulti, onChan
 	const inputs = inputOption as unknown[]
 	const value = isMulti ? options.filter(o => inputs.includes(o.value)) : options.find(o => o.value === input)
 
-	const exit = React.useCallback(
+	const exit = useCallback(
 		(e: MouseEvent) => {
 			if (e.target instanceof Node) {
 				if (!container.current.contains(e.target)) {
@@ -50,8 +50,8 @@ export const FilterSelect = ({ tabIndex, label, options, styles, isMulti, onChan
 		[id, fid, setFocus, onCancel, value],
 	)
 
-	const mount = React.useRef(false)
-	React.useEffect(() => {
+	const mount = useRef(false)
+	useEffect(() => {
 		if (focus && mount.current) {
 			window.addEventListener("mousedown", exit)
 		}

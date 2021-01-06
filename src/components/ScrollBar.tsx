@@ -1,4 +1,4 @@
-import React from "react"
+import { useEffect, useState, useRef, createContext, useContext } from "react"
 import { useTheme } from "@emotion/react"
 import tw, { styled } from "twin.macro"
 
@@ -44,21 +44,21 @@ const CustomScrollBar = styled.div`
 		box-shadow: inset 0 0 0 100px;
 	}
 `
-const ScrollBarContext = React.createContext<HTMLDivElement>(null)
-const ScrollBarVisibleContext = React.createContext<boolean>(null)
+const ScrollBarContext = createContext<HTMLDivElement>(null)
+const ScrollBarVisibleContext = createContext<boolean>(null)
 
 export function useScrollBarSource() {
-	return React.useContext(ScrollBarContext)
+	return useContext(ScrollBarContext)
 }
 
 export function useScollBarVisible() {
-	return React.useContext(ScrollBarVisibleContext)
+	return useContext(ScrollBarVisibleContext)
 }
 
 export function useScrollTop({ scrollbar }: { scrollbar: HTMLElement }) {
-	const [scrollTop, setScrollTop] = React.useState(scrollbar.scrollTop)
-	const animationFrame = React.useRef(0)
-	React.useEffect(() => {
+	const [scrollTop, setScrollTop] = useState(scrollbar.scrollTop)
+	const animationFrame = useRef(0)
+	useEffect(() => {
 		function scroll() {
 			if (animationFrame.current) {
 				cancelAnimationFrame(animationFrame.current)
@@ -77,16 +77,16 @@ interface ScrollBarProps {
 }
 
 export const ScrollBar = ({ children, ...props }: ScrollBarProps) => {
-	const ref = React.useRef<HTMLDivElement>()
-	const [handle, setHandle] = React.useState<HTMLDivElement>()
-	const isMount = React.useRef(false)
+	const ref = useRef<HTMLDivElement>()
+	const [handle, setHandle] = useState<HTMLDivElement>()
+	const isMount = useRef(false)
 
 	const {
 		background,
 		text: { background: color },
 	} = useTheme()
-	const [thumbColor, setThumbColor] = React.useState(background)
-	React.useEffect(() => {
+	const [thumbColor, setThumbColor] = useState(background)
+	useEffect(() => {
 		isMount.current = true
 		setHandle(ref.current)
 		return () => {
@@ -94,9 +94,9 @@ export const ScrollBar = ({ children, ...props }: ScrollBarProps) => {
 		}
 	}, [])
 
-	const tick = React.useRef<number>(0)
+	const tick = useRef<number>(0)
 
-	React.useEffect(() => {
+	useEffect(() => {
 		const target = ref.current
 		function cb() {
 			window.requestAnimationFrame(() => {
@@ -120,11 +120,10 @@ export const ScrollBar = ({ children, ...props }: ScrollBarProps) => {
 		}
 	}, [background, color])
 
-	const [visible, setVisible] = React.useState(false)
-	React.useEffect(() => {
+	const [visible, setVisible] = useState(false)
+	useEffect(() => {
 		if (!handle) {
-			// eslint-disable-next-line @typescript-eslint/no-empty-function
-			return () => {}
+			return () => void 0
 		}
 		const el = handle.children[0]
 		const observer = new ResizeObserver(entries => {

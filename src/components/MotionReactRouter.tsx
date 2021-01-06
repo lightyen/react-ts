@@ -1,4 +1,3 @@
-import React from "react"
 import { motion } from "framer-motion"
 import { Route, Redirect } from "react-router-dom"
 import type { RouteProps, RedirectProps } from "react-router-dom"

@@ -1,4 +1,4 @@
-import React from "react"
+import { useEffect, useState, useRef, useCallback } from "react"
 import Select from "react-select"
 import { motion } from "framer-motion"
 import { FormattedMessage, useIntl } from "react-intl"
@@ -7,7 +7,7 @@ import { faFilter } from "@fortawesome/free-solid-svg-icons/faFilter"
 import tw, { styled } from "twin.macro"
 
 const AddFilerButton = styled.button`
-	${tw`transition ease-in-out duration-200 rounded bg-green-500 px-4 py-2 text-white font-bold leading-none whitespace-nowrap`}
+	${tw`transition ease-in-out! duration-200! rounded bg-green-500 px-4 py-2 text-white font-bold leading-none whitespace-nowrap`}
 
 	:hover,:focus {
 		box-shadow: 0 0 0 3px rgba(72, 187, 120, 0.5);
@@ -27,14 +27,14 @@ interface Props<T = string> {
 }
 
 function useFocusExit() {
-	const [focus, setFocus] = React.useState(false)
-	const ref = React.useRef<HTMLDivElement>()
-	const exit = React.useCallback((e: MouseEvent) => {
+	const [focus, setFocus] = useState(false)
+	const ref = useRef<HTMLDivElement>()
+	const exit = useCallback((e: MouseEvent) => {
 		if (e.target instanceof Node) {
 			!ref.current.contains(e.target) && setFocus(false)
 		}
 	}, [])
-	React.useEffect(() => {
+	useEffect(() => {
 		return () => {
 			if (focus) {
 				window.removeEventListener("mousedown", exit)

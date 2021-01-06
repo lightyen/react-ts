@@ -1,9 +1,9 @@
-import React from "react"
+import { useRef, useState, useCallback, useEffect, forwardRef } from "react"
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function useDebounce<T extends (...args: any[]) => void>(callback: T, delay: number) {
-	const handle = React.useRef<number>()
-	return React.useCallback(
+	const handle = useRef<number>()
+	return useCallback(
 		(...args: Parameters<T>) => {
 			window.clearTimeout(handle.current)
 			handle.current = window.setTimeout(() => callback(...args), delay)
@@ -19,17 +19,17 @@ interface ExtendProps {
 	onBlur?: (event: React.FocusEvent<HTMLInputElement>, value: string) => void
 }
 
-export const DebounceInput = React.forwardRef<
+export const DebounceInput = forwardRef<
 	HTMLInputElement,
 	ExtendProps & Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange" | "onKeyDown" | "onBlur">
 >((props, ref) => {
 	const { timeout, onChange, onKeyDown, onBlur, value, defaultValue, ...rest } = props
-	const [text, setText] = React.useState<string>((defaultValue as string) || "")
+	const [text, setText] = useState<string>((defaultValue as string) || "")
 
 	const debounceChange = useDebounce(onChange, timeout)
 
 	// restore when props receive
-	React.useEffect(() => {
+	useEffect(() => {
 		if (props.defaultValue != undefined) {
 			setText(props.defaultValue as string)
 		}

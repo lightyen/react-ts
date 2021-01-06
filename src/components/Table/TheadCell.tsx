@@ -1,4 +1,3 @@
-import React from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons/faArrowUp"
 import { faArrowsAltV } from "@fortawesome/free-solid-svg-icons/faArrowsAltV"

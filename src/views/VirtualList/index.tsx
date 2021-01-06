@@ -1,4 +1,4 @@
-import React from "react"
+import { useEffect, useState, useRef, useReducer, useMemo, createContext, useContext, useCallback } from "react"
 import chroma from "chroma-js"
 import { FormattedMessage } from "react-intl"
 import { useVirtualScroll, useStay, VirtualItem, VirtualScrollProps } from "./useVirtualScroll"
@@ -55,7 +55,7 @@ interface MyContextType extends MyContextState {
 	dispatch: React.Dispatch<MyContextAction>
 }
 
-const MyContext = React.createContext<MyContextType>(null)
+const MyContext = createContext<MyContextType>(null)
 
 function reducer(state: MyContextState, action: MyContextAction) {
 	switch (action.type) {
@@ -69,20 +69,19 @@ function reducer(state: MyContextState, action: MyContextAction) {
 }
 
 function useMyContext() {
-	const { dispatch, ...state } = React.useContext(MyContext)
-	const changeData = React.useCallback((data: Item[]) => dispatch({ type: "CHANGE_DATA", data }), [dispatch])
-	const changeOffsetTop = React.useCallback(
-		(offsetTop: number) => dispatch({ type: "CHANGE_OFFSETTOP", offsetTop }),
-		[dispatch],
-	)
+	const { dispatch, ...state } = useContext(MyContext)
+	const changeData = useCallback((data: Item[]) => dispatch({ type: "CHANGE_DATA", data }), [dispatch])
+	const changeOffsetTop = useCallback((offsetTop: number) => dispatch({ type: "CHANGE_OFFSETTOP", offsetTop }), [
+		dispatch,
+	])
 	return { ...state, changeData, changeOffsetTop }
 }
 
 const VirtualList = () => {
 	const { data, offsetTop, changeOffsetTop } = useMyContext()
 	const scrollbar = useScrollBarSource()
-	const container = React.useRef<HTMLDivElement>()
-	React.useEffect(() => {
+	const container = useRef<HTMLDivElement>()
+	useEffect(() => {
 		const e = container.current
 		const marginTop = parseInt(
 			document.defaultView.getComputedStyle(e.parentElement).getPropertyValue("margin-top"),
@@ -138,11 +137,11 @@ function scrollTo(options: {
 
 const Information = ({ scrollTop, start, end, accHeights, scrollbar }: VirtualScrollProps) => {
 	const { offsetTop, changeData } = useMyContext()
-	const input = React.useRef(0)
-	const ref = React.useRef<HTMLDivElement>()
+	const input = useRef(0)
+	const ref = useRef<HTMLDivElement>()
 
-	const [marginBottom, setMarginBottom] = React.useState(0)
-	React.useEffect(() => {
+	const [marginBottom, setMarginBottom] = useState(0)
+	useEffect(() => {
 		setMarginBottom(-outerHeight(ref.current))
 	}, [])
 
@@ -205,8 +204,8 @@ const Information = ({ scrollTop, start, end, accHeights, scrollbar }: VirtualSc
 }
 
 const VirtualListPage = () => {
-	const [state, dispatch] = React.useReducer(reducer, null, () => ({ offsetTop: 0, data: createData() }))
-	const value = React.useMemo(() => ({ ...state, dispatch }), [state, dispatch])
+	const [state, dispatch] = useReducer(reducer, null, () => ({ offsetTop: 0, data: createData() }))
+	const value = useMemo(() => ({ ...state, dispatch }), [state, dispatch])
 	return (
 		<MyContext.Provider value={value}>
 			<Page tw="m-3 pt-3 px-3 pb-6 relative">

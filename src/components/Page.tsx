@@ -1,4 +1,3 @@
-import React from "react"
 import { useScollBarVisible } from "./ScrollBar"
 import tw, { styled } from "twin.macro"
 

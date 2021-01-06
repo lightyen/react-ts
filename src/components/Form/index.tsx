@@ -1,4 +1,3 @@
-import React from "react"
 import tw, { styled } from "twin.macro"
 
 export const FormGroup = tw.div`md:flex mb-6`

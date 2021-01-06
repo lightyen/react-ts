@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react"
+import { useState, useRef, useCallback } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBars } from "@fortawesome/free-solid-svg-icons/faBars"
 import { FormattedMessage } from "react-intl"
 import Modal from "~/components/Modal"
 import { startOfDay, endOfDay, subDays } from "date-fns"
 import { CustomDateRangePicker, DateRange } from "~/components/DateRangePicker"
-import { PromptModal } from "~/components/PromptModal"
+import PromptModal from "~/components/PromptModal"
 import { RippleButton } from "~/components/Button"
 import Page from "~/components/Page"
 import tw, { css } from "twin.macro"
@@ -17,8 +17,8 @@ import Skeleton from "~/components/Skeleton"
 import Spinner from "~/components/Spinner"
 
 function useDebounce<T extends (...args: any[]) => void>(cb: T, delay: number) {
-	const handle = React.useRef<number>()
-	return React.useCallback(
+	const handle = useRef<number>()
+	return useCallback(
 		(...args: Parameters<T>) => {
 			window.clearTimeout(handle.current)
 			handle.current = window.setTimeout(cb, delay, args)
@@ -43,7 +43,7 @@ interface Data {
 const SectionHeader = tw.h3`text-xl mt-6 mb-3 font-bold capitalize`
 
 const ModalButton = () => {
-	const [open, setOpen] = React.useState(false)
+	const [open, setOpen] = useState(false)
 	return (
 		<>
 			<RippleButton variant="blue" tw="mr-3" onClick={e => setOpen(true)}>
@@ -76,7 +76,7 @@ const ModalButton = () => {
 }
 
 const ModalButton2 = () => {
-	const [open2, setOpen2] = React.useState(false)
+	const [open2, setOpen2] = useState(false)
 	return (
 		<>
 			<RippleButton onClick={e => setOpen2(true)}>
@@ -125,13 +125,13 @@ const ModalButton2 = () => {
 	)
 }
 
-const ComponentsPage = () => {
-	const [dateRange, setDateRange] = React.useState<DateRange>(() => {
+export default function ComponentsPage() {
+	const [dateRange, setDateRange] = useState<DateRange>(() => {
 		const now = new Date()
 		return { startDate: startOfDay(subDays(now, 2)), endDate: endOfDay(now) }
 	})
 	const { register, handleSubmit, errors } = useForm<Data>()
-	const [value, setValue] = React.useState("")
+	const [value, setValue] = useState("")
 	const debounceChange = useDebounce(e => setValue(e), 500)
 
 	return (
@@ -259,5 +259,3 @@ const ComponentsPage = () => {
 		</Page>
 	)
 }
-
-export default ComponentsPage

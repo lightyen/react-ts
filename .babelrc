@@ -4,10 +4,9 @@
     [
       "@babel/preset-react",
       { "runtime": "automatic", "importSource": "@emotion/react" }
-    ],
-    ["@emotion/babel-preset-css-prop"]
+    ]
   ],
-  "plugins": ["@babel/plugin-transform-runtime", "macros"],
+  "plugins": ["@babel/plugin-transform-runtime", "@emotion", "macros"],
   "env": {
     "development": {
       "plugins": ["react-refresh/babel"]

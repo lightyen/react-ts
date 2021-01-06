@@ -1,4 +1,4 @@
-import React from "react"
+import { useState, useRef, useLayoutEffect } from "react"
 import { motion, useMotionValue, useTransform } from "framer-motion"
 import chroma from "chroma-js"
 import Page from "~/components/Page"
@@ -22,32 +22,32 @@ const CarouselPage = () => {
 const ResizeObserver = window["ResizeObserver"]
 
 const Carousel = () => {
-	const [isDragging, setDragging] = React.useState(false)
+	const [isDragging, setDragging] = useState(false)
 	const dragOriginX = useMotionValue(0)
 	const x = useMotionValue(0)
 
 	// https://github.com/framer/motion/issues/513
 
-	const [index, setI] = React.useState(0)
+	const [index, setI] = useState(0)
 	// workaround for useTransform
-	const i = React.useRef(0)
+	const i = useRef(0)
 	function setIndex(index: number) {
 		i.current = index
 		setI(index)
 	}
 
-	const viewport = React.useRef<HTMLDivElement>()
-	const container = React.useRef<HTMLDivElement>()
+	const viewport = useRef<HTMLDivElement>()
+	const container = useRef<HTMLDivElement>()
 
-	const [width, setW] = React.useState(0)
+	const [width, setW] = useState(0)
 	// workaround for useTransform
-	const w = React.useRef(0)
+	const w = useRef(0)
 	function setWidth(width: number) {
 		w.current = width
 		setW(width)
 	}
 
-	React.useLayoutEffect(() => {
+	useLayoutEffect(() => {
 		const el = viewport.current
 		w.current = el.clientWidth
 		setWidth(w.current)

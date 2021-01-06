@@ -1,4 +1,3 @@
-import React from "react"
 import { BrowserRouter, RouteProps, RedirectProps, Redirect, Route, Switch } from "react-router-dom"
 import { motion } from "framer-motion"
 import Sidebar from "./Sidebar"

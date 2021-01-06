@@ -1,4 +1,4 @@
-import React from "react"
+import { useState } from "react"
 import { useTable, BaseColumnProps, WithCheckbox } from "./hooks"
 import { FormattedMessage } from "react-intl"
 import { TheadCell } from "./TheadCell"
@@ -153,7 +153,7 @@ function TableLayout<T>({
 
 	onChecked,
 }: TableProps<T>) {
-	const [_pageSize, _setPageSize] = React.useState(() => {
+	const [_pageSize, _setPageSize] = useState(() => {
 		if (pageSize instanceof Array) {
 			return pageSize.length > 0 ? pageSize[0] : 10
 		}

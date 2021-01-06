@@ -1,4 +1,4 @@
-import React from "react"
+import { useEffect, useState, useRef, useCallback } from "react"
 import { useFiltersSelector, useFiltersAction } from "./store"
 import { FilterType } from "./store/filter/model"
 
@@ -29,7 +29,7 @@ interface PaginationProps {
 }
 
 function usePagination({ total, pageSize, maxPageItem, infiniteLoop }: PaginationProps) {
-	const [_pageIndex, setPageIndex] = React.useState(0)
+	const [_pageIndex, setPageIndex] = useState(0)
 
 	const pageCount = Math.ceil(total / pageSize)
 
@@ -49,7 +49,7 @@ function usePagination({ total, pageSize, maxPageItem, infiniteLoop }: Paginatio
 		links[i] = start + i
 	}
 
-	const gotoPage = React.useCallback(
+	const gotoPage = useCallback(
 		(index: number) => {
 			if (pageIndex !== index) {
 				setPageIndex(index)
@@ -58,8 +58,8 @@ function usePagination({ total, pageSize, maxPageItem, infiniteLoop }: Paginatio
 		[pageIndex, setPageIndex],
 	)
 
-	const len = React.useRef(total)
-	React.useEffect(() => {
+	const len = useRef(total)
+	useEffect(() => {
 		if (len.current > total) {
 			gotoPage(0)
 		}
@@ -122,7 +122,7 @@ function sorting<T>(data: T[], columns: Array<BaseColumnProps<T>>, sortKeys: Sor
 }
 
 function useSort<T>({ columns }: SortProps<T>) {
-	const [sortTypes, setSortTypes] = React.useState<SortType[]>(columns.map(c => (c.sorter ? "none" : undefined)))
+	const [sortTypes, setSortTypes] = useState<SortType[]>(columns.map(c => (c.sorter ? "none" : undefined)))
 	function nextSortType(col: number) {
 		function newTypes(t: SortType) {
 			const keys = sortTypes.slice()
@@ -202,8 +202,8 @@ function filtering<T>(data: readonly T[], columns: Array<BaseColumnProps<T>>, fi
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function useDebounce<T extends (...args: any[]) => void>(callback: T, delay: number) {
-	const handle = React.useRef<number>()
-	return React.useCallback(
+	const handle = useRef<number>()
+	return useCallback(
 		(...args: Parameters<T>) => {
 			window.clearTimeout(handle.current)
 			handle.current = window.setTimeout(() => callback(...args), delay)
@@ -225,9 +225,9 @@ function useFilterInputs({ id }: { id: string }) {
 	}
 
 	// debounce
-	const [inputs, setInputs] = React.useState(filterInputs)
+	const [inputs, setInputs] = useState(filterInputs)
 	const debounceChange = useDebounce(setInputs, 200)
-	React.useEffect(() => {
+	useEffect(() => {
 		if (!shallowEqual(inputs, filterInputs)) {
 			debounceChange(filterInputs)
 		}
@@ -254,7 +254,7 @@ export function useTable<T = unknown>({ id, data, columns, pageSize, maxPageItem
 	// checkbox
 	const enableCheckbox = data.length > 0 && data.every(d => Object.prototype.hasOwnProperty.call(d, "__checkbox__"))
 	const allChecked = enableCheckbox && (rows as Array<WithCheckbox<T>>).every(d => d.__checkbox__)
-	const [c, setC] = React.useState(false)
+	const [c, setC] = useState(false)
 
 	return {
 		rows,

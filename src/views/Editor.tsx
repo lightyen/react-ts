@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef, useEffect, useImperativeHandle } from "react"
+import { forwardRef, useRef, useEffect, useImperativeHandle } from "react"
 
 import { fromTextArea, on, off } from "codemirror"
 import type { Editor, EditorConfiguration, EditorFromTextArea, Doc, EditorChange } from "codemirror"
@@ -118,13 +118,12 @@ const CodeMirror = forwardRef<Editor, Props>(({ options, onChange, ...props }, r
 const EditorPage = () => {
 	const ref = useRef<Editor>()
 
-	const cache = React.useRef(
+	const cache = useRef(
 		`# Test
 
 code
 
 \`\`\`tsx
-import React from "react"
 const Card = () => {
     return (
         <div>Card</div>

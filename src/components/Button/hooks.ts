@@ -1,8 +1,8 @@
-import React from "react"
+import { useEffect, useRef } from "react"
 
 export function useRipple<T extends HTMLElement>() {
-	const ref = React.useRef<T>()
-	React.useEffect(() => {
+	const ref = useRef<T>()
+	useEffect(() => {
 		const el = ref.current
 
 		function ripple(el: HTMLElement, e: MouseEvent) {
